@@ -280,6 +280,12 @@
   td:first-child { font-weight: 560; color: var(--text); }
   td .fine { font-size: 12px; color: var(--dim); }
 
+  /* ── Beta ─────────────────────────────────────────── */
+  .cell ul { margin: 0; padding-left: 17px; font-size: 14px; display: grid; gap: 7px; }
+  .cell ul li::marker { color: var(--dim); }
+  .beta-cta { margin-top: 28px; display: grid; gap: 14px; justify-items: center; text-align: center; }
+  .beta-fine { font-size: 12.5px; color: var(--dim); max-width: 66ch; }
+
   /* ── Footer ───────────────────────────────────────── */
   footer { margin-top: 120px; border-top: 1px solid var(--border); background: var(--bg-raise); }
   .foot-inner { padding: 44px 0 56px; display: grid; gap: 20px; }
@@ -323,6 +329,7 @@
       <a href="#regel">Treffer-Regel</a>
       <a href="#anzeige">Live Activity</a>
       <a href="#daten">Datenquellen</a>
+      <a href="#beta">Beta</a>
     </div>
     <span class="nav-chip">Feldtest 07/2026</span>
   </div>
@@ -541,6 +548,48 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </section>
+
+  <section class="wrap reveal" id="beta">
+    <div class="section-head">
+      <p class="eyebrow">// beta — winter 2026/27</p>
+      <h2>Teste die Treffer-Regel an echten Hängen.</h2>
+      <p>Nach dem Feldtest im Tannheimer Tal öffnen wir eine kleine Beta — für Skitourengeher,
+      Freerider und Splitboarder, die diesen Winter in Tiroler Warnregionen unterwegs sind.
+      Zunächst nur iOS, Verteilung über TestFlight.</p>
+    </div>
+    <div class="bento">
+      <div class="cell span2">
+        <h3>Was du bekommst</h3>
+        <ul>
+          <li>Früher Zugang per TestFlight — vor dem offiziellen Launch</li>
+          <li>Direkter Draht zum Entwickler, dein Feedback landet nicht in einem Ticketsystem</li>
+          <li>Einfluss auf Schwellwerte und Funktionen, bevor sie festgezurrt sind</li>
+        </ul>
+      </div>
+      <div class="cell span2">
+        <h3>Was wir erwarten</h3>
+        <ul>
+          <li>Die App auf deinen Touren im Hintergrund mitlaufen lassen</li>
+          <li>Kurzes Feedback: Waren Zustände und Meldungen verständlich? Zu viele? Zu wenige?</li>
+          <li>Bereitschaft für gelegentliche Rückfragen</li>
+        </ul>
+      </div>
+      <div class="cell span2">
+        <h3>Was wir herausfinden wollen</h3>
+        <ul>
+          <li>Passen <kbd>≥ 28°</kbd>, <kbd>±1 Sektor</kbd>, <kbd>±100 m</kbd> in der Praxis?</li>
+          <li>Sind die drei Zustände ohne Erklärung verständlich?</li>
+          <li>Meldefrequenz und Akkuverbrauch über ganze Tourentage</li>
+        </ul>
+      </div>
+    </div>
+    <div class="beta-cta">
+      <a class="btn btn-primary" href="mailto:ptheven123@gmail.com?subject=Beta-Test%20AvalancheGuard&amp;body=Hallo%2C%0A%0Aich%20m%C3%B6chte%20AvalancheGuard%20im%20Winter%202026/27%20testen.%0A%0AAktivit%C3%A4t%20%28Skitour%20/%20Freeride%20/%20Splitboard%20/%20Sonstiges%29%3A%0AErfahrung%20%28Anf%C3%A4nger%20/%20fortgeschritten%20/%20erfahren%20/%20Profi%29%3A%0AUnterwegs%20meist%20%28allein%20/%20in%20der%20Gruppe%29%3A%0ARegionen%20diesen%20Winter%3A%0AiPhone-Modell%20und%20iOS-Version%3A%0A">Als Beta-Tester melden</a>
+      <p class="beta-fine">Die Mail öffnet sich mit einer kurzen Vorlage (Aktivität, Erfahrung, Regionen).
+      Deine Adresse wird nur für die Organisation der Beta verwendet und nicht weitergegeben.
+      Und auch als Tester gilt: Die App ersetzt weder LVS-Gerät noch Ausbildung noch Lagebericht.</p>
     </div>
   </section>
 </main>
