@@ -163,7 +163,8 @@
   .phone img { display: block; width: 100%; height: auto; border-radius: 36px; }
 
   /* ── Sections ─────────────────────────────────────── */
-  section { padding: 110px 0 0; }
+  /* section.wrap statt section: muss die 0-Vertikal-Padding-Regel von .wrap schlagen */
+  section.wrap { padding: 110px 24px 0; }
   .section-head { display: grid; gap: 14px; max-width: 640px; margin-bottom: 40px; }
   .section-head p { font-size: 16.5px; }
 
@@ -310,7 +311,7 @@
     .states { grid-template-columns: 1fr; }
     .bento { grid-template-columns: 1fr; }
     .span3, .span2 { grid-column: auto; }
-    section { padding-top: 76px; }
+    section.wrap { padding-top: 76px; }
     .hero { padding-top: 72px; }
     .nav-links { display: none; }
   }
