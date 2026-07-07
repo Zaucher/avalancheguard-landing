@@ -284,8 +284,41 @@
   /* ── Beta ─────────────────────────────────────────── */
   .cell ul { margin: 0; padding-left: 17px; font-size: 14px; display: grid; gap: 7px; }
   .cell ul li::marker { color: var(--dim); }
-  .beta-cta { margin-top: 28px; display: grid; gap: 14px; justify-items: center; text-align: center; }
   .beta-fine { font-size: 12.5px; color: var(--dim); max-width: 66ch; }
+  .beta-form {
+    margin: 28px auto 0; max-width: 760px;
+    border: 1px solid var(--border); background: var(--card);
+    border-radius: 16px; padding: 26px;
+    display: grid; gap: 16px;
+  }
+  .bf-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .bf-row-2 { grid-template-columns: 1fr 1fr; }
+  .field { display: grid; gap: 6px; }
+  .field label { font-size: 12px; font-weight: 560; color: var(--dim); letter-spacing: 0.02em; }
+  .field input, .field select {
+    width: 100%; box-sizing: border-box;
+    background: var(--bg-raise); color: var(--text);
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 12px; font: inherit; font-size: 14px;
+    color-scheme: dark;
+  }
+  .field input::placeholder { color: var(--dim); }
+  .field input:focus, .field select:focus {
+    outline: none; border-color: var(--accent-deep);
+  }
+  .field select:invalid { color: var(--dim); }
+  .bf-actions { display: grid; gap: 12px; justify-items: center; text-align: center; margin-top: 4px; }
+  .bf-actions .btn { border: 0; cursor: pointer; font: inherit; font-weight: 560; font-size: 14.5px; }
+  .bf-actions .btn[disabled] { opacity: 0.6; cursor: default; transform: none; }
+  .bf-error { font-size: 13px; color: #F0A48A; text-align: center; }
+  .beta-success {
+    margin: 28px auto 0; max-width: 760px;
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    background: rgba(74, 222, 128, 0.06);
+    border-radius: 16px; padding: 22px 26px;
+    font-size: 14.5px; text-align: center;
+  }
+  .beta-success strong { color: var(--text); }
 
   /* ── Footer ───────────────────────────────────────── */
   footer { margin-top: 120px; border-top: 1px solid var(--border); background: var(--bg-raise); }
@@ -310,6 +343,7 @@
   @media (max-width: 860px) {
     .states { grid-template-columns: 1fr; }
     .bento { grid-template-columns: 1fr; }
+    .bf-row, .bf-row-2 { grid-template-columns: 1fr; }
     .span3, .span2 { grid-column: auto; }
     section.wrap { padding-top: 76px; }
     .hero { padding-top: 72px; }
@@ -586,11 +620,62 @@
         </ul>
       </div>
     </div>
-    <div class="beta-cta">
-      <a class="btn btn-primary" href="mailto:ptheven123@gmail.com?subject=Beta-Test%20AvalancheGuard&amp;body=Hallo%2C%0A%0Aich%20m%C3%B6chte%20AvalancheGuard%20im%20Winter%202026/27%20testen.%0A%0AAktivit%C3%A4t%20%28Skitour%20/%20Freeride%20/%20Splitboard%20/%20Sonstiges%29%3A%0AErfahrung%20%28Anf%C3%A4nger%20/%20fortgeschritten%20/%20erfahren%20/%20Profi%29%3A%0AUnterwegs%20meist%20%28allein%20/%20in%20der%20Gruppe%29%3A%0ARegionen%20diesen%20Winter%3A%0AiPhone-Modell%20und%20iOS-Version%3A%0A">Als Beta-Tester melden</a>
-      <p class="beta-fine">Die Mail öffnet sich mit einer kurzen Vorlage (Aktivität, Erfahrung, Regionen).
-      Deine Adresse wird nur für die Organisation der Beta verwendet und nicht weitergegeben.
-      Und auch als Tester gilt: Die App ersetzt weder LVS-Gerät noch Ausbildung noch Lagebericht.</p>
+    <form class="beta-form" id="beta-form" action="https://formspree.io/f/xwvdzagy" method="POST" novalidate>
+      <div class="bf-row">
+        <div class="field">
+          <label for="bf-aktivitaet">Aktivität</label>
+          <select id="bf-aktivitaet" name="aktivitaet" required>
+            <option value="" selected disabled>Bitte wählen</option>
+            <option>Skitour</option>
+            <option>Freeride</option>
+            <option>Splitboard</option>
+            <option>Schneeschuh</option>
+            <option>Bergführer / Ausbildung</option>
+            <option>Sonstiges</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bf-erfahrung">Erfahrung im freien Gelände</label>
+          <select id="bf-erfahrung" name="erfahrung" required>
+            <option value="" selected disabled>Bitte wählen</option>
+            <option>Anfänger</option>
+            <option>Fortgeschritten</option>
+            <option>Erfahren</option>
+            <option>Profi</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bf-geraet">Gerät</label>
+          <select id="bf-geraet" name="geraet" required>
+            <option value="" selected disabled>Bitte wählen</option>
+            <option>iPhone</option>
+            <option>Android (Warteliste)</option>
+          </select>
+        </div>
+      </div>
+      <div class="bf-row bf-row-2">
+        <div class="field">
+          <label for="bf-regionen">Regionen diesen Winter</label>
+          <input type="text" id="bf-regionen" name="regionen" placeholder="z. B. Tannheimer Tal, Stubai" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="bf-email">E-Mail</label>
+          <input type="email" id="bf-email" name="email" placeholder="du@beispiel.at" required autocomplete="email">
+        </div>
+      </div>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+      <div class="bf-actions">
+        <button type="submit" class="btn btn-primary" id="bf-submit">Als Beta-Tester melden</button>
+        <p class="beta-fine">Deine Angaben werden nur für die Organisation der Beta verwendet und nicht
+        weitergegeben. Und auch als Tester gilt: Die App ersetzt weder LVS-Gerät noch Ausbildung
+        noch Lagebericht.</p>
+      </div>
+      <p class="bf-error" id="bf-error" hidden>Senden hat nicht geklappt — bitte versuch es später
+      noch einmal.</p>
+    </form>
+    <div class="beta-success" id="beta-success" hidden>
+      <strong>Danke — Anmeldung ist da.</strong> Wir melden uns vor dem ersten Schnee.
+      Bis dahin: Lagebericht lesen bleibt Pflicht.
     </div>
   </section>
 </main>
@@ -651,6 +736,34 @@
       });
     }, { rootMargin: '0px 0px -8% 0px' });
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  })();
+
+  // Beta-Formular → Formspree, Erfolgsmeldung inline
+  (function () {
+    var form = document.getElementById('beta-form');
+    if (!form) return;
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      if (!form.reportValidity()) return;
+      var btn = document.getElementById('bf-submit');
+      var err = document.getElementById('bf-error');
+      err.hidden = true;
+      btn.disabled = true;
+      btn.textContent = 'Wird gesendet …';
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (res) {
+        if (!res.ok) throw new Error(res.status);
+        form.hidden = true;
+        document.getElementById('beta-success').hidden = false;
+      }).catch(function () {
+        err.hidden = false;
+        btn.disabled = false;
+        btn.textContent = 'Als Beta-Tester melden';
+      });
+    });
   })();
 </script>
 
