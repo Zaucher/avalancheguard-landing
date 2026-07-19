@@ -43,12 +43,33 @@ input::placeholder{color:#565D66}
 @keyframes hkPulse{0%,100%{opacity:1}50%{opacity:0.15}}
 @keyframes hkMarquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @keyframes hkRise{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes hkFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* --- DESKTOP / MOBIL-WEICHE ---
+   Unter 760px wird das Desktop-Markup komplett ausgeblendet und stattdessen
+   das eigenständige Mobil-Layout (Design "HangKontext Mobil v3") gezeigt.
+   Beide Varianten nutzen dieselben Bilddateien — kein doppelter Ladeaufwand. */
+.hk-mobile{display:none}
+@media (max-width:760px){
+  .hk-desktop{display:none}
+  .hk-mobile{display:block}
+}
+.hkm-gal{scrollbar-width:none;-ms-overflow-style:none}
+.hkm-gal::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;scroll-behavior:auto !important}
+}
 input[type=range]{-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;outline:none;width:100%;margin:10px 0}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#EDEFEA;border:4px solid #0B0C0E;box-shadow:0 0 0 1.5px #878E96;cursor:pointer}
 input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#EDEFEA;border:4px solid #0B0C0E;box-shadow:0 0 0 1.5px #878E96;cursor:pointer}
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     DESKTOP-VARIANTE (ab 761px) — Landingpage v2
+     ============================================================ -->
+<div class="hk-desktop">
 
 <!-- HEADER -->
 <div style="position:sticky;top:0;z-index:60;background:rgba(11,12,14,0.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid #24282E;">
@@ -431,6 +452,180 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
   </div>
 </div>
 
+</div><!-- /.hk-desktop -->
+
+
+<!-- ============================================================
+     MOBIL-VARIANTE (bis 760px) — Design "HangKontext Mobil v3"
+     Aus dem Design-Projekt konvertiert: x-dc/sc-if/sc-for -> Vanilla-JS.
+     ============================================================ -->
+<div class="hk-mobile">
+<div style="max-width:480px;margin:0 auto;">
+
+  <!-- HERO — ein Screen, eine Botschaft -->
+  <div style="min-height:100svh;display:flex;flex-direction:column;position:relative;overflow:hidden;background:radial-gradient(120% 55% at 50% -5%,rgba(167,155,255,0.16) 0%,rgba(11,12,14,0) 60%);">
+    <div style="padding:20px 24px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;animation:hkRise 0.6s ease-out both;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="img/app-icon.png" alt="HangKontext App-Icon" style="width:32px;height:32px;border-radius:8px;border:1px solid #2E343A;">
+        <div style="font-size:16px;font-weight:700;letter-spacing:-0.01em;">HangKontext</div>
+      </div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;border:1px solid #24282E;border-radius:99px;padding:5px 11px;">Beta · Winter 26/27</div>
+    </div>
+    <div style="padding:36px 24px 0;display:flex;flex-direction:column;gap:16px;text-align:center;animation:hkRise 0.6s 0.1s ease-out both;">
+      <h1 style="margin:0;font-size:clamp(40px,11.5vw,56px);line-height:1.0;font-weight:700;letter-spacing:-0.035em;">Der Lagebericht.<br><span style="color:#A79BFF;">Für genau deinen Hang.</span></h1>
+      <p style="margin:0 auto;font-size:16px;line-height:1.55;color:#B9BFBB;max-width:320px;text-wrap:pretty;">Exposition, Höhe, Neigung — live abgeglichen mit dem amtlichen Lawinenlagebericht.</p>
+    </div>
+    <div style="flex:1;display:flex;align-items:flex-end;justify-content:center;margin-top:28px;min-height:280px;">
+      <div style="width:min(290px,74vw);animation:hkRise 0.8s 0.25s ease-out both;">
+        <div style="background:#14161A;border:1px solid #2E343A;border-bottom:none;border-radius:46px 46px 0 0;padding:9px 9px 0;box-shadow:0 -20px 90px -20px rgba(167,155,255,0.25);animation:hkFloat 5s 1.2s ease-in-out infinite;">
+          <img src="img/home-treffer.webp" alt="HangKontext App — Treffer an Gefahrenstelle" style="width:100%;display:block;border-radius:38px 38px 0 0;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DREI WERTE — kompakt -->
+  <div style="padding:56px 24px 0;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#878E96;text-align:center;">Treffer nur, wenn alle drei passen</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;">
+      <div style="background:#14161A;border:1px solid #24282E;border-radius:14px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+        <div style="font-size:17px;font-weight:600;">Exposition</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#CFC8FF;">NO · IM BEREICH</div>
+      </div>
+      <div style="background:#14161A;border:1px solid #24282E;border-radius:14px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+        <div style="font-size:17px;font-weight:600;">Höhe</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#CFC8FF;">1.940 M · IM BEREICH</div>
+      </div>
+      <div style="background:#14161A;border:1px solid #24282E;border-radius:14px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+        <div style="font-size:17px;font-weight:600;">Hangneigung</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#CFC8FF;">32° · IM BEREICH</div>
+      </div>
+      <div style="background:#16131F;border:1px solid #4A4090;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;">
+        <div style="width:34px;height:34px;background:#A79BFF;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:11px;height:11px;background:#0B0C0E;transform:rotate(45deg);"></div></div>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:0.06em;font-weight:600;color:#CFC8FF;">TREFFER · TRIEBSCHNEE · STUFE 2</div>
+          <div style="font-size:13px;color:#878E96;margin-top:2px;">Informativ, nie als Freigabe.</div>
+        </div>
+      </div>
+      <div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#565D66;margin-top:4px;">Beispiel · Warnregion Tirol AT-07-01</div>
+    </div>
+  </div>
+
+  <!-- APP-SCREENS — Swipe-Galerie -->
+  <div style="padding:64px 0 0;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#878E96;text-align:center;padding:0 24px;">Ein Blick in die App · wischen →</div>
+    <div id="hkm-gal" class="hkm-gal" style="display:flex;gap:16px;overflow-x:auto;padding:20px 24px 8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;">
+      <div style="flex:0 0 230px;scroll-snap-align:center;">
+        <div style="background:#14161A;border:1px solid #2E343A;border-radius:36px;padding:7px;">
+          <img src="img/home-keine-uebereinstimmung.webp" alt="Keine Übereinstimmung — App prüft laufend weiter" style="width:100%;display:block;border-radius:30px;">
+        </div>
+        <div style="text-align:center;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#878E96;">Keine Übereinstimmung · prüft weiter</div>
+      </div>
+      <div style="flex:0 0 230px;scroll-snap-align:center;">
+        <div style="background:#14161A;border:1px solid #4A4090;border-radius:36px;padding:7px;">
+          <img src="img/karte-overlay.webp" alt="Karte mit Gefahrenstellen-Overlay" style="width:100%;display:block;border-radius:30px;">
+        </div>
+        <div style="text-align:center;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#878E96;">Gefahrenstellen auf der Karte</div>
+      </div>
+      <div style="flex:0 0 230px;scroll-snap-align:center;">
+        <div style="background:#14161A;border:1px solid #2E343A;border-radius:36px;padding:7px;">
+          <img src="img/log.webp" alt="Entscheidungs-Log" style="width:100%;display:block;border-radius:30px;">
+        </div>
+        <div style="text-align:center;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#878E96;">Jede Prüfung dokumentiert</div>
+      </div>
+      <div style="flex:0 0 230px;scroll-snap-align:center;">
+        <div style="background:#14161A;border:1px solid #2E343A;border-radius:36px;padding:7px;">
+          <img src="img/sperrbildschirm.webp" alt="Live Activity auf dem Sperrbildschirm" style="width:100%;display:block;border-radius:30px;">
+        </div>
+        <div style="text-align:center;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#878E96;">Sperrbildschirm · Live Activity</div>
+      </div>
+    </div>
+    <div id="hkm-dots" style="display:flex;justify-content:center;gap:8px;margin-top:14px;">
+      <div style="width:7px;height:7px;border-radius:50%;transition:background 0.25s;background:#A79BFF;"></div>
+      <div style="width:7px;height:7px;border-radius:50%;transition:background 0.25s;background:#2E343A;"></div>
+      <div style="width:7px;height:7px;border-radius:50%;transition:background 0.25s;background:#2E343A;"></div>
+      <div style="width:7px;height:7px;border-radius:50%;transition:background 0.25s;background:#2E343A;"></div>
+    </div>
+  </div>
+
+  <!-- IM BLICK — Watch + Fail-safe -->
+  <div style="padding:56px 24px 0;display:flex;flex-direction:column;gap:10px;">
+    <div style="background:#14161A;border:1px solid #24282E;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;">
+      <div style="width:76px;background:#0B0C0E;border:1px solid #2E343A;border-radius:22px;padding:5px;flex-shrink:0;">
+        <img src="img/watch.webp" alt="Apple-Watch-Komplikation" style="width:100%;display:block;border-radius:17px;">
+      </div>
+      <div>
+        <div style="font-size:16px;font-weight:600;">Auch am Handgelenk</div>
+        <div style="font-size:13.5px;line-height:1.55;color:#878E96;margin-top:3px;text-wrap:pretty;">Apple-Watch-Komplikation — ein Blick, weitergehen. Handschuhe bleiben an.</div>
+      </div>
+    </div>
+    <div style="background:#14161A;border:1px dashed #2E343A;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;">
+      <div style="width:30px;height:30px;border:2.5px dashed #878E96;border-radius:50%;flex-shrink:0;"></div>
+      <div>
+        <div style="font-size:16px;font-weight:600;">Stille bedeutet nie Entwarnung</div>
+        <div style="font-size:13.5px;line-height:1.55;color:#878E96;margin-top:3px;text-wrap:pretty;">Fehlen Daten, sagt die App das explizit — ausgegraut, mit Zeitstempel.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUELLEN
+       HINWEIS: Die Retro-Validierungs-Zahl (96,7 % von 657 Unfallhängen) ist hier
+       bewusst AUSGEBLENDET, solange die Lizenzantwort des LWD Tirol zu den
+       LAWIS-Unfalldaten aussteht — analog zur Desktop-Sektion #validierung.
+       Zum Reaktivieren: den folgenden Kommentarblock (öffnendes und schließendes
+       Tag) entfernen. -->
+  <div style="padding:64px 24px 0;text-align:center;">
+    <!--
+    <div style="font-size:clamp(72px,22vw,104px);font-weight:700;letter-spacing:-0.05em;line-height:1;font-variant-numeric:tabular-nums;color:#A79BFF;">96,7<span style="font-size:0.45em;">&thinsp;%</span></div>
+    <div style="margin:14px auto 0;font-size:16px;line-height:1.6;color:#B9BFBB;max-width:320px;text-wrap:pretty;">von 657 echten Unfallhängen wären am Unfalltag als Gefahrenstelle angezeigt worden.</div>
+    <div style="margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:#565D66;">Rückwärts getestet · Tirol · 2021/22–2025/26</div>
+    -->
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;line-height:2;text-transform:uppercase;color:#878E96;">Amtliche Quellen<br><span style="color:#565D66;">avalanche.report · LWD Bayern · Land Tirol</span></div>
+  </div>
+
+  <!-- ANMELDUNG -->
+  <div id="hkm-beta" style="padding:64px 24px 0;">
+    <div style="background:linear-gradient(180deg,#16131F 0%,#101216 100%);border:1px solid #4A4090;border-radius:20px;padding:28px 22px;text-align:center;">
+      <h2 style="margin:0;font-size:clamp(26px,7.5vw,34px);font-weight:700;letter-spacing:-0.02em;line-height:1.1;">Teste es diesen Winter.</h2>
+      <p style="margin:12px auto 0;font-size:15px;line-height:1.6;color:#878E96;max-width:300px;text-wrap:pretty;">TestFlight-Einladung vor Saisonstart. iOS zuerst, Android auf der Warteliste.</p>
+      <div id="hkm-form-wrap">
+        <form id="hkm-form" style="margin-top:24px;display:flex;flex-direction:column;gap:12px;">
+          <input name="email" type="email" required placeholder="deine@email.org" style="background:#0E1013;border:1px solid #2E343A;border-radius:12px;color:#EDEFEA;font-size:16px;padding:15px 16px;text-align:center;">
+          <select name="geraet" required style="background:#0E1013;border:1px solid #2E343A;border-radius:12px;color:#EDEFEA;font-size:16px;padding:15px 16px;text-align:center;">
+            <option value="">Dein Gerät wählen</option><option value="iPhone">iPhone</option><option value="Android">Android (Warteliste)</option>
+          </select>
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
+          <button id="hkm-submit" type="submit" class="hk-primary" style="background:#A79BFF;color:#0B0C0E;border:none;font-size:17px;font-weight:600;padding:17px 26px;border-radius:99px;cursor:pointer;">Beta-Zugang anfordern</button>
+        </form>
+        <div id="hkm-form-err" style="display:none;margin-top:14px;border:1px dashed #2E343A;border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6;color:#B9BFBB;">Senden nicht möglich — schreib direkt an <a href="mailto:beta@hangkontext.de">beta@hangkontext.de</a>.</div>
+      </div>
+      <div id="hkm-form-ok" style="display:none;margin-top:24px;background:#0E1013;border:1px solid #24282E;border-radius:12px;padding:22px;flex-direction:column;align-items:center;gap:12px;">
+        <div style="width:40px;height:40px;background:#A79BFF;border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:13px;height:13px;background:#0B0C0E;transform:rotate(45deg);"></div></div>
+        <div style="font-size:17px;font-weight:600;">Danke — du stehst auf der Liste.</div>
+        <div style="font-size:14px;line-height:1.6;color:#878E96;">TestFlight-Einladung kommt vor Saisonstart.</div>
+      </div>
+      <div style="margin-top:18px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;line-height:1.8;text-transform:uppercase;color:#565D66;">Kostenlos · Abmeldung jederzeit</div>
+    </div>
+  </div>
+
+  <!-- MICRO-FOOTER -->
+  <div style="padding:48px 24px 120px;text-align:center;display:flex;flex-direction:column;gap:12px;">
+    <div style="font-size:13.5px;line-height:1.65;color:#878E96;text-wrap:pretty;">Die Beurteilung bleibt beim Menschen — immer.</div>
+    <div style="display:flex;justify-content:center;gap:20px;font-size:13.5px;">
+      <a href="rechtliches.html">Impressum</a>
+      <a href="rechtliches.html">Datenschutz</a>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;color:#565D66;">© 2026 HANGKONTEXT · QUELLEN: AVALANCHE.REPORT · LWD BAYERN</div>
+  </div>
+
+</div>
+
+<!-- FLOATING CTA -->
+<div id="hkm-cta" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;padding:12px 20px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(11,12,14,0) 0%,rgba(11,12,14,0.92) 40%);">
+  <a href="#hkm-beta" class="hk-primary" style="display:block;max-width:432px;margin:0 auto;background:#A79BFF;color:#0B0C0E;font-size:16.5px;font-weight:600;padding:16px 24px;border-radius:99px;text-decoration:none;text-align:center;box-shadow:0 12px 40px -8px rgba(167,155,255,0.5);">Beta-Tester werden</a>
+</div>
+</div><!-- /.hk-mobile -->
+
 <script>
 (function(){
   "use strict";
@@ -560,6 +755,72 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
       errBox.style.display = 'block';
       submitBtn.disabled = false;
       submitBtn.textContent = 'Beta-Zugang anfordern';
+    });
+  });
+
+  // ============================================================
+  // MOBIL-VARIANTE (Design "HangKontext Mobil v3")
+  // ============================================================
+
+  // --- SWIPE-GALERIE: Punkte mitführen ---
+  var gal = document.getElementById('hkm-gal');
+  var dots = document.getElementById('hkm-dots').children;
+  var galIdx = 0;
+  var GAL_STEP = 246; // Kachel 230px + gap 16px
+  gal.addEventListener('scroll', function(){
+    var i = Math.max(0, Math.min(dots.length - 1, Math.round(gal.scrollLeft / GAL_STEP)));
+    if (i === galIdx) return;
+    galIdx = i;
+    for (var k = 0; k < dots.length; k++) {
+      dots[k].style.background = (k === i) ? '#A79BFF' : '#2E343A';
+    }
+  }, { passive: true });
+
+  // --- FLOATING CTA: ab 300px sichtbar, verschwindet über dem Formular ---
+  var cta = document.getElementById('hkm-cta');
+  var betaBox = document.getElementById('hkm-beta');
+  var betaSichtbar = false, weitGenug = false, abgeschickt = false;
+  function ctaPruefen(){
+    cta.style.display = (weitGenug && !betaSichtbar && !abgeschickt) ? 'block' : 'none';
+  }
+  window.addEventListener('scroll', function(){
+    var w = window.scrollY > 300;
+    if (w !== weitGenug) { weitGenug = w; ctaPruefen(); }
+  }, { passive: true });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries){
+      betaSichtbar = entries.some(function(e){ return e.isIntersecting; });
+      ctaPruefen();
+    }, { threshold: 0.25 }).observe(betaBox);
+  }
+
+  // --- BETA FORM (mobil) ---
+  var mForm = document.getElementById('hkm-form');
+  var mBtn = document.getElementById('hkm-submit');
+  var mErr = document.getElementById('hkm-form-err');
+  mForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (mBtn.disabled) return;
+    mBtn.disabled = true;
+    mBtn.textContent = 'Wird gesendet …';
+    mErr.style.display = 'none';
+    fetch('https://formspree.io/f/xwvdzagy', {
+      method: 'POST',
+      body: new FormData(mForm),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(r){
+      if (r.ok) {
+        document.getElementById('hkm-form-wrap').style.display = 'none';
+        document.getElementById('hkm-form-ok').style.display = 'flex';
+        abgeschickt = true;
+        ctaPruefen();
+      } else {
+        throw new Error('bad status');
+      }
+    }).catch(function(){
+      mErr.style.display = 'block';
+      mBtn.disabled = false;
+      mBtn.textContent = 'Beta-Zugang anfordern';
     });
   });
 })();
