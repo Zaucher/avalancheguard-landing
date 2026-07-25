@@ -62,7 +62,36 @@ img{max-width:100%}
 @media (min-aspect-ratio:21/9){[data-screen-label="Hero"]{min-height:min(94svh,820px) !important}}
 @media (min-width:720px){video[data-hk-video="hero"]{object-position:66% 42% !important;transform:scale(1.04)}[data-hk-hero-phone]>div{transform:translateX(2vw);transform-origin:bottom center}}
 @media (min-width:720px) and (max-width:1023px){[data-hk-phone]{width:min(19%,190px) !important;left:1.5% !important}[data-hk-layer="band-chip"] div{left:calc(1.5% + min(19%,190px) + 54px) !important}}
-@media (max-width:719px){[data-hk-phone]{position:static !important;width:min(52%,230px) !important;margin:18px auto 0 !important;animation:none !important;opacity:1 !important;transform:none !important}[data-hk-connect]{display:none !important}[data-hk-layer="neigung-chip"] div{left:68% !important}[data-hk-layer="band-chip"] div{left:7% !important}header nav a{padding:12px 16px !important}}
+
+/* --- DESKTOP-/MOBIL-WEICHE (Entwurf v5.7.1) ---
+   Ab 720px gilt das Desktop-Layout, darunter das eigenstaendige Handy-
+   Layout. Beide Varianten teilen sich dieselben Bilddateien, es laedt also
+   nichts doppelt. Die Blöcke sind mit data-hk-desktop bzw. data-hk-mobile
+   markiert; gemeinsame Sektionen (Datenquellen, Drei Zustaende, Zielgruppen,
+   Validierung, Beta, Footer) tragen keine Markierung und gelten fuer beide. */
+@media (min-width:720px){[data-hk-mobile]{display:none !important}}
+@media (max-width:719px){
+body{overflow-x:hidden}
+[data-hk-desktop]{display:none !important}
+#zustaende [role="tablist"]{flex-direction:column}
+#zustaende button[role="tab"]{width:100%;text-align:left;padding:15px 20px !important;font-size:16.5px !important;min-height:52px;box-sizing:border-box}
+#zustaende [role="tabpanel"]{padding:24px 18px !important}
+#zustaende p{font-size:16px !important}
+[data-screen-label="Zielgruppen"]>div:first-child{flex-direction:column;align-items:stretch !important;gap:18px !important;padding:20px !important}
+[data-screen-label="Zielgruppen"]>div:first-child>div{flex-direction:column;align-items:flex-start !important;gap:5px !important;min-width:0 !important;flex:0 0 auto !important}
+[data-screen-label="Zielgruppen"]>div:first-child span+span{font-size:16px !important}
+[data-screen-label="Zielgruppen"]>p{font-size:16px !important;line-height:1.6 !important}
+#validierung>div{padding:28px 20px !important;border-radius:24px !important}
+#validierung p{font-size:16px !important}
+#validierung summary{font-size:16px !important;padding:6px 0}
+#validierung details>div>div{font-size:15px !important;line-height:1.65 !important}
+#beta input[type="email"]{font-size:16px !important}
+#beta select{font-size:16px !important}
+#beta form button[type="submit"]{width:100%}
+#beta p{font-size:16px !important}
+footer a{padding:8px 0;display:inline-block}
+footer [data-hk-attribution]{font-size:11.5px !important;letter-spacing:0.04em !important;line-height:1.95 !important;overflow-wrap:break-word}
+}
 @media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important}}
 
 /* --- HOVER-ZUSTÄNDE ---
@@ -84,11 +113,16 @@ img{max-width:100%}
 </head>
 <body>
 
-<!-- ============ KAPITEL 1 · CINEMATIC HERO ============ -->
-<div data-screen-label="Hero" style="position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;background:#0A1524;">
+<!-- ============ KAPITEL 1 · CINEMATIC HERO (DESKTOP/TABLET) ============ -->
+<div data-hk-desktop data-screen-label="Hero" style="position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;background:#0A1524;">
   <div style="position:absolute;inset:0;" aria-hidden="true">
-    <img src="img/hero-still.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;">
-    <video data-hk-video="hero" data-src="video/hero.mp4" poster="img/hero-poster.webp" muted playsinline autoplay preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;"></video>
+    <!-- Das 4K-Standbild laedt nur ab 720px; darunter reicht das leichte
+         WebP-Poster (~0,3 MB statt 9,5 MB). -->
+    <picture>
+      <source media="(min-width:720px)" srcset="img/hero-still.png">
+      <img src="img/hero-poster.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;">
+    </picture>
+    <video data-hk-video="hero" data-src="video/hero.mp4" data-poster="img/hero-poster.webp" muted playsinline autoplay preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;"></video>
   </div>
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,21,36,0.6) 0%,rgba(10,21,36,0.28) 40%,rgba(10,21,36,0.2) 72%,#F4F7FA 100%);pointer-events:none;" aria-hidden="true"></div>
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse 62% 75% at 26% 52%,rgba(9,20,38,0.62) 0%,rgba(9,20,38,0.32) 55%,rgba(9,20,38,0) 100%);pointer-events:none;" aria-hidden="true"></div>
@@ -97,7 +131,7 @@ img{max-width:100%}
   <header style="position:relative;z-index:6;">
     <div style="max-width:1240px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
       <div style="display:flex;align-items:center;gap:11px;background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:7px 16px 7px 7px;box-shadow:0 4px 24px -8px rgba(9,20,38,0.35);">
-        <img src="img/app-icon-1024.png" alt="HangKontext App-Icon" width="32" height="32" style="width:32px;height:32px;border-radius:50%;">
+        <img src="img/app-icon-96.png" alt="HangKontext App-Icon" width="32" height="32" style="width:32px;height:32px;border-radius:50%;">
         <div style="font-size:15.5px;font-weight:800;letter-spacing:-0.01em;color:#FFFFFF;">HangKontext</div>
         <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#B9C9DC;">Beta 26/27</div>
       </div>
@@ -141,6 +175,42 @@ img{max-width:100%}
   </div>
 </div>
 
+<!-- ============ KAPITEL 1 · HERO (MOBIL) ============ -->
+<div data-hk-mobile data-hk-mhero data-screen-label="Hero Mobil" style="position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;background:#0A1524;padding-top:env(safe-area-inset-top);">
+  <img src="img/hero-poster.webp" alt="" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 40%;" aria-hidden="true">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,21,36,0.74) 0%,rgba(10,21,36,0.36) 30%,rgba(9,20,38,0.3) 55%,rgba(9,20,38,0.62) 78%,#F4F7FA 100%);pointer-events:none;" aria-hidden="true"></div>
+  <header style="position:relative;z-index:6;">
+    <div style="padding:12px 12px 0;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.55);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:5px 12px 5px 5px;min-height:44px;box-sizing:border-box;">
+        <img src="img/app-icon-96.png" alt="HangKontext App-Icon" width="30" height="30" style="width:30px;height:30px;border-radius:50%;">
+        <div style="font-size:14.5px;font-weight:800;letter-spacing:-0.01em;color:#FFFFFF;">HangKontext</div>
+      </div>
+      <a href="#beta" style="display:inline-flex;align-items:center;min-height:44px;background:#1A6DE0;color:#FFFFFF;text-decoration:none;font-size:13.5px;font-weight:700;padding:0 14px;border-radius:99px;box-shadow:0 8px 24px -8px rgba(26,109,224,0.55);white-space:nowrap;">Für die Beta anmelden</a>
+    </div>
+  </header>
+  <div style="position:relative;z-index:3;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 20px 0;gap:16px;animation:hkReveal 0.7s ease-out both;">
+    <div style="display:flex;align-items:center;gap:8px;align-self:flex-start;background:rgba(9,20,38,0.55);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.92);">
+      <div style="width:7px;height:7px;border-radius:50%;background:#6FAAF7;animation:hkPulse 1.8s ease-in-out infinite;flex-shrink:0;" aria-hidden="true"></div>
+      Abgleich mit dem amtlichen Lawinenlagebericht
+    </div>
+    <h1 style="margin:0;font-size:clamp(33px,9.2vw,42px);line-height:1.04;font-weight:900;letter-spacing:-0.03em;color:#FFFFFF;text-shadow:0 2px 26px rgba(10,30,60,0.55);text-wrap:balance;">Der Lagebericht für genau deinen Hang.</h1>
+    <p style="margin:0;font-size:16.5px;line-height:1.55;color:#FFFFFF;text-wrap:pretty;text-shadow:0 1px 16px rgba(10,30,60,0.6);">HangKontext misst Exposition, Höhe und Hangneigung an deinem Standort — und gleicht sie laufend mit den Gefahrenstellen des amtlichen Lawinenlageberichts ab. Fakten statt Bewertung.</p>
+    <a href="#beta" style="display:flex;align-items:center;justify-content:center;min-height:54px;background:#1A6DE0;color:#FFFFFF;font-size:17px;font-weight:700;border-radius:99px;text-decoration:none;box-shadow:0 14px 34px -10px rgba(26,109,224,0.6);">Für die Beta anmelden</a>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:6px 12px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:8px;color:#FFFFFF;font-size:14.5px;line-height:1.45;text-shadow:0 1px 14px rgba(10,30,60,0.65);flex:1 1 220px;min-width:0;">
+        <div style="width:7px;height:7px;background:#FFFFFF;transform:rotate(45deg);flex-shrink:0;opacity:0.8;" aria-hidden="true"></div>
+        Informativ, nie als Freigabe — die Beurteilung bleibt beim Menschen.
+      </div>
+      <a href="#funktionsweise-m" style="color:#FFFFFF;font-size:14.5px;font-weight:600;text-decoration:underline;text-decoration-color:rgba(255,255,255,0.5);white-space:nowrap;padding:10px 0;">So funktioniert's</a>
+    </div>
+  </div>
+  <div style="position:relative;z-index:4;width:min(56%,222px);margin:20px auto -178px;">
+    <div style="background:#0E1B2C;border-radius:40px 40px 0 0;padding:8px 8px 0;box-shadow:0 -20px 70px -16px rgba(9,20,38,0.6);">
+      <img src="img/home-treffer.png" alt="HangKontext App — dein Standort entspricht einer Gefahrenstelle des Lageberichts" style="width:100%;display:block;border-radius:33px 33px 0 0;">
+    </div>
+  </div>
+</div>
+
 <!-- DATENQUELLEN -->
 <div data-screen-label="Datenquellen" style="max-width:1240px;margin:0 auto;padding:26px 24px 0;display:flex;gap:10px 28px;flex-wrap:wrap;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#33445A;">
   <span>Datenquellen:</span>
@@ -150,8 +220,8 @@ img{max-width:100%}
   <span style="font-weight:600;">OpenTopoMap</span>
 </div>
 
-<!-- ============ KAPITEL 2 · SO FUNKTIONIERT'S ============ -->
-<div id="funktionsweise" data-screen-label="So funktioniert's" style="max-width:1240px;margin:0 auto;padding:clamp(44px,6vw,84px) 24px 0;">
+<!-- ============ KAPITEL 2 · SO FUNKTIONIERT'S (DESKTOP/TABLET) ============ -->
+<div data-hk-desktop id="funktionsweise" data-screen-label="So funktioniert's" style="max-width:1240px;margin:0 auto;padding:clamp(44px,6vw,84px) 24px 0;">
   <div style="display:flex;gap:clamp(24px,4vw,56px);align-items:flex-end;justify-content:space-between;flex-wrap:wrap;">
     <div style="flex:1 1 420px;display:flex;flex-direction:column;gap:14px;max-width:680px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1A6DE0;">So funktioniert's</div>
@@ -202,9 +272,55 @@ img{max-width:100%}
   </div>
 </div>
 
-<!-- ============ TERRAIN-TRANSITION ============ -->
-<div data-screen-label="Terrain-Transition" style="position:relative;margin-top:clamp(48px,6vw,80px);background:#0A1524;overflow:hidden;">
-  <video data-hk-video="terrain" data-src="video/terrain-transition.mp4" poster="img/terrain-poster.webp" muted loop playsinline preload="none" aria-hidden="true" style="width:100%;display:block;aspect-ratio:16/9;max-height:62vh;object-fit:cover;object-position:center 55%;background:#0A1524;"></video>
+<!-- ============ MOBILE · SO FUNKTIONIERT'S ============ -->
+<div data-hk-mobile id="funktionsweise-m" data-screen-label="So funktioniert's Mobil" style="padding:54px 20px 0;">
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1A6DE0;">So funktioniert's</div>
+    <h2 style="margin:0;font-size:clamp(27px,7.6vw,32px);font-weight:900;letter-spacing:-0.025em;line-height:1.08;text-wrap:balance;">Drei Schritte. Ein Abgleich. Deine Entscheidung.</h2>
+  </div>
+  <div style="position:relative;margin-top:30px;padding-left:30px;">
+    <div style="position:absolute;left:8px;top:8px;bottom:8px;width:1px;background:linear-gradient(180deg,#1A6DE0 0%,#B9C7D6 55%,#A79BFF 100%);" aria-hidden="true"></div>
+    <div style="display:flex;flex-direction:column;gap:40px;">
+      <div style="position:relative;display:flex;flex-direction:column;gap:10px;">
+        <div style="position:absolute;left:-30px;top:2px;width:17px;height:17px;border-radius:50%;background:#F4F7FA;border:3px solid #1A6DE0;box-sizing:border-box;" aria-hidden="true"></div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#1A6DE0;">SCHRITT 1</div>
+        <h3 style="margin:0;font-size:20px;font-weight:800;letter-spacing:-0.01em;">App starten, losgehen</h3>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">GPS und Geländemodell bestimmen Exposition, Höhe und Neigung — laufend, ohne Eingabe.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:2px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#33445A;border:1px solid #C9D6E3;border-radius:99px;padding:7px 13px;background:#FFFFFF;">EXPOSITION</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#33445A;border:1px solid #C9D6E3;border-radius:99px;padding:7px 13px;background:#FFFFFF;">HÖHE</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#33445A;border:1px solid #C9D6E3;border-radius:99px;padding:7px 13px;background:#FFFFFF;">NEIGUNG</span>
+        </div>
+      </div>
+      <div style="position:relative;display:flex;flex-direction:column;gap:10px;">
+        <div style="position:absolute;left:-30px;top:2px;width:17px;height:17px;border-radius:50%;background:#F4F7FA;border:3px solid #33445A;box-sizing:border-box;" aria-hidden="true"></div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#1A6DE0;">SCHRITT 2</div>
+        <h3 style="margin:0;font-size:20px;font-weight:800;letter-spacing:-0.01em;">Abgleich mit dem Lagebericht</h3>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Deine Messwerte werden mit den Gefahrenstellen des amtlichen Berichts verglichen — Übereinstimmung nur, wenn alle Kriterien zusammenpassen.</p>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:2px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#33445A;border:1px solid #C9D6E3;border-radius:99px;padding:7px 13px;background:#FFFFFF;">MESSWERTE</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#5C6E80;" aria-hidden="true">×</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#33445A;border:1px solid #C9D6E3;border-radius:99px;padding:7px 13px;background:#FFFFFF;">AMTLICHER LAGEBERICHT</span>
+        </div>
+      </div>
+      <div style="position:relative;display:flex;flex-direction:column;gap:10px;">
+        <div style="position:absolute;left:-30px;top:2px;width:17px;height:17px;border-radius:50%;background:#F4F7FA;border:3px solid #6B5CE0;box-sizing:border-box;" aria-hidden="true"></div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#1A6DE0;">SCHRITT 3</div>
+        <h3 style="margin:0;font-size:20px;font-weight:800;letter-spacing:-0.01em;">Klare Antwort, du entscheidest</h3>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Übereinstimmung, keine Übereinstimmung oder Prüfung eingeschränkt — die Beurteilung bleibt bei dir.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:2px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#4A5A6B;border:1px solid #C9D6E3;border-radius:99px;padding:7px 13px;background:#FFFFFF;">KEINE ÜBEREINSTIMMUNG</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#3F2FB8;border:1px solid #A79BFF;border-radius:99px;padding:7px 13px;background:#EFECFF;">ÜBEREINSTIMMUNG</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#5C6E80;border:1px dashed #5C6E80;border-radius:99px;padding:7px 13px;background:#FFFFFF;">PRÜFUNG EINGESCHRÄNKT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TERRAIN-TRANSITION (DESKTOP/TABLET) ============ -->
+<div data-hk-desktop data-screen-label="Terrain-Transition" style="position:relative;margin-top:clamp(48px,6vw,80px);background:#0A1524;overflow:hidden;">
+  <video data-hk-video="terrain" data-src="video/terrain-transition.mp4" data-poster="img/terrain-poster.webp" muted loop playsinline preload="none" aria-hidden="true" style="width:100%;display:block;aspect-ratio:16/9;max-height:62vh;object-fit:cover;object-position:center 55%;background:#0A1524;"></video>
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,#F4F7FA 0%,rgba(244,247,250,0) 14%,rgba(10,21,36,0) 62%,rgba(228,235,242,0.94) 100%);pointer-events:none;" aria-hidden="true"></div>
   <div style="position:absolute;left:0;right:0;bottom:clamp(28px,6vh,64px);display:flex;justify-content:center;padding:0 24px;">
     <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;animation:hkFade 1s both;animation-timeline:view();animation-range:entry 20% entry 70%;">
@@ -214,8 +330,8 @@ img{max-width:100%}
   </div>
 </div>
 
-<!-- ============ KAPITEL 3 · SIGNATURE: IM GELÄNDE ============ -->
-<div id="gelaende" data-screen-label="Im Gelände" style="background:linear-gradient(180deg,#E4EBF2 0%,#F4F7FA 100%);padding:clamp(56px,7vw,100px) 0 0;">
+<!-- ============ KAPITEL 3 · SIGNATURE: IM GELÄNDE (DESKTOP/TABLET) ============ -->
+<div data-hk-desktop id="gelaende" data-screen-label="Im Gelände" style="background:linear-gradient(180deg,#E4EBF2 0%,#F4F7FA 100%);padding:clamp(56px,7vw,100px) 0 0;">
   <div style="max-width:1240px;margin:0 auto;padding:0 24px;">
     <div style="display:flex;flex-direction:column;gap:14px;max-width:680px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#6B5CE0;">Im Gelände</div>
@@ -280,6 +396,44 @@ img{max-width:100%}
   </div>
 </div>
 
+<!-- ============ MOBILE · IM GELÄNDE ============ -->
+<div data-hk-mobile id="gelaende-m" data-screen-label="Im Gelände Mobil" style="background:linear-gradient(180deg,#E4EBF2 0%,#F4F7FA 100%);margin-top:54px;padding:52px 0 0;">
+  <div style="padding:0 20px;">
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#6B5CE0;">Im Gelände</div>
+      <h2 style="margin:0;font-size:clamp(27px,7.6vw,32px);font-weight:900;letter-spacing:-0.025em;line-height:1.08;text-wrap:balance;">So sieht eine Gefahrenstelle aus.</h2>
+      <p style="margin:0;font-size:16.5px;line-height:1.55;font-weight:600;color:#33445A;text-wrap:pretty;">Das Gelände liefert Messwerte. Der Lagebericht liefert Kriterien.</p>
+    </div>
+    <div style="position:relative;border-radius:22px;overflow:hidden;box-shadow:0 30px 70px -34px rgba(14,27,44,0.45);margin-top:26px;">
+      <img src="img/terrain-base-mobile.webp" alt="Alpiner Hang mit den drei geprüften Kriterien: Exposition, Höhenband und Hangneigung" loading="lazy" style="width:100%;display:block;aspect-ratio:4/5;object-fit:cover;object-position:64% 30%;">
+      <div style="position:absolute;left:12px;top:12px;display:flex;flex-direction:column;gap:9px;align-items:flex-start;">
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;color:#FFFFFF;white-space:nowrap;"><svg width="11" height="11" viewBox="0 0 12 12" aria-hidden="true"><path d="M9 3 L3 9 M3 9 L3 5.4 M3 9 L6.6 9" stroke="#FFFFFF" stroke-width="1.6" fill="none" stroke-linecap="round"></path></svg>EXPOSITION · SW</div>
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;color:#FFFFFF;white-space:nowrap;">HÖHENBAND · 1.681&#8239;M</div>
+        <div style="display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;color:#FFFFFF;white-space:nowrap;">HANGNEIGUNG · 30°</div>
+      </div>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:46%;background:linear-gradient(180deg,rgba(9,20,38,0) 0%,rgba(9,20,38,0.34) 100%);pointer-events:none;" aria-hidden="true"></div>
+    </div>
+    <div style="width:min(54%,212px);margin:max(-150px,-34vw) auto 0;position:relative;z-index:2;background:#0B0D12;border-radius:32px;padding:8px;box-shadow:0 24px 54px -22px rgba(9,20,38,0.55),0 0 0 1px rgba(255,255,255,0.10) inset;">
+      <img src="img/sperrbildschirm.png" alt="Echter Sperrbildschirm: Übereinstimmung mit denselben Werten — Höhenband 1.681 m, Exposition SW, Hangneigung 30°" loading="lazy" style="width:100%;display:block;border-radius:25px;">
+    </div>
+    <p style="margin:34px 0 0;text-align:center;font-size:clamp(21px,6vw,26px);font-weight:800;letter-spacing:-0.02em;text-wrap:balance;">Ein Hang. Drei Kriterien. Ein Abgleich.</p>
+    <div style="display:flex;flex-direction:column;gap:22px;margin-top:28px;">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <h3 style="margin:0;font-size:17.5px;font-weight:800;letter-spacing:-0.01em;">Was HangKontext zeigt</h3>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#33445A;text-wrap:pretty;">Ob Exposition, Höhenband und Hangneigung an deinem Standort einer Gefahrenstelle des amtlichen Lageberichts entsprechen.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;border-left:2px solid #A79BFF;padding-left:16px;">
+        <h3 style="margin:0;font-size:17.5px;font-weight:800;letter-spacing:-0.01em;">Was HangKontext nicht zeigt</h3>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Keine Prognose, keine Gefahrenkartierung und keine Freigabe. Unmarkierte Flächen sind nicht automatisch sicher.</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:30px;padding-bottom:44px;">
+      <a href="#beta" style="display:flex;align-items:center;justify-content:center;min-height:52px;background:#1A6DE0;color:#FFFFFF;font-size:16.5px;font-weight:700;border-radius:99px;text-decoration:none;box-shadow:0 12px 30px -10px rgba(26,109,224,0.5);">Für die Beta anmelden</a>
+      <span style="font-size:14.5px;color:#4A5A6B;text-align:center;">Einladung per TestFlight vor Saisonstart.</span>
+    </div>
+  </div>
+</div>
+
 <!-- ============ KAPITEL 4 · DREI ZUSTÄNDE (Bühne) ============ -->
 <div id="zustaende" data-screen-label="Drei Zustände" style="max-width:1240px;margin:0 auto;padding:clamp(24px,3vw,48px) 24px 0;">
   <div style="display:flex;flex-direction:column;gap:14px;max-width:680px;">
@@ -322,22 +476,22 @@ img{max-width:100%}
 
 
 <!-- ÜBERGANG HELL → DUNKEL -->
-<div style="position:relative;height:clamp(32px,3.5vw,56px);background:linear-gradient(180deg,#F4F7FA 0%,#E4EBF2 100%);margin-top:clamp(20px,2.5vw,40px);overflow:hidden;" aria-hidden="true">
+<div data-hk-fadein style="position:relative;height:clamp(32px,3.5vw,56px);background:linear-gradient(180deg,#F4F7FA 0%,#E4EBF2 100%);margin-top:clamp(20px,2.5vw,40px);overflow:hidden;" aria-hidden="true">
   <svg viewBox="0 0 1600 140" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.3;">
     <path d="M0,74 C300,50 620,96 920,70 C1160,48 1420,82 1600,60" fill="none" stroke="#6FAAF7" stroke-width="1" stroke-dasharray="2 8"></path>
     <path d="M0,104 C360,82 660,116 1010,92 C1260,74 1460,104 1600,88" fill="none" stroke="#93A2B2" stroke-width="1" stroke-dasharray="2 8"></path>
   </svg>
 </div>
 
-<!-- ============ KAPITEL 5 · UNTERWEGS ============ -->
-<div id="unterwegs" data-screen-label="Unterwegs" style="background:linear-gradient(180deg,#E4EBF2 0%,#F4F7FA 100%);color:#0E1B2C;padding:clamp(24px,3vw,48px) 0 clamp(24px,3vw,40px);">
+<!-- ============ KAPITEL 5 · UNTERWEGS (DESKTOP/TABLET) ============ -->
+<div data-hk-desktop id="unterwegs" data-screen-label="Unterwegs" style="background:linear-gradient(180deg,#E4EBF2 0%,#F4F7FA 100%);color:#0E1B2C;padding:clamp(24px,3vw,48px) 0 clamp(24px,3vw,40px);">
   <div style="max-width:1240px;margin:0 auto;padding:0 24px;">
     <div style="display:flex;flex-direction:column;gap:14px;max-width:680px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1A6DE0;">Unterwegs</div>
       <h2 style="margin:0;font-size:clamp(30px,4vw,50px);font-weight:900;letter-spacing:-0.025em;line-height:1.05;color:#0E1B2C;text-wrap:balance;">Handschuhe an. Der Zustand bleibt im Blick.</h2>
     </div>
     <div style="position:relative;margin-top:36px;border-radius:28px;overflow:hidden;">
-      <video data-hk-video="ontour" data-src="video/on-tour.mp4" poster="img/on-tour-poster.webp" muted loop playsinline preload="none" aria-hidden="true" style="width:100%;display:block;aspect-ratio:16/9;min-height:460px;object-fit:cover;background:#18364A;"></video>
+      <video data-hk-video="ontour" data-src="video/on-tour.mp4" data-poster="img/on-tour-poster.webp" muted loop playsinline preload="none" aria-hidden="true" style="width:100%;display:block;aspect-ratio:16/9;min-height:460px;object-fit:cover;background:#18364A;"></video>
       <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(15,36,52,0.68) 0%,rgba(15,36,52,0.26) 48%,rgba(15,36,52,0.04) 100%);" aria-hidden="true"></div>
       <div style="position:absolute;inset:0;display:flex;align-items:center;">
         <div style="display:flex;gap:clamp(20px,3vw,48px);align-items:center;flex-wrap:wrap;padding:clamp(22px,3.5vw,52px);width:100%;box-sizing:border-box;">
@@ -379,8 +533,50 @@ img{max-width:100%}
   </div>
 </div>
 
+<!-- ============ MOBILE · UNTERWEGS ============ -->
+<div data-hk-mobile id="unterwegs-m" data-screen-label="Unterwegs Mobil" style="background:linear-gradient(180deg,#E4EBF2 0%,#F4F7FA 100%);color:#0E1B2C;padding:36px 20px 44px;">
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1A6DE0;">Unterwegs</div>
+    <h2 style="margin:0;font-size:clamp(27px,7.6vw,32px);font-weight:900;letter-spacing:-0.025em;line-height:1.08;color:#0E1B2C;text-wrap:balance;">Handschuhe an. Der Zustand bleibt im Blick.</h2>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#5E7788;">Live Activity · Sperrbildschirm · Dynamic Island</div>
+  </div>
+  <div style="position:relative;border-radius:22px;overflow:hidden;margin-top:24px;">
+    <img src="img/on-tour-poster.webp" alt="" aria-hidden="true" loading="lazy" style="width:100%;display:block;aspect-ratio:4/5;object-fit:cover;object-position:56% center;">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,36,52,0.16) 0%,rgba(15,36,52,0.05) 40%,rgba(18,42,60,0.78) 100%);pointer-events:none;" aria-hidden="true"></div>
+  </div>
+  <div data-lb="lock" role="button" tabindex="0" aria-label="Sperrbildschirm-Mockup vergrößern" style="width:min(54%,212px);margin:max(-150px,-34vw) auto 0;position:relative;z-index:2;background:#05090F;border-radius:32px;padding:8px;box-shadow:0 26px 60px -22px rgba(4,14,24,0.7);cursor:zoom-in;">
+    <img src="img/sperrbildschirm.png" alt="Sperrbildschirm mit Live Activity: Zustand, Messwerte und Gefahrenstufe" loading="lazy" style="width:100%;display:block;border-radius:25px;">
+  </div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:26px;">
+    <div style="font-size:21px;font-weight:800;letter-spacing:-0.015em;line-height:1.15;color:#0E1B2C;">Ohne die App zu öffnen.</div>
+    <p style="margin:0;font-size:16px;line-height:1.6;color:#33445A;text-wrap:pretty;">Zustand, Messwerte und Gefahrenstufe liegen auf dem Sperrbildschirm und kompakt in der Dynamic Island — die Handschuhe bleiben an, das Telefon in der Jacke.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px;">
+    <div style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:16px;display:flex;gap:14px;align-items:center;">
+      <div data-lb="watch" role="button" tabindex="0" aria-label="Watch-Mockup vergrößern" style="width:82px;background:#05090F;border-radius:22px;padding:5px;flex-shrink:0;cursor:zoom-in;">
+        <img src="img/watch.png" alt="Apple-Watch-Komplikation: Zustand am Handgelenk" loading="lazy" style="width:100%;display:block;border-radius:20px;">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Apple Watch</div>
+        <div style="font-size:17.5px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;">Ein Blick, weitergehen.</div>
+        <div style="font-size:15.5px;line-height:1.5;color:#33445A;text-wrap:pretty;">Der Zustand als Komplikation direkt am Handgelenk.</div>
+      </div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:16px;display:flex;gap:14px;align-items:center;">
+      <div data-lb="map" role="button" tabindex="0" aria-label="Karten-Mockup vergrößern" style="width:82px;background:#05090F;border-radius:18px;padding:5px;flex-shrink:0;cursor:zoom-in;">
+        <img src="img/karte-overlay.png" alt="Karte mit markiertem passendem Steilgelände" loading="lazy" style="width:100%;display:block;border-radius:16px;">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;min-width:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Karte · Opt-in</div>
+        <div style="font-size:17.5px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;">Gefahrenstellen im Gelände</div>
+        <div style="font-size:15.5px;line-height:1.5;color:#33445A;text-wrap:pretty;">Passendes Steilgelände liegt markiert auf der Karte. Unmarkiert heißt nie sicher.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ÜBERGANG DUNKEL → HELL -->
-<div style="position:relative;height:clamp(16px,1.8vw,28px);background:#F4F7FA;overflow:hidden;" aria-hidden="true">
+<div data-hk-fadeout style="position:relative;height:clamp(16px,1.8vw,28px);background:#F4F7FA;overflow:hidden;" aria-hidden="true">
   <svg viewBox="0 0 1600 140" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.3;">
     <path d="M0,34 C320,58 640,18 960,44 C1200,64 1440,30 1600,50" fill="none" stroke="#6FAAF7" stroke-width="1" stroke-dasharray="2 8"></path>
     <path d="M0,10 C360,32 700,-4 1040,24 C1280,42 1480,12 1600,28" fill="none" stroke="#93A2B2" stroke-width="1" stroke-dasharray="2 8"></path>
@@ -506,12 +702,12 @@ img{max-width:100%}
   <div style="border-top:1px solid #D6E1EC;padding-top:40px;display:flex;gap:40px;flex-wrap:wrap;justify-content:space-between;">
     <div style="display:flex;flex-direction:column;gap:13px;max-width:480px;">
       <div style="display:flex;align-items:center;gap:10px;">
-        <img src="img/app-icon-1024.png" alt="" width="26" height="26" style="width:26px;height:26px;border-radius:7px;">
+        <img src="img/app-icon-96.png" alt="" width="26" height="26" style="width:26px;height:26px;border-radius:7px;">
         <div style="font-size:15px;font-weight:800;">HangKontext</div>
         <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6E80;">hangkontext.de</div>
       </div>
       <div style="font-size:14.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;">HangKontext informiert. Der Mensch beurteilt und entscheidet. Diese Information ersetzt keine Ausbildung, keine Tourenplanung und keine eigene Beurteilung im Gelände.</div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;line-height:2;color:#5C6E80;">LAGEBERICHTE: AVALANCHE.REPORT · LAWINENWARNDIENST BAYERN<br>UNFALLDATEN: LAWINENWARNDIENST DES LANDES TIROL · CC BY<br>GELÄNDE: LAND TIROL · BAYER. VERMESSUNGSVERWALTUNG (CC-BY 4.0)<br>KARTE: © OPENTOPOMAP (CC-BY-SA) · © OPENSTREETMAP</div>
+      <div data-hk-attribution style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;line-height:2;color:#5C6E80;">LAGEBERICHTE: AVALANCHE.REPORT · LAWINENWARNDIENST BAYERN<br>UNFALLDATEN: LAWINENWARNDIENST DES LANDES TIROL · CC BY<br>GELÄNDE: LAND TIROL · BAYER. VERMESSUNGSVERWALTUNG (CC-BY 4.0)<br>KARTE: © OPENTOPOMAP (CC-BY-SA) · © OPENSTREETMAP</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:11px;font-size:14.5px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6E80;">Rechtliches</div>
@@ -570,8 +766,8 @@ img{max-width:100%}
     tab.addEventListener('click', function () { setZustand(tab.getAttribute('data-zust')); });
     tab.addEventListener('keydown', function (e) {
       var i = ZUST.indexOf(zust);
-      if (e.key === 'ArrowRight') i = (i + 1) % 3;
-      else if (e.key === 'ArrowLeft') i = (i + 2) % 3;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') i = (i + 1) % 3;
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') i = (i + 2) % 3;
       else if (e.key === 'Home') i = 0;
       else if (e.key === 'End') i = 2;
       else return;
@@ -678,6 +874,7 @@ img{max-width:100%}
   }
   function loadVid(v) {
     attachErr(v); attachEnd(v);
+    if (v.dataset.poster && !v.getAttribute('poster')) v.setAttribute('poster', v.dataset.poster);
     if (!v.getAttribute('src')) {
       v.src = v.dataset.src;
       try { v.load(); } catch (e) {}
@@ -696,6 +893,7 @@ img{max-width:100%}
   }
   function applyVids() {
     vids.forEach(function (v) {
+      if (allowed() && v.dataset.poster && !v.getAttribute('poster')) v.setAttribute('poster', v.dataset.poster);
       if (allowed() && seen[v.dataset.hkVideo]) loadVid(v); else unloadVid(v);
     });
   }
