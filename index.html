@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HangKontext — Der Lagebericht für genau deinen Hang</title>
 <meta name="description" content="Standortbezogener Lawinen-Entscheidungsassistent: HangKontext misst Exposition, Höhe und Hangneigung an deinem Standort und gleicht sie laufend mit den Gefahrenstellen des amtlichen Lawinenlageberichts ab. Fakten statt Bewertung. Beta-Tester für Winter 2026/27 gesucht.">
-<meta name="theme-color" content="#0B0C0E">
+<meta name="theme-color" content="#0A1524">
+<meta name="color-scheme" content="light">
 <link rel="canonical" href="https://hangkontext.de/">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="img/app-icon.png">
@@ -23,818 +24,725 @@
 <meta name="twitter:title" content="HangKontext — Der Lagebericht für genau deinen Hang">
 <meta name="twitter:description" content="Exposition, Höhe und Hangneigung an deinem Standort — laufend abgeglichen mit dem amtlichen Lawinenlagebericht. Beta-Tester für Winter 2026/27 gesucht.">
 <meta name="twitter:image" content="https://hangkontext.de/og.png">
-<link rel="preload" href="fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/schibsted-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 /* --- SCHRIFTEN, SELBST GEHOSTET (DSGVO) ---
-   Vorher wurden Space Grotesk und IBM Plex Mono von fonts.googleapis.com
-   geladen — dabei ging bei jedem Seitenaufruf ungefragt die IP-Adresse der
-   Besucher:innen an Google (vgl. LG München I, 20.01.2022, 3 O 17493/20).
-   Jetzt liegen die Dateien unter fonts/ auf der eigenen Domain.
-   Space Grotesk ist ein Variable Font: eine Datei deckt 400-700 ab.
-   Beide Schriften stehen unter der SIL Open Font License 1.1. */
-@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 700;font-display:swap;src:url('fonts/space-grotesk-var-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
-@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 700;font-display:swap;src:url('fonts/space-grotesk-var-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+   Der Design-Entwurf (v5.7) lädt Schibsted Grotesk und IBM Plex Mono von
+   fonts.googleapis.com — dabei ginge bei jedem Seitenaufruf ungefragt die
+   IP-Adresse der Besucher:innen an Google (vgl. LG München I, 20.01.2022,
+   3 O 17493/20). Die Dateien liegen deshalb unter fonts/ auf der eigenen
+   Domain. Schibsted Grotesk ist ein Variable Font: eine Datei deckt 400-900
+   ab. Beide Schriften stehen unter der SIL Open Font License 1.1. */
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-weight:400 900;font-display:swap;src:url('fonts/schibsted-grotesk-var-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-weight:400 900;font-display:swap;src:url('fonts/schibsted-grotesk-var-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
 @font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/ibm-plex-mono-400-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 @font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/ibm-plex-mono-400-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/ibm-plex-mono-500-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/ibm-plex-mono-500-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
 @font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/ibm-plex-mono-600-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 @font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/ibm-plex-mono-600-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
-html{scroll-behavior:smooth}
-body{margin:0;background:#0B0C0E;color:#EDEFEA;font-family:'Space Grotesk',sans-serif;-webkit-font-smoothing:antialiased}
-*{box-sizing:border-box}
-img{max-width:100%}
-a{color:#EDEFEA;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#565D66}
-a:hover{color:#FFFFFF;text-decoration-color:#A79BFF}
-input,select,button{font-family:'Space Grotesk',sans-serif}
-input::placeholder{color:#565D66}
-.hk-nav{color:#878E96;text-decoration:none}
-.hk-nav:hover{color:#EDEFEA}
-.hk-primary:hover{background:#C1B8FF}
-.hk-secondary:hover{border-color:#878E96}
-.hk-hoverborder:hover{border-color:#878E96}
-@keyframes hkPulse{0%,100%{opacity:1}50%{opacity:0.15}}
-@keyframes hkMarquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-@keyframes hkRise{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:translateY(0)}}
-@keyframes hkFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-/* --- DESKTOP / MOBIL-WEICHE ---
-   Unter 760px wird das Desktop-Markup komplett ausgeblendet und stattdessen
-   das eigenständige Mobil-Layout (Design "HangKontext Mobil v3") gezeigt.
-   Beide Varianten nutzen dieselben Bilddateien — kein doppelter Ladeaufwand. */
-.hk-mobile{display:none}
-@media (max-width:760px){
-  .hk-desktop{display:none}
-  .hk-mobile{display:block}
-}
-.hkm-gal{scrollbar-width:none;-ms-overflow-style:none}
-.hkm-gal::-webkit-scrollbar{display:none}
-@media (prefers-reduced-motion:reduce){
-  *{animation:none !important;scroll-behavior:auto !important}
-}
-input[type=range]{-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;outline:none;width:100%;margin:10px 0}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#EDEFEA;border:4px solid #0B0C0E;box-shadow:0 0 0 1.5px #878E96;cursor:pointer}
-input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#EDEFEA;border:4px solid #0B0C0E;box-shadow:0 0 0 1.5px #878E96;cursor:pointer}
+/* --- BASIS (1:1 aus dem Design-Entwurf v5.7) --- */
+html{scroll-behavior:smooth}
+body{margin:0;background:#F4F7FA;color:#0E1B2C;font-family:'Schibsted Grotesk',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0E1B2C;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#B9C7D6}
+a:hover{color:#1A6DE0;text-decoration-color:#1A6DE0}
+input,select,button{font-family:'Schibsted Grotesk',sans-serif}
+input::placeholder{color:#5C6E80;opacity:1}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #1A6DE0;outline-offset:2px;border-radius:4px}
+img{max-width:100%}
+[hidden]{display:none !important}
+@keyframes hkPulse{0%,100%{opacity:1}50%{opacity:0.2}}
+@keyframes hkReveal{0%{opacity:0;transform:translateY(28px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes hkFade{0%{opacity:0}100%{opacity:1}}
+@keyframes hkLayer{0%{opacity:0;transform:translateY(16px)}100%{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion: reduce){[data-hk-layer],[data-hk-phone],[data-hk-connect]{animation:none !important;opacity:1 !important;transform:none !important;transition:none !important}}
+[data-hk-phone].is-visible{opacity:1 !important;transform:translateY(0) scale(1) !important}
+@media (min-aspect-ratio:21/9){[data-screen-label="Hero"]{min-height:min(94svh,820px) !important}}
+@media (min-width:720px){video[data-hk-video="hero"]{object-position:66% 42% !important;transform:scale(1.04)}[data-hk-hero-phone]>div{transform:translateX(2vw);transform-origin:bottom center}}
+@media (min-width:720px) and (max-width:1023px){[data-hk-phone]{width:min(19%,190px) !important;left:1.5% !important}[data-hk-layer="band-chip"] div{left:calc(1.5% + min(19%,190px) + 54px) !important}}
+@media (max-width:719px){[data-hk-phone]{position:static !important;width:min(52%,230px) !important;margin:18px auto 0 !important;animation:none !important;opacity:1 !important;transform:none !important}[data-hk-connect]{display:none !important}[data-hk-layer="neigung-chip"] div{left:68% !important}[data-hk-layer="band-chip"] div{left:7% !important}header nav a{padding:12px 16px !important}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important}}
+
+/* --- HOVER-ZUSTÄNDE ---
+   Im Designer stehen sie als style-hover="…" direkt am Element; standalone
+   brauchen sie echte CSS-Regeln. Werte 1:1 aus dem Entwurf. */
+.hk-navlink:hover{background:rgba(255,255,255,0.14);color:#FFFFFF}
+.hk-cta:hover{background:#3B82F0}
+.hk-cta-hero:hover{background:#3B82F0;transform:translateY(-2px)}
+.hk-ghost:hover{background:rgba(9,20,38,0.7);border-color:rgba(255,255,255,0.4)}
+.hk-zoom:hover{transform:scale(1.045);box-shadow:0 38px 84px -22px rgba(6,20,32,0.7)}
+.hk-zoom-sm:hover{transform:scale(1.08)}
+.hk-optbtn:hover{border-color:#4A5A6B}
+
+/* --- TABS „Drei Zustände" ---
+   Im Entwurf als Style-Objekte tabOn/tabOff berechnet. */
+.hk-tab{font-family:'Schibsted Grotesk',sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.01em;padding:12px 20px;border-radius:99px;cursor:pointer;transition:background 0.15s,border-color 0.15s,color 0.15s;background:#FFFFFF;color:#33445A;border:1px solid #C9D6E3}
+.hk-tab.is-on{background:#0E1B2C;color:#FFFFFF;border:1px solid #0E1B2C;box-shadow:0 10px 24px -12px rgba(14,27,44,0.5)}
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     DESKTOP-VARIANTE (ab 761px) — Landingpage v2
-     ============================================================ -->
-<div class="hk-desktop">
-
-<!-- HEADER -->
-<div style="position:sticky;top:0;z-index:60;background:rgba(11,12,14,0.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid #24282E;">
-  <div style="max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-    <div style="display:flex;align-items:center;gap:12px;">
-      <img src="img/app-icon.png" alt="HangKontext App-Icon" style="width:34px;height:34px;border-radius:8px;border:1px solid #2E343A;">
-      <div style="font-size:17px;font-weight:700;letter-spacing:-0.01em;">HangKontext</div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#565D66;border:1px solid #24282E;border-radius:99px;padding:4px 10px;">Beta · Winter 26/27</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;">
-      <a href="#zustaende" class="hk-nav">Zustände</a>
-      <a href="#simulator" class="hk-nav">Simulator</a>
-      <a href="#beta" class="hk-primary" style="background:#A79BFF;color:#0B0C0E;text-decoration:none;padding:10px 18px;border-radius:99px;font-weight:600;">Beta-Tester werden</a>
-    </div>
+<!-- ============ KAPITEL 1 · CINEMATIC HERO ============ -->
+<div data-screen-label="Hero" style="position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;background:#0A1524;">
+  <div style="position:absolute;inset:0;" aria-hidden="true">
+    <img src="img/hero-still.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;">
+    <video data-hk-video="hero" data-src="video/hero.mp4" poster="img/hero-poster.webp" muted playsinline autoplay preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;"></video>
   </div>
-  <div style="border-top:1px solid #24282E;background:#0E1013;">
-    <div style="max-width:1200px;margin:0 auto;padding:8px 24px;display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#878E96;overflow:hidden;white-space:nowrap;">
-      <div style="width:7px;height:7px;border-radius:50%;background:#A79BFF;animation:hkPulse 1.6s ease-in-out infinite;flex-shrink:0;"></div>
-      <span id="hk-ticker" style="overflow:hidden;text-overflow:ellipsis;">ABGLEICH AKTIV · 47.2612° N, 11.3919° O · EXPOSITION NO · 1.940 M · 32° — LAGEBERICHT 07:30, GÜLTIG</span>
-    </div>
-  </div>
-</div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,21,36,0.6) 0%,rgba(10,21,36,0.28) 40%,rgba(10,21,36,0.2) 72%,#F4F7FA 100%);pointer-events:none;" aria-hidden="true"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 62% 75% at 26% 52%,rgba(9,20,38,0.62) 0%,rgba(9,20,38,0.32) 55%,rgba(9,20,38,0) 100%);pointer-events:none;" aria-hidden="true"></div>
 
-<!-- HERO -->
-<div style="border-bottom:1px solid #24282E;background:radial-gradient(120% 90% at 75% 0%,rgba(167,155,255,0.07) 0%,rgba(11,12,14,0) 55%);">
-  <div style="max-width:1200px;margin:0 auto;padding:clamp(60px,8vw,110px) 24px clamp(48px,6vw,80px);display:flex;gap:clamp(32px,6vw,80px);align-items:center;flex-wrap:wrap;">
-    <div style="flex:1 1 520px;min-width:290px;display:flex;flex-direction:column;gap:28px;animation:hkRise 0.7s ease-out both;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#878E96;">// standortbezogener lawinen-entscheidungsassistent</div>
-      <h1 style="margin:0;font-size:clamp(46px,7.8vw,96px);line-height:0.98;font-weight:700;letter-spacing:-0.035em;">Der amtliche Lagebericht.<br><span style="color:#A79BFF;">Für genau deinen Hang.</span></h1>
-      <p style="margin:0;font-size:clamp(16px,2vw,20px);line-height:1.6;color:#B9BFBB;max-width:560px;text-wrap:pretty;">HangKontext misst Exposition, Höhe und Hangneigung an deinem Standort und gleicht sie laufend mit den Gefahrenstellen des amtlichen Lawinenlageberichts ab. Fakten statt Bewertung — informativ, nie als Freigabe.</p>
-      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
-        <a href="#beta" class="hk-primary" style="background:#A79BFF;color:#0B0C0E;font-size:16.5px;font-weight:600;padding:16px 30px;border-radius:99px;text-decoration:none;">Beta-Tester werden</a>
-        <a href="#simulator" class="hk-secondary" style="border:1px solid #2E343A;background:rgba(20,22,26,0.6);color:#EDEFEA;font-size:16.5px;padding:15px 30px;border-radius:99px;text-decoration:none;">Selbst ausprobieren ↓</a>
+  <!-- NAV -->
+  <header style="position:relative;z-index:6;">
+    <div style="max-width:1240px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:11px;background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:7px 16px 7px 7px;box-shadow:0 4px 24px -8px rgba(9,20,38,0.35);">
+        <img src="img/app-icon-1024.png" alt="HangKontext App-Icon" width="32" height="32" style="width:32px;height:32px;border-radius:50%;">
+        <div style="font-size:15.5px;font-weight:800;letter-spacing:-0.01em;color:#FFFFFF;">HangKontext</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#B9C9DC;">Beta 26/27</div>
       </div>
-      <div style="display:flex;align-items:center;gap:10px;color:#878E96;font-size:14.5px;">
-        <div style="width:8px;height:8px;background:#878E96;transform:rotate(45deg);flex-shrink:0;"></div>
-        Die Beurteilung bleibt beim Menschen — immer.
+      <nav aria-label="Hauptnavigation" style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:5px;box-shadow:0 4px 24px -8px rgba(9,20,38,0.35);">
+        <a class="hk-navlink" href="#funktionsweise" style="color:rgba(255,255,255,0.85);text-decoration:none;font-size:14.5px;font-weight:500;padding:10px 14px;border-radius:99px;">So funktioniert's</a>
+        <a class="hk-navlink" href="#unterwegs" style="color:rgba(255,255,255,0.85);text-decoration:none;font-size:14.5px;font-weight:500;padding:10px 14px;border-radius:99px;">Unterwegs</a>
+        <a class="hk-navlink" href="#validierung" style="color:rgba(255,255,255,0.85);text-decoration:none;font-size:14.5px;font-weight:500;padding:10px 14px;border-radius:99px;">Validierung</a>
+        <a class="hk-cta" href="#beta" style="background:#1A6DE0;color:#FFFFFF;text-decoration:none;font-size:14.5px;font-weight:700;padding:11px 18px;border-radius:99px;">Für die Beta anmelden</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO CONTENT -->
+  <div style="position:relative;z-index:3;flex:1;display:flex;align-items:center;">
+    <div style="max-width:1240px;margin:0 auto;width:100%;padding:clamp(30px,4vw,56px) 24px 0;display:flex;gap:clamp(28px,5vw,64px);align-items:flex-end;flex-wrap:wrap;">
+      <div style="flex:1 1 540px;min-width:290px;display:flex;flex-direction:column;gap:24px;padding-bottom:clamp(40px,7vh,90px);animation:hkReveal 0.8s ease-out both;">
+        <div style="display:flex;align-items:center;gap:9px;align-self:flex-start;background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:8px 16px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.92);">
+          <div style="width:7px;height:7px;border-radius:50%;background:#6FAAF7;animation:hkPulse 1.8s ease-in-out infinite;" aria-hidden="true"></div>
+          Abgleich mit dem amtlichen Lawinenlagebericht
+        </div>
+        <h1 style="margin:0;font-size:clamp(42px,6vw,80px);line-height:1.02;font-weight:900;letter-spacing:-0.03em;color:#FFFFFF;text-shadow:0 2px 30px rgba(10,30,60,0.5);text-wrap:balance;">Der Lagebericht für genau deinen Hang.</h1>
+        <p style="margin:0;font-size:clamp(16.5px,1.9vw,20px);line-height:1.55;color:#FFFFFF;max-width:560px;text-wrap:pretty;text-shadow:0 1px 18px rgba(10,30,60,0.55);">HangKontext misst Exposition, Höhe und Hangneigung an deinem Standort — und gleicht sie laufend mit den Gefahrenstellen des amtlichen Lawinenlageberichts ab. Fakten statt Bewertung.</p>
+        <div style="font-size:14.5px;line-height:1.5;color:#D5E2EE;text-shadow:0 1px 14px rgba(10,30,60,0.6);max-width:560px;">Für Skitourengeher, Splitboarder und Winterbergsteiger — vom ersten Tourenwinter bis zum professionellen Einsatz.</div>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+          <a class="hk-cta-hero" href="#beta" style="background:#1A6DE0;color:#FFFFFF;font-size:16.5px;font-weight:700;padding:16px 30px;border-radius:99px;text-decoration:none;box-shadow:0 14px 34px -10px rgba(26,109,224,0.6);">Für die Beta anmelden</a>
+          <a class="hk-ghost" href="#funktionsweise" style="background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.22);color:#FFFFFF;font-size:16.5px;font-weight:600;padding:15px 28px;border-radius:99px;text-decoration:none;">So funktioniert's</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:9px;color:#FFFFFF;font-size:14.5px;text-shadow:0 1px 14px rgba(10,30,60,0.6);">
+          <div style="width:7px;height:7px;background:#FFFFFF;transform:rotate(45deg);flex-shrink:0;opacity:0.8;" aria-hidden="true"></div>
+          Informativ, nie als Freigabe — die Beurteilung bleibt beim Menschen.
+        </div>
       </div>
-    </div>
-    <div style="flex:0 1 380px;min-width:290px;margin:0 auto;position:relative;animation:hkRise 0.7s 0.15s ease-out both;">
-      <div style="width:min(330px,86vw);background:#14161A;border:1px solid #2E343A;border-radius:48px;padding:10px;margin:0 auto;box-shadow:0 40px 90px -30px rgba(0,0,0,0.8);">
-        <img src="img/home-treffer.webp" alt="HangKontext App — Treffer an Gefahrenstelle" style="width:100%;display:block;border-radius:40px;">
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- MARQUEE -->
-<div style="border-bottom:1px solid #24282E;overflow:hidden;padding:14px 0;">
-  <div style="display:flex;white-space:nowrap;animation:hkMarquee 32s linear infinite;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#565D66;">
-    <div style="padding-right:48px;">Fakten statt Bewertung ◆ Exposition · Höhenband · Hangneigung ◆ Amtlicher Lagebericht, laufend abgeglichen ◆ Stille bedeutet nie Entwarnung ◆ Fail-safe: fehlende Daten werden angezeigt ◆ Tirol · Bayerische Alpen ◆&nbsp;</div>
-    <div style="padding-right:48px;">Fakten statt Bewertung ◆ Exposition · Höhenband · Hangneigung ◆ Amtlicher Lagebericht, laufend abgeglichen ◆ Stille bedeutet nie Entwarnung ◆ Fail-safe: fehlende Daten werden angezeigt ◆ Tirol · Bayerische Alpen ◆&nbsp;</div>
-  </div>
-</div>
-
-<!-- ZUSTÄNDE -->
-<div id="zustaende" style="max-width:1200px;margin:0 auto;padding:clamp(80px,11vw,140px) 24px 0;">
-  <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;color:#565D66;">01</div>
-    <h2 style="margin:0;font-size:clamp(32px,5vw,54px);font-weight:700;letter-spacing:-0.025em;line-height:1.05;">Drei Antworten. Nie Schweigen.</h2>
-  </div>
-  <p style="margin:16px 0 0;font-size:17px;line-height:1.6;color:#878E96;max-width:620px;text-wrap:pretty;">Jeder Zustand hat eine eigene Form — fehlen Daten, sagt die App das explizit. Tippe die Zustände durch:</p>
-  <div style="display:flex;gap:clamp(20px,3vw,40px);margin-top:40px;flex-wrap:wrap;align-items:stretch;">
-    <div id="hk-ztabs" style="flex:1 1 340px;min-width:280px;display:flex;flex-direction:column;gap:12px;"></div>
-    <div id="hk-zpanel" style="flex:1.4 1 440px;min-width:290px;background:#16131F;border:1px solid #4A4090;border-radius:16px;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:22px;justify-content:center;">
-      <div id="hk-zicon"></div>
-      <div id="hk-zstatus" style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;"></div>
-      <div id="hk-zhead" style="font-size:clamp(24px,3vw,32px);font-weight:700;letter-spacing:-0.02em;line-height:1.15;"></div>
-      <div id="hk-zbody" style="font-size:16.5px;line-height:1.65;color:#B9BFBB;text-wrap:pretty;"></div>
-      <div id="hk-zfoot" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#565D66;border-top:1px solid rgba(135,142,150,0.25);padding-top:16px;"></div>
-    </div>
-  </div>
-</div>
-
-<!-- SIMULATOR -->
-<div id="simulator" style="max-width:1200px;margin:0 auto;padding:clamp(80px,11vw,140px) 24px 0;">
-  <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;color:#565D66;">02</div>
-    <h2 style="margin:0;font-size:clamp(32px,5vw,54px);font-weight:700;letter-spacing:-0.025em;line-height:1.05;">Du gehst. HangKontext prüft.</h2>
-  </div>
-  <p style="margin:16px 0 0;font-size:17px;line-height:1.6;color:#878E96;max-width:620px;text-wrap:pretty;">Treffer nur, wenn alle drei Messwerte derselben Gefahrenstelle des Lageberichts entsprechen. Stell deinen Standort selbst ein:</p>
-  <div style="display:flex;gap:clamp(20px,3vw,36px);margin-top:40px;flex-wrap:wrap;align-items:stretch;">
-    <div style="flex:0 1 360px;min-width:290px;background:#14161A;border:1px solid #24282E;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;">
-      <div style="padding:16px 22px;border-bottom:1px solid #24282E;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;">Gefahrenstelle · amtlicher Lagebericht</div>
-      <div style="padding:24px;display:flex;flex-direction:column;gap:18px;flex:1;">
-        <div style="display:flex;align-items:center;gap:14px;">
-          <div style="width:44px;height:44px;background:#FFF734;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:21px;color:#151515;">2</div>
-          <div>
-            <div style="font-size:21px;font-weight:600;">Triebschnee</div>
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#565D66;">EAWS-Stufe 2 · mäßig</div>
+      <div data-hk-hero-phone style="flex:0 1 340px;min-width:280px;margin:0 auto;animation:hkReveal 0.8s 0.2s ease-out both;">
+        <div style="width:min(340px,82vw);margin:0 auto -40px;position:relative;z-index:4;">
+          <div style="background:#0E1B2C;border-radius:52px 52px 0 0;padding:10px 10px 0;box-shadow:0 -24px 90px -18px rgba(9,20,38,0.65);">
+            <img src="img/home-treffer.png" alt="HangKontext App — dein Standort entspricht einer Gefahrenstelle des Lageberichts" style="width:100%;display:block;border-radius:42px 42px 0 0;">
           </div>
         </div>
-        <div style="display:flex;flex-direction:column;font-family:'IBM Plex Mono',monospace;font-size:13px;">
-          <div style="display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid #24282E;"><span style="color:#878E96;">EXPOSITIONEN</span><span style="color:#CFC8FF;">NW · N · NO</span></div>
-          <div style="display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid #24282E;"><span style="color:#878E96;">HÖHENBAND</span><span style="color:#CFC8FF;">über 1800 m</span></div>
-          <div style="display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid #24282E;border-bottom:1px solid #24282E;"><span style="color:#878E96;">HANGNEIGUNG</span><span style="color:#CFC8FF;">ab 30°</span></div>
-        </div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:#565D66;margin-top:auto;">WARNREGION AT-07-01 · LAWINENWARNDIENST TIROL</div>
       </div>
     </div>
-    <div style="flex:1.6 1 480px;min-width:290px;background:#101216;border:1px solid #24282E;border-radius:16px;overflow:hidden;">
-      <div style="padding:16px 22px;border-bottom:1px solid #24282E;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;">
-        <span style="color:#878E96;">Dein Standort · simuliert</span><span style="color:#565D66;">GPS ±5 m</span>
-      </div>
-      <div style="padding:clamp(20px,3vw,32px);display:flex;gap:clamp(24px,3vw,40px);flex-wrap:wrap;align-items:center;">
-        <div style="flex:0 0 auto;margin:0 auto;position:relative;width:250px;height:250px;">
-          <div style="position:absolute;inset:0;border-radius:50%;border:1px solid #24282E;background:conic-gradient(from -67.5deg,rgba(167,155,255,0.16) 0deg 135deg,rgba(20,22,26,0.4) 135deg 360deg);"></div>
-          <div id="hk-compass" style="position:absolute;inset:0;"></div>
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;pointer-events:none;">
-            <div id="hk-expo-val" style="font-size:30px;font-weight:700;letter-spacing:-0.02em;">NO</div>
-            <div id="hk-expo-status" style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.12em;color:#CFC8FF;">IM BEREICH</div>
-          </div>
+  </div>
+</div>
+
+<!-- DATENQUELLEN -->
+<div data-screen-label="Datenquellen" style="max-width:1240px;margin:0 auto;padding:26px 24px 0;display:flex;gap:10px 28px;flex-wrap:wrap;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#33445A;">
+  <span>Datenquellen:</span>
+  <span style="font-weight:600;">avalanche.report</span>
+  <span style="font-weight:600;">Lawinenwarndienst Bayern</span>
+  <span style="font-weight:600;">Land Tirol · DGM 5&#8239;m</span>
+  <span style="font-weight:600;">OpenTopoMap</span>
+</div>
+
+<!-- ============ KAPITEL 2 · SO FUNKTIONIERT'S ============ -->
+<div id="funktionsweise" data-screen-label="So funktioniert's" style="max-width:1240px;margin:0 auto;padding:clamp(44px,6vw,84px) 24px 0;">
+  <div style="display:flex;gap:clamp(24px,4vw,56px);align-items:flex-end;justify-content:space-between;flex-wrap:wrap;">
+    <div style="flex:1 1 420px;display:flex;flex-direction:column;gap:14px;max-width:680px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1A6DE0;">So funktioniert's</div>
+      <h2 style="margin:0;font-size:clamp(28px,3.6vw,46px);font-weight:900;letter-spacing:-0.025em;line-height:1.06;text-wrap:balance;">Drei Schritte. Ein Abgleich. Deine Entscheidung.</h2>
+    </div>
+    <div style="flex:0 1 250px;min-width:210px;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 20px 50px -24px rgba(14,27,44,0.45);">
+      <img src="img/terrain-base.png" alt="" aria-hidden="true" loading="lazy" style="width:100%;display:block;aspect-ratio:16/10;object-fit:cover;object-position:center 40%;">
+      <div style="position:absolute;left:10px;bottom:10px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:5px 11px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;">GELÄNDEMODELL · DGM 5&#8239;M</div>
+    </div>
+  </div>
+  <div style="position:relative;margin-top:30px;">
+    <div style="position:absolute;top:9px;left:0;right:0;height:1px;background:linear-gradient(90deg,#1A6DE0 0%,#B9C7D6 55%,#A79BFF 100%);" aria-hidden="true"></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px;">
+      <div style="display:flex;flex-direction:column;gap:12px;animation:hkReveal 0.7s both;animation-timeline:view();animation-range:entry 0% entry 35%;">
+        <div style="width:19px;height:19px;border-radius:50%;background:#F4F7FA;border:3px solid #1A6DE0;box-sizing:border-box;" aria-hidden="true"></div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#1A6DE0;margin-top:6px;">SCHRITT 1</div>
+        <h3 style="margin:0;font-size:21px;font-weight:800;letter-spacing:-0.01em;">App starten, losgehen</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">GPS und Geländemodell bestimmen Exposition, Höhe und Neigung — laufend, ohne Eingabe.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#33445A;border:1px solid #C9D6E3;border-radius:99px;padding:6px 12px;background:#FFFFFF;">EXPOSITION</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#33445A;border:1px solid #C9D6E3;border-radius:99px;padding:6px 12px;background:#FFFFFF;">HÖHE</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#33445A;border:1px solid #C9D6E3;border-radius:99px;padding:6px 12px;background:#FFFFFF;">NEIGUNG</span>
         </div>
-        <div style="flex:1 1 240px;min-width:220px;display:flex;flex-direction:column;gap:26px;">
-          <div>
-            <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;">
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;">Höhe</div>
-              <div id="hk-hoehe-out" style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#CFC8FF;">1.950 m · IM BEREICH</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;animation:hkReveal 0.7s 0.1s both;animation-timeline:view();animation-range:entry 0% entry 35%;">
+        <div style="width:19px;height:19px;border-radius:50%;background:#F4F7FA;border:3px solid #33445A;box-sizing:border-box;" aria-hidden="true"></div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#1A6DE0;margin-top:6px;">SCHRITT 2</div>
+        <h3 style="margin:0;font-size:21px;font-weight:800;letter-spacing:-0.01em;">Abgleich mit dem Lagebericht</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Deine Messwerte werden mit den Gefahrenstellen des amtlichen Berichts verglichen — Übereinstimmung nur, wenn alle Kriterien zusammenpassen.</p>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:4px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#33445A;border:1px solid #C9D6E3;border-radius:99px;padding:6px 12px;background:#FFFFFF;">MESSWERTE</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#5C6E80;" aria-hidden="true">×</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#33445A;border:1px solid #C9D6E3;border-radius:99px;padding:6px 12px;background:#FFFFFF;">AMTLICHER LAGEBERICHT</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;animation:hkReveal 0.7s 0.2s both;animation-timeline:view();animation-range:entry 0% entry 35%;">
+        <div style="width:19px;height:19px;border-radius:50%;background:#F4F7FA;border:3px solid #6B5CE0;box-sizing:border-box;" aria-hidden="true"></div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#1A6DE0;margin-top:6px;">SCHRITT 3</div>
+        <h3 style="margin:0;font-size:21px;font-weight:800;letter-spacing:-0.01em;">Klare Antwort, du entscheidest</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Übereinstimmung, keine Übereinstimmung oder Prüfung eingeschränkt — die Beurteilung bleibt bei dir.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#4A5A6B;border:1px solid #C9D6E3;border-radius:99px;padding:6px 12px;background:#FFFFFF;">KEINE ÜBEREINSTIMMUNG</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#3F2FB8;border:1px solid #A79BFF;border-radius:99px;padding:6px 12px;background:#EFECFF;">ÜBEREINSTIMMUNG</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#5C6E80;border:1px dashed #5C6E80;border-radius:99px;padding:6px 12px;background:#FFFFFF;">PRÜFUNG EINGESCHRÄNKT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TERRAIN-TRANSITION ============ -->
+<div data-screen-label="Terrain-Transition" style="position:relative;margin-top:clamp(48px,6vw,80px);background:#0A1524;overflow:hidden;">
+  <video data-hk-video="terrain" data-src="video/terrain-transition.mp4" poster="img/terrain-poster.webp" muted loop playsinline preload="none" aria-hidden="true" style="width:100%;display:block;aspect-ratio:16/9;max-height:62vh;object-fit:cover;object-position:center 55%;background:#0A1524;"></video>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,#F4F7FA 0%,rgba(244,247,250,0) 14%,rgba(10,21,36,0) 62%,rgba(228,235,242,0.94) 100%);pointer-events:none;" aria-hidden="true"></div>
+  <div style="position:absolute;left:0;right:0;bottom:clamp(28px,6vh,64px);display:flex;justify-content:center;padding:0 24px;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;animation:hkFade 1s both;animation-timeline:view();animation-range:entry 20% entry 70%;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#FFFFFF;text-shadow:0 1px 14px rgba(10,21,36,0.8);">Vom Gelände zur Gefahrenstelle</div>
+      <div style="font-size:clamp(18px,2.2vw,24px);font-weight:700;color:#FFFFFF;text-shadow:0 2px 20px rgba(10,21,36,0.8);text-wrap:balance;max-width:560px;">Das Gelände liefert Messwerte. Der Lagebericht liefert Kriterien.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ KAPITEL 3 · SIGNATURE: IM GELÄNDE ============ -->
+<div id="gelaende" data-screen-label="Im Gelände" style="background:linear-gradient(180deg,#E4EBF2 0%,#F4F7FA 100%);padding:clamp(56px,7vw,100px) 0 0;">
+  <div style="max-width:1240px;margin:0 auto;padding:0 24px;">
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:680px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#6B5CE0;">Im Gelände</div>
+      <h2 style="margin:0;font-size:clamp(32px,4.4vw,56px);font-weight:900;letter-spacing:-0.025em;line-height:1.04;text-wrap:balance;">So sieht eine Gefahrenstelle aus.</h2>
+      <p style="margin:0;font-size:clamp(16px,1.8vw,19px);color:#4A5A6B;">Scroll weiter — die drei Kriterien erscheinen Schritt für Schritt im Gelände.</p>
+    </div>
+    <div style="position:relative;margin-top:36px;">
+      <div style="position:relative;border-radius:28px;overflow:hidden;box-shadow:0 40px 90px -40px rgba(14,27,44,0.4);animation:hkReveal 0.8s both;animation-timeline:view();animation-range:entry 0% entry 30%;">
+        <img src="img/terrain-base.png" alt="Sauberer alpiner Hang am frühen Morgen — Basisbild ohne Einblendungen" loading="lazy" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;">
+        <svg data-hk-layer="violett" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;animation:hkLayer 1s both;animation-timeline:view();animation-range:cover 33% cover 48%;">
+          <defs>
+            <linearGradient id="hkViol" x1="0" y1="0" x2="0.25" y2="1"><stop offset="0" stop-color="#A79BFF" stop-opacity="0.14"></stop><stop offset="1" stop-color="#8F7FF5" stop-opacity="0.38"></stop></linearGradient>
+            <filter id="hkSoft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="28"></feGaussianBlur></filter>
+          </defs>
+          <polygon points="720,640 1080,420 1450,480 1400,620 1150,830 860,800" fill="url(#hkViol)" filter="url(#hkSoft)"></polygon>
+        </svg>
+        <svg data-hk-layer="band" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;animation:hkLayer 0.8s both;animation-timeline:view();animation-range:cover 16% cover 27%;">
+          <path d="M 706,472 C 980,424 1260,366 1600,330" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2" stroke-dasharray="1 9" stroke-linecap="round"></path>
+        </svg>
+        <svg data-hk-layer="neigung" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;animation:hkLayer 0.8s both;animation-timeline:view();animation-range:cover 27% cover 38%;">
+          <path d="M 940,710 L 1180,710" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-dasharray="5 7" fill="none"></path>
+          <path d="M 940,710 L 1180,572" stroke="rgba(255,255,255,0.9)" stroke-width="2" fill="none"></path>
+          <path d="M 1010,710 A 70 70 0 0 0 1001,675" stroke="rgba(255,255,255,0.9)" stroke-width="2" fill="none"></path>
+        </svg>
+        <div data-hk-layer="band-chip" style="position:absolute;inset:0;pointer-events:none;z-index:6;animation:hkLayer 0.8s both;animation-timeline:view();animation-range:cover 16% cover 27%;">
+          <div style="position:absolute;left:calc(2% + min(22%,240px) + 54px);top:47%;transform:translate(0,-50%);display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:6px 13px;font-family:'IBM Plex Mono',monospace;font-size:clamp(11px,1.1vw,12.5px);letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;">HÖHENBAND · 1.681&#8239;M</div>
+        </div>
+        <div data-hk-layer="expo-chip" style="position:absolute;inset:0;pointer-events:none;z-index:3;animation:hkLayer 0.8s both;animation-timeline:view();animation-range:cover 5% cover 16%;">
+          <div style="position:absolute;left:71%;top:16%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:6px 13px;font-family:'IBM Plex Mono',monospace;font-size:clamp(11px,1.1vw,12.5px);letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;"><svg width="11" height="11" viewBox="0 0 12 12" aria-hidden="true"><path d="M9 3 L3 9 M3 9 L3 5.4 M3 9 L6.6 9" stroke="#FFFFFF" stroke-width="1.6" fill="none" stroke-linecap="round"></path></svg>EXPOSITION · SW</div>
+        </div>
+        <div data-hk-layer="neigung-chip" style="position:absolute;inset:0;pointer-events:none;z-index:3;animation:hkLayer 0.8s both;animation-timeline:view();animation-range:cover 27% cover 38%;">
+          <div style="position:absolute;left:74%;top:83%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:6px 13px;font-family:'IBM Plex Mono',monospace;font-size:clamp(11px,1.1vw,12.5px);letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;">HANGNEIGUNG · 30°</div>
+        </div>
+      </div>
+      <svg data-hk-connect viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:4;animation:hkFade 0.6s both;animation-timeline:view();animation-range:cover 66% cover 74%;">
+        <path d="M 400,318 L 1096,186" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" fill="none"></path>
+        <path d="M 400,536 L 892,447" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" fill="none"></path>
+        <path d="M 400,690 L 918,703" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" fill="none"></path>
+        <circle cx="1096" cy="186" r="3.5" fill="rgba(255,255,255,0.8)"></circle>
+        <circle cx="892" cy="447" r="3.5" fill="rgba(255,255,255,0.8)"></circle>
+        <circle cx="918" cy="703" r="3.5" fill="rgba(255,255,255,0.8)"></circle>
+      </svg>
+      <div data-hk-phone style="position:absolute;left:2%;bottom:-9%;width:min(22%,240px);min-width:126px;z-index:5;background:#0B0D12;border-radius:30px;padding:8px;box-shadow:0 14px 28px -16px rgba(9,20,38,0.35),0 0 0 1px rgba(255,255,255,0.10) inset;opacity:0;transform:translateY(24px) scale(0.985);transition:opacity 200ms linear,transform 480ms cubic-bezier(0.22,0.61,0.36,1);">
+        <img src="img/sperrbildschirm.png" alt="Echter Sperrbildschirm: Übereinstimmung mit denselben Werten — Höhenband 1.681 m, Exposition SW, Hangneigung 30°" loading="lazy" style="width:100%;display:block;border-radius:23px;">
+      </div>
+    </div>
+    <p style="margin:clamp(56px,7vw,92px) 0 0;text-align:center;font-size:clamp(22px,3.2vw,36px);font-weight:800;letter-spacing:-0.02em;text-wrap:balance;animation:hkReveal 0.8s both;animation-timeline:view();animation-range:entry 0% entry 60%;">Ein Hang. Drei Kriterien. Ein Abgleich.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px 40px;margin:clamp(36px,5vw,56px) auto 0;max-width:1000px;">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <h3 style="margin:0;font-size:17px;font-weight:800;letter-spacing:-0.01em;">Was HangKontext zeigt</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#33445A;text-wrap:pretty;">Ob Exposition, Höhenband und Hangneigung an deinem Standort einer Gefahrenstelle des amtlichen Lageberichts entsprechen.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;border-left:2px solid #A79BFF;padding-left:18px;">
+        <h3 style="margin:0;font-size:17px;font-weight:800;letter-spacing:-0.01em;">Was HangKontext nicht zeigt</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Keine Prognose, keine Gefahrenkartierung und keine Freigabe. Unmarkierte Flächen sind nicht automatisch sicher.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:36px;padding-bottom:clamp(40px,5vw,64px);">
+      <a class="hk-cta" href="#beta" style="background:#1A6DE0;color:#FFFFFF;font-size:16px;font-weight:700;padding:15px 28px;border-radius:99px;text-decoration:none;box-shadow:0 12px 30px -10px rgba(26,109,224,0.5);">Für die Beta anmelden</a>
+      <span style="font-size:14.5px;color:#4A5A6B;">Einladung per TestFlight vor Saisonstart.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ KAPITEL 4 · DREI ZUSTÄNDE (Bühne) ============ -->
+<div id="zustaende" data-screen-label="Drei Zustände" style="max-width:1240px;margin:0 auto;padding:clamp(24px,3vw,48px) 24px 0;">
+  <div style="display:flex;flex-direction:column;gap:14px;max-width:680px;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1A6DE0;">Drei Zustände</div>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,50px);font-weight:900;letter-spacing:-0.025em;line-height:1.05;text-wrap:balance;">Drei Antworten. Nie Schweigen.</h2>
+    <p style="margin:0;font-size:16.5px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Ein Interface, drei klar unterscheidbare Zustände — wähle sie hier aus. Fehlen Daten, sagt die App das explizit.</p>
+  </div>
+  <div style="margin-top:26px;">
+    <div role="tablist" aria-label="Zustand auswählen" style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button type="button" id="tab-keine" class="hk-tab" role="tab" aria-selected="false" aria-controls="zustand-panel" tabindex="-1" data-zust="keine">Keine Übereinstimmung</button>
+      <button type="button" id="tab-treffer" class="hk-tab is-on" role="tab" aria-selected="true" aria-controls="zustand-panel" tabindex="0" data-zust="treffer">Übereinstimmung</button>
+      <button type="button" id="tab-nicht" class="hk-tab" role="tab" aria-selected="false" aria-controls="zustand-panel" tabindex="-1" data-zust="nicht">Prüfung eingeschränkt</button>
+    </div>
+    <div id="zustand-panel" role="tabpanel" aria-labelledby="tab-treffer" style="margin-top:14px;background:#FFFFFF;border:1px solid #DDE6EF;border-radius:26px;padding:clamp(22px,3vw,40px);display:flex;gap:clamp(24px,4vw,56px);align-items:center;flex-wrap:wrap;box-shadow:0 24px 60px -40px rgba(14,27,44,0.3);">
+      <div style="flex:1 1 340px;min-width:280px;display:flex;flex-direction:column;gap:12px;">
+        <div data-z="keine" hidden>
+          <h3 style="margin:0 0 12px;font-size:clamp(20px,2.4vw,26px);font-weight:800;letter-spacing:-0.015em;">Keine Übereinstimmung</h3>
+          <p style="margin:0;font-size:15.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;max-width:520px;">Dein Standort entspricht keiner Gefahrenstelle des aktuellen Lageberichts. Die App bleibt aktiv und prüft weiter. Keine Übereinstimmung bedeutet niemals Entwarnung.</p>
+        </div>
+        <div data-z="treffer">
+          <h3 style="margin:0 0 12px;font-size:clamp(20px,2.4vw,26px);font-weight:800;letter-spacing:-0.015em;">Dein Standort entspricht einer Gefahrenstelle.</h3>
+          <p style="margin:0;font-size:15.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;max-width:520px;">Exposition, Höhenband und Hangneigung entsprechen einer Gefahrenstelle des amtlichen Lageberichts — mit Lawinenproblem und Gefahrenstufe. Informativ, keine Bewertung. <strong style="color:#0E1B2C;">Eigene Beurteilung nötig — immer.</strong></p>
+        </div>
+        <div data-z="nicht" hidden>
+          <h3 style="margin:0 0 12px;font-size:clamp(20px,2.4vw,26px);font-weight:800;letter-spacing:-0.015em;">Die App sagt, was sie nicht prüfen kann.</h3>
+          <p style="margin:0;font-size:15.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;max-width:520px;">Kein GPS, veralteter Lagebericht oder Gelände außerhalb der Abdeckung: HangKontext zeigt explizit „Prüfung eingeschränkt" an, statt zu schweigen. Fehlende Daten sind nie ein unkritischer Normalzustand.</p>
+        </div>
+        <div id="z-status" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#33445A;border-top:1px solid #EDF2F7;padding-top:12px;">TREFFER · TRIEBSCHNEE · STUFE 2 · EIGENE BEURTEILUNG NÖTIG</div>
+      </div>
+      <div style="flex:0 1 300px;min-width:250px;margin:0 auto;">
+        <div style="width:min(300px,76vw);background:#0E1B2C;border-radius:46px;padding:9px;margin:0 auto;box-shadow:0 34px 80px -26px rgba(9,20,38,0.55);">
+          <img data-z="keine" hidden src="img/home-keine-uebereinstimmung.png" alt="App-Zustand: keine Übereinstimmung — App bleibt aktiv und prüft weiter" loading="lazy" style="width:100%;display:block;border-radius:38px;">
+          <img data-z="treffer" src="img/home-treffer.png" alt="App-Zustand: Übereinstimmung mit einer Gefahrenstelle — mit Lawinenproblem und Gefahrenstufe" loading="lazy" style="width:100%;display:block;border-radius:38px;">
+          <img data-z="nicht" hidden src="img/home-gps-ungenau.png" alt="App-Zustand: Prüfung eingeschränkt — GPS zu ungenau, Position unsicher, keine Aussage möglich" loading="lazy" style="width:100%;display:block;border-radius:38px;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ÜBERGANG HELL → DUNKEL -->
+<div style="position:relative;height:clamp(32px,3.5vw,56px);background:linear-gradient(180deg,#F4F7FA 0%,#E4EBF2 100%);margin-top:clamp(20px,2.5vw,40px);overflow:hidden;" aria-hidden="true">
+  <svg viewBox="0 0 1600 140" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.3;">
+    <path d="M0,74 C300,50 620,96 920,70 C1160,48 1420,82 1600,60" fill="none" stroke="#6FAAF7" stroke-width="1" stroke-dasharray="2 8"></path>
+    <path d="M0,104 C360,82 660,116 1010,92 C1260,74 1460,104 1600,88" fill="none" stroke="#93A2B2" stroke-width="1" stroke-dasharray="2 8"></path>
+  </svg>
+</div>
+
+<!-- ============ KAPITEL 5 · UNTERWEGS ============ -->
+<div id="unterwegs" data-screen-label="Unterwegs" style="background:linear-gradient(180deg,#E4EBF2 0%,#F4F7FA 100%);color:#0E1B2C;padding:clamp(24px,3vw,48px) 0 clamp(24px,3vw,40px);">
+  <div style="max-width:1240px;margin:0 auto;padding:0 24px;">
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:680px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1A6DE0;">Unterwegs</div>
+      <h2 style="margin:0;font-size:clamp(30px,4vw,50px);font-weight:900;letter-spacing:-0.025em;line-height:1.05;color:#0E1B2C;text-wrap:balance;">Handschuhe an. Der Zustand bleibt im Blick.</h2>
+    </div>
+    <div style="position:relative;margin-top:36px;border-radius:28px;overflow:hidden;">
+      <video data-hk-video="ontour" data-src="video/on-tour.mp4" poster="img/on-tour-poster.webp" muted loop playsinline preload="none" aria-hidden="true" style="width:100%;display:block;aspect-ratio:16/9;min-height:460px;object-fit:cover;background:#18364A;"></video>
+      <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(15,36,52,0.68) 0%,rgba(15,36,52,0.26) 48%,rgba(15,36,52,0.04) 100%);" aria-hidden="true"></div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;">
+        <div style="display:flex;gap:clamp(20px,3vw,48px);align-items:center;flex-wrap:wrap;padding:clamp(22px,3.5vw,52px);width:100%;box-sizing:border-box;">
+          <div style="flex:1 1 300px;min-width:260px;display:flex;flex-direction:column;gap:12px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#9FB8CC;">Live Activity · Sperrbildschirm · Dynamic Island</div>
+            <div style="font-size:clamp(22px,2.6vw,32px);font-weight:800;letter-spacing:-0.015em;line-height:1.15;color:#FFFFFF;">Ohne die App zu öffnen.</div>
+            <p style="margin:0;font-size:15.5px;line-height:1.6;color:#D5E2EE;text-wrap:pretty;max-width:440px;">Zustand, Messwerte und Gefahrenstufe liegen auf dem Sperrbildschirm und kompakt in der Dynamic Island — die Handschuhe bleiben an, das Telefon in der Jacke.</p>
+          </div>
+          <div style="flex:0 1 270px;min-width:210px;margin:0 auto;">
+            <div class="hk-zoom" data-lb="lock" role="button" tabindex="0" aria-label="Sperrbildschirm-Mockup vergrößern" style="width:min(256px,62vw);background:#05090F;border-radius:40px;padding:8px;margin:0 auto;box-shadow:0 30px 70px -24px rgba(6,20,32,0.55);cursor:zoom-in;transition:transform 0.25s ease,box-shadow 0.25s ease;">
+              <img src="img/sperrbildschirm.png" alt="Sperrbildschirm mit Live Activity: Zustand, Messwerte und Gefahrenstufe" loading="lazy" style="width:100%;display:block;border-radius:29px;">
             </div>
-            <input id="hk-hoehe" type="range" min="800" max="3000" step="10" value="1950" style="background:linear-gradient(90deg,#24282E 0 45.4%,rgba(167,155,255,0.45) 45.4% 100%);">
-            <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#565D66;"><span>800 m</span><span style="color:#877FC4;">↑ ab 1800 m</span><span>3000 m</span></div>
-          </div>
-          <div>
-            <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;">
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;">Hangneigung</div>
-              <div id="hk-neig-out" style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#CFC8FF;">31° · IM BEREICH</div>
-            </div>
-            <input id="hk-neig" type="range" min="15" max="45" step="1" value="31" style="background:linear-gradient(90deg,#24282E 0 50%,rgba(167,155,255,0.45) 50% 100%);">
-            <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#565D66;"><span>15°</span><span style="color:#877FC4;">↑ ab 30°</span><span>45°</span></div>
           </div>
         </div>
       </div>
-      <div id="hk-result" style="margin:0 clamp(20px,3vw,32px) clamp(20px,3vw,32px);background:#1A1730;border:1px solid #4A4090;border-radius:12px;padding:18px 22px;display:flex;align-items:center;gap:16px;">
-        <div id="hk-result-icon"></div>
-        <div>
-          <div id="hk-result-title" style="font-family:'IBM Plex Mono',monospace;font-size:15px;letter-spacing:0.08em;font-weight:600;color:#CFC8FF;">TREFFER · TRIEBSCHNEE · STUFE 2</div>
-          <div id="hk-result-text" style="font-size:13.5px;color:#878E96;margin-top:3px;">Alle drei Kriterien entsprechen der Gefahrenstelle. Eigene Beurteilung nötig.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin-top:14px;">
+      <div style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:16px 18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+        <div class="hk-zoom-sm" data-lb="watch" role="button" tabindex="0" aria-label="Watch-Mockup vergrößern" style="width:78px;background:#05090F;border-radius:22px;padding:5px;flex-shrink:0;cursor:zoom-in;transition:transform 0.25s ease;">
+          <img src="img/watch.png" alt="Apple-Watch-Komplikation: Zustand am Handgelenk" loading="lazy" style="width:100%;display:block;border-radius:20px;">
+        </div>
+        <div style="flex:1 1 170px;display:flex;flex-direction:column;gap:7px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Apple Watch</div>
+          <div style="font-size:18px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;">Ein Blick, weitergehen.</div>
+          <div style="font-size:14.5px;line-height:1.55;color:#33445A;text-wrap:pretty;">Der Zustand als Komplikation direkt am Handgelenk.</div>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:16px 18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+        <div class="hk-zoom-sm" data-lb="map" role="button" tabindex="0" aria-label="Karten-Mockup vergrößern" style="width:78px;background:#05090F;border-radius:18px;padding:5px;flex-shrink:0;cursor:zoom-in;transition:transform 0.25s ease;">
+          <img src="img/karte-overlay.png" alt="Karte mit markiertem passendem Steilgelände" loading="lazy" style="width:100%;display:block;border-radius:16px;">
+        </div>
+        <div style="flex:1 1 170px;display:flex;flex-direction:column;gap:7px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Karte · Opt-in</div>
+          <div style="font-size:18px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;">Gefahrenstellen im Gelände</div>
+          <div style="font-size:14.5px;line-height:1.55;color:#33445A;text-wrap:pretty;">Passendes Steilgelände liegt markiert auf der Karte. Unmarkiert heißt nie sicher.</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- IMMER SICHTBAR -->
-<div id="sichtbar" style="max-width:1200px;margin:0 auto;padding:clamp(80px,11vw,140px) 24px 0;">
-  <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;color:#565D66;">03</div>
-    <h2 style="margin:0;font-size:clamp(32px,5vw,54px);font-weight:700;letter-spacing:-0.025em;line-height:1.05;">Der Zustand bleibt im Blick.</h2>
+<!-- ÜBERGANG DUNKEL → HELL -->
+<div style="position:relative;height:clamp(16px,1.8vw,28px);background:#F4F7FA;overflow:hidden;" aria-hidden="true">
+  <svg viewBox="0 0 1600 140" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.3;">
+    <path d="M0,34 C320,58 640,18 960,44 C1200,64 1440,30 1600,50" fill="none" stroke="#6FAAF7" stroke-width="1" stroke-dasharray="2 8"></path>
+    <path d="M0,10 C360,32 700,-4 1040,24 C1280,42 1480,12 1600,28" fill="none" stroke="#93A2B2" stroke-width="1" stroke-dasharray="2 8"></path>
+  </svg>
+</div>
+
+<!-- ============ KAPITEL 6 · ZIELGRUPPEN ============ -->
+<div data-screen-label="Zielgruppen" style="max-width:1240px;margin:0 auto;padding:clamp(8px,1.5vw,20px) 24px 0;">
+  <div style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:18px 24px;display:flex;gap:14px 36px;flex-wrap:wrap;align-items:center;">
+    <div style="display:flex;align-items:baseline;gap:10px;flex:1 1 250px;min-width:230px;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:#1A6DE0;flex-shrink:0;">EINSTIEG</span>
+      <span style="font-size:14.5px;line-height:1.5;color:#33445A;">Wesentliches unterwegs nicht übersehen.</span>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:10px;flex:1 1 250px;min-width:230px;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:#33445A;flex-shrink:0;">ERFAHRUNG</span>
+      <span style="font-size:14.5px;line-height:1.5;color:#33445A;">Lagebericht und Gelände schneller zusammenbringen.</span>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:10px;flex:1 1 250px;min-width:230px;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:#6B5CE0;flex-shrink:0;">PROFESSIONELL</span>
+      <span style="font-size:14.5px;line-height:1.5;color:#33445A;">Zustände dokumentieren und nachvollziehbar besprechen.</span>
+    </div>
   </div>
-  <p style="margin:16px 0 0;font-size:17px;line-height:1.6;color:#878E96;max-width:620px;text-wrap:pretty;">Handschuhe an, Telefon in der Jacke — der Abgleich läuft sichtbar weiter.</p>
-  <div style="display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;align-items:stretch;">
-    <div style="flex:1 1 380px;min-width:290px;background:#14161A;border:1px solid #24282E;border-radius:16px;padding:28px 28px 0;display:flex;flex-direction:column;gap:16px;overflow:hidden;">
-      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;">Live Activity · Dynamic Island</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#565D66;">Sperrbildschirm</div>
+  <p style="margin:12px 0 0;font-size:13.5px;color:#4A5A6B;max-width:680px;">Dieselbe App, dieselben Grenzen: HangKontext ersetzt in keiner Erfahrungsstufe Ausbildung, Planung oder Beurteilung.</p>
+</div>
+
+
+<!-- ============ KAPITEL 7 · VALIDIERUNG ============ -->
+<div id="validierung" data-screen-label="Validierung" style="max-width:1240px;margin:0 auto;padding:clamp(48px,6vw,88px) 24px 0;">
+  <div style="background:#FFFFFF;border:1px solid #E2E9F1;border-radius:32px;padding:clamp(28px,4.5vw,64px);box-shadow:0 30px 80px -50px rgba(14,27,44,0.25);">
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:760px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1A6DE0;">Retrospektive Abdeckungsprüfung</div>
+      <h2 style="margin:0;font-size:clamp(28px,3.8vw,48px);font-weight:900;letter-spacing:-0.025em;line-height:1.06;text-wrap:balance;">An 657 auswertbaren Lawinenereignissen retrospektiv geprüft.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(20px,3vw,40px);margin-top:36px;align-items:start;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#4A5A6B;">Übereinstimmung der auswertbaren Ereignisse</div>
+        <div style="font-size:clamp(56px,7vw,96px);font-weight:900;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;color:#1A6DE0;">96,7<span style="font-size:0.42em;">&#8239;%</span></div>
+        <p style="margin:0;font-size:16.5px;line-height:1.6;color:#33445A;text-wrap:pretty;max-width:440px;">Bei 96,7&#8239;% der 657 auswertbaren Ereignisse lag am gemeldeten Punkt oder innerhalb eines Umkreises von 200 Metern eine Übereinstimmung mit einer Gefahrenstelle des am Ereignistag gültigen Lageberichts vor.</p>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;max-width:440px;">Bei 35 von 36 auswertbaren tödlichen Ereignissen lag mit derselben Prüflogik eine Übereinstimmung vor (97,2&#8239;%).</p>
       </div>
-      <div style="font-size:15.5px;line-height:1.6;color:#B9BFBB;text-wrap:pretty;max-width:480px;">Zustand, Gelände-Messwerte und Gefahrenstufe liegen auf dem Sperrbildschirm und kompakt in der Dynamic Island — ohne die App zu öffnen.</div>
-      <div style="width:min(280px,78vw);background:#0B0C0E;border:1px solid #2E343A;border-radius:42px 42px 0 0;border-bottom:none;padding:9px 9px 0;margin:8px auto -60px;">
-        <img src="img/sperrbildschirm.webp" alt="Live Activity auf dem Sperrbildschirm" style="width:100%;display:block;border-radius:34px 34px 0 0;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#4A5A6B;">Zufällige Vergleichspunkte</div>
+        <div style="font-size:clamp(56px,7vw,96px);font-weight:900;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;color:#33445A;">89<span style="font-size:0.42em;">&#8239;%</span></div>
+        <p style="margin:0;font-size:16.5px;line-height:1.6;color:#33445A;text-wrap:pretty;max-width:440px;">Zu jedem auswertbaren Ereignis wurden fünf zufällig über das abgedeckte Gelände zwischen 1.500 und 3.200 Metern verteilte Vergleichspunkte erzeugt — insgesamt 3.285 Punkte. Sie wurden mit derselben Punkt- und 200-Meter-Umkreislogik sowie dem Lagebericht des jeweiligen Ereignistages geprüft. Rund 89&#8239;% dieser Vergleichspunkte ergaben ebenfalls eine Übereinstimmung.</p>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;max-width:440px;">Die 89&#8239;% beschreiben die Grundrate dieser Prüfmethode im abgedeckten Gelände an den untersuchten Ereignistagen. Sie sind kein Gütemaß und keine Unfallwahrscheinlichkeit.</p>
       </div>
     </div>
-    <div style="flex:1 1 380px;min-width:290px;display:flex;flex-direction:column;gap:16px;">
-      <div style="flex:1;background:#14161A;border:1px solid #24282E;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:14px;justify-content:center;">
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;">Apple Watch · Komplikation</div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#0B0C0E;background:#A79BFF;border-radius:99px;padding:3px 9px;font-weight:600;">Neu</div>
-        </div>
-        <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;">
-          <div style="width:132px;background:#0B0C0E;border:1px solid #2E343A;border-radius:34px;padding:7px;flex-shrink:0;">
-            <img src="img/watch.webp" alt="Apple-Watch-Komplikation — Treffer" style="width:100%;display:block;border-radius:27px;">
-          </div>
-          <div style="flex:1 1 180px;font-size:15.5px;line-height:1.6;color:#B9BFBB;text-wrap:pretty;">Der Zustand als Komplikation am Handgelenk — ein Blick, weitergehen.</div>
-        </div>
+    <p style="margin:28px 0 0;font-size:15px;line-height:1.65;color:#4A5A6B;max-width:760px;text-wrap:pretty;">Die Auswertung prüft die Abdeckung der Kriterien des amtlichen Lageberichts im konkreten Gelände. Sie misst keine Unfallwahrscheinlichkeit und belegt keine Unfallvermeidung. HangKontext gibt keine Hänge frei — die Beurteilung bleibt beim Menschen.</p>
+    <details style="margin-top:28px;border-top:1px solid #E2E9F1;padding-top:20px;">
+      <summary style="font-size:15.5px;font-weight:700;cursor:pointer;color:#0E1B2C;">Methodik und Datenbasis</summary>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:6px 40px;margin-top:18px;font-size:14.5px;line-height:1.6;color:#33445A;">
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Datenbasis:</strong> Öffentlich dokumentierte Lawinenereignisse aus LAWIS für Tirol ab November 2021. Datenquelle und Attribution: Lawinenwarndienst des Landes Tirol.</div>
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Grundgesamtheit:</strong> Insgesamt wurden 711 Ereignisse geprüft. Davon waren 657 auswertbar. Bei 54 Ereignissen fehlten die erforderliche Geländebasis, eine passende Warnregion oder ein gültiger Lagebericht. Diese Ereignisse wurden nicht als „keine Übereinstimmung" gewertet, sondern gesondert als nicht auswertbar dokumentiert.</div>
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Ausgangspunkt:</strong> Ausgangspunkt ist die in LAWIS veröffentlichte Ereigniskoordinate. Neigung, Exposition und Höhe werden dort mit demselben Geländemodell und denselben Standardschwellwerten bestimmt, die der Auswertungslogik von HangKontext zugrunde liegen.</div>
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Koordinatenunsicherheit:</strong> LAWIS-Koordinaten können unterschiedliche räumliche Bezüge bezeichnen, beispielsweise die Anrisskante, die Ablagerung oder eine näherungsweise gesetzte Position. Ergibt der exakte Koordinatenpunkt keine Übereinstimmung, werden deshalb zusätzlich alle Rasterzellen geprüft, deren Mittelpunkt innerhalb eines echten Kreises von 200 Metern um die gemeldete Koordinate liegt.</div>
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Übereinstimmungsregel:</strong> Eine Rasterzelle zählt nur dann als Übereinstimmung, wenn Neigung, Exposition und Höhe gemeinsam zu ein und derselben Gefahrenstelle des am Ereignistag gültigen Lageberichts passen. Die Warnregion und deren Gefahrenstellen bleiben dabei die des ursprünglichen Koordinatenpunkts. Der Umkreis verändert nicht die geltende Gefahrenstelle, sondern ausschließlich die geprüfte Geländezelle.</div>
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Vergleichsmethode:</strong> Für jedes der 657 auswertbaren Ereignisse wurden fünf zufällige Vergleichspunkte erzeugt, insgesamt 3.285 Punkte. Sie wurden über das gesamte abgedeckte Gelände zwischen 1.500 und 3.200 Metern verteilt. Die Punkte waren weder auf die Nähe des Ereignisses noch auf dessen Warnregion beschränkt. Jeder Vergleichspunkt wurde mit derselben Punkt- und Umkreislogik und mit dem Lagebericht des zugehörigen Ereignistages geprüft.</div>
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Tödliche Ereignisse:</strong> Die 36 auswertbaren tödlichen Ereignisse wurden mit derselben automatisierten Punkt- und 200-Meter-Umkreislogik geprüft. Bei 35 dieser 36 Ereignisse lag eine Übereinstimmung vor.</div>
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Stand der Auswertung:</strong> 12. Juli 2026</div>
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Stand der Auswertungslogik:</strong> HangKontext 1.0.0 mit den zu diesem Zeitpunkt geltenden Standardschwellwerten für Neigung, Exposition und Höhenband.</div>
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Bekannte Einschränkungen:</strong> Retrospektive Abdeckungsprüfung. Die Ergebnisse erlauben keine Aussage über zukünftige Unfälle, individuelle Entscheidungen oder eine mögliche Unfallvermeidung.</div>
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Weitere Datenquellen:</strong> avalanche.report, Lawinenwarndienst Bayern, Land Tirol (DGM 5&#8239;m), OpenTopoMap</div>
       </div>
-      <div style="flex:1;background:#14161A;border:1px dashed #2E343A;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:14px;justify-content:center;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;">Die Anzeige lügt nie</div>
-        <div style="font-size:15.5px;line-height:1.6;color:#B9BFBB;text-wrap:pretty;">Sind Daten veraltet, wird der Zustand ausgegraut und trägt den Zeitstempel — nie ein stiller Weiterbetrieb mit alten Werten.</div>
-        <div style="border:1px solid #24282E;border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;filter:grayscale(1);opacity:0.6;">
-          <div style="width:26px;height:26px;border:2.5px dashed #878E96;border-radius:50%;flex-shrink:0;"></div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#878E96;">NICHT PRÜFBAR · STAND 06:12 · VERALTET</div>
-        </div>
-      </div>
-    </div>
+    </details>
   </div>
 </div>
 
-<!-- KARTE -->
-<div id="karte" style="max-width:1200px;margin:0 auto;padding:clamp(80px,11vw,140px) 24px 0;">
-  <div style="background:#101216;border:1px solid #24282E;border-radius:20px;padding:clamp(28px,4vw,52px);display:flex;gap:clamp(28px,5vw,64px);flex-wrap:wrap;align-items:center;">
-    <div style="flex:1 1 380px;min-width:280px;display:flex;flex-direction:column;gap:18px;">
-      <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;color:#565D66;">04</div>
-        <h2 style="margin:0;font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-0.025em;line-height:1.08;">Gefahrenstellen auf der Karte.</h2>
+<!-- ============ KAPITEL 8 · BETA ============ -->
+<div id="beta" data-screen-label="Beta" style="max-width:1240px;margin:0 auto;padding:clamp(44px,5vw,72px) 24px 0;">
+  <div style="position:relative;border-radius:32px;overflow:hidden;animation:hkReveal 0.7s both;animation-timeline:view();animation-range:entry 0% entry 25%;">
+    <img src="img/terrain-base.png" alt="" aria-hidden="true" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 26%;">
+    <div style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(244,247,250,0.97) 0%,rgba(244,247,250,0.92) 46%,rgba(244,247,250,0.6) 100%);pointer-events:none;" aria-hidden="true"></div>
+    <div style="position:relative;z-index:2;padding:clamp(28px,4.5vw,60px);">
+      <div style="display:flex;flex-direction:column;gap:14px;max-width:640px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1A6DE0;">Beta · Winter 2026/27</div>
+        <h2 style="margin:0;font-size:clamp(30px,4.2vw,52px);font-weight:900;letter-spacing:-0.025em;line-height:1.05;text-wrap:balance;">Teste HangKontext im Gelände.</h2>
       </div>
-      <p style="margin:0;font-size:16.5px;line-height:1.6;color:#878E96;text-wrap:pretty;">Steilgelände, das zu den Gefahrenstellen des aktuellen Lageberichts passt, liegt violett auf der Karte. Das Overlay ist Opt-in.</p>
-      <div style="display:flex;flex-direction:column;">
-        <div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-top:1px solid #24282E;">
-          <div style="width:34px;height:22px;background:rgba(167,155,255,0.32);border:1px solid #A79BFF;border-radius:4px;flex-shrink:0;margin-top:2px;"></div>
-          <div style="font-size:15px;line-height:1.6;color:#B9BFBB;text-wrap:pretty;"><strong style="color:#EDEFEA;">Violett:</strong> Exposition, Höhenband und Neigung entsprechen einer Gefahrenstelle.</div>
-        </div>
-        <div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-top:1px solid #24282E;">
-          <div style="width:34px;height:22px;background:repeating-linear-gradient(45deg,#24282E 0 5px,#14161A 5px 10px);border:1px dashed #565D66;border-radius:4px;flex-shrink:0;margin-top:2px;"></div>
-          <div style="font-size:15px;line-height:1.6;color:#B9BFBB;text-wrap:pretty;"><strong style="color:#EDEFEA;">Schraffur:</strong> außerhalb der Datenabdeckung — nicht prüfbar.</div>
-        </div>
-        <div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-top:1px solid #24282E;border-bottom:1px solid #24282E;">
-          <div style="width:34px;height:22px;border:1px solid #2E343A;border-radius:4px;flex-shrink:0;margin-top:2px;"></div>
-          <div style="font-size:15px;line-height:1.6;color:#B9BFBB;text-wrap:pretty;"><strong style="color:#EDEFEA;">Unmarkiert</strong> heißt nie „sicher“ — nur: keine Übereinstimmung mit dem aktuellen Bericht.</div>
-        </div>
-      </div>
-    </div>
-    <div style="flex:0 1 330px;min-width:270px;margin:0 auto;">
-      <div style="width:min(320px,84vw);background:#0B0C0E;border:1px solid #2E343A;border-radius:46px;padding:9px;margin:0 auto;">
-        <img src="img/karte-overlay.webp" alt="Karte mit violettem Gefahrenstellen-Overlay" style="width:100%;display:block;border-radius:38px;">
-      </div>
-      <div style="text-align:center;margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#565D66;">Overlay · nur Lagebericht-Übereinstimmungen</div>
-    </div>
-  </div>
-</div>
 
-<!-- LOG -->
-<div id="log" style="max-width:1200px;margin:0 auto;padding:clamp(80px,11vw,140px) 24px 0;">
-  <div style="display:flex;gap:clamp(28px,5vw,64px);flex-wrap:wrap;align-items:center;">
-    <div style="flex:0 1 330px;min-width:270px;margin:0 auto;order:0;">
-      <div style="width:min(320px,84vw);background:#0B0C0E;border:1px solid #2E343A;border-radius:46px;padding:9px;margin:0 auto;">
-        <img src="img/log.webp" alt="Entscheidungs-Log mit protokollierten Prüfungen" style="width:100%;display:block;border-radius:38px;">
-      </div>
-      <div style="text-align:center;margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#565D66;">Entscheidungs-Log · filterbar nach Zustand</div>
-    </div>
-    <div style="flex:1 1 400px;min-width:280px;display:flex;flex-direction:column;gap:18px;">
-      <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;color:#565D66;">05</div>
-        <h2 style="margin:0;font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-0.025em;line-height:1.08;">Jede Prüfung, dokumentiert.</h2>
-      </div>
-      <p style="margin:0;font-size:16.5px;line-height:1.6;color:#878E96;text-wrap:pretty;">Das Entscheidungs-Log hält fest, was die App wann angezeigt hat — zum Nachbesprechen der Tour oder für die Ausbildung.</p>
-      <div style="display:flex;flex-direction:column;">
-        <div style="display:flex;gap:16px;align-items:baseline;padding:15px 0;border-top:1px solid #24282E;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#877FC4;flex-shrink:0;width:110px;">ZUSTAND</div>
-          <div style="font-size:15px;line-height:1.6;color:#B9BFBB;text-wrap:pretty;">Treffer, kein Treffer oder nicht prüfbar — mit Zeitstempel, filterbar.</div>
-        </div>
-        <div style="display:flex;gap:16px;align-items:baseline;padding:15px 0;border-top:1px solid #24282E;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#877FC4;flex-shrink:0;width:110px;">GELÄNDE</div>
-          <div style="font-size:15px;line-height:1.6;color:#B9BFBB;text-wrap:pretty;">Neigung, Exposition, Höhe und GPS-Qualität jeder Prüfung.</div>
-        </div>
-        <div style="display:flex;gap:16px;align-items:baseline;padding:15px 0;border-top:1px solid #24282E;border-bottom:1px solid #24282E;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#877FC4;flex-shrink:0;width:110px;">MITTEILUNG</div>
-          <div style="font-size:15px;line-height:1.6;color:#B9BFBB;text-wrap:pretty;">Ob und wann eine Benachrichtigung gesendet wurde — nichts geht verloren.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- VALIDIERUNG · ausgeblendet bis LWD-Zusage (Retro-Validierung 96,7 %).
-     Zum Reaktivieren: diesen Kommentarblock (öffnendes und schließendes Tag) entfernen
-     UND im Header den Nav-Link  <a href="#validierung" class="hk-nav">Validierung</a>  wieder ergänzen.
-<div id="validierung" style="max-width:1200px;margin:0 auto;padding:clamp(80px,11vw,140px) 24px 0;">
-  <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;color:#565D66;">06</div>
-    <h2 style="margin:0;font-size:clamp(32px,5vw,54px);font-weight:700;letter-spacing:-0.025em;line-height:1.05;">An 657 echten Unfällen rückwärts getestet.</h2>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:40px;align-items:stretch;">
-    <div style="background:#14161A;border:1px solid #24282E;border-radius:16px;padding:clamp(24px,4vw,44px);display:flex;flex-direction:column;gap:18px;">
-      <div style="font-size:clamp(68px,9vw,112px);font-weight:700;letter-spacing:-0.045em;line-height:1;font-variant-numeric:tabular-nums;color:#A79BFF;">96,7<span style="font-size:0.5em;">&thinsp;%</span></div>
-      <div style="font-size:17px;line-height:1.6;color:#B9BFBB;text-wrap:pretty;">der Unfallhänge wären am Unfalltag als Gefahrenstelle angezeigt worden.</div>
-      <div style="display:flex;flex-direction:column;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#878E96;margin-top:auto;">
-        <div style="padding:11px 0;border-top:1px solid #24282E;display:flex;justify-content:space-between;gap:12px;"><span>UNFÄLLE</span><span style="color:#EDEFEA;">657</span></div>
-        <div style="padding:11px 0;border-top:1px solid #24282E;display:flex;justify-content:space-between;gap:12px;"><span>TÖDLICHE ERFASST</span><span style="color:#EDEFEA;">35 VON 36</span></div>
-        <div style="padding:11px 0;border-top:1px solid #24282E;display:flex;justify-content:space-between;gap:12px;"><span>UMKREIS</span><span style="color:#EDEFEA;">200 M</span></div>
-        <div style="padding:11px 0;border-top:1px solid #24282E;border-bottom:1px solid #24282E;display:flex;justify-content:space-between;gap:12px;"><span>RAUM · ZEIT</span><span style="color:#EDEFEA;">TIROL · 2021/22–2025/26</span></div>
-      </div>
-    </div>
-    <div style="background:#101216;border:1px solid #24282E;border-radius:16px;padding:clamp(24px,4vw,44px);display:flex;flex-direction:column;gap:16px;justify-content:center;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;">Ehrliche Einordnung</div>
-      <div style="font-size:17.5px;line-height:1.65;color:#B9BFBB;text-wrap:pretty;">An Tagen angespannter Lagen wäre auch ein zufällig gewählter Punkt im Steilgelände zu rund <strong style="color:#EDEFEA;">89&thinsp;%</strong> eine Gefahrenstelle gewesen.</div>
-      <div style="font-size:17.5px;line-height:1.65;color:#B9BFBB;text-wrap:pretty;">Die App errät keine Unfälle. Sie macht den amtlichen Lagebericht für den konkreten Hang sichtbar — nicht mehr, nicht weniger.</div>
-    </div>
-  </div>
-</div>
--->
-
-<!-- DATEN -->
-<div id="daten" style="max-width:1200px;margin:0 auto;padding:clamp(80px,11vw,140px) 24px 0;">
-  <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.14em;color:#565D66;">06</div>
-    <h2 style="margin:0;font-size:clamp(32px,5vw,54px);font-weight:700;letter-spacing:-0.025em;line-height:1.05;">Amtliche Quellen. Keine eigenen Urteile.</h2>
-  </div>
-  <div style="display:flex;gap:clamp(24px,4vw,48px);margin-top:40px;flex-wrap:wrap;">
-    <div style="flex:1 1 420px;min-width:280px;display:flex;flex-direction:column;">
-      <div style="display:flex;justify-content:space-between;gap:16px;padding:17px 0;border-top:1px solid #24282E;flex-wrap:wrap;"><div style="font-size:16.5px;">avalanche.report</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#878E96;">LAGEBERICHT TIROL</div></div>
-      <div style="display:flex;justify-content:space-between;gap:16px;padding:17px 0;border-top:1px solid #24282E;flex-wrap:wrap;"><div style="font-size:16.5px;">Lawinenwarndienst Bayern</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#878E96;">LAGEBERICHT BAYERISCHE ALPEN</div></div>
-      <div style="display:flex;justify-content:space-between;gap:16px;padding:17px 0;border-top:1px solid #24282E;flex-wrap:wrap;"><div style="font-size:16.5px;">Land Tirol · Bayer. Vermessungsverwaltung</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#878E96;">GELÄNDEMODELLE · CC-BY 4.0</div></div>
-      <div style="display:flex;justify-content:space-between;gap:16px;padding:17px 0;border-top:1px solid #24282E;border-bottom:1px solid #24282E;flex-wrap:wrap;"><div style="font-size:16.5px;">OpenTopoMap · OpenStreetMap</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#878E96;">KARTE · CC-BY-SA</div></div>
-    </div>
-    <div style="flex:1 1 400px;min-width:280px;background:#14161A;border:1px solid #24282E;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:16px;align-self:flex-start;">
-      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;"><span style="color:#878E96;">EAWS-Gefahrenstufen</span><span style="color:#565D66;">amtlich genormt</span></div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:7px;">
-        <div style="display:flex;flex-direction:column;gap:8px;"><div style="height:54px;border-radius:8px;background:#CCDB2A;display:flex;align-items:center;justify-content:center;color:#151515;font-weight:700;font-size:18px;">1</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#878E96;text-align:center;">gering</div></div>
-        <div style="display:flex;flex-direction:column;gap:8px;"><div style="height:54px;border-radius:8px;background:#FFF734;display:flex;align-items:center;justify-content:center;color:#151515;font-weight:700;font-size:18px;">2</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#878E96;text-align:center;">mäßig</div></div>
-        <div style="display:flex;flex-direction:column;gap:8px;"><div style="height:54px;border-radius:8px;background:#FF9E19;display:flex;align-items:center;justify-content:center;color:#151515;font-weight:700;font-size:18px;">3</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#878E96;text-align:center;">erheblich</div></div>
-        <div style="display:flex;flex-direction:column;gap:8px;"><div style="height:54px;border-radius:8px;background:#F32222;display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-weight:700;font-size:18px;">4</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#878E96;text-align:center;">groß</div></div>
-        <div style="display:flex;flex-direction:column;gap:8px;"><div style="height:54px;border-radius:8px;background:repeating-linear-gradient(45deg,#F32222 0 8px,#151515 8px 16px);display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-weight:700;font-size:18px;text-shadow:0 0 6px rgba(0,0,0,0.8);">5</div><div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#878E96;text-align:center;">sehr groß</div></div>
-      </div>
-      <div style="font-size:13.5px;line-height:1.6;color:#878E96;text-wrap:pretty;">Die Stufen bewerten die regionale Lage, nie den einzelnen Hang. Genau deshalb zeigt HangKontext zusätzlich, ob dein Standort einer Gefahrenstelle entspricht.</div>
-    </div>
-  </div>
-</div>
-
-<!-- BETA -->
-<div id="beta" style="max-width:1200px;margin:0 auto;padding:clamp(80px,11vw,140px) 24px 0;">
-  <div style="background:linear-gradient(180deg,#16131F 0%,#101216 100%);border:1px solid #4A4090;border-radius:20px;padding:clamp(28px,5vw,60px);">
-    <div style="display:flex;flex-direction:column;gap:14px;max-width:660px;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#CFC8FF;">// beta-anmeldung · winter 2026/27</div>
-      <h2 style="margin:0;font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-0.025em;line-height:1.05;">Teste HangKontext im Gelände.</h2>
-      <p style="margin:0;font-size:17px;line-height:1.6;color:#878E96;text-wrap:pretty;">Einladung per TestFlight vor Saisonstart. iOS zuerst — mit Android trägst du dich auf die Warteliste ein.</p>
-    </div>
-    <div id="hk-form-wrap">
-      <form id="hk-form" style="margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
-        <label style="display:flex;flex-direction:column;gap:7px;">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;">Aktivität</span>
-          <select name="aktivitaet" required style="background:#0E1013;border:1px solid #2E343A;border-radius:8px;color:#EDEFEA;font-size:15px;padding:13px 14px;">
-            <option value="">Bitte wählen</option><option value="Skitour">Skitour</option><option value="Freeride">Freeride</option><option value="Schneeschuh">Schneeschuh</option><option value="Eisklettern/Hochtour">Eisklettern / Hochtour</option><option value="Beruflich">Beruflich (Führung, Rettung)</option>
-          </select>
-        </label>
-        <label style="display:flex;flex-direction:column;gap:7px;">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;">Erfahrung</span>
-          <select name="erfahrung" required style="background:#0E1013;border:1px solid #2E343A;border-radius:8px;color:#EDEFEA;font-size:15px;padding:13px 14px;">
-            <option value="">Bitte wählen</option><option value="Erste Saisons">Erste Saisons</option><option value="Regelmäßig unterwegs">Regelmäßig unterwegs</option><option value="Sehr erfahren">Sehr erfahren</option><option value="Ausbildung/Profi">Ausbildner:in / Profi</option>
-          </select>
-        </label>
-        <label style="display:flex;flex-direction:column;gap:7px;">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;">Gerät</span>
-          <select name="geraet" required style="background:#0E1013;border:1px solid #2E343A;border-radius:8px;color:#EDEFEA;font-size:15px;padding:13px 14px;">
-            <option value="">Bitte wählen</option><option value="iPhone">iPhone</option><option value="Android">Android (Warteliste)</option>
-          </select>
-        </label>
-        <label style="display:flex;flex-direction:column;gap:7px;">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;">Deine Regionen</span>
-          <input name="regionen" type="text" placeholder="z. B. Stubaier Alpen, Karwendel" style="background:#0E1013;border:1px solid #2E343A;border-radius:8px;color:#EDEFEA;font-size:15px;padding:12px 14px;">
-        </label>
-        <label style="display:flex;flex-direction:column;gap:7px;">
-          <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;">E-Mail</span>
-          <input name="email" type="email" required placeholder="du@example.org" style="background:#0E1013;border:1px solid #2E343A;border-radius:8px;color:#EDEFEA;font-size:15px;padding:12px 14px;">
-        </label>
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
-        <div style="display:flex;flex-direction:column;gap:7px;justify-content:flex-end;">
-          <button id="hk-submit" type="submit" class="hk-primary" style="background:#A79BFF;color:#0B0C0E;border:none;font-size:16px;font-weight:600;padding:14px 26px;border-radius:99px;cursor:pointer;">Beta-Zugang anfordern</button>
-        </div>
-      </form>
-      <div id="hk-form-err" style="display:none;margin-top:18px;background:#1E1518;border:1px solid #6B3A3A;border-radius:12px;padding:16px 20px;font-size:14.5px;color:#E7B9B9;">Das hat nicht geklappt — bitte versuch es später noch einmal.</div>
-    </div>
-    <div id="hk-form-ok" style="display:none;margin-top:36px;background:#16131F;border:1px solid #4A4090;border-radius:14px;padding:24px 26px;align-items:center;gap:16px;">
-      <div style="width:38px;height:38px;background:#A79BFF;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:13px;height:13px;background:#0B0C0E;transform:rotate(45deg);"></div></div>
-      <div>
-        <div style="font-size:18px;font-weight:600;">Danke — du stehst auf der Liste.</div>
-        <div style="font-size:15px;color:#878E96;margin-top:4px;">Wir melden uns vor Saisonstart per TestFlight-Einladung. Android bleibt vorgemerkt.</div>
-      </div>
-    </div>
-    <div style="margin-top:26px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#565D66;">TestFlight · iOS zuerst · Android-Warteliste · Abmeldung jederzeit</div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<div style="border-top:1px solid #24282E;margin-top:clamp(80px,11vw,140px);">
-  <div style="max-width:1200px;margin:0 auto;padding:52px 24px 60px;display:flex;gap:40px;flex-wrap:wrap;justify-content:space-between;">
-    <div style="display:flex;flex-direction:column;gap:14px;max-width:480px;">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <img src="img/app-icon.png" alt="" style="width:26px;height:26px;border-radius:6px;border:1px solid #2E343A;">
-        <div style="font-size:15px;font-weight:600;">HangKontext</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#565D66;">hangkontext.de</div>
-      </div>
-      <div style="font-size:14.5px;line-height:1.65;color:#878E96;text-wrap:pretty;">Diese Information ersetzt keine eigene Beurteilung. Die Beurteilung bleibt beim Menschen — immer.</div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;line-height:2;color:#565D66;">LAGEBERICHTE: AVALANCHE.REPORT · LWD BAYERN<br>GELÄNDE: LAND TIROL · BAYER. VERMESSUNGSVERWALTUNG (CC-BY 4.0)<br>KARTE: © OPENTOPOMAP (CC-BY-SA) · © OPENSTREETMAP</div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:12px;font-size:14.5px;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#565D66;">Rechtliches</div>
-      <a href="rechtliches.html">Impressum</a>
-      <a href="rechtliches.html">Datenschutz</a>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#565D66;margin-top:8px;">© 2026 HANGKONTEXT · HANGKONTEXT.DE</div>
-    </div>
-  </div>
-</div>
-
-</div><!-- /.hk-desktop -->
-
-
-<!-- ============================================================
-     MOBIL-VARIANTE (bis 760px) — Design "HangKontext Mobil v3"
-     Aus dem Design-Projekt konvertiert: x-dc/sc-if/sc-for -> Vanilla-JS.
-     ============================================================ -->
-<div class="hk-mobile">
-<div style="max-width:480px;margin:0 auto;">
-
-  <!-- HERO — ein Screen, eine Botschaft -->
-  <div style="min-height:100svh;display:flex;flex-direction:column;position:relative;overflow:hidden;background:radial-gradient(120% 55% at 50% -5%,rgba(167,155,255,0.16) 0%,rgba(11,12,14,0) 60%);">
-    <div style="padding:20px 24px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;animation:hkRise 0.6s ease-out both;">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <img src="img/app-icon.png" alt="HangKontext App-Icon" style="width:32px;height:32px;border-radius:8px;border:1px solid #2E343A;">
-        <div style="font-size:16px;font-weight:700;letter-spacing:-0.01em;">HangKontext</div>
-      </div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#878E96;border:1px solid #24282E;border-radius:99px;padding:5px 11px;">Beta · Winter 26/27</div>
-    </div>
-    <div style="padding:36px 24px 0;display:flex;flex-direction:column;gap:16px;text-align:center;animation:hkRise 0.6s 0.1s ease-out both;">
-      <h1 style="margin:0;font-size:clamp(40px,11.5vw,56px);line-height:1.0;font-weight:700;letter-spacing:-0.035em;">Der Lagebericht.<br><span style="color:#A79BFF;">Für genau deinen Hang.</span></h1>
-      <p style="margin:0 auto;font-size:16px;line-height:1.55;color:#B9BFBB;max-width:320px;text-wrap:pretty;">Exposition, Höhe, Neigung — live abgeglichen mit dem amtlichen Lawinenlagebericht.</p>
-    </div>
-    <div style="flex:1;display:flex;align-items:flex-end;justify-content:center;margin-top:28px;min-height:280px;">
-      <div style="width:min(290px,74vw);animation:hkRise 0.8s 0.25s ease-out both;">
-        <div style="background:#14161A;border:1px solid #2E343A;border-bottom:none;border-radius:46px 46px 0 0;padding:9px 9px 0;box-shadow:0 -20px 90px -20px rgba(167,155,255,0.25);animation:hkFloat 5s 1.2s ease-in-out infinite;">
-          <img src="img/home-treffer.webp" alt="HangKontext App — Treffer an Gefahrenstelle" style="width:100%;display:block;border-radius:38px 38px 0 0;">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- DREI WERTE — kompakt -->
-  <div style="padding:56px 24px 0;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#878E96;text-align:center;">Treffer nur, wenn alle drei passen</div>
-    <div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;">
-      <div style="background:#14161A;border:1px solid #24282E;border-radius:14px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
-        <div style="font-size:17px;font-weight:600;">Exposition</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#CFC8FF;">NO · IM BEREICH</div>
-      </div>
-      <div style="background:#14161A;border:1px solid #24282E;border-radius:14px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
-        <div style="font-size:17px;font-weight:600;">Höhe</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#CFC8FF;">1.940 M · IM BEREICH</div>
-      </div>
-      <div style="background:#14161A;border:1px solid #24282E;border-radius:14px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
-        <div style="font-size:17px;font-weight:600;">Hangneigung</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#CFC8FF;">32° · IM BEREICH</div>
-      </div>
-      <div style="background:#16131F;border:1px solid #4A4090;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;">
-        <div style="width:34px;height:34px;background:#A79BFF;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:11px;height:11px;background:#0B0C0E;transform:rotate(45deg);"></div></div>
-        <div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:0.06em;font-weight:600;color:#CFC8FF;">TREFFER · TRIEBSCHNEE · STUFE 2</div>
-          <div style="font-size:13px;color:#878E96;margin-top:2px;">Informativ, nie als Freigabe.</div>
-        </div>
-      </div>
-      <div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#565D66;margin-top:4px;">Beispiel · Warnregion Tirol AT-07-01</div>
-    </div>
-  </div>
-
-  <!-- APP-SCREENS — Swipe-Galerie -->
-  <div style="padding:64px 0 0;">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#878E96;text-align:center;padding:0 24px;">Ein Blick in die App · wischen →</div>
-    <div id="hkm-gal" class="hkm-gal" style="display:flex;gap:16px;overflow-x:auto;padding:20px 24px 8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;">
-      <div style="flex:0 0 230px;scroll-snap-align:center;">
-        <div style="background:#14161A;border:1px solid #2E343A;border-radius:36px;padding:7px;">
-          <img src="img/home-keine-uebereinstimmung.webp" alt="Keine Übereinstimmung — App prüft laufend weiter" style="width:100%;display:block;border-radius:30px;">
-        </div>
-        <div style="text-align:center;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#878E96;">Keine Übereinstimmung · prüft weiter</div>
-      </div>
-      <div style="flex:0 0 230px;scroll-snap-align:center;">
-        <div style="background:#14161A;border:1px solid #4A4090;border-radius:36px;padding:7px;">
-          <img src="img/karte-overlay.webp" alt="Karte mit Gefahrenstellen-Overlay" style="width:100%;display:block;border-radius:30px;">
-        </div>
-        <div style="text-align:center;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#878E96;">Gefahrenstellen auf der Karte</div>
-      </div>
-      <div style="flex:0 0 230px;scroll-snap-align:center;">
-        <div style="background:#14161A;border:1px solid #2E343A;border-radius:36px;padding:7px;">
-          <img src="img/log.webp" alt="Entscheidungs-Log" style="width:100%;display:block;border-radius:30px;">
-        </div>
-        <div style="text-align:center;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#878E96;">Jede Prüfung dokumentiert</div>
-      </div>
-      <div style="flex:0 0 230px;scroll-snap-align:center;">
-        <div style="background:#14161A;border:1px solid #2E343A;border-radius:36px;padding:7px;">
-          <img src="img/sperrbildschirm.webp" alt="Live Activity auf dem Sperrbildschirm" style="width:100%;display:block;border-radius:30px;">
-        </div>
-        <div style="text-align:center;margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#878E96;">Sperrbildschirm · Live Activity</div>
-      </div>
-    </div>
-    <div id="hkm-dots" style="display:flex;justify-content:center;gap:8px;margin-top:14px;">
-      <div style="width:7px;height:7px;border-radius:50%;transition:background 0.25s;background:#A79BFF;"></div>
-      <div style="width:7px;height:7px;border-radius:50%;transition:background 0.25s;background:#2E343A;"></div>
-      <div style="width:7px;height:7px;border-radius:50%;transition:background 0.25s;background:#2E343A;"></div>
-      <div style="width:7px;height:7px;border-radius:50%;transition:background 0.25s;background:#2E343A;"></div>
-    </div>
-  </div>
-
-  <!-- IM BLICK — Watch + Fail-safe -->
-  <div style="padding:56px 24px 0;display:flex;flex-direction:column;gap:10px;">
-    <div style="background:#14161A;border:1px solid #24282E;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;">
-      <div style="width:76px;background:#0B0C0E;border:1px solid #2E343A;border-radius:22px;padding:5px;flex-shrink:0;">
-        <img src="img/watch.webp" alt="Apple-Watch-Komplikation" style="width:100%;display:block;border-radius:17px;">
-      </div>
-      <div>
-        <div style="font-size:16px;font-weight:600;">Auch am Handgelenk</div>
-        <div style="font-size:13.5px;line-height:1.55;color:#878E96;margin-top:3px;text-wrap:pretty;">Apple-Watch-Komplikation — ein Blick, weitergehen. Handschuhe bleiben an.</div>
-      </div>
-    </div>
-    <div style="background:#14161A;border:1px dashed #2E343A;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;">
-      <div style="width:30px;height:30px;border:2.5px dashed #878E96;border-radius:50%;flex-shrink:0;"></div>
-      <div>
-        <div style="font-size:16px;font-weight:600;">Stille bedeutet nie Entwarnung</div>
-        <div style="font-size:13.5px;line-height:1.55;color:#878E96;margin-top:3px;text-wrap:pretty;">Fehlen Daten, sagt die App das explizit — ausgegraut, mit Zeitstempel.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- QUELLEN
-       HINWEIS: Die Retro-Validierungs-Zahl (96,7 % von 657 Unfallhängen) ist hier
-       bewusst AUSGEBLENDET, solange die Lizenzantwort des LWD Tirol zu den
-       LAWIS-Unfalldaten aussteht — analog zur Desktop-Sektion #validierung.
-       Zum Reaktivieren: den folgenden Kommentarblock (öffnendes und schließendes
-       Tag) entfernen. -->
-  <div style="padding:64px 24px 0;text-align:center;">
-    <!--
-    <div style="font-size:clamp(72px,22vw,104px);font-weight:700;letter-spacing:-0.05em;line-height:1;font-variant-numeric:tabular-nums;color:#A79BFF;">96,7<span style="font-size:0.45em;">&thinsp;%</span></div>
-    <div style="margin:14px auto 0;font-size:16px;line-height:1.6;color:#B9BFBB;max-width:320px;text-wrap:pretty;">von 657 echten Unfallhängen wären am Unfalltag als Gefahrenstelle angezeigt worden.</div>
-    <div style="margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:#565D66;">Rückwärts getestet · Tirol · 2021/22–2025/26</div>
-    -->
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;line-height:2;text-transform:uppercase;color:#878E96;">Amtliche Quellen<br><span style="color:#565D66;">avalanche.report · LWD Bayern · Land Tirol</span></div>
-  </div>
-
-  <!-- ANMELDUNG -->
-  <div id="hkm-beta" style="padding:64px 24px 0;">
-    <div style="background:linear-gradient(180deg,#16131F 0%,#101216 100%);border:1px solid #4A4090;border-radius:20px;padding:28px 22px;text-align:center;">
-      <h2 style="margin:0;font-size:clamp(26px,7.5vw,34px);font-weight:700;letter-spacing:-0.02em;line-height:1.1;">Teste es diesen Winter.</h2>
-      <p style="margin:12px auto 0;font-size:15px;line-height:1.6;color:#878E96;max-width:300px;text-wrap:pretty;">TestFlight-Einladung vor Saisonstart. iOS zuerst, Android auf der Warteliste.</p>
-      <div id="hkm-form-wrap">
-        <form id="hkm-form" style="margin-top:24px;display:flex;flex-direction:column;gap:12px;">
-          <input name="email" type="email" required placeholder="deine@email.org" style="background:#0E1013;border:1px solid #2E343A;border-radius:12px;color:#EDEFEA;font-size:16px;padding:15px 16px;text-align:center;">
-          <select name="geraet" required style="background:#0E1013;border:1px solid #2E343A;border-radius:12px;color:#EDEFEA;font-size:16px;padding:15px 16px;text-align:center;">
-            <option value="">Dein Gerät wählen</option><option value="iPhone">iPhone</option><option value="Android">Android (Warteliste)</option>
-          </select>
+      <div id="hk-form-idle">
+        <form id="hk-beta-form" style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;max-width:640px;align-items:stretch;">
+          <input name="email" type="email" required autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" placeholder="deine@email.de" aria-label="E-Mail-Adresse" style="flex:1 1 280px;min-width:220px;background:#FFFFFF;border:1px solid #C9D6E3;border-radius:99px;color:#0E1B2C;font-size:15.5px;padding:15px 22px;box-sizing:border-box;">
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
-          <button id="hkm-submit" type="submit" class="hk-primary" style="background:#A79BFF;color:#0B0C0E;border:none;font-size:17px;font-weight:600;padding:17px 26px;border-radius:99px;cursor:pointer;">Beta-Zugang anfordern</button>
+          <button type="submit" id="hk-beta-submit" class="hk-cta" style="background:#1A6DE0;color:#FFFFFF;border:none;font-size:16px;font-weight:700;padding:15px 28px;border-radius:99px;cursor:pointer;box-shadow:0 12px 30px -10px rgba(26,109,224,0.55);flex-shrink:0;">Für die Beta anmelden</button>
         </form>
-        <div id="hkm-form-err" style="display:none;margin-top:14px;border:1px dashed #2E343A;border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.6;color:#B9BFBB;">Senden nicht möglich — schreib direkt an <a href="mailto:beta@hangkontext.de">beta@hangkontext.de</a>.</div>
+        <p style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:#33445A;max-width:560px;text-wrap:pretty;">Du erhältst vor Saisonstart eine Einladung oder einen Platz auf der Warteliste. Nur Informationen zur Beta, keine Weitergabe deiner Daten.</p>
+        <div id="hk-form-err" hidden role="alert" style="margin-top:16px;border:1px dashed #C9D6E3;border-radius:12px;padding:14px 18px;font-size:14.5px;color:#33445A;background:rgba(255,255,255,0.85);max-width:600px;">Senden nicht möglich — bitte später erneut versuchen oder direkt an <a href="mailto:beta@hangkontext.de">beta@hangkontext.de</a> schreiben.</div>
       </div>
-      <div id="hkm-form-ok" style="display:none;margin-top:24px;background:#0E1013;border:1px solid #24282E;border-radius:12px;padding:22px;flex-direction:column;align-items:center;gap:12px;">
-        <div style="width:40px;height:40px;background:#A79BFF;border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:13px;height:13px;background:#0B0C0E;transform:rotate(45deg);"></div></div>
-        <div style="font-size:17px;font-weight:600;">Danke — du stehst auf der Liste.</div>
-        <div style="font-size:14px;line-height:1.6;color:#878E96;">TestFlight-Einladung kommt vor Saisonstart.</div>
+
+      <div id="hk-form-ok" hidden>
+        <div role="status" style="margin-top:28px;background:#FFFFFF;border:1px solid #C9D6E3;border-radius:16px;padding:22px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;max-width:640px;">
+          <div style="width:40px;height:40px;background:#1A6DE0;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true"><div style="width:13px;height:13px;background:#FFFFFF;transform:rotate(45deg);"></div></div>
+          <div>
+            <div style="font-size:17.5px;font-weight:800;">Danke — du stehst auf der Liste.</div>
+            <div style="font-size:14.5px;color:#4A5A6B;margin-top:3px;">Du erhältst vor Saisonstart eine Einladung oder einen Platz auf der Warteliste.</div>
+          </div>
+        </div>
+        <form id="hk-opt-form" style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;max-width:640px;">
+          <label style="flex:1 1 190px;display:flex;flex-direction:column;gap:6px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#4A5A6B;">Aktivität (optional)</span>
+            <select name="aktivitaet" style="background:#FFFFFF;border:1px solid #C9D6E3;border-radius:12px;color:#0E1B2C;font-size:15px;padding:12px;">
+              <option value="">Bitte wählen</option><option value="Skitour">Skitour</option><option value="Splitboard">Splitboard</option><option value="Freeride">Freeride</option><option value="Winterbergsteigen">Winterbergsteigen</option><option value="Beruflich">Beruflich (Führung, Rettung, Ausbildung)</option>
+            </select>
+          </label>
+          <label style="flex:1 1 190px;display:flex;flex-direction:column;gap:6px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#4A5A6B;">Gerät (optional)</span>
+            <select name="geraet" style="background:#FFFFFF;border:1px solid #C9D6E3;border-radius:12px;color:#0E1B2C;font-size:15px;padding:12px;">
+              <option value="">Bitte wählen</option><option value="iPhone">iPhone</option><option value="Android">Android (Warteliste)</option>
+            </select>
+          </label>
+          <button type="submit" id="hk-opt-submit" class="hk-optbtn" style="background:#FFFFFF;color:#0E1B2C;border:1px solid #C9D6E3;font-size:15px;font-weight:700;padding:13px 22px;border-radius:99px;cursor:pointer;">Angaben senden</button>
+        </form>
+        <div id="hk-opt-done" hidden style="margin-top:14px;font-size:14.5px;color:#33445A;">Danke — Angaben gespeichert.</div>
       </div>
-      <div style="margin-top:18px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;line-height:1.8;text-transform:uppercase;color:#565D66;">Kostenlos · Abmeldung jederzeit</div>
+
+      <div style="margin-top:22px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#4A5A6B;">TestFlight · iOS zuerst · Android-Warteliste · jederzeit austragbar</div>
+
     </div>
   </div>
+</div>
 
-  <!-- MICRO-FOOTER -->
-  <div style="padding:48px 24px 120px;text-align:center;display:flex;flex-direction:column;gap:12px;">
-    <div style="font-size:13.5px;line-height:1.65;color:#878E96;text-wrap:pretty;">Die Beurteilung bleibt beim Menschen — immer.</div>
-    <div style="display:flex;justify-content:center;gap:20px;font-size:13.5px;">
+<!-- ============ FOOTER ============ -->
+<footer data-screen-label="Footer" style="max-width:1240px;margin:0 auto;padding:clamp(48px,6vw,80px) 24px 56px;">
+  <div style="border-top:1px solid #D6E1EC;padding-top:40px;display:flex;gap:40px;flex-wrap:wrap;justify-content:space-between;">
+    <div style="display:flex;flex-direction:column;gap:13px;max-width:480px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="img/app-icon-1024.png" alt="" width="26" height="26" style="width:26px;height:26px;border-radius:7px;">
+        <div style="font-size:15px;font-weight:800;">HangKontext</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6E80;">hangkontext.de</div>
+      </div>
+      <div style="font-size:14.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;">HangKontext informiert. Der Mensch beurteilt und entscheidet. Diese Information ersetzt keine Ausbildung, keine Tourenplanung und keine eigene Beurteilung im Gelände.</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;line-height:2;color:#5C6E80;">LAGEBERICHTE: AVALANCHE.REPORT · LAWINENWARNDIENST BAYERN<br>UNFALLDATEN: LAWINENWARNDIENST DES LANDES TIROL · CC BY<br>GELÄNDE: LAND TIROL · BAYER. VERMESSUNGSVERWALTUNG (CC-BY 4.0)<br>KARTE: © OPENTOPOMAP (CC-BY-SA) · © OPENSTREETMAP</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:11px;font-size:14.5px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6E80;">Rechtliches</div>
       <a href="rechtliches.html">Impressum</a>
-      <a href="rechtliches.html">Datenschutz</a>
+      <a href="rechtliches.html#datenschutz">Datenschutz</a>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:#5C6E80;margin-top:8px;">© 2026 HANGKONTEXT</div>
     </div>
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;color:#565D66;">© 2026 HANGKONTEXT · QUELLEN: AVALANCHE.REPORT · LWD BAYERN</div>
   </div>
+</footer>
 
+<!-- LIGHTBOX (im Entwurf: sc-if lbOpen) -->
+<div id="hk-lightbox" hidden role="dialog" aria-modal="true" aria-label="Vergrößerte Ansicht — tippen zum Schließen" style="position:fixed;inset:0;z-index:1000;background:rgba(6,14,24,0.84);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:28px;cursor:zoom-out;">
+  <img id="hk-lightbox-img" src="" alt="" style="max-width:min(90vw,400px);max-height:80vh;border-radius:26px;box-shadow:0 44px 96px -22px rgba(0,0,0,0.65);display:block;">
+  <div style="position:absolute;bottom:22px;left:0;right:0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.55);pointer-events:none;">Tippen zum Schließen</div>
+  <button id="hk-lightbox-close" aria-label="Schließen" style="position:absolute;top:18px;right:18px;width:44px;height:44px;border-radius:99px;border:1px solid rgba(255,255,255,0.28);background:rgba(255,255,255,0.1);color:#FFFFFF;font-size:20px;line-height:1;cursor:pointer;">×</button>
 </div>
-
-<!-- FLOATING CTA -->
-<div id="hkm-cta" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;padding:12px 20px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(11,12,14,0) 0%,rgba(11,12,14,0.92) 40%);">
-  <a href="#hkm-beta" class="hk-primary" style="display:block;max-width:432px;margin:0 auto;background:#A79BFF;color:#0B0C0E;font-size:16.5px;font-weight:600;padding:16px 24px;border-radius:99px;text-decoration:none;text-align:center;box-shadow:0 12px 40px -8px rgba(167,155,255,0.5);">Beta-Tester werden</a>
-</div>
-</div><!-- /.hk-mobile -->
 
 <script>
-(function(){
-  "use strict";
-  var mono = "'IBM Plex Mono',monospace";
+/* ---------------------------------------------------------------------------
+   Standalone-Logik zur Design-Vorlage „HangKontext Landing v5.7 Unterwegs Hell".
+   Im Designer steckt sie in einer DCLogic-Komponente (setState + sc-if); hier
+   ist sie als Vanilla-JS nachgebaut — gleiche Zustände, gleiche Übergänge,
+   gleiche Schwellwerte.
+   --------------------------------------------------------------------------- */
+(function () {
+  'use strict';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
-  // --- TICKER ---
-  var tickerLines = [
-    'ABGLEICH AKTIV · 47.2612° N, 11.3919° O · EXPOSITION NO · 1.940 M · 32° — LAGEBERICHT 07:30, GÜLTIG',
-    'LAGEBERICHT AVALANCHE.REPORT · WARNREGION AT-07-01 · TRIEBSCHNEE · STUFE 2 · STAND 07:30',
-    'GELÄNDEMODELL LAND TIROL · AUFLÖSUNG 5 M · GPS ±5 M · PRÜFINTERVALL LAUFEND',
-    'STILLE BEDEUTET NIE ENTWARNUNG — FEHLENDE DATEN WERDEN EXPLIZIT ANGEZEIGT'
-  ];
-  var tickerEl = document.getElementById('hk-ticker'), tick = 0;
-  setInterval(function(){ tick++; tickerEl.textContent = tickerLines[tick % tickerLines.length]; }, 2600);
-
-  // --- ZUSTÄNDE ---
-  var zData = {
-    aktiv:   { tag:'01 · Standard', title:'Keine Übereinstimmung', status:'AKTIV · PRÜFT LAUFEND', tagColor:'#B9BFBB', headline:'Keine Übereinstimmung', body:'Dein Standort entspricht keiner Gefahrenstelle des aktuellen Lageberichts. Die App bleibt aktiv und prüft weiter — Stille bedeutet nie Entwarnung.', foot:'ZUSTAND WIRD LAUFEND NEU BERECHNET · BEI JEDER STANDORTÄNDERUNG', bg:'#14161A', border:'#24282E' },
-    treffer: { tag:'02 · Übereinstimmung', title:'Treffer · Gefahrenstelle', status:'TREFFER · TRIEBSCHNEE · STUFE 2', tagColor:'#CFC8FF', headline:'Dein Standort entspricht einer Gefahrenstelle.', body:'Exposition, Höhenband und Hangneigung an deinem Standort entsprechen einer Gefahrenstelle des amtlichen Lageberichts — mit Lawinenproblem und Gefahrenstufe. Informativ, keine Bewertung.', foot:'EIGENE BEURTEILUNG NÖTIG — IMMER', bg:'#16131F', border:'#4A4090' },
-    eing:    { tag:'03 · Fail-safe', title:'Eingeschränkt', status:'NICHT PRÜFBAR', tagColor:'#878E96', headline:'Die App sagt, was sie nicht prüfen kann.', body:'Kein GPS, veralteter Lagebericht oder Gelände außerhalb der Abdeckung: Die App zeigt explizit an, was gerade nicht prüfbar ist — statt zu schweigen.', foot:'AUSGEGRAUT + ZEITSTEMPEL · NIE STILLER WEITERBETRIEB', bg:'#14161A', border:'#2E343A' }
+  /* --- KAPITEL 4 · Drei Zustände (Tablist) --- */
+  var ZUST = ['keine', 'treffer', 'nicht'];
+  var STATUSZEILEN = {
+    keine: 'AKTIV · PRÜFT LAUFEND · LAUFEND NEU BERECHNET',
+    treffer: 'TREFFER · TRIEBSCHNEE · STUFE 2 · EIGENE BEURTEILUNG NÖTIG',
+    nicht: 'PRÜFUNG EINGESCHRÄNKT · AUSGEGRAUT + ZEITSTEMPEL'
   };
-  var zOrder = ['aktiv','treffer','eing'], zState = 'treffer';
-  var zicons = {
-    aktiv: '<div style="width:64px;height:64px;border:3px solid #B9BFBB;border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:13px;height:13px;background:#B9BFBB;border-radius:50%;animation:hkPulse 1.6s ease-in-out infinite;"></div></div>',
-    treffer: '<div style="width:64px;height:64px;background:#A79BFF;border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:20px;height:20px;background:#0B0C0E;transform:rotate(45deg);"></div></div>',
-    eing: '<div style="width:64px;height:64px;border:3px dashed #878E96;border-radius:50%;"></div>'
-  };
-  var tabsWrap = document.getElementById('hk-ztabs');
-  var panel = document.getElementById('hk-zpanel');
-  function renderZ(){
-    var d = zData[zState];
-    tabsWrap.innerHTML = '';
-    zOrder.forEach(function(key){
-      var zd = zData[key], active = key === zState;
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'hk-hoverborder';
-      b.style.cssText = 'text-align:left;cursor:pointer;border-radius:12px;padding:18px 22px;color:#EDEFEA;' +
-        (active ? 'background:'+zd.bg+';border:1px solid '+zd.border+';' : 'background:transparent;border:1px solid #24282E;opacity:0.65;');
-      b.innerHTML = '<div style="font-family:'+mono+';font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;opacity:0.7;">'+zd.tag+'</div>' +
-        '<div style="font-size:20px;font-weight:600;letter-spacing:-0.01em;margin-top:5px;">'+zd.title+'</div>';
-      b.addEventListener('click', function(){ zState = key; renderZ(); });
-      tabsWrap.appendChild(b);
-    });
-    panel.style.background = d.bg; panel.style.borderColor = d.border;
-    document.getElementById('hk-zicon').innerHTML = zicons[zState];
-    var st = document.getElementById('hk-zstatus'); st.textContent = d.status; st.style.color = d.tagColor;
-    document.getElementById('hk-zhead').textContent = d.headline;
-    document.getElementById('hk-zbody').textContent = d.body;
-    document.getElementById('hk-zfoot').textContent = d.foot;
-  }
-  renderZ();
+  var zust = 'treffer';
 
-  // --- SIMULATOR ---
-  var dirs = ['N','NO','O','SO','S','SW','W','NW'];
-  var expo = 'NO';
-  var compass = document.getElementById('hk-compass');
-  function renderCompass(){
-    compass.innerHTML = '';
-    dirs.forEach(function(d, i){
-      var a = i * 45 * Math.PI / 180, r = 101, cx = 125, cy = 125;
-      var x = cx + r * Math.sin(a) - 23, y = cy - r * Math.cos(a) - 23;
-      var active = d === expo;
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'hk-hoverborder';
-      b.textContent = d;
-      b.style.cssText = 'position:absolute;left:'+x.toFixed(1)+'px;top:'+y.toFixed(1)+'px;width:46px;height:46px;border-radius:50%;cursor:pointer;font-family:'+mono+';font-size:12.5px;letter-spacing:0.04em;' +
-        (active ? 'background:#EDEFEA;color:#0B0C0E;border:1px solid #EDEFEA;font-weight:600;' : 'background:#101216;color:#B9BFBB;border:1px solid #2E343A;');
-      b.addEventListener('click', function(){ expo = d; renderCompass(); renderSim(); });
-      compass.appendChild(b);
+  function setZustand(k, focus) {
+    if (ZUST.indexOf(k) < 0) return;
+    zust = k;
+    ZUST.forEach(function (o) {
+      var tab = document.getElementById('tab-' + o);
+      var on = o === k;
+      tab.classList.toggle('is-on', on);
+      tab.setAttribute('aria-selected', on ? 'true' : 'false');
+      tab.tabIndex = on ? 0 : -1;
     });
+    $$('[data-z]').forEach(function (el) { el.hidden = el.getAttribute('data-z') !== k; });
+    $('#zustand-panel').setAttribute('aria-labelledby', 'tab-' + k);
+    $('#z-status').textContent = STATUSZEILEN[k];
+    if (focus) document.getElementById('tab-' + k).focus();
   }
-  var hoeheEl = document.getElementById('hk-hoehe');
-  var neigEl = document.getElementById('hk-neig');
-  var iconTreffer = '<div style="width:38px;height:38px;background:#A79BFF;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:13px;height:13px;background:#0B0C0E;transform:rotate(45deg);"></div></div>';
-  var iconAktiv = '<div style="width:38px;height:38px;border:2.5px solid #B9BFBB;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:8px;height:8px;background:#B9BFBB;border-radius:50%;animation:hkPulse 1.6s ease-in-out infinite;"></div></div>';
-  function renderSim(){
-    var hoehe = Number(hoeheEl.value), neig = Number(neigEl.value);
-    var expoOk = ['NW','N','NO'].indexOf(expo) !== -1;
-    var hoeheOk = hoehe >= 1800, neigOk = neig >= 30;
-    var isTreffer = expoOk && hoeheOk && neigOk;
-    var stat = function(ok){ return ok ? 'IM BEREICH' : 'AUSSERHALB'; };
-    var col = function(ok){ return ok ? '#CFC8FF' : '#565D66'; };
-    document.getElementById('hk-expo-val').textContent = expo;
-    var es = document.getElementById('hk-expo-status'); es.textContent = stat(expoOk); es.style.color = col(expoOk);
-    var ho = document.getElementById('hk-hoehe-out'); ho.textContent = hoehe.toLocaleString('de-DE') + ' m · ' + stat(hoeheOk); ho.style.color = col(hoeheOk);
-    var ne = document.getElementById('hk-neig-out'); ne.textContent = neig + '° · ' + stat(neigOk); ne.style.color = col(neigOk);
-    var box = document.getElementById('hk-result');
-    box.style.background = isTreffer ? '#1A1730' : '#14161A';
-    box.style.borderColor = isTreffer ? '#4A4090' : '#24282E';
-    document.getElementById('hk-result-icon').innerHTML = isTreffer ? iconTreffer : iconAktiv;
-    var t = document.getElementById('hk-result-title');
-    t.textContent = isTreffer ? 'TREFFER · TRIEBSCHNEE · STUFE 2' : 'KEIN TREFFER';
-    t.style.color = isTreffer ? '#CFC8FF' : '#EDEFEA';
-    document.getElementById('hk-result-text').textContent = isTreffer
-      ? 'Alle drei Kriterien entsprechen der Gefahrenstelle. Eigene Beurteilung nötig.'
-      : 'Aktiv · prüft laufend. Stille bedeutet nie Entwarnung.';
-  }
-  hoeheEl.addEventListener('input', renderSim);
-  neigEl.addEventListener('input', renderSim);
-  renderCompass();
-  renderSim();
 
-  // --- BETA FORM ---
-  var form = document.getElementById('hk-form');
-  var submitBtn = document.getElementById('hk-submit');
-  var errBox = document.getElementById('hk-form-err');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    if (submitBtn.disabled) return;
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Wird gesendet …';
-    errBox.style.display = 'none';
-    fetch('https://formspree.io/f/xwvdzagy', {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    }).then(function(r){
-      if (r.ok) {
-        document.getElementById('hk-form-wrap').style.display = 'none';
-        document.getElementById('hk-form-ok').style.display = 'flex';
-      } else {
-        throw new Error('bad status');
-      }
-    }).catch(function(){
-      errBox.style.display = 'block';
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Beta-Zugang anfordern';
+  $$('[data-zust]').forEach(function (tab) {
+    tab.addEventListener('click', function () { setZustand(tab.getAttribute('data-zust')); });
+    tab.addEventListener('keydown', function (e) {
+      var i = ZUST.indexOf(zust);
+      if (e.key === 'ArrowRight') i = (i + 1) % 3;
+      else if (e.key === 'ArrowLeft') i = (i + 2) % 3;
+      else if (e.key === 'Home') i = 0;
+      else if (e.key === 'End') i = 2;
+      else return;
+      e.preventDefault();
+      setZustand(ZUST[i], true);
     });
   });
 
-  // ============================================================
-  // MOBIL-VARIANTE (Design "HangKontext Mobil v3")
-  // ============================================================
+  /* --- Lightbox für die Mockups --- */
+  var LB = {
+    lock: { src: 'img/sperrbildschirm.png', alt: 'Sperrbildschirm mit Live Activity: Zustand, Messwerte und Gefahrenstufe' },
+    watch: { src: 'img/watch.png', alt: 'Apple-Watch-Komplikation: Zustand am Handgelenk' },
+    map: { src: 'img/karte-overlay.png', alt: 'Karte mit markiertem passendem Steilgelände' }
+  };
+  var lbBox = $('#hk-lightbox'), lbImg = $('#hk-lightbox-img'), lbLast = null;
 
-  // --- SWIPE-GALERIE: Punkte mitführen ---
-  var gal = document.getElementById('hkm-gal');
-  var dots = document.getElementById('hkm-dots').children;
-  var galIdx = 0;
-  var GAL_STEP = 246; // Kachel 230px + gap 16px
-  gal.addEventListener('scroll', function(){
-    var i = Math.max(0, Math.min(dots.length - 1, Math.round(gal.scrollLeft / GAL_STEP)));
-    if (i === galIdx) return;
-    galIdx = i;
-    for (var k = 0; k < dots.length; k++) {
-      dots[k].style.background = (k === i) ? '#A79BFF' : '#2E343A';
+  function openLb(k) {
+    var e = LB[k];
+    if (!e) return;
+    lbLast = document.activeElement;
+    lbImg.src = e.src;
+    lbImg.alt = e.alt;
+    lbBox.hidden = false;
+    $('#hk-lightbox-close').focus();
+  }
+  function closeLb() {
+    if (lbBox.hidden) return;
+    lbBox.hidden = true;
+    lbImg.removeAttribute('src');
+    if (lbLast && lbLast.focus) lbLast.focus();
+  }
+  $$('[data-lb]').forEach(function (el) {
+    el.addEventListener('click', function () { openLb(el.getAttribute('data-lb')); });
+    el.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      openLb(el.getAttribute('data-lb'));
+    });
+  });
+  lbBox.addEventListener('click', closeLb);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+
+  /* --- KAPITEL 8 · Beta-Formular (Formspree, unverändert f/xwvdzagy) --- */
+  var FORMSPREE = 'https://formspree.io/f/xwvdzagy';
+  var betaForm = $('#hk-beta-form'), betaBtn = $('#hk-beta-submit');
+  var optForm = $('#hk-opt-form'), optBtn = $('#hk-opt-submit');
+  var sending = false, optSending = false, email = '';
+
+  betaForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (sending) return;
+    sending = true;
+    var fd = new FormData(betaForm);
+    email = String(fd.get('email') || '');
+    betaBtn.textContent = 'Wird gesendet …';
+    $('#hk-form-err').hidden = true;
+    var reset = function () { sending = false; betaBtn.textContent = 'Für die Beta anmelden'; };
+    fetch(FORMSPREE, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+      .then(function (r) {
+        reset();
+        if (r.ok) {
+          $('#hk-form-idle').hidden = true;
+          $('#hk-form-ok').hidden = false;
+        } else {
+          $('#hk-form-err').hidden = false;
+        }
+      })
+      .catch(function () { reset(); $('#hk-form-err').hidden = false; });
+  });
+
+  optForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (optSending) return;
+    optSending = true;
+    optBtn.textContent = 'Wird gesendet …';
+    var fd = new FormData(optForm);
+    fd.append('email', email);
+    fd.append('_subject', 'HangKontext Beta – ergänzende Angaben');
+    var done = function () {
+      optSending = false;
+      optForm.hidden = true;
+      $('#hk-opt-done').hidden = false;
+    };
+    fetch(FORMSPREE, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } }).then(done, done);
+  });
+
+  /* --- Videos: erst laden, wenn sie in Sichtweite kommen, und nur auf breiten
+         Viewports ohne „reduzierte Bewegung". Logik aus dem Entwurf. --- */
+  var vids = $$('video[data-hk-video]');
+  var mqReduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var mqWide = window.matchMedia ? window.matchMedia('(min-width: 720px)') : null;
+  var seen = { hero: true };
+  var allowed = function () { return (!mqWide || mqWide.matches) && !(mqReduce && mqReduce.matches); };
+
+  function attachErr(v) {
+    if (v._hkErrBound) return;
+    v._hkErrBound = true;
+    v.addEventListener('error', function () { v.removeAttribute('src'); try { v.load(); } catch (e) {} });
+  }
+  function attachEnd(v) {
+    if (v.dataset.hkVideo !== 'hero' || v._hkEndBound) return;
+    v._hkEndBound = true;
+    v.addEventListener('ended', function () { v._hkEnded = true; try { v.pause(); } catch (e) {} });
+  }
+  function loadVid(v) {
+    attachErr(v); attachEnd(v);
+    if (!v.getAttribute('src')) {
+      v.src = v.dataset.src;
+      try { v.load(); } catch (e) {}
+      if (v._hkEnded) v.addEventListener('loadedmetadata', function () {
+        try { v.currentTime = Math.max(0, v.duration - 0.05); } catch (e) {}
+      }, { once: true });
     }
-  }, { passive: true });
-
-  // --- FLOATING CTA: ab 300px sichtbar, verschwindet über dem Formular ---
-  var cta = document.getElementById('hkm-cta');
-  var betaBox = document.getElementById('hkm-beta');
-  var betaSichtbar = false, weitGenug = false, abgeschickt = false;
-  function ctaPruefen(){
-    cta.style.display = (weitGenug && !betaSichtbar && !abgeschickt) ? 'block' : 'none';
+    v.muted = true;
+    if (v._hkEnded) return;
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});
   }
-  window.addEventListener('scroll', function(){
-    var w = window.scrollY > 300;
-    if (w !== weitGenug) { weitGenug = w; ctaPruefen(); }
-  }, { passive: true });
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function(entries){
-      betaSichtbar = entries.some(function(e){ return e.isIntersecting; });
-      ctaPruefen();
-    }, { threshold: 0.25 }).observe(betaBox);
+  function unloadVid(v) {
+    try { v.pause(); } catch (e) {}
+    if (v.getAttribute('src')) { v.removeAttribute('src'); try { v.load(); } catch (e) {} }
   }
-
-  // --- BETA FORM (mobil) ---
-  var mForm = document.getElementById('hkm-form');
-  var mBtn = document.getElementById('hkm-submit');
-  var mErr = document.getElementById('hkm-form-err');
-  mForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    if (mBtn.disabled) return;
-    mBtn.disabled = true;
-    mBtn.textContent = 'Wird gesendet …';
-    mErr.style.display = 'none';
-    fetch('https://formspree.io/f/xwvdzagy', {
-      method: 'POST',
-      body: new FormData(mForm),
-      headers: { 'Accept': 'application/json' }
-    }).then(function(r){
-      if (r.ok) {
-        document.getElementById('hkm-form-wrap').style.display = 'none';
-        document.getElementById('hkm-form-ok').style.display = 'flex';
-        abgeschickt = true;
-        ctaPruefen();
-      } else {
-        throw new Error('bad status');
-      }
-    }).catch(function(){
-      mErr.style.display = 'block';
-      mBtn.disabled = false;
-      mBtn.textContent = 'Beta-Zugang anfordern';
+  function applyVids() {
+    vids.forEach(function (v) {
+      if (allowed() && seen[v.dataset.hkVideo]) loadVid(v); else unloadVid(v);
     });
+  }
+  if (window.IntersectionObserver) {
+    var vio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) { seen[v.dataset.hkVideo] = true; if (allowed()) loadVid(v); }
+        else if (!v.paused) v.pause();
+      });
+    }, { rootMargin: '300px 0px', threshold: 0.05 });
+    vids.forEach(function (v) { vio.observe(v); });
+  } else {
+    vids.forEach(function (v) { seen[v.dataset.hkVideo] = true; });
+  }
+  [mqReduce, mqWide].forEach(function (m) {
+    if (!m) return;
+    if (m.addEventListener) m.addEventListener('change', applyVids);
+    else if (m.addListener) m.addListener(applyVids);
   });
+  applyVids();
+
+  /* --- Telefon im Gelände-Bild: erscheint, wenn die Bühne mittig steht --- */
+  (function initPhoneReveal() {
+    var el = $('[data-hk-phone]');
+    var fig = el && el.parentElement;
+    if (!el || !fig) return;
+    if (mqReduce && mqReduce.matches) { el.classList.add('is-visible'); return; }
+    var SHOW = 0.56, HIDE = 0.50, ticking = false;
+    function check() {
+      ticking = false;
+      var r = fig.getBoundingClientRect();
+      var vh = window.innerHeight || 1;
+      var p = (vh - r.top) / (vh + r.height);
+      if (p >= SHOW) el.classList.add('is-visible');
+      else if (p < HIDE) el.classList.remove('is-visible');
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(check); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    if (window.IntersectionObserver) {
+      var th = [];
+      for (var i = 0; i <= 20; i++) th.push(i / 20);
+      new IntersectionObserver(onScroll, { threshold: th }).observe(fig);
+    }
+    check();
+  })();
 })();
 </script>
 <script data-goatcounter="https://hangkontext.goatcounter.com/count"
