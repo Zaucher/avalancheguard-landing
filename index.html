@@ -546,12 +546,17 @@ footer [data-hk-attribution]{font-size:11.5px !important;letter-spacing:0.04em !
     <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,36,52,0.12) 0%,rgba(15,36,52,0.02) 55%,rgba(18,42,60,0.3) 100%);pointer-events:none;" aria-hidden="true"></div>
   </div>
   <div data-lb="lock" role="button" tabindex="0" aria-label="Sperrbildschirm-Mockup vergrößern" style="margin-top:12px;background:#05090F;border-radius:20px;padding:7px;box-shadow:0 20px 46px -22px rgba(4,14,24,0.55);cursor:zoom-in;">
-    <div style="border-radius:14px;overflow:hidden;aspect-ratio:2.7/1;">
-      <img src="img/sperrbildschirm.png" alt="Live Activity auf dem Sperrbildschirm: Übereinstimmung, Triebschnee, 30° SW, 1.681 m, Gefahrenstufe 2 — tippen für den vollständigen Sperrbildschirm" loading="lazy" style="width:100%;height:100%;display:block;object-fit:cover;object-position:center 70%;">
+    <!-- Ausschnitt (26.07., am Simulator gemessen): das Fenster zeigt genau die
+         Live Activity samt schmalem Rand — Originalbild-Zeilen 1612–1890 von
+         2622. Daraus aspect-ratio 1206/278 und object-position 1612/2344.
+         Der v5.8.1-Entwurf hatte 2.7/1 · 70 %, dabei ragte die halbe zweite
+         Mitteilung ins Bild und sah nach abgeschnittenem Bild aus. -->
+    <div style="border-radius:14px;overflow:hidden;aspect-ratio:4.34/1;">
+      <img src="img/sperrbildschirm.png" alt="Live Activity auf dem Sperrbildschirm: Übereinstimmung, Triebschnee, 30° SW, 1.681 m, Gefahrenstufe 2 — tippen für den vollständigen Sperrbildschirm" loading="lazy" style="width:100%;height:100%;display:block;object-fit:cover;object-position:center 68.8%;">
     </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 8px 4px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#9FB8CC;">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 8px 4px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#9FB8CC;">
       <span>Live Activity · Dynamic Island</span>
-      <span style="color:#6E8AA0;">Tippen für Sperrbildschirm</span>
+      <span style="color:#6E8AA0;">Vergrößern</span>
     </div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
