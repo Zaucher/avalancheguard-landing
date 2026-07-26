@@ -598,16 +598,20 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
     <div style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:8px;">
+      <!-- Beide Vorschauen im Seitenverhaeltnis des Watch-Bildes (368/430),
+           damit die Kacheln gleich hoch sind und die Texte auf einer Linie
+           beginnen. Beim Watch-Bild schneidet das nichts weg, das Karten-
+           Bild wird mittig beschnitten. -->
       <div data-lb="watch" role="button" tabindex="0" aria-label="Watch-Mockup vergrößern" style="width:72px;background:#05090F;border-radius:20px;padding:4px;cursor:zoom-in;">
-        <img src="img/watch.png" alt="Apple-Watch-Komplikation: Zustand am Handgelenk" loading="lazy" style="width:100%;display:block;border-radius:17px;">
+        <img src="img/watch.png" alt="Apple-Watch-Komplikation: Zustand am Handgelenk" loading="lazy" style="width:100%;display:block;border-radius:17px;aspect-ratio:368/430;object-fit:cover;">
       </div>
       <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Apple Watch</div>
       <div style="font-size:17px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;line-height:1.2;">Ein Blick, weitergehen.</div>
       <div style="font-size:15.5px;line-height:1.5;color:#33445A;text-wrap:pretty;">Der Zustand direkt am Handgelenk.</div>
     </div>
     <div style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:8px;">
-      <div data-lb="map" role="button" tabindex="0" aria-label="Karten-Mockup vergrößern" style="width:72px;background:#05090F;border-radius:16px;padding:4px;cursor:zoom-in;">
-        <img src="img/karte-overlay.png" alt="Karte mit markiertem passendem Steilgelände" loading="lazy" style="width:100%;display:block;border-radius:13px;">
+      <div data-lb="map" role="button" tabindex="0" aria-label="Karten-Mockup vergrößern" style="width:72px;background:#05090F;border-radius:20px;padding:4px;cursor:zoom-in;">
+        <img src="img/karte-overlay.png" alt="Karte mit markiertem passendem Steilgelände" loading="lazy" style="width:100%;display:block;border-radius:17px;aspect-ratio:368/430;object-fit:cover;object-position:center 42%;">
       </div>
       <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Karte · Opt-in</div>
       <div style="font-size:17px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;line-height:1.2;">Gefahrenstellen im Gelände</div>
