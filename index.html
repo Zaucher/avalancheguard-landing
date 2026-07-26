@@ -798,6 +798,13 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     treffer: 'TREFFER · TRIEBSCHNEE · STUFE 2 · EIGENE BEURTEILUNG NÖTIG',
     nicht: 'PRÜFUNG EINGESCHRÄNKT · AUSGEGRAUT + ZEITSTEMPEL'
   };
+  /* Am Handy passt die Statuszeile in keine Zeile. Sie soll an den
+     Trennpunkten umbrechen, nicht mitten in einer Angabe („… EIGENE /
+     BEURTEILUNG NÖTIG"), deshalb geschuetzte Leerzeichen innerhalb der
+     Abschnitte und normale nur um das „·". */
+  function zStatusText(s) {
+    return s.replace(/ /g, ' ').replace(/ · /g, ' · ');
+  }
   var zust = 'treffer';
 
   function setZustand(k, focus) {
@@ -812,9 +819,11 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     });
     $$('[data-z]').forEach(function (el) { el.hidden = el.getAttribute('data-z') !== k; });
     $('#zustand-panel').setAttribute('aria-labelledby', 'tab-' + k);
-    $('#z-status').textContent = STATUSZEILEN[k];
+    $('#z-status').textContent = zStatusText(STATUSZEILEN[k]);
     if (focus) document.getElementById('tab-' + k).focus();
   }
+
+  $('#z-status').textContent = zStatusText(STATUSZEILEN[zust]);
 
   $$('[data-zust]').forEach(function (tab) {
     tab.addEventListener('click', function () { setZustand(tab.getAttribute('data-zust')); });
