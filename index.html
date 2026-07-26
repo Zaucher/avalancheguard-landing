@@ -101,7 +101,14 @@ html{scroll-padding-top:66px}
 #beta form button[type="submit"]{width:100%}
 #beta p{font-size:16px !important}
 footer a{padding:8px 0;display:inline-block}
-footer [data-hk-attribution]{font-size:11.5px !important;letter-spacing:0.04em !important;line-height:1.95 !important;overflow-wrap:break-word}
+/* Quellenangaben: am Handy bricht jede Nennung um und lief bisher buendig
+   unter die naechste Kategorie — dieselbe Struktur wie oben bei den
+   Datenquellen, Kategorie als eigene Zeile, Nennung eingerueckt an einer
+   Linie. */
+footer [data-hk-attribution]{font-size:11.5px !important;letter-spacing:0.04em !important;line-height:1.7 !important;overflow-wrap:break-word}
+footer [data-hk-attribution]>div+div{margin-top:12px}
+footer [data-hk-attr-key]{display:block;color:#7E92A6}
+footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid #C9D6E3;font-weight:600}
 }
 @media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important}}
 
@@ -745,7 +752,16 @@ footer [data-hk-attribution]{font-size:11.5px !important;letter-spacing:0.04em !
         <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6E80;">hangkontext.de</div>
       </div>
       <div style="font-size:14.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;">HangKontext informiert. Der Mensch beurteilt und entscheidet. Diese Information ersetzt keine Ausbildung, keine Tourenplanung und keine eigene Beurteilung im Gelände.</div>
-      <div data-hk-attribution style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;line-height:2;color:#5C6E80;">LAGEBERICHTE: AVALANCHE.REPORT · LAWINENWARNDIENST BAYERN<br>UNFALLDATEN: LAWINENWARNDIENST DES LANDES TIROL · CC BY<br>GELÄNDE: LAND TIROL · BAYER. VERMESSUNGSVERWALTUNG (CC-BY 4.0)<br>KARTE: © OPENTOPOMAP (CC-BY-SA) · © OPENSTREETMAP</div>
+      <!-- Vier Zeilen statt eines <br>-Blocks: am Desktop unveraendert eine
+           Zeile je Quelle, am Handy (siehe 719-px-Query) Kategorie und
+           Nennung getrennt, damit umgebrochene Nennungen nicht wie eine
+           neue Kategorie aussehen. -->
+      <div data-hk-attribution style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;line-height:2;color:#5C6E80;">
+        <div><span data-hk-attr-key>LAGEBERICHTE:</span> <span data-hk-attr-val>AVALANCHE.REPORT · LAWINENWARNDIENST BAYERN</span></div>
+        <div><span data-hk-attr-key>UNFALLDATEN:</span> <span data-hk-attr-val>LAWINENWARNDIENST DES LANDES TIROL · CC BY</span></div>
+        <div><span data-hk-attr-key>GELÄNDE:</span> <span data-hk-attr-val>LAND TIROL · BAYER. VERMESSUNGSVERWALTUNG <span style="white-space:nowrap;">(CC-BY 4.0)</span></span></div>
+        <div><span data-hk-attr-key>KARTE:</span> <span data-hk-attr-val>© OPENTOPOMAP <span style="white-space:nowrap;">(CC-BY-SA)</span> · © OPENSTREETMAP</span></div>
+      </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:11px;font-size:14.5px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6E80;">Rechtliches</div>
