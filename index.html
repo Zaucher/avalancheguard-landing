@@ -598,24 +598,26 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
     <div style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:8px;">
-      <!-- Beide Vorschauen im Seitenverhaeltnis des Watch-Bildes (368/430),
-           damit die Kacheln gleich hoch sind und die Texte auf einer Linie
-           beginnen. Beim Watch-Bild schneidet das nichts weg, das Karten-
-           Bild wird mittig beschnitten. -->
-      <div data-lb="watch" role="button" tabindex="0" aria-label="Watch-Mockup vergrößern" style="width:72px;background:#05090F;border-radius:20px;padding:4px;cursor:zoom-in;">
-        <img src="img/watch.png" alt="Apple-Watch-Komplikation: Zustand am Handgelenk" loading="lazy" style="width:100%;display:block;border-radius:17px;aspect-ratio:368/430;object-fit:cover;">
+      <!-- Beide Vorschauen ueber eine feste Bildhoehe gleich hoch, die Breite
+           folgt dem Seitenverhaeltnis. So bleiben die Silhouetten geraetetreu
+           — Uhr breit, Telefon hochkant —, und die Texte beider Kacheln
+           beginnen trotzdem auf einer Linie. Die Karte darf NICHT wie ein
+           Watch-Inhalt aussehen: auf der Uhr laeuft nur der Zustand
+           (Komplikation, Watch-App, gespiegelte Mitteilung), nie die Karte. -->
+      <div data-lb="watch" role="button" tabindex="0" aria-label="Watch-Mockup vergrößern" style="background:#05090F;border-radius:20px;padding:4px;cursor:zoom-in;align-self:flex-start;">
+        <img src="img/watch.png" alt="Apple-Watch-Komplikation: Zustand am Handgelenk" loading="lazy" style="height:75px;width:auto;display:block;border-radius:17px;">
       </div>
       <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Apple Watch</div>
       <div style="font-size:17px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;line-height:1.2;">Ein Blick, weitergehen.</div>
       <div style="font-size:15.5px;line-height:1.5;color:#33445A;text-wrap:pretty;">Der Zustand direkt am Handgelenk.</div>
     </div>
     <div style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:8px;">
-      <div data-lb="map" role="button" tabindex="0" aria-label="Karten-Mockup vergrößern" style="width:72px;background:#05090F;border-radius:20px;padding:4px;cursor:zoom-in;">
-        <img src="img/karte-overlay.png" alt="Karte mit markiertem passendem Steilgelände" loading="lazy" style="width:100%;display:block;border-radius:17px;aspect-ratio:368/430;object-fit:cover;object-position:center 42%;">
+      <div data-lb="map" role="button" tabindex="0" aria-label="Karten-Mockup vergrößern" style="background:#05090F;border-radius:9px;padding:3px;cursor:zoom-in;align-self:flex-start;">
+        <img src="img/karte-overlay.png" alt="Karte in der iPhone-App mit markiertem passendem Steilgelände" loading="lazy" style="height:77px;width:auto;display:block;border-radius:7px;">
       </div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Karte · Opt-in</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">iPhone · Karte</div>
       <div style="font-size:17px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;line-height:1.2;">Gefahrenstellen im Gelände</div>
-      <div style="font-size:15.5px;line-height:1.5;color:#33445A;text-wrap:pretty;">Passendes Steilgelände wird markiert. Unmarkiert heißt nie sicher.</div>
+      <div style="font-size:15.5px;line-height:1.5;color:#33445A;text-wrap:pretty;">In der App zuschaltbar: passendes Steilgelände wird markiert. Unmarkiert heißt nie sicher.</div>
     </div>
   </div>
 </div>
@@ -662,7 +664,11 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(20px,3vw,40px);margin-top:36px;align-items:start;">
       <div style="display:flex;flex-direction:column;gap:12px;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#4A5A6B;">Übereinstimmung der auswertbaren Ereignisse</div>
-        <div style="font-size:clamp(56px,7vw,96px);font-weight:900;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;color:#1A6DE0;">96,7<span style="font-size:0.42em;">&#8239;%</span></div>
+        <!-- Das Komma hat in Schibsted Grotesk bei Staerke 900 breite
+             Seitenraender, „96,7" liest sich dadurch als „96 , 7". Der
+             Ausgleich haengt an der Schrift, nicht an tabular-nums (mit und
+             ohne exakt gleich breit gemessen), deshalb von Hand. -->
+        <div style="font-size:clamp(56px,7vw,96px);font-weight:900;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;color:#1A6DE0;">96<span style="margin:0 -0.055em;">,</span>7<span style="font-size:0.42em;">&#8239;%</span></div>
         <p style="margin:0;font-size:16.5px;line-height:1.6;color:#33445A;text-wrap:pretty;max-width:440px;">Bei 96,7&#8239;% der 657 auswertbaren Ereignisse lag am gemeldeten Punkt oder innerhalb eines Umkreises von 200 Metern eine Übereinstimmung mit einer Gefahrenstelle des am Ereignistag gültigen Lageberichts vor.</p>
         <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;max-width:440px;">Bei 35 von 36 auswertbaren tödlichen Ereignissen lag mit derselben Prüflogik eine Übereinstimmung vor (97,2&#8239;%).</p>
       </div>
