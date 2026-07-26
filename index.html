@@ -72,6 +72,8 @@ img{max-width:100%}
 @media (min-width:720px){[data-hk-mobile]{display:none !important}}
 @media (max-width:719px){
 body{overflow-x:hidden}
+/* Sprungziele nicht unter die Sticky-Leiste rutschen lassen. */
+html{scroll-padding-top:66px}
 [data-hk-desktop]{display:none !important}
 #zustaende [role="tablist"]{flex-direction:column}
 #zustaende button[role="tab"]{width:100%;text-align:left;padding:15px 20px !important;font-size:16.5px !important;min-height:52px;box-sizing:border-box}
@@ -118,9 +120,27 @@ footer [data-hk-attribution]{font-size:11.5px !important;letter-spacing:0.04em !
    Im Entwurf als Style-Objekte tabOn/tabOff berechnet. */
 .hk-tab{font-family:'Schibsted Grotesk',sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.01em;padding:12px 20px;border-radius:99px;cursor:pointer;transition:background 0.15s,border-color 0.15s,color 0.15s;background:#FFFFFF;color:#33445A;border:1px solid #C9D6E3}
 .hk-tab.is-on{background:#0E1B2C;color:#FFFFFF;border:1px solid #0E1B2C;box-shadow:0 10px 24px -12px rgba(14,27,44,0.5)}
+
+/* --- STICKY-CTA (nur Handy) ---
+   Im Hero steht der CTA einmal, gross und mit Kontext. Diese Leiste faehrt
+   erst ein, wenn der Hero weg ist, und wieder aus, sobald das Beta-Formular
+   im Bild ist — so ist der Weg zur Anmeldung durchgehend erreichbar, ohne
+   dass zwei gleiche Knoepfe gleichzeitig sichtbar sind. Geschaltet in
+   der Haupt-IIFE per IntersectionObserver. */
+[data-hk-stickycta]{transform:translateY(-105%);visibility:hidden;transition:transform 0.28s ease,visibility 0s linear 0.28s}
+[data-hk-stickycta].is-on{transform:none;visibility:visible;transition:transform 0.28s ease,visibility 0s}
 </style>
 </head>
 <body>
+
+<!-- STICKY-CTA (MOBIL) -->
+<div data-hk-mobile data-hk-stickycta aria-hidden="true" style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 12px;padding-top:calc(8px + env(safe-area-inset-top));background:rgba(244,247,250,0.9);backdrop-filter:blur(16px);border-bottom:1px solid #DDE6EF;">
+  <div style="display:flex;align-items:center;gap:8px;min-width:0;">
+    <img src="img/app-icon-96.png" alt="" aria-hidden="true" width="28" height="28" style="width:28px;height:28px;border-radius:50%;flex-shrink:0;">
+    <span style="font-size:14.5px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;">HangKontext</span>
+  </div>
+  <a href="#beta" style="display:inline-flex;align-items:center;min-height:40px;background:#1A6DE0;color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:700;padding:0 16px;border-radius:99px;white-space:nowrap;flex-shrink:0;">Für die Beta anmelden</a>
+</div>
 
 <!-- ============ KAPITEL 1 · CINEMATIC HERO (DESKTOP/TABLET) ============ -->
 <div data-hk-desktop data-screen-label="Hero" style="position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;background:#0A1524;">
@@ -188,13 +208,15 @@ footer [data-hk-attribution]{font-size:11.5px !important;letter-spacing:0.04em !
 <div data-hk-mobile data-hk-mhero data-screen-label="Hero Mobil" style="position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;background:#0A1524;padding-top:env(safe-area-inset-top);">
   <img src="img/hero-poster.webp" alt="" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 40%;" aria-hidden="true">
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,21,36,0.74) 0%,rgba(10,21,36,0.36) 30%,rgba(9,20,38,0.3) 55%,rgba(9,20,38,0.62) 78%,#F4F7FA 100%);pointer-events:none;" aria-hidden="true"></div>
+  <!-- Nur die Marke: der Haupt-CTA steht groß im Hero, ein zweiter Knopf
+       daneben waere derselbe Weg zweimal im selben Blick. Sobald der Hero
+       weggescrollt ist, uebernimmt die Sticky-Leiste (data-hk-stickycta). -->
   <header style="position:relative;z-index:6;">
-    <div style="padding:12px 12px 0;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+    <div style="padding:12px 12px 0;display:flex;align-items:center;gap:8px;">
       <div style="display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.55);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:5px 12px 5px 5px;min-height:44px;box-sizing:border-box;">
         <img src="img/app-icon-96.png" alt="HangKontext App-Icon" width="30" height="30" style="width:30px;height:30px;border-radius:50%;">
         <div style="font-size:14.5px;font-weight:800;letter-spacing:-0.01em;color:#FFFFFF;">HangKontext</div>
       </div>
-      <a href="#beta" style="display:inline-flex;align-items:center;min-height:44px;background:#1A6DE0;color:#FFFFFF;text-decoration:none;font-size:13.5px;font-weight:700;padding:0 14px;border-radius:99px;box-shadow:0 8px 24px -8px rgba(26,109,224,0.55);white-space:nowrap;">Für die Beta anmelden</a>
     </div>
   </header>
   <div style="position:relative;z-index:3;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 20px 0;gap:16px;animation:hkReveal 0.7s ease-out both;">
@@ -204,23 +226,23 @@ footer [data-hk-attribution]{font-size:11.5px !important;letter-spacing:0.04em !
     </div>
     <h1 style="margin:0;font-size:clamp(33px,9.2vw,42px);line-height:1.04;font-weight:900;letter-spacing:-0.03em;color:#FFFFFF;text-shadow:0 2px 26px rgba(10,30,60,0.55);text-wrap:balance;">Der Lagebericht für genau deinen Hang.</h1>
     <p style="margin:0;font-size:16.5px;line-height:1.55;color:#FFFFFF;text-wrap:pretty;text-shadow:0 1px 16px rgba(10,30,60,0.6);">HangKontext misst Exposition, Höhe und Hangneigung an deinem Standort — und gleicht sie laufend mit den Gefahrenstellen des amtlichen Lawinenlageberichts ab. Fakten statt Bewertung.</p>
-    <!-- Zwei Aktionen wie im Desktop-Hero (Haupt-CTA + Ghost-Button). Bis
-         26.07. hing „So funktioniert's" als Textlink rechts neben dem
-         Haftungssatz und wirkte dadurch keinem Element zugeordnet. -->
-    <div style="display:flex;flex-direction:column;gap:10px;">
-      <a href="#beta" style="display:flex;align-items:center;justify-content:center;min-height:54px;background:#1A6DE0;color:#FFFFFF;font-size:17px;font-weight:700;border-radius:99px;text-decoration:none;box-shadow:0 14px 34px -10px rgba(26,109,224,0.6);">Für die Beta anmelden</a>
-      <a href="#funktionsweise-m" style="display:flex;align-items:center;justify-content:center;gap:9px;min-height:50px;background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.22);color:#FFFFFF;font-size:16px;font-weight:600;border-radius:99px;text-decoration:none;">So funktioniert's<svg width="11" height="13" viewBox="0 0 12 14" aria-hidden="true"><path d="M6 1 L6 12 M1.6 7.8 L6 12.2 L10.4 7.8" stroke="#FFFFFF" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
-    </div>
-    <div style="display:flex;align-items:flex-start;gap:8px;color:#FFFFFF;font-size:14.5px;line-height:1.45;text-shadow:0 1px 14px rgba(10,30,60,0.65);">
-      <div style="width:7px;height:7px;background:#FFFFFF;transform:rotate(45deg);flex-shrink:0;opacity:0.8;margin-top:6px;" aria-hidden="true"></div>
-      Informativ, nie als Freigabe — die Beurteilung bleibt beim Menschen.
-    </div>
+    <!-- Eine Aktion im Hero. „So funktioniert's" braucht hier keinen Knopf,
+         der Abschnitt folgt unmittelbar; der Haftungssatz steht unter dem
+         Mockup. -->
+    <a href="#beta" style="display:flex;align-items:center;justify-content:center;min-height:54px;background:#1A6DE0;color:#FFFFFF;font-size:17px;font-weight:700;border-radius:99px;text-decoration:none;box-shadow:0 14px 34px -10px rgba(26,109,224,0.6);">Für die Beta anmelden</a>
   </div>
   <div style="position:relative;z-index:4;width:min(56%,222px);margin:20px auto -178px;">
     <div style="background:#0E1B2C;border-radius:40px 40px 0 0;padding:8px 8px 0;box-shadow:0 -20px 70px -16px rgba(9,20,38,0.6);">
       <img src="img/home-treffer.png" alt="HangKontext App — dein Standort entspricht einer Gefahrenstelle des Lageberichts" style="width:100%;display:block;border-radius:33px 33px 0 0;">
     </div>
   </div>
+</div>
+
+<!-- HAFTUNGSSATZ (MOBIL) — steht bewusst unter dem Mockup: die Aussage
+     gehoert zur gezeigten App, nicht in die Aktionszeile des Heros. -->
+<div data-hk-mobile style="display:flex;align-items:flex-start;justify-content:center;gap:9px;padding:22px 24px 0;color:#33445A;font-size:14.5px;line-height:1.45;text-wrap:pretty;">
+  <div style="width:7px;height:7px;background:#33445A;transform:rotate(45deg);flex-shrink:0;margin-top:6px;opacity:0.7;" aria-hidden="true"></div>
+  Informativ, nie als Freigabe — die Beurteilung bleibt beim Menschen.
 </div>
 
 <!-- DATENQUELLEN -->
@@ -439,10 +461,7 @@ footer [data-hk-attribution]{font-size:11.5px !important;letter-spacing:0.04em !
         <p style="margin:0;font-size:16px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Keine Prognose, keine Gefahrenkartierung und keine Freigabe. Unmarkierte Flächen sind nicht automatisch sicher.</p>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:12px;margin-top:26px;padding-bottom:38px;">
-      <a href="#beta" style="display:flex;align-items:center;justify-content:center;min-height:52px;background:#1A6DE0;color:#FFFFFF;font-size:16.5px;font-weight:700;border-radius:99px;text-decoration:none;box-shadow:0 12px 30px -10px rgba(26,109,224,0.5);">Für die Beta anmelden</a>
-      <span style="font-size:14.5px;color:#4A5A6B;text-align:center;">Einladung per TestFlight vor Saisonstart.</span>
-    </div>
+    <div style="padding-bottom:38px;"></div>
   </div>
 </div>
 
@@ -934,6 +953,31 @@ footer [data-hk-attribution]{font-size:11.5px !important;letter-spacing:0.04em !
     else if (m.addListener) m.addListener(applyVids);
   });
   applyVids();
+
+  /* --- Sticky-CTA (nur Handy) ---
+     Faehrt ein, sobald der Mobil-Hero aus dem Bild ist, und wieder aus,
+     sobald das Beta-Formular sichtbar wird. Ueber 720 px ist die Leiste
+     per data-hk-mobile ohnehin ausgeblendet. */
+  (function initStickyCta() {
+    var bar = $('[data-hk-stickycta]');
+    var hero = $('[data-hk-mhero]');
+    var beta = $('#beta');
+    if (!bar || !hero || !beta || !window.IntersectionObserver) return;
+    var pastHero = false, atBeta = false;
+    function apply() {
+      var on = pastHero && !atBeta;
+      bar.classList.toggle('is-on', on);
+      bar.setAttribute('aria-hidden', on ? 'false' : 'true');
+    }
+    new IntersectionObserver(function (es) {
+      pastHero = !es[0].isIntersecting;
+      apply();
+    }, { threshold: 0 }).observe(hero);
+    new IntersectionObserver(function (es) {
+      atBeta = es[0].isIntersecting;
+      apply();
+    }, { threshold: 0 }).observe(beta);
+  })();
 
   /* --- Telefon im Gelände-Bild: erscheint, wenn die Bühne mittig steht --- */
   (function initPhoneReveal() {
