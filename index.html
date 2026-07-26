@@ -84,7 +84,7 @@ html{scroll-padding-top:66px}
    einem, mal zwei Eintraegen um und wirkte dadurch zufaellig. Am Handy
    deshalb Label plus eine Quelle je Zeile, zusammengehalten von einer
    durchgehenden Linie. */
-[data-screen-label="Datenquellen"]{display:block !important;padding:22px 20px 0 !important;font-size:10.5px !important;letter-spacing:0.08em !important;line-height:1.95}
+[data-screen-label="Datenquellen"]{display:block !important;padding:22px 20px 0 !important;font-size:11.5px !important;letter-spacing:0.08em !important;line-height:1.95}
 [data-screen-label="Datenquellen"]>span{display:block}
 [data-screen-label="Datenquellen"]>span:first-child{color:#5C6E80;margin-bottom:3px}
 [data-screen-label="Datenquellen"]>span+span{padding-left:12px;border-left:1px solid #C9D6E3}
@@ -100,7 +100,7 @@ html{scroll-padding-top:66px}
 #beta select{font-size:16px !important}
 #beta form button[type="submit"]{width:100%}
 #beta p{font-size:16px !important}
-footer a{padding:8px 0;display:inline-block}
+footer a{padding:12px 0;display:inline-block}
 /* Quellenangaben: am Handy bricht jede Nennung um und lief bisher buendig
    unter die naechste Kategorie — dieselbe Struktur wie oben bei den
    Datenquellen, Kategorie als eigene Zeile, Nennung eingerueckt an einer
@@ -122,35 +122,49 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
 .hk-zoom:hover{transform:scale(1.045);box-shadow:0 38px 84px -22px rgba(6,20,32,0.7)}
 .hk-zoom-sm:hover{transform:scale(1.08)}
 .hk-optbtn:hover{border-color:#4A5A6B}
+.hk-stickylink:hover{background:rgba(14,27,44,0.07);color:#0E1B2C}
+.hk-tab:focus-visible{outline:2px solid #1A6DE0;outline-offset:2px}
 
 /* --- TABS „Drei Zustände" ---
    Im Entwurf als Style-Objekte tabOn/tabOff berechnet. */
 .hk-tab{font-family:'Schibsted Grotesk',sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.01em;padding:12px 20px;border-radius:99px;cursor:pointer;transition:background 0.15s,border-color 0.15s,color 0.15s;background:#FFFFFF;color:#33445A;border:1px solid #C9D6E3}
 .hk-tab.is-on{background:#0E1B2C;color:#FFFFFF;border:1px solid #0E1B2C;box-shadow:0 10px 24px -12px rgba(14,27,44,0.5)}
 
-/* --- STICKY-CTA (nur Handy) ---
+/* --- STICKY-CTA (alle Breiten) ---
    Im Hero steht der CTA einmal, gross und mit Kontext. Diese Leiste faehrt
    erst ein, wenn der Hero weg ist, und wieder aus, sobald das Beta-Formular
    im Bild ist — so ist der Weg zur Anmeldung durchgehend erreichbar, ohne
    dass zwei gleiche Knoepfe gleichzeitig sichtbar sind. Geschaltet in
-   der Haupt-IIFE per IntersectionObserver. */
+   der Haupt-IIFE per IntersectionObserver; beobachtet werden beide Heros,
+   der jeweils ausgeblendete schneidet nie und stoert damit nicht. */
 [data-hk-stickycta]{transform:translateY(-105%);visibility:hidden;transition:transform 0.28s ease,visibility 0s linear 0.28s}
 [data-hk-stickycta].is-on{transform:none;visibility:visible;transition:transform 0.28s ease,visibility 0s}
 </style>
 </head>
 <body>
 
-<!-- STICKY-CTA (MOBIL) -->
-<div data-hk-mobile data-hk-stickycta aria-hidden="true" style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 12px;padding-top:calc(8px + env(safe-area-inset-top));background:rgba(244,247,250,0.9);backdrop-filter:blur(16px);border-bottom:1px solid #DDE6EF;">
-  <div style="display:flex;align-items:center;gap:8px;min-width:0;">
-    <img src="img/app-icon-96.png" alt="" aria-hidden="true" width="28" height="28" style="width:28px;height:28px;border-radius:50%;flex-shrink:0;">
-    <span style="font-size:14.5px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;">HangKontext</span>
+<!-- STICKY-CTA (ALLE BREITEN) — am Desktop zusaetzlich mit den Nav-Links,
+     denn die Hero-Nav scrollt dort mit weg und liess sonst lange Strecken
+     ohne Weg zur Anmeldung. -->
+<div data-hk-stickycta aria-hidden="true" style="position:fixed;top:0;left:0;right:0;z-index:60;padding:8px 12px;padding-top:calc(8px + env(safe-area-inset-top));background:rgba(244,247,250,0.9);backdrop-filter:blur(16px);border-bottom:1px solid #DDE6EF;">
+  <div style="max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;">
+    <div style="display:flex;align-items:center;gap:8px;min-width:0;">
+      <img src="img/app-icon-96.png" alt="" aria-hidden="true" width="28" height="28" style="width:28px;height:28px;border-radius:50%;flex-shrink:0;">
+      <span style="font-size:14.5px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;">HangKontext</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <nav data-hk-desktop aria-label="Sticky-Navigation" style="display:flex;align-items:center;gap:2px;margin-right:10px;">
+        <a class="hk-stickylink" href="#funktionsweise" style="color:#33445A;text-decoration:none;font-size:14px;font-weight:500;padding:9px 12px;border-radius:99px;">So funktioniert's</a>
+        <a class="hk-stickylink" href="#unterwegs" style="color:#33445A;text-decoration:none;font-size:14px;font-weight:500;padding:9px 12px;border-radius:99px;">Unterwegs</a>
+        <a class="hk-stickylink" href="#validierung" style="color:#33445A;text-decoration:none;font-size:14px;font-weight:500;padding:9px 12px;border-radius:99px;">Validierung</a>
+      </nav>
+      <a class="hk-cta" href="#beta" style="display:inline-flex;align-items:center;min-height:40px;background:#1A6DE0;color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:700;padding:0 16px;border-radius:99px;white-space:nowrap;flex-shrink:0;">Für die Beta anmelden</a>
+    </div>
   </div>
-  <a href="#beta" style="display:inline-flex;align-items:center;min-height:40px;background:#1A6DE0;color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:700;padding:0 16px;border-radius:99px;white-space:nowrap;flex-shrink:0;">Für die Beta anmelden</a>
 </div>
 
 <!-- ============ KAPITEL 1 · CINEMATIC HERO (DESKTOP/TABLET) ============ -->
-<div data-hk-desktop data-screen-label="Hero" style="position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;background:#0A1524;">
+<div data-hk-desktop data-hk-dhero data-screen-label="Hero" style="position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;background:#0A1524;">
   <div style="position:absolute;inset:0;" aria-hidden="true">
     <!-- Das 4K-Standbild laedt nur ab 720px; darunter reicht das leichte
          WebP-Poster (~0,3 MB statt 9,5 MB). -->
@@ -169,7 +183,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       <div style="display:flex;align-items:center;gap:11px;background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:7px 16px 7px 7px;box-shadow:0 4px 24px -8px rgba(9,20,38,0.35);">
         <img src="img/app-icon-96.png" alt="HangKontext App-Icon" width="32" height="32" style="width:32px;height:32px;border-radius:50%;">
         <div style="font-size:15.5px;font-weight:800;letter-spacing:-0.01em;color:#FFFFFF;">HangKontext</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#B9C9DC;">Beta 26/27</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#B9C9DC;">Beta · Winter 26/27</div>
       </div>
       <nav aria-label="Hauptnavigation" style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:5px;box-shadow:0 4px 24px -8px rgba(9,20,38,0.35);">
         <a class="hk-navlink" href="#funktionsweise" style="color:rgba(255,255,255,0.85);text-decoration:none;font-size:14.5px;font-weight:500;padding:10px 14px;border-radius:99px;">So funktioniert's</a>
@@ -203,7 +217,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       <div data-hk-hero-phone style="flex:0 1 340px;min-width:280px;margin:0 auto;animation:hkReveal 0.8s 0.2s ease-out both;">
         <div style="width:min(340px,82vw);margin:0 auto -40px;position:relative;z-index:4;">
           <div style="background:#0E1B2C;border-radius:52px 52px 0 0;padding:10px 10px 0;box-shadow:0 -24px 90px -18px rgba(9,20,38,0.65);">
-            <img src="img/home-treffer.png" alt="HangKontext App — dein Standort entspricht einer Gefahrenstelle des Lageberichts" style="width:100%;display:block;border-radius:42px 42px 0 0;">
+            <img src="img/home-treffer.webp" alt="HangKontext App — dein Standort entspricht einer Gefahrenstelle des Lageberichts" width="1206" height="2622" style="width:100%;height:auto;display:block;border-radius:42px 42px 0 0;">
           </div>
         </div>
       </div>
@@ -229,7 +243,10 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
   <div style="position:relative;z-index:3;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 20px 0;gap:16px;animation:hkReveal 0.7s ease-out both;">
     <div style="display:flex;align-items:center;gap:8px;align-self:flex-start;background:rgba(9,20,38,0.55);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.92);">
       <div style="width:7px;height:7px;border-radius:50%;background:#6FAAF7;animation:hkPulse 1.8s ease-in-out infinite;flex-shrink:0;" aria-hidden="true"></div>
-      Abgleich mit dem amtlichen Lawinenlagebericht
+      <!-- Kurzform nur hier: „Lawinenlagebericht" bricht am Handy zweizeilig
+           und wirkt gequetscht; der volle Begriff steht direkt darunter im
+           Fliesstext. -->
+      Abgleich mit dem amtlichen Lagebericht
     </div>
     <h1 style="margin:0;font-size:clamp(33px,9.2vw,42px);line-height:1.04;font-weight:900;letter-spacing:-0.03em;color:#FFFFFF;text-shadow:0 2px 26px rgba(10,30,60,0.55);text-wrap:balance;">Der Lagebericht für genau deinen Hang.</h1>
     <p style="margin:0;font-size:16.5px;line-height:1.55;color:#FFFFFF;text-wrap:pretty;text-shadow:0 1px 16px rgba(10,30,60,0.6);">HangKontext misst Exposition, Höhe und Hangneigung an deinem Standort — und gleicht sie laufend mit den Gefahrenstellen des amtlichen Lawinenlageberichts ab. Fakten statt Bewertung.</p>
@@ -240,7 +257,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
   </div>
   <div style="position:relative;z-index:4;width:min(56%,222px);margin:20px auto -178px;">
     <div style="background:#0E1B2C;border-radius:40px 40px 0 0;padding:8px 8px 0;box-shadow:0 -20px 70px -16px rgba(9,20,38,0.6);">
-      <img src="img/home-treffer.png" alt="HangKontext App — dein Standort entspricht einer Gefahrenstelle des Lageberichts" style="width:100%;display:block;border-radius:33px 33px 0 0;">
+      <img src="img/home-treffer.webp" alt="HangKontext App — dein Standort entspricht einer Gefahrenstelle des Lageberichts" width="1206" height="2622" style="width:100%;height:auto;display:block;border-radius:33px 33px 0 0;">
     </div>
   </div>
 </div>
@@ -364,7 +381,9 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
   <video data-hk-video="terrain" data-src="video/terrain-transition.mp4" data-poster="img/terrain-poster.webp" muted loop playsinline preload="none" aria-hidden="true" style="width:100%;display:block;aspect-ratio:16/9;max-height:62vh;object-fit:cover;object-position:center 55%;background:#0A1524;"></video>
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,#F4F7FA 0%,rgba(244,247,250,0) 14%,rgba(10,21,36,0) 62%,rgba(228,235,242,0.94) 100%);pointer-events:none;" aria-hidden="true"></div>
   <div style="position:absolute;left:0;right:0;bottom:clamp(28px,6vh,64px);display:flex;justify-content:center;padding:0 24px;">
-    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;animation:hkFade 1s both;animation-timeline:view();animation-range:entry 20% entry 70%;">
+    <!-- Scrim hinter dem Text: das Video zeigt an dieser Stelle hellen Schnee,
+         weisser Text allein war grenzwertig lesbar. -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;background:rgba(9,20,38,0.42);backdrop-filter:blur(8px);border-radius:20px;padding:16px 26px;animation:hkFade 1s both;animation-timeline:view();animation-range:entry 20% entry 70%;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#FFFFFF;text-shadow:0 1px 14px rgba(10,21,36,0.8);">Vom Gelände zur Gefahrenstelle</div>
       <div style="font-size:clamp(18px,2.2vw,24px);font-weight:700;color:#FFFFFF;text-shadow:0 2px 20px rgba(10,21,36,0.8);text-wrap:balance;max-width:560px;">Das Gelände liefert Messwerte. Der Lagebericht liefert Kriterien.</div>
     </div>
@@ -416,7 +435,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         <circle cx="918" cy="703" r="3.5" fill="rgba(255,255,255,0.8)"></circle>
       </svg>
       <div data-hk-phone style="position:absolute;left:2%;bottom:-9%;width:min(22%,240px);min-width:126px;z-index:5;background:#0B0D12;border-radius:30px;padding:8px;box-shadow:0 14px 28px -16px rgba(9,20,38,0.35),0 0 0 1px rgba(255,255,255,0.10) inset;opacity:0;transform:translateY(24px) scale(0.985);transition:opacity 200ms linear,transform 480ms cubic-bezier(0.22,0.61,0.36,1);">
-        <img src="img/sperrbildschirm.png" alt="Echter Sperrbildschirm: Übereinstimmung mit denselben Werten — Höhenband 1.681 m, Exposition SW, Hangneigung 30°" loading="lazy" style="width:100%;display:block;border-radius:23px;">
+        <img src="img/sperrbildschirm.webp" alt="Echter Sperrbildschirm: Übereinstimmung mit denselben Werten — Höhenband 1.681 m, Exposition SW, Hangneigung 30°" loading="lazy" width="1206" height="2622" style="width:100%;height:auto;display:block;border-radius:23px;">
       </div>
     </div>
     <p style="margin:clamp(56px,7vw,92px) 0 0;text-align:center;font-size:clamp(22px,3.2vw,36px);font-weight:800;letter-spacing:-0.02em;text-wrap:balance;animation:hkReveal 0.8s both;animation-timeline:view();animation-range:entry 0% entry 60%;">Ein Hang. Drei Kriterien. Ein Abgleich.</p>
@@ -455,7 +474,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       <div style="position:absolute;left:0;right:0;bottom:0;height:46%;background:linear-gradient(180deg,rgba(9,20,38,0) 0%,rgba(9,20,38,0.34) 100%);pointer-events:none;" aria-hidden="true"></div>
     </div>
     <div style="width:min(50%,198px);margin:max(-138px,-31vw) auto 0;position:relative;z-index:2;background:#0B0D12;border-radius:32px;padding:8px;box-shadow:0 24px 54px -22px rgba(9,20,38,0.55),0 0 0 1px rgba(255,255,255,0.10) inset;">
-      <img src="img/sperrbildschirm.png" alt="Echter Sperrbildschirm: Übereinstimmung mit denselben Werten — Höhenband 1.681 m, Exposition SW, Hangneigung 30°" loading="lazy" style="width:100%;display:block;border-radius:25px;">
+      <img src="img/sperrbildschirm.webp" alt="Echter Sperrbildschirm: Übereinstimmung mit denselben Werten — Höhenband 1.681 m, Exposition SW, Hangneigung 30°" loading="lazy" width="1206" height="2622" style="width:100%;height:auto;display:block;border-radius:25px;">
     </div>
     <p style="margin:28px 0 0;text-align:center;font-size:clamp(21px,6vw,26px);font-weight:800;letter-spacing:-0.02em;text-wrap:balance;">Ein Hang. Drei Kriterien. Ein Abgleich.</p>
     <div style="display:flex;flex-direction:column;gap:18px;margin-top:24px;">
@@ -501,11 +520,11 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         </div>
         <div id="z-status" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#33445A;border-top:1px solid #EDF2F7;padding-top:12px;">TREFFER · TRIEBSCHNEE · STUFE 2 · EIGENE BEURTEILUNG NÖTIG</div>
       </div>
-      <div style="flex:0 1 300px;min-width:250px;margin:0 auto;">
-        <div style="width:min(300px,76vw);background:#0E1B2C;border-radius:46px;padding:9px;margin:0 auto;box-shadow:0 34px 80px -26px rgba(9,20,38,0.55);">
-          <img data-z="keine" hidden src="img/home-keine-uebereinstimmung.png" alt="App-Zustand: keine Übereinstimmung — App bleibt aktiv und prüft weiter" loading="lazy" style="width:100%;display:block;border-radius:38px;">
-          <img data-z="treffer" src="img/home-treffer.png" alt="App-Zustand: Übereinstimmung mit einer Gefahrenstelle — mit Lawinenproblem und Gefahrenstufe" loading="lazy" style="width:100%;display:block;border-radius:38px;">
-          <img data-z="nicht" hidden src="img/home-gps-ungenau.png" alt="App-Zustand: Prüfung eingeschränkt — GPS zu ungenau, Position unsicher, keine Aussage möglich" loading="lazy" style="width:100%;display:block;border-radius:38px;">
+      <div style="flex:0 1 280px;min-width:250px;margin:0 auto;">
+        <div style="width:min(280px,76vw);background:#0E1B2C;border-radius:46px;padding:9px;margin:0 auto;box-shadow:0 34px 80px -26px rgba(9,20,38,0.55);">
+          <img data-z="keine" hidden src="img/home-keine-uebereinstimmung.webp" alt="App-Zustand: keine Übereinstimmung — App bleibt aktiv und prüft weiter" loading="lazy" width="1206" height="2622" style="width:100%;height:auto;display:block;border-radius:38px;">
+          <img data-z="treffer" src="img/home-treffer.webp" alt="App-Zustand: Übereinstimmung mit einer Gefahrenstelle — mit Lawinenproblem und Gefahrenstufe" loading="lazy" width="1206" height="2622" style="width:100%;height:auto;display:block;border-radius:38px;">
+          <img data-z="nicht" hidden src="img/home-gps-ungenau.webp" alt="App-Zustand: Prüfung eingeschränkt — GPS zu ungenau, Position unsicher, keine Aussage möglich" loading="lazy" width="1206" height="2622" style="width:100%;height:auto;display:block;border-radius:38px;">
         </div>
       </div>
     </div>
@@ -540,7 +559,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
           </div>
           <div style="flex:0 1 270px;min-width:210px;margin:0 auto;">
             <div class="hk-zoom" data-lb="lock" role="button" tabindex="0" aria-label="Sperrbildschirm-Mockup vergrößern" style="width:min(256px,62vw);background:#05090F;border-radius:40px;padding:8px;margin:0 auto;box-shadow:0 30px 70px -24px rgba(6,20,32,0.55);cursor:zoom-in;transition:transform 0.25s ease,box-shadow 0.25s ease;">
-              <img src="img/sperrbildschirm.png" alt="Sperrbildschirm mit Live Activity: Zustand, Messwerte und Gefahrenstufe" loading="lazy" style="width:100%;display:block;border-radius:29px;">
+              <img src="img/sperrbildschirm.webp" alt="Sperrbildschirm mit Live Activity: Zustand, Messwerte und Gefahrenstufe" loading="lazy" width="1206" height="2622" style="width:100%;height:auto;display:block;border-radius:29px;">
             </div>
           </div>
         </div>
@@ -559,7 +578,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       </div>
       <div style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:16px 18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
         <div class="hk-zoom-sm" data-lb="map" role="button" tabindex="0" aria-label="Karten-Mockup vergrößern" style="width:78px;background:#05090F;border-radius:18px;padding:5px;flex-shrink:0;cursor:zoom-in;transition:transform 0.25s ease;">
-          <img src="img/karte-overlay.png" alt="Karte mit markiertem passendem Steilgelände" loading="lazy" style="width:100%;display:block;border-radius:16px;">
+          <img src="img/karte-overlay.webp" alt="Karte mit markiertem passendem Steilgelände" loading="lazy" width="1206" height="2622" style="width:100%;height:auto;display:block;border-radius:16px;">
         </div>
         <div style="flex:1 1 170px;display:flex;flex-direction:column;gap:7px;">
           <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Karte · Opt-in</div>
@@ -589,7 +608,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
          Der v5.8.1-Entwurf hatte 2.7/1 · 70 %, dabei ragte die halbe zweite
          Mitteilung ins Bild und sah nach abgeschnittenem Bild aus. -->
     <div style="border-radius:14px;overflow:hidden;aspect-ratio:4.34/1;">
-      <img src="img/sperrbildschirm.png" alt="Live Activity auf dem Sperrbildschirm: Übereinstimmung, Triebschnee, 30° SW, 1.681 m, Gefahrenstufe 2 — tippen für den vollständigen Sperrbildschirm" loading="lazy" style="width:100%;height:100%;display:block;object-fit:cover;object-position:center 68.8%;">
+      <img src="img/sperrbildschirm.webp" alt="Live Activity auf dem Sperrbildschirm: Übereinstimmung, Triebschnee, 30° SW, 1.681 m, Gefahrenstufe 2 — tippen für den vollständigen Sperrbildschirm" loading="lazy" style="width:100%;height:100%;display:block;object-fit:cover;object-position:center 68.8%;">
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 8px 4px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#9FB8CC;">
       <span>Live Activity · Dynamic Island</span>
@@ -613,7 +632,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     </div>
     <div style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:14px;display:flex;flex-direction:column;gap:8px;">
       <div data-lb="map" role="button" tabindex="0" aria-label="Karten-Mockup vergrößern" style="background:#05090F;border-radius:9px;padding:3px;cursor:zoom-in;align-self:center;">
-        <img src="img/karte-overlay.png" alt="Karte in der iPhone-App mit markiertem passendem Steilgelände" loading="lazy" style="height:77px;width:auto;display:block;border-radius:7px;">
+        <img src="img/karte-overlay.webp" alt="Karte in der iPhone-App mit markiertem passendem Steilgelände" loading="lazy" width="1206" height="2622" style="height:77px;width:auto;display:block;border-radius:7px;">
       </div>
       <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">iPhone · Karte</div>
       <div style="font-size:17px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;line-height:1.2;">Gefahrenstellen im Gelände</div>
@@ -679,7 +698,11 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;max-width:440px;">Die 89&#8239;% beschreiben die Grundrate dieser Prüfmethode im abgedeckten Gelände an den untersuchten Ereignistagen. Sie sind kein Gütemaß und keine Unfallwahrscheinlichkeit.</p>
       </div>
     </div>
-    <p style="margin:28px 0 0;font-size:15px;line-height:1.65;color:#4A5A6B;max-width:760px;text-wrap:pretty;">Die Auswertung prüft die Abdeckung der Kriterien des amtlichen Lageberichts im konkreten Gelände. Sie misst keine Unfallwahrscheinlichkeit und belegt keine Unfallvermeidung. HangKontext gibt keine Hänge frei — die Beurteilung bleibt beim Menschen.</p>
+    <!-- Einordnung direkt unter den beiden Zahlen: ohne diesen Satz lesen
+         Ueberflieger 96,7 und 89 als zwei Erfolgswerte oder als Widerspruch.
+         Der Abstand ist die Aussage, nicht die einzelne Zahl. -->
+    <p style="margin:28px 0 0;font-size:16px;font-weight:700;line-height:1.6;color:#0E1B2C;max-width:760px;text-wrap:pretty;border-left:3px solid #1A6DE0;padding-left:16px;">Beide Zahlen gehören zusammen: Ereignisorte stimmen mit 96,7&#8239;% häufiger mit einer Gefahrenstelle überein als zufällige Vergleichspunkte im selben Gelände (89&#8239;%). Der Abstand — nicht die einzelne Zahl — beschreibt, was die Prüfmethode leistet.</p>
+    <p style="margin:20px 0 0;font-size:15px;line-height:1.65;color:#4A5A6B;max-width:760px;text-wrap:pretty;">Die Auswertung prüft die Abdeckung der Kriterien des amtlichen Lageberichts im konkreten Gelände. Sie misst keine Unfallwahrscheinlichkeit und belegt keine Unfallvermeidung. HangKontext gibt keine Hänge frei — die Beurteilung bleibt beim Menschen.</p>
     <details style="margin-top:28px;border-top:1px solid #E2E9F1;padding-top:20px;">
       <summary style="font-size:15.5px;font-weight:700;cursor:pointer;color:#0E1B2C;">Methodik und Datenbasis</summary>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:6px 40px;margin-top:18px;font-size:14.5px;line-height:1.6;color:#33445A;">
@@ -717,7 +740,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
           <button type="submit" id="hk-beta-submit" class="hk-cta" style="background:#1A6DE0;color:#FFFFFF;border:none;font-size:16px;font-weight:700;padding:15px 28px;border-radius:99px;cursor:pointer;box-shadow:0 12px 30px -10px rgba(26,109,224,0.55);flex-shrink:0;">Für die Beta anmelden</button>
         </form>
         <p style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:#33445A;max-width:560px;text-wrap:pretty;">Du erhältst vor Saisonstart eine Einladung oder einen Platz auf der Warteliste. Nur Informationen zur Beta, keine Weitergabe deiner Daten.</p>
-        <div id="hk-form-err" hidden role="alert" style="margin-top:16px;border:1px dashed #C9D6E3;border-radius:12px;padding:14px 18px;font-size:14.5px;color:#33445A;background:rgba(255,255,255,0.85);max-width:600px;">Senden nicht möglich — bitte später erneut versuchen oder direkt an <a href="mailto:beta@hangkontext.de">beta@hangkontext.de</a> schreiben.</div>
+        <div id="hk-form-err" hidden role="alert" style="margin-top:16px;border:1px dashed #C9D6E3;border-radius:12px;padding:14px 18px;font-size:14.5px;color:#33445A;background:rgba(255,255,255,0.85);max-width:600px;">Senden nicht möglich — bitte später erneut versuchen oder direkt an <a href="mailto:avalancheguard.app@gmail.com">avalancheguard.app@gmail.com</a> schreiben.</div>
       </div>
 
       <div id="hk-form-ok" hidden>
@@ -851,9 +874,9 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
 
   /* --- Lightbox für die Mockups --- */
   var LB = {
-    lock: { src: 'img/sperrbildschirm.png', alt: 'Sperrbildschirm mit Live Activity: Zustand, Messwerte und Gefahrenstufe' },
+    lock: { src: 'img/sperrbildschirm.webp', alt: 'Sperrbildschirm mit Live Activity: Zustand, Messwerte und Gefahrenstufe' },
     watch: { src: 'img/watch.png', alt: 'Apple-Watch-Komplikation: Zustand am Handgelenk' },
-    map: { src: 'img/karte-overlay.png', alt: 'Karte mit markiertem passendem Steilgelände' }
+    map: { src: 'img/karte-overlay.webp', alt: 'Karte mit markiertem passendem Steilgelände' }
   };
   var lbBox = $('#hk-lightbox'), lbImg = $('#hk-lightbox-img'), lbLast = null;
 
@@ -989,27 +1012,33 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
   });
   applyVids();
 
-  /* --- Sticky-CTA (nur Handy) ---
-     Faehrt ein, sobald der Mobil-Hero aus dem Bild ist, und wieder aus,
-     sobald das Beta-Formular sichtbar wird. Ueber 720 px ist die Leiste
-     per data-hk-mobile ohnehin ausgeblendet. */
+  /* --- Sticky-CTA (alle Breiten) ---
+     Faehrt ein, sobald der sichtbare Hero aus dem Bild ist, und wieder aus,
+     sobald das Beta-Formular sichtbar wird. Beobachtet werden beide Heros:
+     der per Media-Query ausgeblendete schneidet nie und meldet damit
+     dauerhaft „nicht sichtbar" — uebrig bleibt der jeweils aktive. */
   (function initStickyCta() {
     var bar = $('[data-hk-stickycta]');
-    var hero = $('[data-hk-mhero]');
+    var heroes = $$('[data-hk-mhero], [data-hk-dhero]');
     var beta = $('#beta');
-    if (!bar || !hero || !beta || !window.IntersectionObserver) return;
-    var pastHero = false, atBeta = false;
+    if (!bar || !heroes.length || !beta || !window.IntersectionObserver) return;
+    var heroVisible = false, atBeta = false;
     function apply() {
-      var on = pastHero && !atBeta;
+      var on = !heroVisible && !atBeta;
       bar.classList.toggle('is-on', on);
       bar.setAttribute('aria-hidden', on ? 'false' : 'true');
     }
-    new IntersectionObserver(function (es) {
-      pastHero = !es[0].isIntersecting;
+    var seenHero = new WeakMap();
+    var hio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { seenHero.set(e.target, e.isIntersecting); });
+      heroVisible = heroes.some(function (h) { return seenHero.get(h); });
       apply();
-    }, { threshold: 0 }).observe(hero);
+    }, { threshold: 0 });
+    heroes.forEach(function (h) { hio.observe(h); });
     new IntersectionObserver(function (es) {
-      atBeta = es[0].isIntersecting;
+      /* Bei schnellen Spruengen liefert der Observer mehrere gepufferte
+         Eintraege; massgeblich ist der letzte, nicht es[0]. */
+      atBeta = es[es.length - 1].isIntersecting;
       apply();
     }, { threshold: 0 }).observe(beta);
   })();
