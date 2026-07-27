@@ -53,6 +53,14 @@ input::placeholder{color:#5C6E80;opacity:1}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #1A6DE0;outline-offset:2px;border-radius:4px}
 img{max-width:100%}
 [hidden]{display:none !important}
+/* --- PFLICHT-SELECT "GERAET" IN STUFE 1 ---
+   Das Feld sitzt in derselben Pillen-Zeile wie das E-Mail-Feld, muss also
+   dessen Optik treffen. Native Selects rendern je nach OS voellig anders
+   (iOS zeigt z. B. gar keinen Pfeil), darum appearance:none plus eigener
+   Chevron. Solange nichts gewaehlt ist, ist das Feld wegen required
+   :invalid — das faerbt den Platzhaltertext wie einen echten placeholder. */
+#hk-beta-form select{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%234A5A6B' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 20px center;background-size:11px 7px}
+#hk-beta-form select:invalid{color:#5C6E80}
 @keyframes hkPulse{0%,100%{opacity:1}50%{opacity:0.2}}
 @keyframes hkReveal{0%{opacity:0;transform:translateY(28px)}100%{opacity:1;transform:translateY(0)}}
 @keyframes hkFade{0%{opacity:0}100%{opacity:1}}
@@ -98,6 +106,10 @@ html{scroll-padding-top:66px}
 #validierung details>div>div{font-size:15px !important;line-height:1.65 !important}
 #beta input[type="email"]{font-size:16px !important}
 #beta select{font-size:16px !important}
+#beta input[type="text"]{font-size:16px !important}
+/* Am Handy stehen E-Mail und Geraet untereinander statt nebeneinander —
+   nebeneinander bliebe fuer das Select eine Restbreite von unter 150px. */
+#hk-beta-form select{flex:1 1 100% !important;max-width:none !important}
 #beta form button[type="submit"]{width:100%}
 #beta p{font-size:16px !important}
 footer a{padding:12px 0;display:inline-block}
@@ -283,7 +295,8 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
   <span>Datenquellen:</span>
   <span style="font-weight:600;">avalanche.report</span>
   <span style="font-weight:600;">Lawinenwarndienst Bayern</span>
-  <span style="font-weight:600;">Land Tirol · DGM 5&#8239;m</span>
+  <span style="font-weight:600;">Land Tirol</span>
+  <span style="font-weight:600;">Bayer. Vermessungsverwaltung</span>
   <span style="font-weight:600;">OpenTopoMap</span>
 </div>
 
@@ -296,7 +309,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     </div>
     <div style="flex:0 1 250px;min-width:210px;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 20px 50px -24px rgba(14,27,44,0.45);">
       <img src="img/terrain-base.png" alt="" aria-hidden="true" loading="lazy" style="width:100%;display:block;aspect-ratio:16/10;object-fit:cover;object-position:center 40%;">
-      <div style="position:absolute;left:10px;bottom:10px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:5px 11px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;">GELÄNDEMODELL · DGM 5&#8239;M</div>
+      <div style="position:absolute;left:10px;bottom:10px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:5px 11px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;">AMTLICHES GELÄNDEMODELL</div>
     </div>
   </div>
   <div style="position:relative;margin-top:30px;">
@@ -725,7 +738,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Stand der Auswertung:</strong> 12. Juli 2026</div>
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Stand der Auswertungslogik:</strong> HangKontext 1.0.0 mit den zu diesem Zeitpunkt geltenden Standardschwellwerten für Neigung, Exposition und Höhenband.</div>
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Bekannte Einschränkungen:</strong> Retrospektive Abdeckungsprüfung. Die Ergebnisse erlauben keine Aussage über zukünftige Unfälle, individuelle Entscheidungen oder eine mögliche Unfallvermeidung.</div>
-        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Weitere Datenquellen:</strong> avalanche.report, Lawinenwarndienst Bayern, Land Tirol (DGM 5&#8239;m), OpenTopoMap</div>
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Weitere Datenquellen:</strong> avalanche.report, Lawinenwarndienst Bayern, Land Tirol (DGM 10&#8239;m), Bayerische Vermessungsverwaltung (DGM5), OpenTopoMap</div>
       </div>
     </details>
   </div>
@@ -743,12 +756,22 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       </div>
 
       <div id="hk-form-idle">
-        <form id="hk-beta-form" style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;max-width:640px;align-items:stretch;">
-          <input name="email" type="email" required autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" placeholder="deine@email.de" aria-label="E-Mail-Adresse" style="flex:1 1 280px;min-width:220px;background:#FFFFFF;border:1px solid #C9D6E3;border-radius:99px;color:#0E1B2C;font-size:15.5px;padding:15px 22px;box-sizing:border-box;">
+        <!-- Breiter als die 640px der uebrigen Beta-Karte: E-Mail, Geraet und
+             Button sollen im Desktop-Layout in EINER Zeile stehen. -->
+        <form id="hk-beta-form" style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;max-width:720px;align-items:stretch;">
+          <input name="email" type="email" required autocomplete="email" inputmode="email" autocapitalize="none" spellcheck="false" placeholder="deine@email.de" aria-label="E-Mail-Adresse" style="flex:1 1 260px;min-width:220px;background:#FFFFFF;border:1px solid #C9D6E3;border-radius:99px;color:#0E1B2C;font-size:15.5px;padding:15px 22px;box-sizing:border-box;">
+          <select name="geraet" required aria-label="Gerät" style="flex:1 1 200px;min-width:170px;max-width:220px;background-color:#FFFFFF;border:1px solid #C9D6E3;border-radius:99px;color:#0E1B2C;font-size:15.5px;padding:15px 44px 15px 22px;box-sizing:border-box;cursor:pointer;-webkit-appearance:none;appearance:none;">
+            <option value="">Gerät wählen</option>
+            <option value="iPhone">iPhone</option>
+            <option value="Android">Android</option>
+          </select>
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
           <button type="submit" id="hk-beta-submit" class="hk-cta" style="background:#1A6DE0;color:#FFFFFF;border:none;font-size:16px;font-weight:700;padding:15px 28px;border-radius:99px;cursor:pointer;box-shadow:0 12px 30px -10px rgba(26,109,224,0.55);flex-shrink:0;">Beta-Platz sichern</button>
         </form>
-        <p style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:#33445A;max-width:560px;text-wrap:pretty;">Du erhältst vor Saisonstart eine Einladung oder einen Platz auf der Warteliste. Nur Informationen zur Beta, keine Weitergabe deiner Daten.</p>
+        <p style="margin:14px 0 0;font-size:14.5px;line-height:1.6;color:#33445A;max-width:560px;text-wrap:pretty;">Du erhältst vor Saisonstart eine Einladung oder einen Platz auf der Warteliste. Nur Informationen zur Beta, keine Weitergabe deiner Daten. Dein Beta-Feedback landet direkt beim Entwickler.</p>
+        <!-- Bewusst ein div, kein p: die Mobil-Regel #beta p{font-size:16px}
+             wuerde diese Mono-Zeile sonst auf Fliesstextgroesse aufblasen. -->
+        <div style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#4A5A6B;">Es gilt die <a href="rechtliches.html#datenschutz" style="color:#4A5A6B;">Datenschutzerklärung</a> · jederzeit austragbar</div>
         <div id="hk-form-err" hidden role="alert" style="margin-top:16px;border:1px dashed #C9D6E3;border-radius:12px;padding:14px 18px;font-size:14.5px;color:#33445A;background:rgba(255,255,255,0.85);max-width:600px;">Senden nicht möglich — bitte später erneut versuchen oder direkt an <a href="mailto:avalancheguard.app@gmail.com">avalancheguard.app@gmail.com</a> schreiben.</div>
       </div>
 
@@ -756,8 +779,8 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         <div role="status" style="margin-top:28px;background:#FFFFFF;border:1px solid #C9D6E3;border-radius:16px;padding:22px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;max-width:640px;">
           <div style="width:40px;height:40px;background:#1A6DE0;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;" aria-hidden="true"><div style="width:13px;height:13px;background:#FFFFFF;transform:rotate(45deg);"></div></div>
           <div>
-            <div style="font-size:17.5px;font-weight:800;">Danke — du stehst auf der Liste.</div>
-            <div style="font-size:14.5px;color:#4A5A6B;margin-top:3px;">Du erhältst vor Saisonstart eine Einladung oder einen Platz auf der Warteliste.</div>
+            <div id="hk-ok-title" style="font-size:17.5px;font-weight:800;">Danke — du stehst auf der Liste.</div>
+            <div id="hk-ok-sub" style="font-size:14.5px;color:#4A5A6B;margin-top:3px;">Du erhältst vor Saisonstart eine Einladung oder einen Platz auf der Warteliste.</div>
           </div>
         </div>
         <form id="hk-opt-form" style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;max-width:640px;">
@@ -773,11 +796,13 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
               <option value="">Bitte wählen</option><option value="Einstieg">Einstieg (erste Saisons)</option><option value="Erfahren">Erfahren (mehrjährig)</option><option value="Sehr erfahren">Sehr erfahren</option><option value="Professionell">Professionell (Führung, Ausbildung)</option>
             </select>
           </label>
+          <!-- Das Geraet wird seit v6.1 schon in Stufe 1 als Pflichtfeld
+               erhoben (Plattform-Split fuer JEDE Anmeldung), hier stand es
+               frueher optional. An seiner Stelle jetzt die Regionen — das
+               Feld ist in der Datenschutzerklaerung bereits genannt. -->
           <label style="flex:1 1 190px;min-width:0;display:flex;flex-direction:column;gap:6px;">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#4A5A6B;">Gerät (optional)</span>
-            <select name="geraet" style="width:100%;background:#FFFFFF;border:1px solid #C9D6E3;border-radius:12px;color:#0E1B2C;font-size:15px;padding:12px;">
-              <option value="">Bitte wählen</option><option value="iPhone">iPhone</option><option value="Android">Android (Warteliste)</option>
-            </select>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#4A5A6B;">Regionen (optional)</span>
+            <input name="regionen" type="text" autocomplete="off" placeholder="z. B. Allgäu, Tirol" aria-label="Wo bist du meist unterwegs?" style="width:100%;background:#FFFFFF;border:1px solid #C9D6E3;border-radius:12px;color:#0E1B2C;font-size:15px;padding:12px;box-sizing:border-box;">
           </label>
           <button type="submit" id="hk-opt-submit" class="hk-optbtn" style="background:#FFFFFF;color:#0E1B2C;border:1px solid #C9D6E3;font-size:15px;font-weight:700;padding:13px 22px;border-radius:99px;cursor:pointer;">Angaben senden</button>
         </form>
@@ -794,7 +819,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         <div style="margin-top:8px;font-size:16.5px;font-weight:800;line-height:1.35;text-wrap:pretty;">Die Beta ist offen — für iPhone, über TestFlight.</div>
         <p style="margin:8px 0 0;font-size:14.5px;line-height:1.6;color:#33445A;text-wrap:pretty;">Außerhalb der Lawinensaison veröffentlichen die Warndienste keinen Lagebericht. HangKontext hat dann nichts zum Abgleichen und zeigt durchgehend <strong>„Eingeschränkte Prüfung"</strong> — das ist der vorgesehene Zustand, kein Fehler. Gelände, Karte und Bedienung kannst du trotzdem ansehen.</p>
         <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
-          <a class="hk-optbtn" href="https://testflight.apple.com/join/c3ZxWFf4" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;background:#FFFFFF;color:#0E1B2C;border:1px solid #C9D6E3;font-size:15px;font-weight:700;padding:13px 22px;border-radius:99px;text-decoration:none;">TestFlight-Beta öffnen</a>
+          <a class="hk-optbtn" href="https://testflight.apple.com/join/c3ZxWFf4" target="_blank" rel="noopener" data-goatcounter-click="/event/testflight-klick" data-goatcounter-title="TestFlight-Klick" style="display:inline-flex;align-items:center;background:#FFFFFF;color:#0E1B2C;border:1px solid #C9D6E3;font-size:15px;font-weight:700;padding:13px 22px;border-radius:99px;text-decoration:none;">TestFlight-Beta öffnen</a>
           <span style="font-size:13.5px;color:#4A5A6B;">iPhone mit iOS&#8239;16.2 oder neuer, dazu Apples TestFlight-App.</span>
         </div>
       </div>
@@ -830,6 +855,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6E80;">Rechtliches</div>
       <a href="rechtliches.html">Impressum</a>
       <a href="rechtliches.html#datenschutz">Datenschutz</a>
+      <a href="presse.html">Presse</a>
       <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:#5C6E80;margin-top:8px;">© 2026 HANGKONTEXT</div>
     </div>
   </div>
@@ -940,7 +966,15 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
   var FORMSPREE = 'https://formspree.io/f/xwvdzagy';
   var betaForm = $('#hk-beta-form'), betaBtn = $('#hk-beta-submit');
   var optForm = $('#hk-opt-form'), optBtn = $('#hk-opt-submit');
-  var sending = false, optSending = false, email = '';
+  var sending = false, optSending = false, email = '', geraet = '';
+
+  /* GoatCounter zaehlt Seitenaufrufe automatisch; Trichter-Schritte muessen
+     als eigene Events gemeldet werden. Das count.js-Tag laedt async und
+     damit spaeter als diese IIFE — deshalb jeder Aufruf defensiv. */
+  function track(path, title) {
+    if (window.goatcounter && window.goatcounter.count)
+      window.goatcounter.count({ path: path, title: title, event: true });
+  }
 
   betaForm.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -948,6 +982,10 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     sending = true;
     var fd = new FormData(betaForm);
     email = String(fd.get('email') || '');
+    geraet = String(fd.get('geraet') || '');
+    /* Betreff traegt das Geraet, damit die Anmeldungen im Formspree-Dashboard
+       direkt nach Plattform filterbar sind. */
+    fd.append('_subject', 'HangKontext Beta – Anmeldung (' + (geraet || 'ohne Angabe') + ')');
     betaBtn.textContent = 'Wird gesendet …';
     $('#hk-form-err').hidden = true;
     var reset = function () { sending = false; betaBtn.textContent = 'Beta-Platz sichern'; };
@@ -955,8 +993,16 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       .then(function (r) {
         reset();
         if (r.ok) {
+          /* Android ehrlich benennen statt still auf eine iOS-Beta zu
+             verweisen — dieselbe Linie wie ADR-0004: nie stumm entwarnen. */
+          if (geraet === 'Android') {
+            $('#hk-ok-title').textContent = 'Danke — du stehst auf der Android-Warteliste.';
+            $('#hk-ok-sub').textContent = 'Die Beta läuft zunächst nur für iPhone. Ob und wann eine Android-Version kommt, ist offen — du hörst davon, sobald es dazu etwas zu sagen gibt.';
+          }
           $('#hk-form-idle').hidden = true;
           $('#hk-form-ok').hidden = false;
+          track('/event/beta-anmeldung', 'Beta-Anmeldung');
+          track('/event/beta-anmeldung-' + (geraet === 'Android' ? 'android' : 'iphone'), 'Beta-Anmeldung ' + geraet);
         } else {
           $('#hk-form-err').hidden = false;
         }
@@ -971,7 +1017,8 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     optBtn.textContent = 'Wird gesendet …';
     var fd = new FormData(optForm);
     fd.append('email', email);
-    fd.append('_subject', 'HangKontext Beta – ergänzende Angaben');
+    fd.append('geraet', geraet);
+    fd.append('_subject', 'HangKontext Beta – ergänzende Angaben (' + (geraet || 'ohne Angabe') + ')');
     var done = function () {
       optSending = false;
       optForm.hidden = true;
