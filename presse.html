@@ -71,7 +71,11 @@
   .assets li { flex: 1 1 150px; max-width: 190px; display: flex; }
   .assets a { display: flex; flex-direction: column; width: 100%; text-decoration: none; }
   .assets .name { flex: 1 0 auto; }
-  .assets img { width: 100%; display: block; border: 1px solid var(--border); border-radius: 12px; background: var(--card); }
+  /* height:auto ist Pflicht, nicht Kosmetik: die Bilder tragen width/height
+     als Attribut (reserviert den Platz vor dem Lazy-Load), und ohne diese
+     Regel bleibt das Hoehen-Attribut neben width:100% stehen — die
+     Vorschauen werden dann laenglich verzerrt. */
+  .assets img { width: 100%; height: auto; display: block; border: 1px solid var(--border); border-radius: 12px; background: var(--card); }
   .assets .meta {
     display: block; margin-top: 7px; font-family: 'IBM Plex Mono', monospace;
     font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim);
