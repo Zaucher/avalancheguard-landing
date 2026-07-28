@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>657 Lawinenereignisse nachgerechnet — wie gut deckt der Lagebericht das Gelände ab?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Für 657 dokumentierte Lawinenereignisse in Tirol wurde nachgerechnet, ob Exposition, Höhe und Hangneigung am Ereignisort zu einer Gefahrenstelle des am selben Tag gültigen Lawinenlageberichts passten. Ergebnis, Kontrollgruppe und Grenzen der Methode — offengelegt.">
+<link rel="canonical" href="https://hangkontext.de/validierung.html">
+<meta name="theme-color" content="#F4F7FA">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://hangkontext.de/validierung.html">
+<meta property="og:title" content="657 Lawinenereignisse nachgerechnet">
+<meta property="og:description" content="Wie gut deckt der amtliche Lawinenlagebericht das Gelände ab, in dem tatsächlich Lawinen abgingen? Eine retrospektive Abdeckungsprüfung — mit Kontrollgruppe und offengelegten Grenzen.">
+<meta property="og:image" content="https://hangkontext.de/og.png">
+<meta property="og:locale" content="de_DE">
+<link rel="icon" type="image/png" href="img/app-icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  /* Optik und Schriften wie rechtliches.html / presse.html — selbst
+     gehostet, kein Google-Request. Details siehe Kommentar in index.html. */
+  @font-face{font-family:'Schibsted Grotesk';font-style:normal;font-weight:400 900;font-display:swap;src:url('fonts/schibsted-grotesk-var-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+  @font-face{font-family:'Schibsted Grotesk';font-style:normal;font-weight:400 900;font-display:swap;src:url('fonts/schibsted-grotesk-var-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+  @font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/ibm-plex-mono-400-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+  :root {
+    --bg: #F4F7FA; --card: #FFFFFF; --border: #DDE6EF; --hair: #EDF2F7;
+    --text: #0E1B2C; --body: #4A5A6B; --dim: #5C6E80; --accent: #1A6DE0;
+    /* Diagrammfarben: Blau trägt die Aussage, Grau die Referenz. Bewusst
+       keine zweite Buntfarbe — die Zufallspunkte sind keine gleichrangige
+       Kategorie, sondern die Grundlinie, gegen die man liest.
+       Geprüft: Unterscheidbarkeit auch bei Farbfehlsichtigkeit (ΔE 16,8
+       protan / 9,4 tritan) und Kontrast gegen Weiß; zusätzlich trägt jeder
+       Balken sein Zahlenlabel, Farbe ist also nie das einzige Merkmal. */
+    --serie-ereignis: #1A6DE0; --serie-zufall: #7E92A6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--body);
+    font-family: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 96px; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  h1 { color: var(--text); font-size: clamp(30px, 5vw, 42px); font-weight: 900; letter-spacing: -0.028em; line-height: 1.1; margin: 10px 0 14px; text-wrap: balance; }
+  h2 { color: var(--text); font-size: clamp(21px, 3vw, 26px); font-weight: 800; letter-spacing: -0.018em; margin: 52px 0 12px; line-height: 1.25; text-wrap: balance; }
+  h3 { color: var(--text); font-size: 16px; font-weight: 800; margin: 28px 0 6px; }
+  p, ul, ol { margin: 0 0 16px; }
+  li { margin-bottom: 8px; }
+  strong { color: var(--text); }
+  .back { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; }
+  .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 28px 0 0; }
+  .lead { color: var(--text); font-size: clamp(18px, 2.4vw, 20px); line-height: 1.55; text-wrap: pretty; }
+  .card { border: 1px solid var(--border); background: var(--card); border-radius: 16px; padding: 18px 22px; margin: 18px 0; }
+  .note { border-left: 3px solid var(--accent); padding-left: 18px; margin: 22px 0; }
+  .note p:last-child, .card p:last-child { margin-bottom: 0; }
+  .fine { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); margin-top: 52px; }
+  a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  /* Die beiden Kernzahlen */
+  .zahlen { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; margin: 26px 0 8px; }
+  .zahl .k { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+  .zahl .v { font-size: clamp(46px, 8vw, 68px); font-weight: 900; letter-spacing: -0.04em; line-height: 1.05; font-variant-numeric: tabular-nums; margin: 4px 0 6px; }
+  /* Das Komma hat in Schibsted Grotesk bei Stärke 900 breite Seitenränder,
+     „96,7" liest sich sonst als „96 , 7" — gleicher Handausgleich wie auf
+     der Startseite. */
+  .zahl .v .komma { margin: 0 -0.055em; }
+  .zahl .v .pz { font-size: 0.42em; }
+  .zahl p { font-size: 15px; line-height: 1.6; margin: 0; }
+
+  /* Diagramm: gruppierte Balken, rein HTML/CSS, kein Skript.
+     Skala fest 0–100 %, damit die Balkenlängen zwischen den Gruppen
+     vergleichbar bleiben. */
+  figure { margin: 24px 0 8px; }
+  figcaption { font-size: 14.5px; line-height: 1.6; color: var(--dim); margin-top: 14px; }
+  .legende { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-bottom: 18px; font-size: 14px; }
+  .legende span { display: inline-flex; align-items: center; gap: 8px; color: var(--text); }
+  .swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+  .gruppe + .gruppe { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--hair); }
+  .gruppe > .titel { font-size: 15px; font-weight: 800; color: var(--text); }
+  .gruppe > .titel span { font-weight: 400; color: var(--dim); font-size: 13.5px; }
+  .reihe { display: grid; grid-template-columns: 116px 1fr; align-items: center; gap: 12px; margin-top: 8px; }
+  .reihe .rl { font-size: 13.5px; color: var(--body); }
+  /* Die Spur ist die 100-%-Referenz; der Balken sitzt auf der Grundlinie
+     links und endet mit 4px Radius. */
+  .spur { position: relative; height: 26px; background: var(--hair); border-radius: 4px; }
+  .balken { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 9px; }
+  /* Bewusst KEIN tabular-nums: die Labels sitzen am Balkenende, stehen also
+     nicht in einer Spalte untereinander — Ziffernbreite fürs Komma macht sie
+     nur 5px breiter und reißt die bekannte Lücke in „48,1" auf. */
+  .balken b { font-size: 12.5px; font-weight: 700; color: #FFFFFF; white-space: nowrap; }
+  /* Kurze Balken: Zahl außerhalb, sonst passt sie nicht hinein. */
+  .balken.knapp { justify-content: flex-start; padding-right: 0; }
+  .balken.knapp b { color: var(--text); margin-left: calc(100% + 9px); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; margin: 16px 0; }
+  caption { text-align: left; font-size: 14px; color: var(--dim); margin-bottom: 8px; }
+  th, td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--hair); vertical-align: top; }
+  th { color: var(--text); font-weight: 700; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; padding-right: 0; }
+  details { border-top: 1px solid var(--border); padding-top: 16px; margin-top: 22px; }
+  summary { font-size: 15.5px; font-weight: 700; cursor: pointer; color: var(--text); }
+  @media (max-width: 520px) {
+    /* Am Handy fehlt die Breite für eine Beschriftungsspalte — Label über
+       den Balken, in Mono, damit es sich klar vom Gruppentitel absetzt. */
+    .reihe { grid-template-columns: 1fr; gap: 4px; }
+    .reihe .rl { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); }
+    /* Fallzahl auf eigene Zeile: umgebrochen sah sie sonst wie ein
+       eigener Absatz unter dem Titel aus. */
+    .gruppe > .titel span { display: block; margin-top: 1px; }
+    /* Die Stufentabelle hat fünf Spalten und läuft am Handy über — sie
+       darf für sich scrollen, die Seite selbst nie. */
+    .tab-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .tab-scroll table { min-width: 460px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./">&larr; zurück zu HangKontext</a>
+
+  <p class="eyebrow">Retrospektive Abdeckungsprüfung</p>
+  <h1>657 Lawinenereignisse nachgerechnet: Wie gut deckt der Lagebericht das Gelände ab?</h1>
+  <p class="lead">Der amtliche Lawinenlagebericht nennt jeden Tag Expositionen,
+  Höhenbänder und Lawinenprobleme. Für 657 dokumentierte Lawinenereignisse in
+  Tirol lässt sich nachrechnen, ob das Gelände am Ereignisort zu diesen Angaben
+  passte — und, genauso wichtig, wie oft das auch für zufällig gewählte Punkte
+  im selben Gelände gilt.</p>
+
+  <h2>Die Frage</h2>
+  <p>Wer eine Skitour plant, liest im Lagebericht Sätze wie „Gefahrenstellen
+  finden sich vor allem an sehr steilen Nord- bis Osthängen oberhalb von
+  2.200 Metern". Im Gelände steht man dann in einem konkreten Hang, mit einer
+  konkreten Exposition, Höhe und Neigung. Die Frage, die sich dort stellt, ist
+  eine Abgleichsfrage: <strong>Passt das hier zu dem, was heute im Bericht
+  steht?</strong></p>
+  <p>Diese Auswertung dreht die Frage um und schaut zurück. An Orten, an denen
+  tatsächlich eine Lawine abgegangen ist: Passte das Gelände dort zu einer
+  Gefahrenstelle des an diesem Tag gültigen Lageberichts?</p>
+  <p>Die Auswertung ist im Rahmen der Entwicklung von
+  <a href="./">HangKontext</a> entstanden, einer App, die genau diesen Abgleich
+  am Standort vornimmt. Sie ist aber unabhängig von der App lesbar: Geprüft
+  wird die Abdeckung durch den amtlichen Lagebericht, nicht ein Produkt.</p>
+
+  <h2>Die Methode in fünf Sätzen</h2>
+  <ol>
+    <li><strong>Ereignisse:</strong> alle 711 in LAWIS dokumentierten Tiroler
+    Lawinenereignisse mit Koordinate seit dem 1. November 2021 — keine
+    Vorauswahl.</li>
+    <li><strong>Gelände:</strong> An der gemeldeten Koordinate werden Neigung,
+    Exposition und Höhe aus dem amtlichen Geländemodell bestimmt (Land Tirol,
+    10 m).</li>
+    <li><strong>Lagebericht:</strong> Dazu wird der archivierte Tagesbericht des
+    Ereignistages geladen und dieselbe Warnregion bestimmt, in der die
+    Koordinate liegt.</li>
+    <li><strong>Übereinstimmungsregel:</strong> Neigung, Exposition und Höhe
+    müssen <em>gemeinsam</em> zu ein und derselben Gefahrenstelle passen —
+    nicht jedes Merkmal zu einer anderen.</li>
+    <li><strong>Kontrollgruppe:</strong> Zu jedem Ereignis werden fünf zufällige
+    Punkte im selben Höhenbereich und am selben Tag mit exakt derselben Logik
+    geprüft.</li>
+  </ol>
+  <p>Von den 711 Ereignissen waren 657 auswertbar. Bei 51 war für den
+  Ereignistag gar kein Lagebericht veröffentlicht — das betrifft September bis
+  November und den Mai, also Zeiten ohne laufenden Berichtsbetrieb. Drei lagen
+  knapp außerhalb der Warnregionsgrenzen. Diese 54 Fälle zählen <strong>nicht
+  als „keine Übereinstimmung"</strong>, sondern werden getrennt ausgewiesen.</p>
+  <p>Weil eine LAWIS-Koordinate mal die Anrisskante, mal die Ablagerung und mal
+  eine grob gesetzte Position markiert, gilt eine Übereinstimmung auch dann,
+  wenn sie innerhalb von 200 Metern um die gemeldete Koordinate liegt. Die
+  maßgebliche Warnregion und deren Gefahrenstellen bleiben dabei die des
+  ursprünglichen Punkts — der Umkreis verändert nur die geprüfte Geländezelle.</p>
+
+  <h2>Das Ergebnis</h2>
+  <div class="zahlen">
+    <div class="zahl">
+      <div class="k">Ereignisorte</div>
+      <div class="v" style="color:var(--serie-ereignis)">96<span class="komma">,</span>7<span class="pz">&#8239;%</span></div>
+      <p>Bei 635 der 657 auswertbaren Ereignisse passte das Gelände zu einer
+      Gefahrenstelle des am selben Tag gültigen Lageberichts. Direkt an der
+      gemeldeten Koordinate, ohne Umkreis, waren es 75,5&#8239;%.</p>
+    </div>
+    <div class="zahl">
+      <div class="k">Zufällige Vergleichspunkte</div>
+      <div class="v" style="color:var(--serie-zufall)">89<span class="komma">,</span>2<span class="pz">&#8239;%</span></div>
+      <p>Von 3.285 zufällig über das abgedeckte Gelände verteilten Punkten
+      passten 2.930 mit derselben Logik ebenfalls zu einer Gefahrenstelle.
+      Betrachtet man nur Punkte im Steilgelände ab 28°, sind es 90,2&#8239;%.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <p><strong>Die zweite Zahl ist die wichtigere.</strong> Eine hohe
+    Übereinstimmungsquote an Ereignisorten allein sagt wenig — sie wäre auch
+    dann hoch, wenn der Lagebericht schlicht fast alles Gelände nennen würde.
+    Erst der Abstand zwischen 96,7&#8239;% und 89,2&#8239;% zeigt, dass
+    Ereignisorte häufiger passen als beliebige Punkte im selben Gelände. Der
+    Abstand — nicht die einzelne Zahl — ist die Aussage.</p>
+  </div>
+
+  <p>Und dieser Abstand ist kleiner, als die erste Zahl vermuten lässt. An
+  einem durchschnittlichen Wintertag mit Lawinenlage deckt der Lagebericht
+  einen großen Teil der Expositionen und Höhenlagen ab. Wer im Winter im
+  Steilgelände unterwegs ist, steht also die meiste Zeit in Gelände, das der
+  Bericht benennt. Das ist keine Schwäche des Berichts — es ist seine
+  Funktionsweise.</p>
+
+  <h2>Wo der Abgleich wirklich etwas unterscheidet</h2>
+  <p>Interessant wird es, wenn man beide Quoten nach der Gefahrenstufe des
+  jeweiligen Tages trennt. Dann zeigt sich, dass der Informationsgehalt des
+  Abgleichs stark von der Lage abhängt:</p>
+
+  <figure>
+    <div class="legende">
+      <span><i class="swatch" style="background:var(--serie-ereignis)"></i>Ereignisorte</span>
+      <span><i class="swatch" style="background:var(--serie-zufall)"></i>Zufällige Vergleichspunkte</span>
+    </div>
+
+    <div class="gruppe">
+      <div class="titel">Gefahrenstufe 1 — gering <span>· 27 Ereignisse, 182 Vergleichspunkte</span></div>
+      <div class="reihe"><div class="rl">Ereignisorte</div><div class="spur"><div class="balken knapp" style="width:48.1%;background:var(--serie-ereignis)"><b>48,1&#8239;%</b></div></div></div>
+      <div class="reihe"><div class="rl">Vergleichspunkte</div><div class="spur"><div class="balken knapp" style="width:34.1%;background:var(--serie-zufall)"><b>34,1&#8239;%</b></div></div></div>
+    </div>
+
+    <div class="gruppe">
+      <div class="titel">Gefahrenstufe 2 — mäßig <span>· 235 Ereignisse, 1.278 Vergleichspunkte</span></div>
+      <div class="reihe"><div class="rl">Ereignisorte</div><div class="spur"><div class="balken" style="width:98.3%;background:var(--serie-ereignis)"><b>98,3&#8239;%</b></div></div></div>
+      <div class="reihe"><div class="rl">Vergleichspunkte</div><div class="spur"><div class="balken" style="width:85.2%;background:var(--serie-zufall)"><b>85,2&#8239;%</b></div></div></div>
+    </div>
+
+    <div class="gruppe">
+      <div class="titel">Gefahrenstufe 3 — erheblich <span>· 288 Ereignisse, 1.309 Vergleichspunkte</span></div>
+      <div class="reihe"><div class="rl">Ereignisorte</div><div class="spur"><div class="balken" style="width:98.6%;background:var(--serie-ereignis)"><b>98,6&#8239;%</b></div></div></div>
+      <div class="reihe"><div class="rl">Vergleichspunkte</div><div class="spur"><div class="balken" style="width:96.5%;background:var(--serie-zufall)"><b>96,5&#8239;%</b></div></div></div>
+    </div>
+
+    <div class="gruppe">
+      <div class="titel">Gefahrenstufe 4 — groß <span>· 107 Ereignisse, 516 Vergleichspunkte</span></div>
+      <div class="reihe"><div class="rl">Ereignisorte</div><div class="spur"><div class="balken" style="width:100%;background:var(--serie-ereignis)"><b>100&#8239;%</b></div></div></div>
+      <div class="reihe"><div class="rl">Vergleichspunkte</div><div class="spur"><div class="balken" style="width:100%;background:var(--serie-zufall)"><b>100&#8239;%</b></div></div></div>
+    </div>
+
+    <figcaption>Anteil der Punkte, an denen Exposition, Höhe und Hangneigung zu
+    einer Gefahrenstelle des am selben Tag gültigen Lageberichts passten,
+    getrennt nach der Gefahrenstufe des jeweiligen Tages. Skala jeweils
+    0–100&#8239;%. Bei Gefahrenstufe 1 ist die Zahl der Ereignisse klein (27) —
+    die 48,1&#8239;% sind entsprechend unsicher.</figcaption>
+  </figure>
+
+  <p>Der Abstand ist bei den Gefahrenstufen 1 und 2 am größten und verschwindet
+  bei Stufe 4 vollständig. Das ist plausibel und sogar richtig so: Bei großer
+  Lawinengefahr <em>ist</em> praktisch das gesamte Steilgelände Gefahrenstelle,
+  und genau das sagt der Bericht dann auch. Ein Abgleich kann an einem solchen
+  Tag nichts mehr eingrenzen — die Aussage lautet schlicht „überall".</p>
+  <p>Der Informationsgewinn eines Geländeabgleichs liegt damit dort, wo die
+  meisten Touren stattfinden: an den häufigen Tagen mit gering oder mäßig. Dort
+  nennt der Bericht bestimmte Expositionen und Höhenbänder, und es macht einen
+  Unterschied, ob man in einem davon steht oder nicht.</p>
+
+  <h2>Wo die Methode scheitert</h2>
+  <p>In 22 der 657 Fälle passte das Gelände am Ereignisort zu keiner
+  Gefahrenstelle. Diese Fälle sind aufschlussreicher als die Quote:</p>
+  <ul>
+    <li><strong>12-mal nannte der Lagebericht an diesem Tag überhaupt keine
+    Gefahrenstelle</strong> — die Lage galt als günstig. Gegen eine nicht
+    genannte Gefahrenstelle kann kein Abgleich etwas ausrichten; das ist die
+    Grenze des Lageberichts, nicht die der Prüfregel.</li>
+    <li><strong>In den übrigen 10 Fällen passte die Höhe nicht</strong>, in
+    4 davon zusätzlich die Neigung. Die Exposition war nie allein der Grund.</li>
+    <li><strong>14 der 22 Fälle ereigneten sich an Tagen mit Gefahrenstufe
+    1.</strong> Genau die Tage, an denen der Bericht am wenigsten eingrenzt,
+    sind auch die, an denen dieser Abgleich am häufigsten danebenliegt.</li>
+  </ul>
+  <p>Von den 39 tödlichen Ereignissen im Datensatz waren 36 auswertbar; in 35
+  davon lag eine Übereinstimmung vor. Der eine Fall ohne Übereinstimmung ist
+  genau ein Fall der ersten Kategorie: Gefahrenstufe 1, ein Lagebericht ohne
+  genannte Gefahrenstellen.</p>
+
+  <h2>Was diese Zahlen nicht sind</h2>
+  <div class="card">
+    <p><strong>Keine Unfallwahrscheinlichkeit.</strong> Die Auswertung sagt
+    nichts darüber, wie wahrscheinlich es ist, dass an einem passenden Hang
+    etwas passiert. Sie misst nur, ob Gelände und Bericht zusammenpassten.</p>
+    <p><strong>Kein Beleg für verhinderte Unfälle.</strong> Aus einer
+    retrospektiven Abdeckungsprüfung folgt nicht, dass ein Hinweis die
+    Ereignisse verhindert hätte.</p>
+    <p><strong>Keine Aussage über einzelne Hänge.</strong> Dass ein Hang zu
+    keiner Gefahrenstelle passt, macht ihn nicht sicher. Umgekehrt ist ein
+    passender Hang kein Verbot.</p>
+    <p><strong>Kein Gütemaß des Lageberichts.</strong> Ein Lagebericht hat die
+    Aufgabe, die Lage zu beschreiben, nicht die, Unfallorte punktgenau
+    vorherzusagen.</p>
+  </div>
+
+  <h2>Offengelegt: eine Kalibrierung an denselben Daten</h2>
+  <p>Viele Lageberichte beschreiben Höhenbänder nicht in Metern, sondern relativ
+  zur Waldgrenze („oberhalb der Waldgrenze"). Für eine automatisierte Prüfung
+  muss dieser Begriff in eine Zahl übersetzt werden. Ursprünglich lag der Wert
+  bei 1.900 Metern; in der Fehleranalyse fiel auf, dass sich auffällig viele
+  Ereignisse ohne Übereinstimmung zwischen 1.500 und 1.700 Metern häuften.</p>
+  <p>Nach einem systematischen Durchlauf über alle Werte wurde er auf
+  <strong>1.700 Meter</strong> gesetzt — die reale Waldgrenze der betroffenen
+  Grasberge liegt in diesem Bereich. Damit stieg die Quote an den Ereignisorten
+  von 95,7&#8239;% auf 96,7&#8239;%. Bezahlt wurde das mit einer höheren
+  Grundrate in der Kontrollgruppe: 89,2&#8239;% statt vorher 85,5&#8239;%.
+  Der Abstand zwischen beiden Zahlen wurde dadurch <em>kleiner</em> — von
+  10,2 auf 7,5 Prozentpunkte.</p>
+  <p>Dieser Wert wurde an demselben Datensatz bestimmt, an dem anschließend
+  gemessen wurde. Das ist methodisch eine Schwäche und wird deshalb hier
+  benannt. Sie wiegt weniger schwer, weil es um einen einzigen Parameter mit
+  eindeutigem Optimum und einer physikalischen Begründung geht — die
+  unkalibrierte Erstmessung von 95,7&#8239;% bleibt als Referenz stehen.</p>
+
+  <h2>Grenzen der Datenbasis</h2>
+  <ul>
+    <li><strong>Wer meldet, bestimmt die Stichprobe.</strong> 570 der 657
+    auswertbaren Ereignisse sind in LAWIS als künstlich ausgelöst geführt —
+    überwiegend Auslösungen durch Personen. Dokumentiert wird, was jemand
+    erlebt und gemeldet hat; die Daten bilden also ab, wo Menschen unterwegs
+    sind, nicht wo Lawinen abgehen.</li>
+    <li><strong>Koordinatenqualität.</strong> Eine gemeldete Koordinate kann
+    Anriss, Ablagerung oder eine Schätzung sein — daher die 200-Meter-Regel,
+    die die Quote spürbar anhebt (75,5&#8239;% am Punkt gegenüber
+    96,7&#8239;% im Umkreis).</li>
+    <li><strong>Nur der Ort selbst.</strong> Geprüft wird das Gelände am
+    gemeldeten Punkt. Ob eine Lawine von oberhalb ausgelöst wurde und den Ort
+    erst im Auslauf erreichte, geht in diese Prüfung nicht ein.</li>
+    <li><strong>Nur Tirol, nur fünf Winter.</strong> Der Zeitraum reicht von
+    Dezember 2021 bis April 2026 und ist durch den Beginn des öffentlichen
+    Berichtsarchivs begrenzt. Andere Regionen und andere Warndienste können
+    anders ausfallen.</li>
+  </ul>
+
+  <h2>Zwei Nebenbefunde</h2>
+  <p>Das Geländemodell und die von Meldenden angegebenen Werte stimmen gut
+  überein: Bei der Höhe liegt die typische Abweichung bei 8 Metern, bei der
+  Neigung bei 2 Grad — wobei das Modell die Steilheit im Anriss leicht
+  glättet, weil es über 10 Meter mittelt.</p>
+  <p>Über die fünf Winter hinweg schwankt die Quote wenig: 98&#8239;%,
+  98&#8239;%, 98&#8239;%, 92&#8239;% und 97&#8239;%. Es gibt keinen
+  Winter, der aus der Reihe fällt.</p>
+
+  <details>
+    <summary>Alle Zahlen im Überblick</summary>
+    <div class="tab-scroll">
+    <table>
+      <caption>Übereinstimmung nach Gefahrenstufe (Anteil der Punkte, an denen
+      Exposition, Höhe und Neigung gemeinsam zu einer Gefahrenstelle passten)</caption>
+      <thead>
+        <tr><th>Gefahrenstufe</th><th class="num">Ereignisorte</th><th class="num">n</th><th class="num">Vergleichspunkte</th><th class="num">n</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1 — gering</td><td class="num">48,1 %</td><td class="num">27</td><td class="num">34,1 %</td><td class="num">182</td></tr>
+        <tr><td>2 — mäßig</td><td class="num">98,3 %</td><td class="num">235</td><td class="num">85,2 %</td><td class="num">1.278</td></tr>
+        <tr><td>3 — erheblich</td><td class="num">98,6 %</td><td class="num">288</td><td class="num">96,5 %</td><td class="num">1.309</td></tr>
+        <tr><td>4 — groß</td><td class="num">100 %</td><td class="num">107</td><td class="num">100 %</td><td class="num">516</td></tr>
+        <tr><td><strong>gesamt</strong></td><td class="num"><strong>96,7 %</strong></td><td class="num"><strong>657</strong></td><td class="num"><strong>89,2 %</strong></td><td class="num"><strong>3.285</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <table>
+      <caption>Weitere Kennzahlen</caption>
+      <tbody>
+        <tr><th>Geprüfte Ereignisse gesamt</th><td class="num">711</td></tr>
+        <tr><th>davon auswertbar</th><td class="num">657</td></tr>
+        <tr><th>ohne veröffentlichten Lagebericht</th><td class="num">51</td></tr>
+        <tr><th>außerhalb der Warnregionsgrenzen</th><td class="num">3</td></tr>
+        <tr><th>Übereinstimmung exakt an der Koordinate</th><td class="num">75,5 %</td></tr>
+        <tr><th>Übereinstimmung im 200-Meter-Umkreis</th><td class="num">96,7 %</td></tr>
+        <tr><th>tödliche Ereignisse (auswertbar)</th><td class="num">35 von 36</td></tr>
+        <tr><th>Vergleichspunkte im Steilgelände ab 28°</th><td class="num">90,2 % (n = 2.093)</td></tr>
+        <tr><th>Zeitraum</th><td class="num">Dez. 2021 – Apr. 2026</td></tr>
+        <tr><th>Stand der Auswertung</th><td class="num">12. Juli 2026</td></tr>
+      </tbody>
+    </table>
+  </details>
+
+  <h2>Datenquellen und Nachvollziehbarkeit</h2>
+  <p>Die Ereignisdaten stammen aus LAWIS und werden vom
+  <strong>Lawinenwarndienst des Landes Tirol</strong> unter CC&nbsp;BY
+  bereitgestellt. Die Lageberichte stammen aus dem öffentlichen Archiv von
+  avalanche.report, das Geländemodell vom Land Tirol (CC&nbsp;BY 4.0).</p>
+  <p>Die Auswertung nutzt denselben Code, der auch in der App den Abgleich
+  vornimmt — es gibt keine gesonderte Auswertungslogik. Das Werkzeug und die
+  Ergebnisdaten je Ereignis liegen im Projektverzeichnis unter
+  <code>tools/retro_validation/</code>. Rückfragen zur Methodik gern an
+  <a href="mailto:avalancheguard.app@gmail.com">avalancheguard.app@gmail.com</a>.</p>
+
+  <div class="note">
+    <p>Diese Auswertung ist bei der Entwicklung von <a href="./">HangKontext</a>
+    entstanden — einer App, die im Hintergrund das Gelände am Standort mit den
+    Gefahrenstellen des amtlichen Lageberichts abgleicht und Übereinstimmungen
+    meldet. Sie bewertet nichts und gibt keine Hänge frei; die Beurteilung
+    bleibt beim Menschen. Für Winter 2026/27 werden Testerinnen und Tester
+    gesucht.</p>
+  </div>
+
+  <p class="fine">Stand: Juli 2026 ·
+  <a href="presse.html" style="color:inherit">Presse</a> ·
+  <a href="rechtliches.html" style="color:inherit">Impressum &amp; Datenschutz</a></p>
+</div>
+<script data-goatcounter="https://hangkontext.goatcounter.com/count"
+        async src="/count.js"></script>
+</body>
+</html>
