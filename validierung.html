@@ -99,6 +99,18 @@
   td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; padding-right: 0; }
   details { border-top: 1px solid var(--border); padding-top: 16px; margin-top: 22px; }
   summary { font-size: 15.5px; font-weight: 700; cursor: pointer; color: var(--text); }
+
+  /* Quellenverweise: hochgestellte Nummer am Satz, die zur Liste unten
+     springt. Bewusst als eigener Link mit vergrößerter Trefferfläche —
+     hochgestellte Ziffern sind sonst am Handy kaum zu treffen. */
+  .ref { font-size: 11px; font-weight: 700; line-height: 0; vertical-align: super; }
+  .ref a { text-decoration: none; padding: 0 2px; }
+  .ref a:hover { text-decoration: underline; }
+  /* Angesprungene Quelle kurz hervorheben, sonst sucht man in der Liste. */
+  .quellen li:target { background: #EAF2FE; border-radius: 6px; box-shadow: 0 0 0 6px #EAF2FE; }
+  .quellen { padding-left: 22px; font-size: 14.5px; line-height: 1.6; }
+  .quellen li { margin-bottom: 12px; }
+  .quellen .anm { display: block; color: var(--dim); font-size: 13.5px; }
   @media (max-width: 520px) {
     /* Am Handy fehlt die Breite für eine Beschriftungsspalte — Label über
        den Balken, in Mono, damit es sich klar vom Gruppentitel absetzt. */
@@ -197,7 +209,9 @@
     <strong>kein belastbares Maß für den Nutzen auf realen Skitouren</strong>,
     weil die Vergleichspunkte keine tatsächlich begangenen GPS-Trackpunkte
     sind und nicht auf dieselbe Warnregion wie das jeweilige Ereignis
-    beschränkt wurden.</p>
+    beschränkt wurden. Wie eine belastbare Kontrolle aussieht, zeigt die
+    SLABS-Auswertung: Sie stellt Unfallorte gegen mehr als 57.800 Kilometer
+    aufgezeichneter Skitouren.<span class="ref"><a href="#q1">1</a></span></p>
   </div>
 
   <p>Und dieser Abstand ist kleiner, als die erste Zahl vermuten lässt. An
@@ -273,6 +287,16 @@
     1.</strong> Genau die Tage, an denen der Bericht am wenigsten eingrenzt,
     sind auch die, an denen dieser Abgleich am häufigsten danebenliegt.</li>
   </ul>
+  <p>Dass bei geringer Gefahr oft gar keine Gefahrenstelle genannt wird, ist
+  kein Tiroler Sonderfall — auch der Schweizer Lagebericht macht bei Stufe 1
+  keine Angaben zu kritischen Höhen und Expositionen. Winkler et&nbsp;al. haben
+  für solche Tage aus Unfall- und Tourendaten dennoch eine risikobasierte
+  Kernzone hergeleitet, in der das Risiko rund sechsmal höher liegt als
+  außerhalb.<span class="ref"><a href="#q3">3</a></span> Für diese Auswertung
+  wurde daraus <em>nichts</em> übernommen: Geprüft wird ausschließlich, was im
+  Bericht steht. Eine Gefahrenstelle hinzuzurechnen, die dort nicht genannt
+  ist, wäre eine eigene Beurteilung — und genau die soll hier nicht
+  stattfinden.</p>
   <p>Von den 39 tödlichen Ereignissen im Datensatz waren 36 auswertbar; in 35
   davon lag eine Übereinstimmung vor. Der eine Fall ohne Übereinstimmung ist
   genau ein Fall der ersten Kategorie: Gefahrenstufe 1, ein Lagebericht ohne
@@ -283,7 +307,10 @@
   <div class="card">
     <p><strong>Keine Unfallwahrscheinlichkeit.</strong> Die Auswertung sagt
     nichts darüber, wie wahrscheinlich es ist, dass an einem passenden Hang
-    etwas passiert. Sie misst nur, ob Gelände und Bericht zusammenpassten.</p>
+    etwas passiert. Sie misst nur, ob Gelände und Bericht zusammenpassten. Wer
+    eine Risikozahl sucht, findet sie in probabilistischen Verfahren wie
+    SLABS<span class="ref"><a href="#q2">2</a></span> — hier wird bewusst keine
+    gerechnet.</p>
     <p><strong>Kein Beleg für verhinderte Unfälle.</strong> Aus einer
     retrospektiven Abdeckungsprüfung folgt nicht, dass ein Hinweis die
     Ereignisse verhindert hätte.</p>
@@ -328,17 +355,30 @@
     Vergleichspunkte wurden im Höhenband 1.500–3.200 Meter über Tirol verteilt.
     Sie teilen das Datum, aber nicht zwingend die Warnregion des Ereignisses.
     Anders als GPS-Trackpunkte zeigen sie nicht, wo Tourengeher tatsächlich
-    unterwegs waren. Die 89,2&#8239;% sind daher eine künstliche
-    Flächenreferenz, keine False-Positive-Rate der App.</li>
-    <li><strong>Koordinatenqualität.</strong> Eine gemeldete Koordinate kann
-    Anriss, Ablagerung oder eine Schätzung sein — daher die 200-Meter-Regel,
-    die die Quote spürbar anhebt (75,5&#8239;% am Punkt gegenüber
-    96,7&#8239;% im Umkreis). Der Umkreis ist eine Toleranz der Auswertung; die
-    App selbst prüft den aktuellen Standort und sucht nicht pauschal in
-    200 Metern Umgebung.</li>
+    unterwegs waren.<span class="ref"><a href="#q1">1</a></span> Die
+    89,2&#8239;% sind daher eine künstliche Flächenreferenz, keine
+    False-Positive-Rate der App.</li>
+    <li><strong>Koordinatenqualität — und unklare Bedeutung des Punkts.</strong>
+    Eine gemeldete Koordinate kann Anriss, Ablagerung oder eine Schätzung sein.
+    In der Schweiz wird systematisch der Anrisspunkt erfasst und am Saisonende
+    von Hand geprüft; für österreichische Meldungen ist nicht dokumentiert,
+    welcher Punkt gemeint ist.<span class="ref"><a href="#q5">5</a></span>
+    Daher die 200-Meter-Regel, die die Quote spürbar anhebt (75,5&#8239;% am
+    Punkt gegenüber 96,7&#8239;% im Umkreis). Sie federt allerdings nur
+    Streuung ab: Läge der gemeldete Punkt regelmäßig talwärts im Auslauf, wäre
+    er tiefer, flacher und unter Umständen anders exponiert als die
+    Anrissstelle — ein richtungsloser Umkreis gleicht das nicht aus.
+    <strong>Ein Vergleich der Neigungsverteilung an diesen Ereignisorten mit
+    den publizierten Referenzwerten steht aus und wird hier nachgetragen.</strong>
+    Der Umkreis ist eine Toleranz der Auswertung; die App selbst prüft den
+    aktuellen Standort und sucht nicht pauschal in 200 Metern Umgebung.</li>
     <li><strong>Nur der Ort selbst.</strong> Geprüft wird das Gelände am
     gemeldeten Punkt. Ob eine Lawine von oberhalb ausgelöst wurde und den Ort
-    erst im Auslauf erreichte, geht in diese Prüfung nicht ein.</li>
+    erst im Auslauf erreichte, geht in diese Prüfung nicht ein. Lawinengelände
+    ist ohnehin mehr als Neigung und Exposition an einer Stelle: Ob über einem
+    flachen Standort ein auslösbarer Steilhang liegt, hängt auch von Hangform
+    und Größe der zusammenhängenden Steilfläche
+    ab.<span class="ref"><a href="#q4">4</a></span></li>
     <li><strong>Nur Tirol, nur fünf Winter.</strong> Der Zeitraum reicht von
     Dezember 2021 bis April 2026 und ist durch den Beginn des öffentlichen
     Berichtsarchivs begrenzt. Andere Regionen und andere Warndienste können
@@ -384,7 +424,7 @@
         <tr><th>tödliche Ereignisse (auswertbar)</th><td class="num">35 von 36</td></tr>
         <tr><th>Vergleichspunkte im Steilgelände ab 28°</th><td class="num">90,2 % (n = 2.093)</td></tr>
         <tr><th>Zeitraum</th><td class="num">Dez. 2021 – Apr. 2026</td></tr>
-        <tr><th>Stand der Auswertung</th><td class="num">Lauf 24. Juli 2026 · Methodenkritik 29. Juli 2026</td></tr>
+        <tr><th>Stand der Auswertung</th><td class="num">Lauf 24. Juli 2026 · Methodenkritik 29./30. Juli 2026</td></tr>
       </tbody>
     </table>
   </details>
@@ -394,12 +434,6 @@
   <strong>Lawinenwarndienst des Landes Tirol</strong> unter CC&nbsp;BY
   bereitgestellt. Die Lageberichte stammen aus dem öffentlichen Archiv von
   avalanche.report, das Geländemodell vom Land Tirol (CC&nbsp;BY 4.0).</p>
-  <p>Die methodische Gegenprobe orientiert sich an der
-  <a href="https://arc.lib.montana.edu/snow-science/objects/ISSW2024_P12.2.pdf">SLABS-Auswertung
-  von Degraeuwe et&nbsp;al. (2024)</a>, die Unfallorte mit realen
-  GPS-Tourpunkten vergleicht, sowie an der
-  <a href="https://www.slf.ch/fileadmin/user_upload/SLF/Lawinen/Unfaelle_Schadenlawinen/Unfallberichte_Publikationen/Englisch/2021_Winkler.pdf">risikobasierten
-  Auswertung von Winkler et&nbsp;al. (2021)</a>.</p>
   <p>Die Auswertung nutzt denselben Code, der auch in der App den Abgleich
   am einzelnen Geländepunkt vornimmt. Die zusätzliche Suche im
   200-Meter-Umkreis gehört nur zur Auswertung der ungenauen
@@ -407,6 +441,52 @@
   im Projektverzeichnis unter
   <code>tools/retro_validation/</code>. Rückfragen zur Methodik gern an
   <a href="mailto:avalancheguard.app@gmail.com">avalancheguard.app@gmail.com</a>.</p>
+
+  <h2>Referenzen</h2>
+  <p>Diese Auswertung ist keine wissenschaftliche Publikation und war keinem
+  Fachreview unterworfen. Aufgeführt sind ausschließlich Arbeiten, die eine
+  Aussage auf dieser Seite tatsächlich tragen — nicht alles, was zum Thema
+  lesenswert ist.</p>
+  <ol class="quellen">
+    <li id="q1">Degraeuwe, B., Schmudlach, G., Winkler, K., Köhler, J. (2024):
+      <em>Improving avalanche risk assessment for backcountry ski tours: A
+      comparative study of the novel SLABS method with existing methods.</em>
+      Proceedings, International Snow Science Workshop, Tromsø, P12.2.
+      <a href="https://arc.lib.montana.edu/snow-science/objects/ISSW2024_P12.2.pdf">PDF</a>
+      <span class="anm">Die Kontrollgruppe dieser Arbeit — über 57.800 km
+      aufgezeichneter Skitouren gegen 1.250 Unfälle — ist der Maßstab, an dem
+      die 3.285 Zufallspunkte oben als schwächere Referenz einzuordnen
+      sind.</span></li>
+    <li id="q2">Degraeuwe, B., Schmudlach, G., Winkler, K., Köhler, J. (2024):
+      <em>SLABS: An improved probabilistic method to assess the avalanche risk
+      on backcountry ski tours.</em> Cold Regions Science and Technology 221,
+      104169.
+      <a href="https://doi.org/10.1016/j.coldregions.2024.104169">doi:10.1016/j.coldregions.2024.104169</a>
+      <span class="anm">Die ausführliche Fassung des Verfahrens, das
+      skitourenguru.ch heute verwendet. Es rechnet ein Risiko aus — bewusst
+      etwas anderes als der Abgleich, um den es hier geht.</span></li>
+    <li id="q3">Winkler, K., Schmudlach, G., Degraeuwe, B., Techel, F. (2021):
+      <em>On the correlation between the forecast avalanche danger and
+      avalanche risk taken by backcountry skiers in Switzerland.</em> Cold
+      Regions Science and Technology 188, 103299.
+      <a href="https://www.slf.ch/fileadmin/user_upload/SLF/Lawinen/Unfaelle_Schadenlawinen/Unfallberichte_Publikationen/Englisch/2021_Winkler.pdf">PDF</a>
+      <span class="anm">Quelle für die risikobasierte Kernzone bei
+      Gefahrenstufe 1 und für den Befund, dass das Risiko innerhalb der im
+      Bericht genannten Höhen und Expositionen rund sechsmal höher liegt als
+      außerhalb.</span></li>
+    <li id="q4">Skitourenguru-Wiki: <em>Lawinengelände.</em>
+      <a href="https://wiki.skitourenguru.com/de/articles/a0029.html">wiki.skitourenguru.com/de/articles/a0029.html</a>
+      <span class="anm">Warum Neigung und Exposition an einem einzelnen Punkt
+      das Gelände nur unvollständig beschreiben.</span></li>
+    <li id="q5">Skitourenguru-Wiki: <em>Qualität der Unfalldaten.</em>
+      <a href="https://wiki.skitourenguru.com/de/articles/a0078.html">wiki.skitourenguru.com/de/articles/a0078.html</a>
+      <span class="anm">Quelle für die unterschiedliche Erfassungspraxis: in
+      der Schweiz systematisch der Anrisspunkt, in anderen Ländern
+      unbekannt.</span></li>
+  </ol>
+  <p>Mehrere der oben genannten Einschränkungen — die schwache Flächenreferenz
+  und die unklare Bedeutung der Ereigniskoordinate — stammen aus fachlicher
+  Kritik von außen, nicht aus eigener Einsicht.</p>
 
   <div class="note">
     <p>Diese Auswertung ist bei der Entwicklung von <a href="./">HangKontext</a>
@@ -417,7 +497,7 @@
     gesucht.</p>
   </div>
 
-  <p class="fine">Methodenstand: 29. Juli 2026 ·
+  <p class="fine">Methodenstand: 30. Juli 2026 ·
   <a href="presse.html" style="color:inherit">Presse</a> ·
   <a href="rechtliches.html" style="color:inherit">Impressum &amp; Datenschutz</a></p>
 </div>
