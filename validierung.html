@@ -97,6 +97,15 @@
   th, td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--hair); vertical-align: top; }
   th { color: var(--text); font-weight: 700; }
   td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; padding-right: 0; }
+  /* Regelkasten: die Toleranz-Spalte steht in der Mitte, braucht also
+     anders als .num einen rechten Abstand zur Begründung. */
+  /* Bewusst OHNE tabular-nums: der Tausenderpunkt bekäme sonst Ziffernbreite
+     und „1.700" liest sich als „1 . 700" — dieselbe Falle wie beim Komma
+     der Kernzahlen oben. */
+  #regeltabelle td:nth-child(2), #regeltabelle th:nth-child(2) {
+    text-align: right; padding-right: 18px; white-space: nowrap;
+  }
+  #regeltabelle th:nth-child(1), #regeltabelle td:nth-child(1) { padding-right: 18px; }
   details { border-top: 1px solid var(--border); padding-top: 16px; margin-top: 22px; }
   summary { font-size: 15.5px; font-weight: 700; cursor: pointer; color: var(--text); }
 
@@ -181,6 +190,73 @@
   wenn sie innerhalb von 200 Metern um die gemeldete Koordinate liegt. Die
   maßgebliche Warnregion und deren Gefahrenstellen bleiben dabei die des
   ursprünglichen Punkts — der Umkreis verändert nur die geprüfte Geländezelle.</p>
+
+  <h2 id="regel">Die geprüfte Regel, vollständig</h2>
+  <p>Nachrechnen kann man nur, was man kennt. Die Prüfregel hat genau vier
+  Toleranzen — hier stehen sie mit dem Grund, aus dem sie so gewählt sind.
+  Dieselben Werte gelten in der App und in dieser Auswertung; es gibt keine
+  zweite Implementierung.</p>
+  <div class="tab-scroll">
+  <table id="regeltabelle">
+    <caption>Die vier Toleranzen der Übereinstimmungsregel</caption>
+    <thead>
+      <tr><th>Merkmal</th><th>Toleranz</th><th>Begründung</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Hangneigung</td>
+        <td>ab 28°</td>
+        <td>Der Fachdefault für lawinenrelevantes Steilgelände liegt bei 30°.
+        Die 2° darunter sind ein <em>Messpuffer</em>, kein fachliches Urteil:
+        Ein 10-Meter-Raster glättet kurze Steilstufen und unterschätzt die
+        Neigung systematisch.<span class="ref"><a href="#q6">6</a></span></td>
+      </tr>
+      <tr>
+        <td>Exposition</td>
+        <td>±1 Sektor (±45°)</td>
+        <td>Der Bericht nennt Expositionen in Achtelsektoren — eine grobe
+        Einteilung, an deren Grenzen ein Hang nicht plötzlich anders wird. Die
+        Regel rundet deshalb auf den benachbarten Sektor auf, statt hart zu
+        schneiden. Ein eigener Beleg für genau ±45° existiert nicht; es ist
+        eine bewusst großzügige Setzung.</td>
+      </tr>
+      <tr>
+        <td>Höhe</td>
+        <td>±100 Meter</td>
+        <td>Das EAWS-Glossar beziffert die Genauigkeit von Höhenangaben im
+        Lagebericht wörtlich mit „accuracy&nbsp;±&nbsp;100&nbsp;m".<span class="ref"><a href="#q7">7</a></span>
+        Die Toleranz übernimmt exakt diesen Wert.</td>
+      </tr>
+      <tr>
+        <td>„Waldgrenze"</td>
+        <td>1.700 m (unten)<br>2.200 m (oben)</td>
+        <td>Symbolische Höhenangaben brauchen eine Zahl. Die amtliche
+        Interpretationshilfe beziffert die Waldgrenze mit „liegt bei 1600/1800
+        m Höhe".<span class="ref"><a href="#q8">8</a></span> Als
+        <em>Untergrenze</em> („oberhalb der Waldgrenze") ist der Wert
+        zusätzlich an diesen Daten kalibriert — siehe die Offenlegung weiter
+        unten. Als <em>Obergrenze</em> („unterhalb der Waldgrenze") wirkt
+        derselbe Wert in die Gegenrichtung; dazu der Nachtrag weiter unten.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Alle vier Toleranzen wirken in dieselbe Richtung: Sie können eine
+  Gefahrenstelle nur <em>vergrößern</em>, nie verkleinern. Das erhöht die
+  Trefferquote und ist der Grund, warum die Quote allein nichts wert ist — die
+  Zahl der Vergleichspunkte gehört immer daneben. Ablationen, also der Effekt
+  jeder einzelnen Toleranz für sich, stehen noch aus und werden nachgetragen.</p>
+  <p>Diese Toleranzen sind bewusst so gewählt, dass sie an die Grenzen der
+  Quelle heranreichen, nicht darüber hinaus. Der Lagebericht gilt laut EAWS
+  ausdrücklich „for a region with an area of &gt;100&nbsp;km² and not to a
+  specific individual slope"<span class="ref"><a href="#q7">7</a></span>, und
+  die amtliche Interpretationshilfe hält fest: „Einzelhänge können dabei nicht
+  beurteilt werden."<span class="ref"><a href="#q8">8</a></span> Dieselbe
+  Interpretationshilfe beschreibt aber auch, was der Bericht <em>kann</em>: Er
+  „gibt Hinweise auf besonders gefährdete Hangbereiche (Höhe, Exposition und
+  Neigung)".<span class="ref"><a href="#q8">8</a></span> Genau diese drei
+  Merkmale gleicht die Auswertung ab — sie automatisiert eine vorgesehene
+  Leseweise, sie erfindet keine neue.</p>
 
   <h2>Das Ergebnis</h2>
   <div class="zahlen">
@@ -348,6 +424,32 @@
   ausweisen, ohne ein Ereignis mehr zu erklären. Deshalb 1.700 und nicht
   tiefer.</p>
 
+  <h2 id="waldgrenze-richtung">Nachtrag: dieselbe Zahl, zwei Richtungen</h2>
+  <div class="card">
+    <p>Bei der Selbstprüfung Ende Juli 2026 fiel auf, dass diese Kalibrierung
+    nur die eine Hälfte des Problems löst. „Waldgrenze" steht im Lagebericht in
+    zwei Rollen, und ein niedriger Wert wirkt in beiden gegensätzlich:</p>
+    <ul>
+      <li><strong>„oberhalb der Waldgrenze"</strong> — der Wert ist die
+      <em>Untergrenze</em>. Je tiefer er liegt, desto <em>größer</em> wird die
+      Gefahrenstelle. 1.700 statt 1.900 ist hier die vorsichtige Wahl.</li>
+      <li><strong>„unterhalb der Waldgrenze"</strong> — der Wert ist die
+      <em>Obergrenze</em>. Je tiefer er liegt, desto <em>kleiner</em> wird die
+      Gefahrenstelle. Mit 1.700 fielen in Regionen mit hoher realer Waldgrenze
+      (Zentralalpen, etwa 2.000–2.200 Meter) bis zu 500 Höhenmeter aus einem
+      Band heraus, das der Bericht ausdrücklich nennt.</li>
+    </ul>
+    <p>Das ist eine stille Untererfassung — genau die Fehlerrichtung, die diese
+    App nicht haben darf. Seit dem 31. Juli 2026 wird „Waldgrenze" deshalb
+    richtungsabhängig übersetzt: als Untergrenze weiter mit 1.700 Metern, als
+    Obergrenze mit 2.200 Metern. Der zweite Wert ist bewusst <em>gesetzt</em>
+    und nicht an diesen Daten optimiert — sonst wäre der Holdout für den Winter
+    2026/27 entwertet. Betroffen sind 24 von 1.904 Lawinenproblemen im
+    ausgewerteten Berichtsbestand (1,3&#8239;%); die Zahlen dieser Seite
+    stammen aus dem Lauf vor dieser Änderung und werden mit dem nächsten
+    Referenzlauf nachgezogen.</p>
+  </div>
+
   <h2>Grenzen der Datenbasis</h2>
   <ul>
     <li><strong>Relevante Zielklasse, aber breite Stichprobe.</strong>
@@ -381,6 +483,21 @@
     Orten beträgt 34,3° und liegt damit nahe dem für Österreich publizierten
     Vergleichswert von 33,5°, der ebenfalls als Indiz für Fundort-Erfassung
     gilt.<span class="ref"><a href="#q5">5</a></span>
+    <strong>Seit dem 31. Juli 2026 ist das geprüft statt vermutet:</strong> In
+    allen 711 LAWIS-Datensätzen existiert kein Feld, das den Bezugspunkt der
+    Koordinate benennt — was der Punkt bedeutet, bleibt je Ereignis unbekannt.
+    Indirekt lässt er sich einordnen, indem man die gemeldete Neigung mit der
+    Geländeneigung an derselben Koordinate vergleicht: Bei 144 von 554
+    Meldungen mit Neigungsangabe ist das Gelände deutlich flacher als gemeldet,
+    und in dieser Gruppe stimmt der Ort weit überwiegend erst im Umkreis
+    überein statt am Punkt. Insgesamt entfallen 127 der 144 Ereignisse, die
+    erst im Umkreis übereinstimmen, auf Meldungen ohne dazu passende
+    Neigungsangabe. Weil dieselbe Geländeneigung sowohl die Gruppen trennt als
+    auch in die Prüfregel eingeht, ist dieser Unterschied teilweise mechanisch
+    und kein Gütebeleg der Regel. Die 200-Meter-Toleranz federt damit
+    Koordinaten <strong>unbekannter Bedeutung</strong> ab, nicht nur
+    unbekannter Genauigkeit. Die vollständige Aufschlüsselung steht im
+    Ergebnisdokument und im Manifest und wird auf Anfrage herausgegeben.
     Der Umkreis ist eine Toleranz der Auswertung; die App selbst prüft den
     aktuellen Standort und sucht nicht pauschal in 200 Metern Umgebung.</li>
     <li><strong>Nur der Ort selbst.</strong> Geprüft wird das Gelände am
@@ -443,7 +560,7 @@
         <tr><th>Ereignisorte unter 28° (am Punkt nie möglich)</th><td class="num">128 (19,5 %)</td></tr>
         <tr><th>Vergleichspunkte im Steilgelände ab 28°</th><td class="num">89,4 % (n = 2.091)</td></tr>
         <tr><th>Zeitraum</th><td class="num">Dez. 2021 – Apr. 2026</td></tr>
-        <tr><th>Stand der Auswertung</th><td class="num">Lauf 31. Juli 2026 (runId 20260731T110635Z-59283e2) · Korrektur-Nachtrag 31. Juli 2026</td></tr>
+        <tr><th>Stand der Auswertung</th><td class="num">Lauf 31. Juli 2026 (runId 20260731T215304Z-c4a08c7) · Korrektur-Nachtrag 31. Juli 2026</td></tr>
       </tbody>
     </table>
   </details>
@@ -519,7 +636,7 @@
   <p>Jeder Lauf schreibt ein Manifest mit Lauf-Kennung, Commit, Hashes aller
   Eingangsdaten, allen Parametern und den vorab festgelegten Auswertungsgruppen.
   Die Zahlen dieser Seite gehören zum Lauf
-  <code>20260731T110635Z-59283e2</code>. Das Projektverzeichnis ist derzeit
+  <code>20260731T215304Z-c4a08c7</code>. Das Projektverzeichnis ist derzeit
   <strong>nicht öffentlich</strong>; Werkzeug, Manifest und die Ergebnisdaten je
   Ereignis werden auf Anfrage herausgegeben — die Veröffentlichung des
   Validierungswerkzeugs ist vorgesehen. Rückfragen zur Methodik und Anfragen zu
@@ -570,6 +687,30 @@
       mittlerer Neigung an gemeldeten Unfallorten. Der Artikel dokumentiert
       nicht, wie diese Neigung bestimmt wurde; der Vergleich mit den eigenen
       34,3° ist deshalb ein Plausibilitätstest, keine Messung.</span></li>
+    <li id="q6">Voigtländer, A., Rheinwalt, A., Tofelde, S. (2024):
+      <em>Quantifying Earth's Topography: Steeper and Larger Than Projected in
+      Digital Terrain Models.</em> Geophysical Research Letters 51(14),
+      e2024GL109517.
+      <a href="https://doi.org/10.1029/2024GL109517">doi:10.1029/2024GL109517</a>
+      <span class="anm">Belegt, dass digitale Geländemodelle die Hangneigung
+      systematisch unterschätzen — die Begründung dafür, ab 28° statt ab 30°
+      zu prüfen.</span></li>
+    <li id="q7">European Avalanche Warning Services: <em>EAWS-Glossar.</em>
+      <a href="https://www.avalanches.org/glossary/">avalanches.org/glossary</a>
+      <span class="anm">Quelle für die ±100-Meter-Toleranz („Altitudes: Area
+      within certain altitude ranges (accuracy ± 100 m)") und für den
+      Geltungsbereich der Gefahrenstufe („always applies to a region with an
+      area of &gt;100 km² and not to a specific individual slope"). Abgerufen
+      am 31. Juli 2026.</span></li>
+    <li id="q8">Lawinenwarndienste Österreichs, Bayerns und Südtirols (Dezember
+      2024): <em>Interpretationshilfe zum Lawinenlagebericht.</em>
+      <a href="https://oberoesterreich.avalanche-warnings.eu/PDF/Interpretationshilfe%202024.pdf">PDF</a>
+      <span class="anm">Gilt ausdrücklich auch für Tirol und Bayern. Quelle für
+      die Waldgrenzen-Zahl („Waldgrenze: liegt bei 1600/1800 m Höhe"), für die
+      Schranke („Einzelhänge können dabei nicht beurteilt werden") und für die
+      Leseweise, die dieser Abgleich automatisiert („er gibt Hinweise auf
+      besonders gefährdete Hangbereiche (Höhe, Exposition und Neigung)").
+      Abgerufen am 31. Juli 2026.</span></li>
   </ol>
   <p>Mehrere der oben genannten Einschränkungen — die schwache Flächenreferenz
   und die unklare Bedeutung der Ereigniskoordinate — stammen aus fachlicher
