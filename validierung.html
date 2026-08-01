@@ -285,7 +285,9 @@
     <strong>kein belastbares Maß für den Nutzen auf realen Skitouren</strong>,
     weil die Vergleichspunkte keine tatsächlich begangenen GPS-Trackpunkte
     sind und nicht auf dieselbe Warnregion wie das jeweilige Ereignis
-    beschränkt wurden. Wie eine belastbare Kontrolle aussieht, zeigt die
+    beschränkt wurden. Der zweite Punkt ist seit dem 1.&nbsp;August behoben —
+    die <a href="#kernauswertung">Kernauswertung unten</a> matcht Datum und
+    Warnregion; der erste bleibt. Wie eine belastbare Kontrolle aussieht, zeigt die
     SLABS-Auswertung: Sie stellt Unfallorte gegen mehr als 57.800 Kilometer
     aufgezeichneter Skitouren.<span class="ref"><a href="#q1">1</a></span></p>
   </div>
@@ -348,6 +350,60 @@
   geringer oder mäßiger Gefahrenstufe am größten. Ob das auf realen Touren
   denselben Informationsgewinn erzeugt, lässt sich erst mit zeitlich passenden
   GPS-Trackdaten beantworten.</p>
+
+  <h2 id="kernauswertung">Nachtrag: die vorab festgelegte Kernauswertung</h2>
+  <p>Die Zahlen oben beschreiben die Gesamtstichprobe gegen Tirol-weit
+  verteilte Vergleichspunkte. Der Analysevertrag vom 30.&nbsp;Juli legt als
+  primäre Auswertung etwas Schärferes fest: eine <strong>vorab definierte
+  Kernstichprobe</strong>, geprüft gegen Vergleichspunkte, die <strong>Datum
+  und Warnregion</strong> des jeweiligen Ereignisses teilen — genau die
+  Kontrolle, deren Fehlen oben als Schwäche benannt ist. Beide Ergänzungen
+  liegen seit dem 1.&nbsp;August 2026 vor.</p>
+  <p>Zur Kernstichprobe zählt ein Ereignis nur, wenn drei Angaben zugleich
+  vorliegen und zutreffen: mindestens eine beteiligte Person, trockene
+  Schneebrettlawine, als gültig markierte Ereigniszeit. Fehlt eine Angabe,
+  zählt das Ereignis nicht dazu — auch das ausdrückliche „unbekannt" gilt
+  als fehlend, nicht als Nein. Von den 656 auswertbaren Ereignissen erfüllen
+  <strong>337</strong> alle drei Kriterien. 215 der 319 ausgeschlossenen
+  scheitern allein an fehlenden Angaben (fehlend je Feld: Feuchte 170,
+  Lawinenart 116, Beteiligung 79; ausdrücklich verneint: gültige Zeit 50,
+  Feuchte 35, Lawinenart 27, Beteiligung 23 — Mehrfachnennungen möglich).</p>
+  <div class="tab-scroll">
+  <table>
+    <caption>Kernstichprobe gegen gematchte Vergleichspunkte (fünf je
+    Ereignis, gleiches Datum, gleiche Warnregion, Höhenband
+    1.500–3.200&nbsp;m). Punkt- und Umkreisquote sind getrennte Zielgrößen
+    und werden nicht zu einer Zahl vermischt.</caption>
+    <thead>
+      <tr><th></th><th class="num">am Punkt</th><th class="num">95-%-Intervall</th><th class="num">Umkreis 200&nbsp;m</th><th class="num">95-%-Intervall</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Kernstichprobe (n&nbsp;=&nbsp;337)</td><td class="num">81,0&#8239;%</td><td class="num">76,8–85,0</td><td class="num">97,6&#8239;%</td><td class="num">95,9–99,1</td></tr>
+      <tr><td>gematchte Vergleichspunkte (n&nbsp;=&nbsp;1.685)</td><td class="num">48,8&#8239;%</td><td class="num">—</td><td class="num">91,3&#8239;%</td><td class="num">—</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Der Abstand beträgt am Punkt 32,2 Prozentpunkte, im Umkreis 6,3. Der
+  große Punkt-Abstand ist <strong>zum Teil Zusammensetzung</strong>: Die
+  Kern-Ereignisorte sind überwiegend steil, die Vergleichspunkte decken das
+  ganze Höhenband ab — auch Gelände unter 28°, an dem die Regel nie
+  anschlägt. Beschränkt man beide Seiten auf mindestens 28°, bleiben
+  93,5&#8239;% gegen 83,1&#8239;% am Punkt (n&nbsp;=&nbsp;292 gegen 990),
+  also rund 10 Punkte Abstand. Und auch gematchte Vergleichspunkte bleiben
+  künstliche Flächenpunkte: Wo Tourengeher tatsächlich unterwegs sind,
+  zeigen erst GPS-Trackdaten.<span class="ref"><a href="#q1">1</a></span></p>
+  <p>Die Intervalle stammen aus einem Cluster-Bootstrap (Ereignistag ×
+  Warnregion, 10.000 Wiederholungen, Startwert im Manifest); nahe
+  100&#8239;% sind sie bewusst asymmetrisch und dürfen nicht als
+  „±&nbsp;x&nbsp;Punkte" gelesen werden. Für die Gesamtstichprobe oben
+  lauten sie 71,1–77,9 (Punkt) und 95,1–97,9 (Umkreis). Zwei vorab
+  festgelegte Stabilitätsprüfungen bestehen: Lässt man eine ganze Saison
+  oder einen ganzen Ereignistag weg, verschiebt sich die Umkreisquote der
+  Kernstichprobe um höchstens 0,4 beziehungsweise 0,6 Prozentpunkte — unter
+  der vorab gesetzten 2-Punkte-Schwelle. Ein enges Intervall belegt dabei
+  Stabilität gegenüber der Stichprobenziehung, <strong>nicht</strong>
+  Übertragbarkeit auf eine künftige Saison — die echte Prüfung bleibt der
+  Winter 2026/27 mit eingefrorenen Parametern.</p>
 
   <h2>Wo die Methode scheitert</h2>
   <p>In 23 der 656 Fälle passte das Gelände am Ereignisort zu keiner
@@ -601,8 +657,11 @@
         <tr><th>tödliche Ereignisse (auswertbar)</th><td class="num">35 von 36</td></tr>
         <tr><th>Ereignisorte unter 28° (am Punkt nie möglich)</th><td class="num">128 (19,5 %)</td></tr>
         <tr><th>Vergleichspunkte im Steilgelände ab 28°</th><td class="num">89,4 % (n = 2.091)</td></tr>
+        <tr><th>Kernstichprobe (vorab definiert, auswertbar)</th><td class="num">337</td></tr>
+        <tr><th>Kernstichprobe am Punkt / im Umkreis</th><td class="num">81,0 % / 97,6 %</td></tr>
+        <tr><th>gematchte Vergleichspunkte der Kernstichprobe</th><td class="num">48,8 % / 91,3 % (n = 1.685)</td></tr>
         <tr><th>Zeitraum</th><td class="num">Dez. 2021 – Apr. 2026</td></tr>
-        <tr><th>Stand der Auswertung</th><td class="num">Lauf 1. August 2026 (runId 20260801T191516Z-f28aeaf) · Korrektur-Nachtrag 31. Juli · Variantenaudit 1. August 2026</td></tr>
+        <tr><th>Stand der Auswertung</th><td class="num">Lauf 1. August 2026 (runId 20260801T191516Z-f28aeaf) · Korrektur-Nachtrag 31. Juli · Variantenaudit und Kernauswertung 1. August 2026</td></tr>
       </tbody>
     </table>
   </details>
@@ -659,8 +718,10 @@
   damit ausdrücklich <em>nicht</em> erfolgt. Sie beginnt mit dem Winter
   2026/27, für den die Parameter eingefroren sind. Bis dahin gilt jede Zahl
   auf dieser Seite als Beschreibung der Vergangenheit, nicht als Vorhersage
-  der Zukunft. Konfidenzintervalle, Ablationen der einzelnen Toleranzen und
-  eine Spezifitätsschätzung sind in Arbeit und werden nachgetragen.</p>
+  der Zukunft. Ablationen der einzelnen Toleranzen und eine
+  Spezifitätsschätzung sind in Arbeit und werden nachgetragen; die
+  Konfidenzintervalle aus dem Cluster-Bootstrap stehen seit dem
+  1.&nbsp;August in der <a href="#kernauswertung">Kernauswertung</a>.</p>
 
   <h2>Datenquellen und Nachvollziehbarkeit</h2>
   <p>Die Ereignisdaten stammen aus LAWIS und werden vom
