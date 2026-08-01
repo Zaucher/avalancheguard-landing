@@ -445,10 +445,52 @@
     Obergrenze mit 2.200 Metern. Der zweite Wert ist bewusst <em>gesetzt</em>
     und nicht an diesen Daten optimiert — sonst wäre der Holdout für den Winter
     2026/27 entwertet. Betroffen sind 24 von 1.904 Lawinenproblemen im
-    ausgewerteten Berichtsbestand (1,3&#8239;%); die Zahlen dieser Seite
-    stammen aus dem Lauf vor dieser Änderung und werden mit dem nächsten
-    Referenzlauf nachgezogen.</p>
+    ausgewerteten Berichtsbestand (1,3&#8239;%). Mit dem Referenzlauf vom
+    1.&nbsp;August 2026 ist die Änderung nachgezogen — an den Quoten dieser
+    Seite hat sie nichts geändert.</p>
   </div>
+
+  <h2>Warum Variantenabfahrten nicht herausgefiltert werden</h2>
+  <p>Ein berechtigter Einwand gegen jede Zahl dieser Seite lautet: Im
+  Datensatz stecken auch liftgestützte Variantenabfahrten, die keine
+  Skitouren sind. Ereignisse deshalb nach Aktenlage von Hand auszusortieren,
+  wäre allerdings die schlechtere Auswertung — subjektives Aussortieren
+  erzeugt mehr Verzerrung, als es entfernt. Stattdessen wurde am
+  1.&nbsp;August 2026 mit vorab festgelegten Kriterien geprüft, ob eine
+  reproduzierbare, verblindete Regel möglich ist: die Distanz der
+  Ereigniskoordinate zur Liftinfrastruktur, klassifiziert ohne Kenntnis des
+  Prüfergebnisses.</p>
+  <p><strong>Das Ergebnis ist ein Nein — und es steht hier als Befund, nicht
+  als Panne.</strong> Erstens fehlt die ergebnisfreie Referenz: Nur 9
+  LAWIS-Kommentare nennen ausdrücklich eine Variante oder Freerider, vorab
+  gefordert waren 30 je Klasse. Zweitens, unabhängig von der
+  Stichprobengröße: Keine Distanz trennt sauber. Bei 200 Metern sind erst 7
+  der 9 Variantenmeldungen erfasst; bei 1.000 Metern alle — dort gelten aber
+  bereits 22 der 98 in der Aufstiegsphase gemeldeten Unfälle als „liftnah",
+  und wer aufsteigt, fährt keine Variante ab. Die beiden Fehlerarten tauschen
+  sich gegeneinander ein. Es wird deshalb kein Ereignis entfernt und kein
+  Schwellwert geändert — und die Zahlen dieser Seite heißen weiterhin
+  „dokumentierte Lawinenereignisse", nicht „Skitouren-Unfälle".</p>
+  <p>Die Liftdistanz zeigt trotzdem etwas, und zwar gegen die Richtung des
+  Einwands: Liftnahe Ereignisse passen im Mittel <em>besser</em> zum
+  Lagebericht als liftferne — innerhalb von 1.000 Metern stimmen
+  77,6&#8239;% direkt an der Koordinate überein, außerhalb 71,8&#8239;%.
+  Ein Entfernen mutmaßlicher Variantenabfahrten würde die Quoten dieser
+  Seite also senken, nicht heben; nach oben verzerrt sind sie durch diese
+  Frage nicht. Zwei Vorbehalte gehören zwingend dazu: <strong>„Liftnah" ist
+  nicht „Variantenabfahrt"</strong> — Skitouren starten regelmäßig an
+  Liftstationen, und Bahnen queren unerschlossenes Gelände. Und
+  <strong>der Abstand ist nicht stabil</strong>: In der Saison 2023/24 kehrt
+  er sich um. Er ist ein Befund über diesen Datensatz, keine
+  Gesetzmäßigkeit.</p>
+  <p>Grundlage sind 2.072 Lift-Wege aus OpenStreetMap
+  (©&nbsp;OpenStreetMap-Mitwirkende, Lizenz ODbL), abgerufen am
+  1.&nbsp;August 2026 über die Overpass&nbsp;API; Materialseilbahnen und
+  Lawinensprengbahnen zählen nicht als Lift — sie stehen gerade im
+  unerschlossenen Gelände. Prüfkriterien, Bandtabellen und die vollständige
+  Auswertung stehen im Ergebnisdokument zum Lauf
+  <code>20260801T191516Z-f28aeaf</code> und werden auf Anfrage
+  herausgegeben.</p>
 
   <h2>Grenzen der Datenbasis</h2>
   <ul>
@@ -560,7 +602,7 @@
         <tr><th>Ereignisorte unter 28° (am Punkt nie möglich)</th><td class="num">128 (19,5 %)</td></tr>
         <tr><th>Vergleichspunkte im Steilgelände ab 28°</th><td class="num">89,4 % (n = 2.091)</td></tr>
         <tr><th>Zeitraum</th><td class="num">Dez. 2021 – Apr. 2026</td></tr>
-        <tr><th>Stand der Auswertung</th><td class="num">Lauf 31. Juli 2026 (runId 20260731T215304Z-c4a08c7) · Korrektur-Nachtrag 31. Juli 2026</td></tr>
+        <tr><th>Stand der Auswertung</th><td class="num">Lauf 1. August 2026 (runId 20260801T191516Z-f28aeaf) · Korrektur-Nachtrag 31. Juli · Variantenaudit 1. August 2026</td></tr>
       </tbody>
     </table>
   </details>
@@ -624,7 +666,9 @@
   <p>Die Ereignisdaten stammen aus LAWIS und werden vom
   <strong>Lawinenwarndienst des Landes Tirol</strong> unter CC&nbsp;BY
   bereitgestellt. Die Lageberichte stammen aus dem öffentlichen Archiv von
-  avalanche.report, das Geländemodell vom Land Tirol (CC&nbsp;BY 4.0).</p>
+  avalanche.report, das Geländemodell vom Land Tirol (CC&nbsp;BY 4.0). Die
+  Liftinfrastruktur für das Variantenaudit stammt aus OpenStreetMap
+  (©&nbsp;OpenStreetMap-Mitwirkende, Lizenz ODbL).</p>
   <p>Die Auswertung nutzt denselben Code, der auch in der App den Abgleich
   am einzelnen Geländepunkt vornimmt — es gibt keine zweite Implementierung der
   Prüfregel. Zwei Zusätze gehören ausschließlich zur Auswertung und nicht zur
@@ -636,7 +680,7 @@
   <p>Jeder Lauf schreibt ein Manifest mit Lauf-Kennung, Commit, Hashes aller
   Eingangsdaten, allen Parametern und den vorab festgelegten Auswertungsgruppen.
   Die Zahlen dieser Seite gehören zum Lauf
-  <code>20260731T215304Z-c4a08c7</code>. Das Projektverzeichnis ist derzeit
+  <code>20260801T191516Z-f28aeaf</code>. Das Projektverzeichnis ist derzeit
   <strong>nicht öffentlich</strong>; Werkzeug, Manifest und die Ergebnisdaten je
   Ereignis werden auf Anfrage herausgegeben — die Veröffentlichung des
   Validierungswerkzeugs ist vorgesehen. Rückfragen zur Methodik und Anfragen zu
@@ -725,7 +769,7 @@
     gesucht.</p>
   </div>
 
-  <p class="fine">Methodenstand: 31. Juli 2026 ·
+  <p class="fine">Methodenstand: 1. August 2026 ·
   <a href="presse.html" style="color:inherit">Presse</a> ·
   <a href="rechtliches.html" style="color:inherit">Impressum &amp; Datenschutz</a></p>
 </div>
