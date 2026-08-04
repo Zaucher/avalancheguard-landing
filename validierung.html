@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>656 Lawinenereignisse nachgerechnet — wie gut deckt der Lagebericht das Gelände ab?</title>
+<title>656 Lawinenereignisse nachgerechnet — wie oft passte das Gelände am Ereignisort zum Lagebericht?</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Für 656 dokumentierte Lawinenereignisse in Tirol wurde nachgerechnet, ob Exposition, Höhe und Hangneigung am Ereignisort zu einer Gefahrenstelle des am selben Tag gültigen Lawinenlageberichts passten. Ergebnis, Kontrollgruppe und Grenzen der Methode — offengelegt.">
 <link rel="canonical" href="https://hangkontext.de/validierung.html">
@@ -11,7 +11,7 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hangkontext.de/validierung.html">
 <meta property="og:title" content="656 Lawinenereignisse nachgerechnet">
-<meta property="og:description" content="Wie gut deckt der amtliche Lawinenlagebericht das Gelände ab, in dem tatsächlich Lawinen abgingen? Eine retrospektive Abdeckungsprüfung — mit Kontrollgruppe und offengelegten Grenzen.">
+<meta property="og:description" content="Wie oft passte das Gelände an dokumentierten Lawinenereignisorten zu einer Gefahrenstelle des am selben Tag gültigen Lageberichts? Eine retrospektive Abdeckungsprüfung — mit Kontrollgruppe und offengelegten Grenzen.">
 <meta property="og:image" content="https://hangkontext.de/og.png">
 <meta property="og:locale" content="de_DE">
 <link rel="icon" type="image/png" href="img/app-icon.png">
@@ -140,7 +140,7 @@
   <a class="back" href="./">&larr; zurück zu HangKontext</a>
 
   <p class="eyebrow">Retrospektive Abdeckungsprüfung</p>
-  <h1>656 Lawinenereignisse nachgerechnet: Wie gut deckt der Lagebericht das Gelände ab?</h1>
+  <h1>656 Lawinenereignisse nachgerechnet: Wie oft passte das Gelände am Ereignisort zum Lagebericht?</h1>
   <p class="lead">Der amtliche Lawinenlagebericht nennt jeden Tag Expositionen,
   Höhenbänder und Lawinenprobleme. Für 656 dokumentierte Lawinenereignisse in
   Tirol lässt sich nachrechnen, ob das Gelände am Ereignisort zu diesen Angaben
@@ -177,8 +177,10 @@
     müssen <em>gemeinsam</em> zu ein und derselben Gefahrenstelle passen —
     nicht jedes Merkmal zu einer anderen.</li>
     <li><strong>Kontrollgruppe:</strong> Zu jedem Ereignis werden fünf zufällige
-    Punkte im selben Höhenbereich und am selben Tag mit exakt derselben Logik
-    geprüft.</li>
+    Punkte im Höhenband 1.500–3.200&nbsp;m am selben Tag mit exakt derselben
+    Logik geprüft — einmal Tirol-weit gezogen und einmal, als vertraglich
+    primäre Kontrolle, zusätzlich auf die Warnregion des Ereignisses
+    beschränkt.</li>
   </ol>
   <p>Von den 711 Ereignissen waren 656 auswertbar. Bei 52 war für den
   Ereignistag gar kein Lagebericht veröffentlicht — das betrifft September bis
@@ -204,7 +206,7 @@
     </thead>
     <tbody>
       <tr>
-        <td>Hangneigung</td>
+        <td>Hangneigung am Punkt (10-m-Zelle)</td>
         <td>ab 28°</td>
         <td>Der Fachdefault für lawinenrelevantes Steilgelände liegt bei 30°.
         Die 2° darunter sind ein <em>Messpuffer</em>, kein fachliches Urteil:
@@ -241,6 +243,12 @@
     </tbody>
   </table>
   </div>
+  <p>Fehlt im Bericht eine Angabe, wird sie konservativ aufgelöst: keine
+  Expositionsliste heißt „alle Expositionen", keine Bandgrenze heißt „offen".
+  Im gecachten Bestand greift der Expositions-Default in 0 von 1.904
+  Problemen; 104 der 1.904 nennen kein Höhenband — ob das eine bewusste
+  Aussage („alle Höhen") oder eine fehlende Angabe ist, lässt sich dem
+  Archiv nicht ansehen.</p>
   <p>Alle vier Toleranzen wirken in dieselbe Richtung: Sie können eine
   Gefahrenstelle nur <em>vergrößern</em>, nie verkleinern. Das erhöht die
   Trefferquote und ist der Grund, warum die Quote allein nichts wert ist — die
@@ -268,11 +276,16 @@
       gemeldeten Koordinate, ohne Umkreis, waren es 74,5&#8239;%.</p>
     </div>
     <div class="zahl">
-      <div class="k">Zufällige Vergleichspunkte</div>
-      <div class="v" style="color:var(--serie-zufall)">88<span class="komma">,</span>5<span class="pz">&#8239;%</span></div>
-      <p>Von 3.280 zufällig über das abgedeckte Gelände verteilten Punkten
-      passten 2.903 mit derselben Logik ebenfalls zu einer Gefahrenstelle.
-      Betrachtet man nur Punkte im Steilgelände ab 28°, sind es 89,4&#8239;%.</p>
+      <div class="k">Gematchte Vergleichspunkte · gleiche Warnregion</div>
+      <div class="v" style="color:var(--serie-zufall)">89<span class="komma">,</span>9<span class="pz">&#8239;%</span></div>
+      <p>Von 3.280 zufälligen Punkten, die das Datum und die Warnregion
+      teilen, für die der Bericht des Ereignistags galt (bei gröber
+      aufgelösten Archiv-Berichten die übergeordnete Region), passten 2.948
+      mit derselben Logik ebenfalls zu einer Gefahrenstelle; am Punkt sind es
+      48,8&#8239;%. Das ist die vertraglich primäre Kontrolle; der Abstand
+      beträgt 6,6 Prozentpunkte im Umkreis. Die Tirol-weit gezogene
+      Sekundärkontrolle liegt bei 88,5&#8239;%
+      (Abstand 8,0 Prozentpunkte; im Steilgelände ab 28° bei 89,4&#8239;%).</p>
     </div>
   </div>
 
@@ -280,14 +293,12 @@
     <p><strong>Die zweite Zahl ist die wichtigere.</strong> Eine hohe
     Übereinstimmungsquote an Ereignisorten allein sagt wenig — sie wäre auch
     dann hoch, wenn der Lagebericht schlicht fast alles Gelände nennen würde.
-    Der Abstand zwischen 96,5&#8239;% und 88,5&#8239;% zeigt zunächst nur:
-    Ereignisorte passen häufiger als zufällige Flächenpunkte in Tirol. Er ist
+    Der Abstand zwischen 96,5&#8239;% und 89,9&#8239;% zeigt zunächst nur:
+    Ereignisorte passen häufiger als zufällige Flächenpunkte derselben
+    Warnregion. Er ist
     <strong>kein belastbares Maß für den Nutzen auf realen Skitouren</strong>,
     weil die Vergleichspunkte keine tatsächlich begangenen GPS-Trackpunkte
-    sind und nicht auf dieselbe Warnregion wie das jeweilige Ereignis
-    beschränkt wurden. Der zweite Punkt ist seit dem 1.&nbsp;August behoben —
-    die <a href="#kernauswertung">Kernauswertung unten</a> matcht Datum und
-    Warnregion; der erste bleibt. Wie eine belastbare Kontrolle aussieht, zeigt die
+    sind. Wie eine belastbare Kontrolle aussieht, zeigt die
     SLABS-Auswertung: Sie stellt Unfallorte gegen mehr als 57.800 Kilometer
     aufgezeichneter Skitouren.<span class="ref"><a href="#q1">1</a></span></p>
   </div>
@@ -307,59 +318,65 @@
   <figure>
     <div class="legende">
       <span><i class="swatch" style="background:var(--serie-ereignis)"></i>Ereignisorte</span>
-      <span><i class="swatch" style="background:var(--serie-zufall)"></i>Zufällige Vergleichspunkte</span>
+      <span><i class="swatch" style="background:var(--serie-zufall)"></i>Gematchte Vergleichspunkte</span>
     </div>
 
     <div class="gruppe">
-      <div class="titel">Gefahrenstufe 1 — gering <span>· 28 Ereignisse, 188 Vergleichspunkte</span></div>
+      <div class="titel">Gefahrenstufe 1 — gering <span>· 28 Ereignisse, 140 Vergleichspunkte</span></div>
       <div class="reihe"><div class="rl">Ereignisorte</div><div class="spur"><div class="balken knapp" style="width:50.0%;background:var(--serie-ereignis)"><b>50,0&#8239;%</b></div></div></div>
-      <div class="reihe"><div class="rl">Vergleichspunkte</div><div class="spur"><div class="balken knapp" style="width:33.5%;background:var(--serie-zufall)"><b>33,5&#8239;%</b></div></div></div>
+      <div class="reihe"><div class="rl">Vergleichspunkte</div><div class="spur"><div class="balken knapp" style="width:44.3%;background:var(--serie-zufall)"><b>44,3&#8239;%</b></div></div></div>
     </div>
 
     <div class="gruppe">
-      <div class="titel">Gefahrenstufe 2 — mäßig <span>· 233 Ereignisse, 1.282 Vergleichspunkte</span></div>
+      <div class="titel">Gefahrenstufe 2 — mäßig <span>· 233 Ereignisse, 1.165 Vergleichspunkte</span></div>
       <div class="reihe"><div class="rl">Ereignisorte</div><div class="spur"><div class="balken" style="width:98.3%;background:var(--serie-ereignis)"><b>98,3&#8239;%</b></div></div></div>
-      <div class="reihe"><div class="rl">Vergleichspunkte</div><div class="spur"><div class="balken" style="width:83.6%;background:var(--serie-zufall)"><b>83,6&#8239;%</b></div></div></div>
+      <div class="reihe"><div class="rl">Vergleichspunkte</div><div class="spur"><div class="balken" style="width:84.1%;background:var(--serie-zufall)"><b>84,1&#8239;%</b></div></div></div>
     </div>
 
     <div class="gruppe">
-      <div class="titel">Gefahrenstufe 3 — erheblich <span>· 292 Ereignisse, 1.304 Vergleichspunkte</span></div>
+      <div class="titel">Gefahrenstufe 3 — erheblich <span>· 292 Ereignisse, 1.460 Vergleichspunkte</span></div>
       <div class="reihe"><div class="rl">Ereignisorte</div><div class="spur"><div class="balken" style="width:98.3%;background:var(--serie-ereignis)"><b>98,3&#8239;%</b></div></div></div>
-      <div class="reihe"><div class="rl">Vergleichspunkte</div><div class="spur"><div class="balken" style="width:96.9%;background:var(--serie-zufall)"><b>96,9&#8239;%</b></div></div></div>
+      <div class="reihe"><div class="rl">Vergleichspunkte</div><div class="spur"><div class="balken" style="width:95.5%;background:var(--serie-zufall)"><b>95,5&#8239;%</b></div></div></div>
     </div>
 
     <div class="gruppe">
-      <div class="titel">Gefahrenstufe 4 — groß <span>· 103 Ereignisse, 506 Vergleichspunkte</span></div>
+      <div class="titel">Gefahrenstufe 4 — groß <span>· 103 Ereignisse, 515 Vergleichspunkte</span></div>
       <div class="reihe"><div class="rl">Ereignisorte</div><div class="spur"><div class="balken" style="width:100%;background:var(--serie-ereignis)"><b>100&#8239;%</b></div></div></div>
-      <div class="reihe"><div class="rl">Vergleichspunkte</div><div class="spur"><div class="balken" style="width:99.8%;background:var(--serie-zufall)"><b>99,8&#8239;%</b></div></div></div>
+      <div class="reihe"><div class="rl">Vergleichspunkte</div><div class="spur"><div class="balken" style="width:99.4%;background:var(--serie-zufall)"><b>99,4&#8239;%</b></div></div></div>
     </div>
 
     <figcaption>Anteil der Punkte, an denen Exposition, Höhe und Hangneigung zu
     einer Gefahrenstelle des am selben Tag gültigen Lageberichts passten,
-    getrennt nach der Gefahrenstufe des jeweiligen Tages. Skala jeweils
-    0–100&#8239;%. Bei Gefahrenstufe 1 ist die Zahl der Ereignisse klein (28) —
-    die 50,0&#8239;% sind entsprechend unsicher.</figcaption>
+    <strong>gemessen im 200-m-Umkreis</strong>, getrennt nach der Gefahrenstufe
+    des jeweiligen Tages. Vergleichspunkte: nach Datum und Warnregion gematchte
+    Ziehung. Direkt am Punkt, ohne Umkreis, lauten die Quoten
+    50,0&nbsp;/ 74,2&nbsp;/ 77,4&nbsp;/ 73,8&#8239;% (Ereignisorte) gegen
+    21,4&nbsp;/ 46,0&nbsp;/ 50,4&nbsp;/ 58,1&#8239;% (Vergleichspunkte).
+    Skala jeweils 0–100&#8239;%. Bei Gefahrenstufe 1 ist die Zahl der
+    Ereignisse klein (28) — die 50,0&#8239;% sind entsprechend
+    unsicher.</figcaption>
   </figure>
 
   <p>Der Abstand ist bei den Gefahrenstufen 1 und 2 am größten und verschwindet
-  bei Stufe 4 praktisch vollständig. Das ist plausibel und sogar richtig so: Bei großer
-  Lawinengefahr <em>ist</em> praktisch das gesamte Steilgelände Gefahrenstelle,
-  und genau das sagt der Bericht dann auch. Ein Abgleich kann an einem solchen
-  Tag nichts mehr eingrenzen — die Aussage lautet schlicht „überall".</p>
+  bei Stufe 4 <em>im Umkreis</em> praktisch vollständig. Das ist plausibel: Bei
+  großer Lawinengefahr ist praktisch das gesamte Steilgelände Gefahrenstelle —
+  und mit den ausschließlich erweiternden Toleranzen dieser Prüfung plus dem
+  200-m-Umkreis bleibt davon nichts mehr zu unterscheiden. Direkt am Punkt
+  bleibt allerdings auch an solchen Tagen ein Abstand: 73,8&#8239;%
+  an Ereignisorten gegen 58,1&#8239;% an Vergleichspunkten.</p>
   <p>In dieser künstlichen Flächenreferenz ist der Abstand an Tagen mit
   geringer oder mäßiger Gefahrenstufe am größten. Ob das auf realen Touren
   denselben Informationsgewinn erzeugt, lässt sich erst mit zeitlich passenden
   GPS-Trackdaten beantworten.</p>
 
   <h2 id="kernauswertung">Nachtrag: die vorab festgelegte Kernauswertung</h2>
-  <p>Die Zahlen oben beschreiben die Gesamtstichprobe gegen Tirol-weit
-  verteilte Vergleichspunkte. Der Analysevertrag vom 30.&nbsp;Juli legt
-  zusätzlich etwas Schärferes fest, das er zur primären Zielgröße der
-  eigentlichen Prüfung im Winter 2026/27 erklärt: eine <strong>vorab
-  definierte Kernstichprobe</strong>, geprüft gegen Vergleichspunkte, die
-  <strong>Datum und Warnregion</strong> des jeweiligen Ereignisses teilen —
-  genau die Kontrolle, deren Fehlen oben als Schwäche benannt ist. Beide Ergänzungen
-  liegen seit dem 1.&nbsp;August 2026 vor.</p>
+  <p>Die Zahlen oben beschreiben die Gesamtstichprobe. Der Analysevertrag vom
+  30.&nbsp;Juli legt zusätzlich etwas Schärferes fest, das er zur primären
+  Zielgröße der eigentlichen Prüfung im Winter 2026/27 erklärt: eine
+  <strong>vorab definierte Kernstichprobe</strong>, geprüft gegen
+  Vergleichspunkte, die <strong>Datum und Warnregion</strong> des jeweiligen
+  Ereignisses teilen. Beide Ergänzungen liegen seit dem 1.&nbsp;August 2026
+  vor.</p>
   <p>Zur Kernstichprobe zählt ein Ereignis nur, wenn drei Angaben zugleich
   vorliegen und zutreffen: mindestens eine beteiligte Person, trockene
   Schneebrettlawine, als gültig markierte Ereigniszeit. Fehlt eine Angabe,
@@ -398,7 +415,10 @@
   Warnregion, 10.000 Wiederholungen, Startwert im Manifest); nahe
   100&#8239;% sind sie bewusst asymmetrisch und dürfen nicht als
   „±&nbsp;x&nbsp;Punkte" gelesen werden. Für die Gesamtstichprobe oben
-  lauten sie 71,1–77,9 (Punkt) und 95,1–97,9 (Umkreis). Zwei vorab
+  lauten sie 71,1–77,9 (Punkt) und 95,1–97,9 (Umkreis). Für die
+  <strong>Abstände</strong> zwischen Ereignis- und Kontrollquoten ist kein
+  Intervall gerechnet — die angegebenen Intervalle gelten nur für die
+  Ereignisquoten selbst. Zwei vorab
   festgelegte Stabilitätsprüfungen bestehen: Lässt man eine ganze Saison
   oder einen ganzen Ereignistag weg, verschiebt sich die Umkreisquote der
   Kernstichprobe um höchstens 0,4 beziehungsweise 0,6 Prozentpunkte — unter
@@ -467,9 +487,11 @@
   <strong>1.700 Meter</strong> gesetzt — die reale Waldgrenze der betroffenen
   Grasberge liegt in diesem Bereich. Damit stieg die Quote an den Ereignisorten
   von 95,6&#8239;% auf 96,5&#8239;%. Bezahlt wurde das mit einer höheren
-  Quote in der Kontrollgruppe: 88,5&#8239;% statt vorher 85,0&#8239;%.
-  Der Abstand zwischen beiden Zahlen wurde dadurch <em>kleiner</em> — von
-  10,6 auf 8,0 Prozentpunkte.</p>
+  Quote in der Kontrollgruppe (Tirol-weite Ziehung): 88,5&#8239;% statt vorher
+  85,0&#8239;%. Der Abstand zwischen beiden Zahlen wurde dadurch
+  <em>kleiner</em> — von 10,6 auf 8,0 Prozentpunkte. Die Vorher-Werte stammen
+  aus dem Waldgrenzen-Sweep, der kein eigenes Manifest schreibt — sie gehören
+  nicht zum unten genannten Referenzlauf.</p>
   <p>Dieser Wert wurde an demselben Datensatz bestimmt, an dem anschließend
   gemessen wurde. Das ist methodisch eine Schwäche. Fünf der sechs dadurch
   zusätzlich erfassten Ereignisse stammen zudem von nur zwei Tagen im Februar
@@ -481,6 +503,9 @@
   Vergleichspunkte weiter an — er würde also nur mehr Fläche als Gefahrenstelle
   ausweisen, ohne ein Ereignis mehr zu erklären. Deshalb 1.700 und nicht
   tiefer.</p>
+  <p>Der Wert ist an Tiroler Daten gewählt. Die App verwendet ihn auch
+  außerhalb Tirols — dort ist er nicht überprüft; die reale Waldgrenze etwa
+  im Allgäu liegt deutlich tiefer als in den Zentralalpen.</p>
 
   <h2 id="waldgrenze-richtung">Nachtrag: dieselbe Zahl, zwei Richtungen</h2>
   <div class="card">
@@ -502,10 +527,15 @@
     richtungsabhängig übersetzt: als Untergrenze weiter mit 1.700 Metern, als
     Obergrenze mit 2.200 Metern. Der zweite Wert ist bewusst <em>gesetzt</em>
     und nicht an diesen Daten optimiert — sonst wäre der Holdout für den Winter
-    2026/27 entwertet. Betroffen sind 24 von 1.904 Lawinenproblemen im
-    ausgewerteten Berichtsbestand (1,3&#8239;%). Mit dem Referenzlauf vom
-    1.&nbsp;August 2026 ist die Änderung nachgezogen — an den Quoten dieser
-    Seite hat sie nichts geändert.</p>
+    2026/27 entwertet. Betroffen sind 40 von 1.904 Lawinenproblemen im
+    gecachten Berichtsbestand (283 Archivtage; 2,1&#8239;%) — nachgezählt über
+    das im Manifest per Hash gebundene Berichtsarchiv, gezählt nach dem
+    Adapter, der das ältere Dateiformat der Saison 2021/22 vereinheitlicht;
+    16 der 40 Fälle stammen aus diesem Altbestand. Eine frühere Fassung dieser
+    Seite nannte 24 (1,3&#8239;%), weil ohne Adapter gezählt wurde; das
+    Manifest des Referenzlaufs trägt diese alte Zählung noch als Prosa-Notiz.
+    Mit dem Referenzlauf vom 1.&nbsp;August 2026 ist die Änderung
+    nachgezogen — an den Quoten dieser Seite hat sie nichts geändert.</p>
   </div>
 
   <h2>Warum Variantenabfahrten nicht herausgefiltert werden</h2>
@@ -559,12 +589,13 @@
     positive Beteiligtenangabe; die übrigen 102 haben null oder fehlende
     Beteiligung. Die Auswertung bleibt deshalb bei der Bezeichnung
     „dokumentierte Lawinenereignisse".</li>
-    <li><strong>Flächenpunkte sind keine Tourbewegung.</strong> Die 3.280
-    Vergleichspunkte wurden im Höhenband 1.500–3.200 Meter über Tirol verteilt.
-    Sie teilen das Datum, aber nicht zwingend die Warnregion des Ereignisses.
-    Anders als GPS-Trackpunkte zeigen sie nicht, wo Tourengeher tatsächlich
-    unterwegs waren.<span class="ref"><a href="#q1">1</a></span> Die
-    88,5&#8239;% sind daher eine künstliche Flächenreferenz, keine
+    <li><strong>Flächenpunkte sind keine Tourbewegung.</strong> Beide
+    Kontrollziehungen — die gematchte (Datum und Warnregion des Ereignisses)
+    wie die Tirol-weite — verteilen je 3.280 Punkte im Höhenband
+    1.500–3.200 Meter. Anders als GPS-Trackpunkte zeigen sie nicht, wo
+    Tourengeher tatsächlich unterwegs
+    waren.<span class="ref"><a href="#q1">1</a></span> Die 89,9&#8239;% wie
+    die 88,5&#8239;% sind daher künstliche Flächenreferenzen, keine
     False-Positive-Rate der App.</li>
     <li><strong>Koordinatenqualität — und unklare Bedeutung des Punkts.</strong>
     Eine gemeldete Koordinate kann Anriss, Ablagerung oder eine Schätzung sein.
@@ -633,17 +664,20 @@
     <summary>Alle Zahlen im Überblick</summary>
     <div class="tab-scroll">
     <table>
-      <caption>Übereinstimmung nach Gefahrenstufe (Anteil der Punkte, an denen
-      Exposition, Höhe und Neigung gemeinsam zu einer Gefahrenstelle passten)</caption>
+      <caption>Übereinstimmung nach Gefahrenstufe: Anteil der Orte, an denen
+      Exposition, Höhe und Neigung gemeinsam zu einer Gefahrenstelle passten —
+      je Gruppe im 200-m-Umkreis und direkt am Punkt. Vergleichspunkte: nach
+      Datum und Warnregion gematchte Ziehung (die Tirol-weite Sekundärkontrolle
+      liegt gesamt bei 88,5 % im Umkreis und 51,0 % am Punkt).</caption>
       <thead>
-        <tr><th>Gefahrenstufe</th><th class="num">Ereignisorte</th><th class="num">n</th><th class="num">Vergleichspunkte</th><th class="num">n</th></tr>
+        <tr><th>Gefahrenstufe</th><th class="num">Ereignisorte<br>Umkreis / Punkt</th><th class="num">n</th><th class="num">Vergleichspunkte<br>Umkreis / Punkt</th><th class="num">n</th></tr>
       </thead>
       <tbody>
-        <tr><td>1 — gering</td><td class="num">50,0 %</td><td class="num">28</td><td class="num">33,5 %</td><td class="num">188</td></tr>
-        <tr><td>2 — mäßig</td><td class="num">98,3 %</td><td class="num">233</td><td class="num">83,6 %</td><td class="num">1.282</td></tr>
-        <tr><td>3 — erheblich</td><td class="num">98,3 %</td><td class="num">292</td><td class="num">96,9 %</td><td class="num">1.304</td></tr>
-        <tr><td>4 — groß</td><td class="num">100 %</td><td class="num">103</td><td class="num">99,8 %</td><td class="num">506</td></tr>
-        <tr><td><strong>gesamt</strong></td><td class="num"><strong>96,5 %</strong></td><td class="num"><strong>656</strong></td><td class="num"><strong>88,5 %</strong></td><td class="num"><strong>3.280</strong></td></tr>
+        <tr><td>1 — gering</td><td class="num">50,0 % / 50,0 %</td><td class="num">28</td><td class="num">44,3 % / 21,4 %</td><td class="num">140</td></tr>
+        <tr><td>2 — mäßig</td><td class="num">98,3 % / 74,2 %</td><td class="num">233</td><td class="num">84,1 % / 46,0 %</td><td class="num">1.165</td></tr>
+        <tr><td>3 — erheblich</td><td class="num">98,3 % / 77,4 %</td><td class="num">292</td><td class="num">95,5 % / 50,4 %</td><td class="num">1.460</td></tr>
+        <tr><td>4 — groß</td><td class="num">100 % / 73,8 %</td><td class="num">103</td><td class="num">99,4 % / 58,1 %</td><td class="num">515</td></tr>
+        <tr><td><strong>gesamt</strong></td><td class="num"><strong>96,5 % / 74,5 %</strong></td><td class="num"><strong>656</strong></td><td class="num"><strong>89,9 % / 48,8 %</strong></td><td class="num"><strong>3.280</strong></td></tr>
       </tbody>
     </table>
     </div>
@@ -658,12 +692,14 @@
         <tr><th>Übereinstimmung im 200-Meter-Umkreis</th><td class="num">96,5 %</td></tr>
         <tr><th>tödliche Ereignisse (auswertbar)</th><td class="num">35 von 36</td></tr>
         <tr><th>Ereignisorte unter 28° (am Punkt nie möglich)</th><td class="num">128 (19,5 %)</td></tr>
-        <tr><th>Vergleichspunkte im Steilgelände ab 28°</th><td class="num">89,4 % (n = 2.091)</td></tr>
+        <tr><th>gematchte Vergleichspunkte (primär), am Punkt / im Umkreis</th><td class="num">48,8 % / 89,9 % (n = 3.280)</td></tr>
+        <tr><th>Tirol-weite Vergleichspunkte (sekundär), am Punkt / im Umkreis</th><td class="num">51,0 % / 88,5 % (n = 3.280)</td></tr>
+        <tr><th>Tirol-weite Vergleichspunkte im Steilgelände ab 28°</th><td class="num">89,4 % im Umkreis (n = 2.091)</td></tr>
         <tr><th>Kernstichprobe (vorab definiert, auswertbar)</th><td class="num">337</td></tr>
         <tr><th>Kernstichprobe am Punkt / im Umkreis</th><td class="num">81,0 % / 97,6 %</td></tr>
         <tr><th>gematchte Vergleichspunkte der Kernstichprobe</th><td class="num">48,8 % / 91,3 % (n = 1.685)</td></tr>
         <tr><th>Zeitraum</th><td class="num">Dez. 2021 – Apr. 2026</td></tr>
-        <tr><th>Stand der Auswertung</th><td class="num">Lauf 1. August 2026 (runId 20260801T191516Z-f28aeaf) · Korrektur-Nachtrag 31. Juli · Variantenaudit und Kernauswertung 1. August 2026</td></tr>
+        <tr><th>Stand der Auswertung</th><td class="num">Lauf 1. August 2026 (runId 20260801T191516Z-f28aeaf) · Korrektur-Nachtrag 31. Juli · Variantenaudit und Kernauswertung 1. August · Beschriftungs- und Kontrollwahl-Korrektur 4. August 2026</td></tr>
       </tbody>
     </table>
   </details>
@@ -672,8 +708,9 @@
   <div class="card">
     <p>Bei einer systematischen Selbstprüfung am 30. Juli 2026 sind
     <strong>zwei Rechenfehler im Auswertungswerkzeug</strong> gefunden worden.
-    Beide sind behoben; alle Zahlen auf dieser Seite stammen aus dem
-    korrigierten Lauf vom 31. Juli 2026. Weil die vorherigen Zahlen
+    Beide sind behoben; alle aktuellen Quoten dieser Seite stammen aus dem
+    korrigierten Lauf vom 1. August 2026 (runId
+    <code>20260801T191516Z-f28aeaf</code>). Weil die vorherigen Zahlen
     veröffentlicht waren, stehen die Fehler hier statt in einem stillen
     Austausch.</p>
     <p><strong>1. Ereignistag in falscher Zeitzone.</strong> Bei 59 von 711
@@ -685,9 +722,9 @@
     das Ergebnis nicht — der Fehler war also folgenlos für die einzelne
     Bewertung, aber er hätte nicht bestehen dürfen.</p>
     <p><strong>2. Eine Saison ohne Expositions- und Höhenprüfung.</strong> Die
-    28 archivierten Berichtstage der Saison 2021/22 verwenden ein älteres
-    Dateiformat, in dem Exposition und Höhenband an einer anderen Stelle
-    stehen. Der Parser fand sie dort nicht und griff seine konservativen
+    27 in die Auswertung eingegangenen archivierten Berichtstage der Saison
+    2021/22 verwenden ein älteres Dateiformat, in dem Exposition und Höhenband
+    an einer anderen Stelle stehen. Der Parser fand sie dort nicht und griff seine konservativen
     Rückfallwerte: alle Expositionen, kein Höhenband. Für diese Saison lief die
     Prüfung damit faktisch nur über die Hangneigung, 129 echte
     Expositions- und 180 echte Höhen-Einschränkungen blieben unberücksichtigt.
@@ -696,7 +733,9 @@
     <p><strong>Was sich geändert hat.</strong> Auswertbar 657&nbsp;→&nbsp;656
     Ereignisse; Übereinstimmung am Punkt 75,5&nbsp;→&nbsp;74,5&#8239;%, im
     200-Meter-Umkreis 96,7&nbsp;→&nbsp;96,5&#8239;%; Vergleichspunkte
-    89,2&nbsp;→&nbsp;88,5&#8239;%. Am stärksten betroffen ist die Saison
+    (Tirol-weite Ziehung) 89,2&nbsp;→&nbsp;88,5&#8239;%. Die Vorher-Werte
+    stammen aus dem Lauf vor der Korrektur, dessen Manifest nicht mehr
+    archiviert ist. Am stärksten betroffen ist die Saison
     2021/22 (am Punkt 90,2&nbsp;→&nbsp;80,0&#8239;%). Bei den tödlichen
     Ereignissen bleibt es bei 35 von 36. <strong>Keiner der beiden Fehler hat
     die Auswertung geschönt</strong> — der Abstand zwischen Ereignisorten und
@@ -711,6 +750,41 @@
     Vergleichspunkten ab 28°, kehrt sich das Bild um (92,6 gegenüber
     80,0&#8239;%). Beide Lesarten stehen hier, weil die erste die
     unangenehmere ist.</p>
+  </div>
+
+  <h2 id="korrektur-0804">Korrektur-Nachtrag vom 4. August 2026</h2>
+  <div class="card">
+    <p>Eine fachliche Gegenprüfung dieser Seite hat am 4. August 2026
+    <strong>zwei Darstellungsfehler</strong> gefunden. Kein Ergebnis des
+    Referenzlaufs war falsch — falsch war, wie zwei Zahlen beschriftet
+    beziehungsweise ausgewählt waren. Weil die Seite veröffentlicht war,
+    stehen die Fehler hier statt in einem stillen Austausch.</p>
+    <p><strong>1. Umkreisquoten unter einer Punkt-Beschriftung.</strong> Das
+    Gefahrenstufen-Diagramm und die Übersichtstabelle zeigten die Quoten im
+    200-m-Umkreis (98,3 / 98,3 / 100&#8239;% für die Stufen 2–4), waren aber
+    als „Anteil der Punkte" beschriftet — direkt am Punkt lauten die Quoten
+    74,2 / 77,4 / 73,8&#8239;%. Auch der Satz, der Abstand verschwinde bei
+    Stufe 4 praktisch vollständig, galt nur im Umkreis. Beide Darstellungen
+    nennen jetzt beide Zielgrößen getrennt. Die Verwechslung ging nicht
+    zugunsten der Seite: Am Punkt ist der Abstand zu den Vergleichspunkten auf
+    jeder Stufe größer als im Umkreis.</p>
+    <p><strong>2. Die sekundäre Kontrollzahl stand an erster Stelle.</strong>
+    Als Kernzahl der Kontrollgruppe nannte die Seite 88,5&#8239;% — die
+    Tirol-weite Ziehung, die der Analysevertrag ausdrücklich nur als
+    Sensitivitätsanalyse führt. Die vertraglich primäre, nach Datum und
+    Warnregion gematchte Kontrolle lag im selben Lauf vor und stand nirgends:
+    89,9&#8239;% im Umkreis, 48,8&#8239;% am Punkt (n&nbsp;=&nbsp;3.280).
+    Der Abstand der Gesamtstichprobe beträgt damit 6,6 statt 8,0
+    Prozentpunkte — die ehrlichere Zahl ist die <em>kleinere</em>; sie steht
+    jetzt oben. Mit der Umstellung wurde auch die Kontrollreihe des
+    Gefahrenstufen-Diagramms auf die gematchte Ziehung getauscht; das
+    verändert dort die Abstände in beide Richtungen, am deutlichsten bei
+    Stufe 1, wo die Vergleichsquote von 33,5 auf 44,3&#8239;% steigt und der
+    Abstand von 16,5 auf 5,7 Prozentpunkte schrumpft. Daneben korrigiert:
+    die Zahl der von der
+    Waldgrenzen-Obergrenze betroffenen Lawinenprobleme (40 statt 24, siehe
+    dort), die Zahl der Alt-Schema-Berichtstage (27 statt 28) und ein falsches
+    Laufdatum im Korrektur-Nachtrag vom 31. Juli.</p>
   </div>
 
   <h2>Was diese Auswertung methodisch ist</h2>
@@ -729,7 +803,8 @@
   <p>Die Ereignisdaten stammen aus LAWIS und werden vom
   <strong>Lawinenwarndienst des Landes Tirol</strong> unter CC&nbsp;BY
   bereitgestellt. Die Lageberichte stammen aus dem öffentlichen Archiv von
-  avalanche.report, das Geländemodell vom Land Tirol (CC&nbsp;BY 4.0). Die
+  avalanche.report (Lawinenwarndienst Tirol / Projekt Albina, CC&nbsp;BY 4.0),
+  das Geländemodell vom Land Tirol (CC&nbsp;BY 4.0). Die
   Liftinfrastruktur für das Variantenaudit stammt aus OpenStreetMap
   (©&nbsp;OpenStreetMap-Mitwirkende, Lizenz ODbL).</p>
   <p>Die Auswertung nutzt denselben Code, der auch in der App den Abgleich
@@ -742,8 +817,11 @@
   Prüfentscheidung.</p>
   <p>Jeder Lauf schreibt ein Manifest mit Lauf-Kennung, Commit, Hashes aller
   Eingangsdaten, allen Parametern und den vorab festgelegten Auswertungsgruppen.
-  Die Zahlen dieser Seite gehören zum Lauf
-  <code>20260801T191516Z-f28aeaf</code>. Das Projektverzeichnis ist derzeit
+  Die Zahlen des aktuellen Stands gehören zum Lauf
+  <code>20260801T191516Z-f28aeaf</code>; die Vergleichswerte früherer Stände
+  in der Kalibrier-Offenlegung und im Korrektur-Nachtrag vom 31.&nbsp;Juli
+  stammen aus dem Waldgrenzen-Sweep beziehungsweise dem Lauf vor der
+  Korrektur, deren Manifeste nicht archiviert sind. Das Projektverzeichnis ist derzeit
   <strong>nicht öffentlich</strong>; Werkzeug, Manifest und die Ergebnisdaten je
   Ereignis werden auf Anfrage herausgegeben — die Veröffentlichung des
   Validierungswerkzeugs ist vorgesehen. Rückfragen zur Methodik und Anfragen zu
@@ -832,7 +910,7 @@
     gesucht.</p>
   </div>
 
-  <p class="fine">Methodenstand: 1. August 2026 ·
+  <p class="fine">Methodenstand: 4. August 2026 ·
   <a href="presse.html" style="color:inherit">Presse</a> ·
   <a href="rechtliches.html" style="color:inherit">Impressum &amp; Datenschutz</a></p>
 </div>
