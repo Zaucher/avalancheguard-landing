@@ -360,9 +360,11 @@
     unsicher.</figcaption>
   </figure>
 
-  <p>Im Umkreis ist der Abstand bei <strong>Gefahrenstufe 2</strong> am
-  größten (+14,2&nbsp;Prozentpunkte, Intervall 10,7 bis 17,8) und verschwindet
-  bei Stufe 4 praktisch vollständig. Das ist plausibel: Bei
+  <p>Im Umkreis ist der Abstand bei <strong>Gefahrenstufe 2</strong> nominell
+  am größten (+14,2&nbsp;Prozentpunkte, Intervall 10,7 bis 17,8) — ein
+  Intervall für den Unterschied <em>zwischen</em> den Stufen ist nicht
+  gerechnet, und das Stufe-1-Intervall überlappt. Bei Stufe 4 verschwindet
+  der Abstand im Umkreis praktisch vollständig. Das ist plausibel: Bei
   großer Lawinengefahr ist praktisch das gesamte Steilgelände Gefahrenstelle —
   und mit den ausschließlich erweiternden Toleranzen dieser Prüfung plus dem
   200-m-Umkreis bleibt davon nichts mehr zu unterscheiden. Direkt am Punkt
@@ -370,7 +372,13 @@
   an Ereignisorten gegen 58,1&#8239;% an Vergleichspunkten.</p>
   <p><strong>Stufe 1 trägt diese Aussage nicht.</strong> Der Balken zeigt dort
   im Umkreis 50,0 gegen 44,3&#8239;%, also +5,7 Prozentpunkte — das Intervall
-  reicht aber von −5,9 bis 16,3 und schließt damit die Null ein. Bei 28
+  reicht aber von −5,9 bis 16,3 und schließt damit die Null ein. Die
+  Intervallgrenzen auf dieser Stufe sind zudem simulationsbedingt nur auf
+  rund ±0,4 Prozentpunkte genau (größte Abweichung zwischen den beiden
+  unabhängigen Zufallsströmen der Gegenprobe) — und das erst nach Erhöhung
+  auf 40.000 Replikate: mit 10.000 lag derselbe Vergleich bei
+  0,53&nbsp;Prozentpunkten und damit über der vorab festgelegten Toleranz
+  von 0,5. Bei 28
   Ereignissen in 27 Ziehungseinheiten (Ereignistag × Warnregion) ist der
   Umkreis-Abstand auf dieser Stufe
   <strong>nicht von null zu unterscheiden</strong>. Bis zum 4.&nbsp;August
@@ -379,9 +387,12 @@
   dort ein Abstand (50,0 gegen 21,4&#8239;%), aber ebenfalls mit einem sehr
   breiten Intervall (11,9 bis 44,3) — die Stufe ist zu dünn besetzt, um mehr
   als eine Größenordnung herzugeben.</p>
-  <p>In dieser künstlichen Flächenreferenz ist der Abstand an Tagen mit
-  <em>mäßiger</em> Gefahrenstufe am größten — für Stufe 1 gibt die
-  Stichprobe das nicht her. Ob das auf realen Touren
+  <p>In dieser künstlichen Flächenreferenz ist der Abstand <strong>im
+  Umkreis</strong> an Tagen mit <em>mäßiger</em> Gefahrenstufe nominell am
+  größten — für Stufe 1 gibt die Stichprobe das nicht her, und direkt am Punkt
+  unterscheiden sich die Stufen 1 bis 3 nicht erkennbar (28,6&nbsp;/
+  28,2&nbsp;/ 27,0 Prozentpunkte; für Stufe 1 reicht das Intervall von 11,9
+  bis 44,3). Ob das auf realen Touren
   denselben Informationsgewinn erzeugt, lässt sich erst mit zeitlich passenden
   GPS-Trackdaten beantworten.</p>
 
@@ -494,8 +505,10 @@
   Bericht steht. Eine Gefahrenstelle hinzuzurechnen, die dort nicht genannt
   ist, wäre eine eigene Beurteilung — und genau die soll hier nicht
   stattfinden.</p>
-  <p>Von den 39 tödlichen Ereignissen im Datensatz waren 36 auswertbar; in 35
-  davon lag eine Übereinstimmung vor. Der eine Fall ohne Übereinstimmung ist
+  <p>Von den 39 tödlichen Ereignissen im Datensatz waren 36 auswertbar; in 34
+  lag direkt am Koordinatenpunkt eine Übereinstimmung vor, in 35 im
+  200-Meter-Umkreis. Ein Ereignis traf also erst im Umkreis auf eine passende
+  Zelle, eines auf gar keine. Der Fall ganz ohne Übereinstimmung ist
   genau ein Fall der ersten Kategorie: Gefahrenstufe 1, ein Lagebericht ohne
   genannte Gefahrenstellen. Wegen der kleinen Teilgruppe ist 35 von 36
   aussagekräftiger als die scheinbar präzise Prozentangabe 97,2&#8239;%.</p>
@@ -574,10 +587,12 @@
     das im Manifest per Hash gebundene Berichtsarchiv, gezählt nach dem
     Adapter, der das ältere Dateiformat der Saison 2021/22 vereinheitlicht;
     16 der 40 Fälle stammen aus diesem Altbestand. Eine frühere Fassung dieser
-    Seite nannte 24 (1,3&#8239;%), weil ohne Adapter gezählt wurde; das
-    Manifest des Referenzlaufs trägt diese alte Zählung noch als Prosa-Notiz.
-    Mit dem Referenzlauf vom 1.&nbsp;August 2026 ist die Änderung
-    nachgezogen — an den Quoten dieser Seite hat sie nichts geändert.</p>
+    Seite nannte 24 (1,3&#8239;%), weil ohne Adapter gezählt wurde; die
+    Manifeste der damaligen Läufe trugen diese alte Zählung noch als
+    Prosa-Notiz. Mit dem Lauf vom 4.&nbsp;August 2026 ist die Zählung
+    nachgezogen — das aktuelle Manifest führt sie unter
+    <code>kTreelineUpperMNote</code>, und an den Quoten dieser Seite hat sie
+    nichts geändert.</p>
   </div>
 
   <h2>Warum Variantenabfahrten nicht herausgefiltert werden</h2>
@@ -619,7 +634,7 @@
   Lawinensprengbahnen zählen nicht als Lift — sie stehen gerade im
   unerschlossenen Gelände. Prüfkriterien, Bandtabellen und die vollständige
   Auswertung stehen im Ergebnisdokument zum Lauf
-  <code>20260804T202205Z-40a6149</code> und werden auf Anfrage
+  <code>20260811T105326Z-c774755</code> und werden auf Anfrage
   herausgegeben.</p>
 
   <h2>Grenzen der Datenbasis</h2>
@@ -732,7 +747,7 @@
         <tr><th>außerhalb der Warnregionsgrenzen</th><td class="num">3</td></tr>
         <tr><th>Übereinstimmung exakt an der Koordinate</th><td class="num">74,5 %</td></tr>
         <tr><th>Übereinstimmung im 200-Meter-Umkreis</th><td class="num">96,5 %</td></tr>
-        <tr><th>tödliche Ereignisse (auswertbar)</th><td class="num">35 von 36</td></tr>
+        <tr><th>tödliche Ereignisse (auswertbar), am Punkt / im Umkreis</th><td class="num">34 / 35 von 36</td></tr>
         <tr><th>Ereignisorte unter 28° (am Punkt nie möglich)</th><td class="num">128 (19,5 %)</td></tr>
         <tr><th>gematchte Vergleichspunkte (primär), am Punkt / im Umkreis</th><td class="num">48,8 % / 89,9 % (n = 3.280)</td></tr>
         <tr><th>Tirol-weite Vergleichspunkte (sekundär), am Punkt / im Umkreis</th><td class="num">51,0 % / 88,5 % (n = 3.280)</td></tr>
@@ -741,7 +756,7 @@
         <tr><th>Kernstichprobe am Punkt / im Umkreis</th><td class="num">81,0 % / 97,6 %</td></tr>
         <tr><th>gematchte Vergleichspunkte der Kernstichprobe</th><td class="num">48,8 % / 91,3 % (n = 1.685)</td></tr>
         <tr><th>Zeitraum</th><td class="num">Dez. 2021 – Apr. 2026</td></tr>
-        <tr><th>Stand der Auswertung</th><td class="num">Lauf 4. August 2026 (runId 20260804T202205Z-40a6149) · Korrektur-Nachtrag 31. Juli · Variantenaudit und Kernauswertung 1. August · Beschriftungs- und Kontrollwahl-Korrektur 4. August · Intervalle für die Abstände 4. August 2026</td></tr>
+        <tr><th>Stand der Auswertung</th><td class="num">Lauf 11. August 2026 (runId 20260811T105326Z-c774755; reproduziert den Lauf vom 4. August Stelle für Stelle) · Korrektur-Nachtrag 31. Juli · Variantenaudit und Kernauswertung 1. August · Beschriftungs- und Kontrollwahl-Korrektur 4. August · Intervalle für die Abstände 4. August 2026</td></tr>
       </tbody>
     </table>
   </details>
@@ -752,8 +767,8 @@
     <strong>zwei Rechenfehler im Auswertungswerkzeug</strong> gefunden worden.
     Beide sind behoben; die korrigierten Quoten stammten aus dem Lauf vom
     1. August 2026 (runId <code>20260801T191516Z-f28aeaf</code>) und werden
-    vom aktuellen Lauf vom 4. August (runId
-    <code>20260804T202205Z-40a6149</code>) Stelle für Stelle reproduziert.
+    vom aktuellen Lauf vom 11. August (runId
+    <code>20260811T105326Z-c774755</code>) Stelle für Stelle reproduziert.
     Dabei ist der Code zwischen beiden Läufen nicht derselbe geblieben: Der
     Parser für die Lageberichte wurde <em>konservativer</em> gemacht
     (Vereinigung der Vormittags- und Nachmittagshälften, Prüfung des
@@ -788,7 +803,7 @@
     stammen aus dem Lauf vor der Korrektur, dessen Manifest nicht mehr
     archiviert ist. Am stärksten betroffen ist die Saison
     2021/22 (am Punkt 90,2&nbsp;→&nbsp;80,0&#8239;%). Bei den tödlichen
-    Ereignissen bleibt es bei 35 von 36. <strong>Keiner der beiden Fehler hat
+    Ereignissen bleibt es bei 35 von 36 im Umkreis (34 am Punkt). <strong>Keiner der beiden Fehler hat
     die Auswertung geschönt</strong> — der Abstand zwischen Ereignisorten und
     Vergleichspunkten ist nach der Korrektur sogar etwas größer als vorher:
     8,0 statt 7,5 Prozentpunkte.</p>
@@ -882,7 +897,7 @@
   <p>Jeder Lauf schreibt ein Manifest mit Lauf-Kennung, Commit, Hashes aller
   Eingangsdaten, allen Parametern und den vorab festgelegten Auswertungsgruppen.
   Die Zahlen des aktuellen Stands gehören zum Lauf
-  <code>20260804T202205Z-40a6149</code>; die Vergleichswerte früherer Stände
+  <code>20260811T105326Z-c774755</code>; die Vergleichswerte früherer Stände
   in der Kalibrier-Offenlegung und im Korrektur-Nachtrag vom 31.&nbsp;Juli
   stammen aus dem Waldgrenzen-Sweep beziehungsweise dem Lauf vor der
   Korrektur, deren Manifeste nicht archiviert sind. Das Projektverzeichnis ist derzeit
