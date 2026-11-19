@@ -66,6 +66,8 @@ img{max-width:100%}
 @keyframes hkFade{0%{opacity:0}100%{opacity:1}}
 @keyframes hkLayer{0%{opacity:0;transform:translateY(16px)}100%{opacity:1;transform:translateY(0)}}
 @media (prefers-reduced-motion: reduce){[data-hk-layer],[data-hk-phone],[data-hk-connect]{animation:none !important;opacity:1 !important;transform:none !important;transition:none !important}}
+/* Ohne scroll-gesteuerte Animationen (z. B. Firefox) liefen alle Ebenen beim Laden gleichzeitig ab: dann statisch zeigen. */
+@supports not (animation-timeline: view()){[data-hk-layer],[data-hk-phone],[data-hk-connect]{animation:none !important;opacity:1 !important;transform:none !important}}
 [data-hk-phone].is-visible{opacity:1 !important;transform:translateY(0) scale(1) !important}
 @media (min-aspect-ratio:21/9){[data-screen-label="Hero"]{min-height:min(94svh,820px) !important}}
 @media (min-width:720px){video[data-hk-video="hero"]{object-position:66% 42% !important;transform:scale(1.04)}[data-hk-hero-phone]>div{transform:translateX(2vw);transform-origin:bottom center}}
@@ -111,10 +113,8 @@ html{scroll-padding-top:66px}
    nebeneinander bliebe fuer das Select eine Restbreite von unter 150px. */
 #hk-beta-form select{flex:1 1 100% !important;max-width:none !important}
 #beta form button[type="submit"]{width:100%}
-/* Beta am Handy: TestFlight zuerst, die Zusage danach; der Button bricht nicht um (Critique 19.11.2026, Lauf 3). */
+/* Beta am Handy: der TestFlight-Button bricht nicht um (Critique Lauf 3). Die Zusage steht seit Lauf 5 wieder vor den Karten, sie ist jetzt kurz. */
 .hk-betainhalt{display:flex;flex-direction:column}
-.hk-betawege{order:1}
-.hk-zusage{order:2}
 #beta .hk-tf{width:100%;box-sizing:border-box;white-space:nowrap}
 /* Weniger verschachtelter Innenabstand am Handy: vorher ~230 px Satzbreite. */
 #beta{padding-left:12px !important;padding-right:12px !important}
@@ -233,6 +233,9 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
           <span style="display:inline-flex;align-items:center;background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:7px 13px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.92);white-space:nowrap;">Kostenlos per TestFlight</span>
           <span style="display:inline-flex;align-items:center;background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:7px 13px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.92);white-space:nowrap;">Android: Warteliste</span>
         </div>
+        <!-- Erwartung „sofort“ einordnen (Critique-Lauf 5): Satzkern aus dem
+             Off-Season-Hinweis der Beta-Karte. -->
+        <div style="font-size:14px;line-height:1.5;color:#E6EEF6;max-width:560px;text-shadow:0 1px 12px rgba(10,30,60,0.7);">Solange kein aktueller Lagebericht vorliegt, zeigt die App während einer Prüfung „Prüfung eingeschränkt“. Das ist vorgesehen.</div>
         <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
           <a class="hk-cta-hero" href="#beta" style="background:#1A6DE0;color:#FFFFFF;font-size:16.5px;font-weight:700;padding:16px 30px;border-radius:99px;text-decoration:none;box-shadow:0 14px 34px -10px rgba(26,109,224,0.6);">Beta testen</a>
           <a class="hk-ghost" href="#funktionsweise" style="background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.22);color:#FFFFFF;font-size:16.5px;font-weight:600;padding:15px 28px;border-radius:99px;text-decoration:none;">So funktioniert's</a>
@@ -283,6 +286,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     <!-- v6.0: Beta-Deal als Micro-Zeile — am Handy statt der drei Chips
          des Desktop-Heros, damit der Hero nicht wächst. -->
     <div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.92);text-shadow:0 1px 12px rgba(10,30,60,0.65);">Kostenlos · iPhone sofort · Android-Warteliste</div>
+    <div style="text-align:center;font-size:13.5px;line-height:1.45;color:#E6EEF6;text-shadow:0 1px 12px rgba(10,30,60,0.7);">Solange kein aktueller Lagebericht vorliegt, zeigt die App während einer Prüfung „Prüfung eingeschränkt“. Das ist vorgesehen.</div>
   </div>
   <div style="position:relative;z-index:4;width:min(56%,222px);margin:20px auto -178px;">
     <div style="background:#0E1B2C;border-radius:40px 40px 0 0;padding:8px 8px 0;box-shadow:0 -20px 70px -16px rgba(9,20,38,0.6);">
@@ -334,7 +338,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         <div style="width:19px;height:19px;border-radius:50%;background:#F4F7FA;border:3px solid #33445A;box-sizing:border-box;" aria-hidden="true"></div>
         <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#1A6DE0;margin-top:6px;">SCHRITT 2</div>
         <h3 style="margin:0;font-size:21px;font-weight:800;letter-spacing:-0.01em;">Abgleich mit dem Lagebericht</h3>
-        <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Deine Messwerte werden mit den Gefahrenstellen des amtlichen Berichts verglichen — Übereinstimmung nur, wenn alle Kriterien zusammenpassen.</p>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Deine Messwerte werden mit den Gefahrenstellen des amtlichen Berichts verglichen — Übereinstimmung nur, wenn alle Kriterien zusammenpassen. <a href="validierung.html#regel" style="color:#1A6DE0;font-weight:600;">Die Regel im Detail</a></p>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:4px;">
           <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#33445A;border:1px solid #C9D6E3;border-radius:99px;padding:6px 12px;background:#FFFFFF;">MESSWERTE</span>
           <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#5C6E80;" aria-hidden="true">×</span>
@@ -380,7 +384,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         <div style="position:absolute;left:-30px;top:2px;width:17px;height:17px;border-radius:50%;background:#F4F7FA;border:3px solid #33445A;box-sizing:border-box;" aria-hidden="true"></div>
         <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;color:#1A6DE0;">SCHRITT 2</div>
         <h3 style="margin:0;font-size:20px;font-weight:800;letter-spacing:-0.01em;">Abgleich mit dem Lagebericht</h3>
-        <p style="margin:0;font-size:16px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Deine Messwerte werden mit den Gefahrenstellen des amtlichen Berichts verglichen — Übereinstimmung nur, wenn alle Kriterien zusammenpassen.</p>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Deine Messwerte werden mit den Gefahrenstellen des amtlichen Berichts verglichen — Übereinstimmung nur, wenn alle Kriterien zusammenpassen. <a href="validierung.html#regel" style="color:#1A6DE0;font-weight:600;">Die Regel im Detail</a></p>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:2px;">
           <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#33445A;border:1px solid #C9D6E3;border-radius:99px;padding:7px 13px;background:#FFFFFF;">MESSWERTE</span>
           <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#5C6E80;" aria-hidden="true">×</span>
@@ -422,11 +426,10 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     <div style="display:flex;flex-direction:column;gap:14px;max-width:680px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#6B5CE0;">Im Gelände</div>
       <h2 style="margin:0;font-size:clamp(32px,4.4vw,56px);font-weight:900;letter-spacing:-0.025em;line-height:1.04;text-wrap:balance;">So sieht eine Gefahrenstelle aus.</h2>
-      <p style="margin:0;font-size:clamp(16px,1.8vw,19px);color:#4A5A6B;">Scroll weiter — die drei Kriterien erscheinen Schritt für Schritt im Gelände.</p>
     </div>
     <div style="position:relative;margin-top:36px;">
       <div style="position:relative;border-radius:28px;overflow:hidden;box-shadow:0 40px 90px -40px rgba(14,27,44,0.4);animation:hkReveal 0.8s both;animation-timeline:view();animation-range:entry 0% entry 30%;">
-        <img src="img/terrain-base.webp" alt="Sauberer alpiner Hang am frühen Morgen — Basisbild ohne Einblendungen" loading="lazy" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;">
+        <img src="img/terrain-base.webp" alt="Sauberer alpiner Hang am frühen Morgen — Basisbild ohne Einblendungen" loading="eager" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;">
         <svg data-hk-layer="violett" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;animation:hkLayer 1s both;animation-timeline:view();animation-range:cover 33% cover 48%;">
           <defs>
             <linearGradient id="hkViol" x1="0" y1="0" x2="0.25" y2="1"><stop offset="0" stop-color="#A79BFF" stop-opacity="0.14"></stop><stop offset="1" stop-color="#8F7FF5" stop-opacity="0.38"></stop></linearGradient>
@@ -443,13 +446,13 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
           <path d="M 1010,710 A 70 70 0 0 0 1001,675" stroke="rgba(255,255,255,0.9)" stroke-width="2" fill="none"></path>
         </svg>
         <div data-hk-layer="band-chip" style="position:absolute;inset:0;pointer-events:none;z-index:6;animation:hkLayer 0.8s both;animation-timeline:view();animation-range:cover 16% cover 27%;">
-          <div style="position:absolute;left:calc(2% + min(22%,240px) + 54px);top:47%;transform:translate(0,-50%);display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:6px 13px;font-family:'IBM Plex Mono',monospace;font-size:clamp(11px,1.1vw,12.5px);letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;">HÖHE · 1.681&#8239;M</div>
+          <div style="position:absolute;left:calc(2% + min(22%,240px) + 54px);top:47%;transform:translate(0,-50%);display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:6px 13px;font-family:'IBM Plex Mono',monospace;font-size:clamp(12.5px,1.2vw,15px);letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;">HÖHE · 1.681&#8239;M</div>
         </div>
         <div data-hk-layer="expo-chip" style="position:absolute;inset:0;pointer-events:none;z-index:3;animation:hkLayer 0.8s both;animation-timeline:view();animation-range:cover 5% cover 16%;">
-          <div style="position:absolute;left:71%;top:16%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:6px 13px;font-family:'IBM Plex Mono',monospace;font-size:clamp(11px,1.1vw,12.5px);letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;"><svg width="11" height="11" viewBox="0 0 12 12" aria-hidden="true"><path d="M9 3 L3 9 M3 9 L3 5.4 M3 9 L6.6 9" stroke="#FFFFFF" stroke-width="1.6" fill="none" stroke-linecap="round"></path></svg>EXPOSITION · SW</div>
+          <div style="position:absolute;left:71%;top:16%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:6px 13px;font-family:'IBM Plex Mono',monospace;font-size:clamp(12.5px,1.2vw,15px);letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;"><svg width="11" height="11" viewBox="0 0 12 12" aria-hidden="true"><path d="M9 3 L3 9 M3 9 L3 5.4 M3 9 L6.6 9" stroke="#FFFFFF" stroke-width="1.6" fill="none" stroke-linecap="round"></path></svg>EXPOSITION · SW</div>
         </div>
         <div data-hk-layer="neigung-chip" style="position:absolute;inset:0;pointer-events:none;z-index:3;animation:hkLayer 0.8s both;animation-timeline:view();animation-range:cover 27% cover 38%;">
-          <div style="position:absolute;left:74%;top:83%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:6px 13px;font-family:'IBM Plex Mono',monospace;font-size:clamp(11px,1.1vw,12.5px);letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;">HANGNEIGUNG · 30°</div>
+          <div style="position:absolute;left:74%;top:83%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:6px 13px;font-family:'IBM Plex Mono',monospace;font-size:clamp(12.5px,1.2vw,15px);letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;">HANGNEIGUNG · 30°</div>
         </div>
       </div>
       <svg data-hk-connect viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:4;animation:hkFade 0.6s both;animation-timeline:view();animation-range:cover 66% cover 74%;">
@@ -472,7 +475,8 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;border-left:2px solid #A79BFF;padding-left:18px;">
         <h3 style="margin:0;font-size:17px;font-weight:800;letter-spacing:-0.01em;">Was HangKontext nicht zeigt</h3>
-        <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Keine Prognose, keine Gefahrenkartierung und keine Freigabe. Unmarkiert heißt nie sicher. Keine Prüfung, ob Lawinen aus dem Gelände oberhalb den Standort erreichen können (Auslauf), und keine Vorwarnung entlang der Route: Die App meldet erst dort, wo man steht.</p>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Keine Prognose, keine Gefahrenkartierung und keine Freigabe. Unmarkiert heißt nie sicher.</p>
+        <p style="margin:4px 0 0;font-size:15px;line-height:1.55;color:#0E1B2C;font-weight:600;text-wrap:pretty;border:1px dashed #9FB3C8;border-radius:12px;padding:10px 14px;background:#FFFFFF;">Keine Prüfung, ob Lawinen aus dem Gelände oberhalb den Standort erreichen können (Auslauf), und keine Vorwarnung entlang der Route: Die App meldet erst dort, wo man steht.</p>
       </div>
     </div>
     <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:36px;padding-bottom:clamp(40px,5vw,64px);">
@@ -510,7 +514,8 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;border-left:2px solid #A79BFF;padding-left:16px;">
         <h3 style="margin:0;font-size:17.5px;font-weight:800;letter-spacing:-0.01em;">Was HangKontext nicht zeigt</h3>
-        <p style="margin:0;font-size:16px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Keine Prognose, keine Gefahrenkartierung und keine Freigabe. Unmarkiert heißt nie sicher. Keine Prüfung, ob Lawinen aus dem Gelände oberhalb den Standort erreichen können (Auslauf), und keine Vorwarnung entlang der Route: Die App meldet erst dort, wo man steht.</p>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Keine Prognose, keine Gefahrenkartierung und keine Freigabe. Unmarkiert heißt nie sicher.</p>
+        <p style="margin:4px 0 0;font-size:15px;line-height:1.55;color:#0E1B2C;font-weight:600;text-wrap:pretty;border:1px dashed #9FB3C8;border-radius:12px;padding:10px 14px;background:#FFFFFF;">Keine Prüfung, ob Lawinen aus dem Gelände oberhalb den Standort erreichen können (Auslauf), und keine Vorwarnung entlang der Route: Die App meldet erst dort, wo man steht.</p>
       </div>
     </div>
     <div style="padding-bottom:38px;"></div>
@@ -523,12 +528,6 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1A6DE0;">Drei Zustände</div>
     <h2 style="margin:0;font-size:clamp(30px,4vw,50px);font-weight:900;letter-spacing:-0.025em;line-height:1.05;text-wrap:balance;">Drei Antworten. Keine davon ist eine Freigabe.</h2>
     <p style="margin:0;font-size:16.5px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Die drei wichtigsten Zustände einer laufenden Prüfung — wähle sie hier aus. Fehlen Daten, sagt die App das explizit.</p>
-    <!-- Vorher ein Satz mit sechs Aufzaehlungen (Critique 19.11.2026, Lauf 3):
-         jetzt die Kernaussage hervorgehoben, die Faelle als gestrichelte
-         Chips (gestrichelt = Formsprache von „Pruefung eingeschraenkt"). -->
-    <p style="margin:6px 0 0;font-size:16.5px;font-weight:700;line-height:1.5;color:#0E1B2C;text-wrap:pretty;">Ein ausbleibender Hinweis ist nie eine Aussage über das Gelände.</p>
-    <div style="font-size:14.5px;line-height:1.5;color:#4A5A6B;">Einen Hinweis auf eine Übereinstimmung gibt es nicht:</div>
-    <ul style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;"><li style="display:inline-flex;align-items:center;border:1px dashed #9FB3C8;border-radius:99px;padding:6px 12px;font-size:13.5px;color:#33445A;background:#FFFFFF;">ohne laufende Prüfung</li><li style="display:inline-flex;align-items:center;border:1px dashed #9FB3C8;border-radius:99px;padding:6px 12px;font-size:13.5px;color:#33445A;background:#FFFFFF;">bei leerem Akku</li><li style="display:inline-flex;align-items:center;border:1px dashed #9FB3C8;border-radius:99px;padding:6px 12px;font-size:13.5px;color:#33445A;background:#FFFFFF;">nach einem Neustart des Handys</li><li style="display:inline-flex;align-items:center;border:1px dashed #9FB3C8;border-radius:99px;padding:6px 12px;font-size:13.5px;color:#33445A;background:#FFFFFF;">ohne GPS-Fix</li><li style="display:inline-flex;align-items:center;border:1px dashed #9FB3C8;border-radius:99px;padding:6px 12px;font-size:13.5px;color:#33445A;background:#FFFFFF;">ohne geladenen Lagebericht</li><li style="display:inline-flex;align-items:center;border:1px dashed #9FB3C8;border-radius:99px;padding:6px 12px;font-size:13.5px;color:#33445A;background:#FFFFFF;">wenn iOS die App beendet</li></ul>
   </div>
   <div style="margin-top:26px;">
     <div role="tablist" aria-label="Zustand auswählen" style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -548,7 +547,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         </div>
         <div data-z="nicht" hidden>
           <h3 style="margin:0 0 12px;font-size:clamp(20px,2.4vw,26px);font-weight:800;letter-spacing:-0.015em;">Die App sagt, was sie nicht prüfen kann.</h3>
-          <p style="margin:0;font-size:15.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;max-width:520px;">GPS zu ungenau, veralteter Lagebericht oder Gelände außerhalb der Abdeckung: HangKontext zeigt explizit „Prüfung eingeschränkt" an, statt stillschweigend „keine Übereinstimmung" zu zeigen. Fehlende Daten zeigt die App als eigenen Zustand an.</p>
+          <p style="margin:0;font-size:15.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;max-width:520px;">GPS zu ungenau, veralteter Lagebericht oder Gelände außerhalb der Abdeckung: HangKontext zeigt explizit „Prüfung eingeschränkt“ an, statt stillschweigend „keine Übereinstimmung“ zu zeigen. Fehlende Daten zeigt die App als eigenen Zustand an.</p>
         </div>
         <div id="z-status" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#33445A;border-top:1px solid #EDF2F7;padding-top:12px;">ÜBEREINSTIMMUNG · TRIEBSCHNEE · STUFE 2 · EIGENE BEURTEILUNG NÖTIG</div>
       </div>
@@ -559,6 +558,15 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
           <img data-z="nicht" hidden src="img/home-gps-ungenau.webp" alt="App-Zustand: Prüfung eingeschränkt — GPS zu ungenau, Position unsicher, keine Aussage möglich" loading="lazy" width="1206" height="2622" style="width:100%;height:auto;display:block;border-radius:38px;">
         </div>
       </div>
+    </div>
+    <!-- Kernaussage und die Faelle ohne Hinweis stehen seit Critique-Lauf 5
+         (19.11.2026) unter dem Panel: erst die Zustaende zeigen, dann
+         „und wenn nichts kommt?“ beantworten. Gestrichelt = Formsprache
+         von „Pruefung eingeschraenkt“. -->
+    <div style="margin-top:22px;display:flex;flex-direction:column;gap:10px;max-width:760px;">
+      <p style="margin:0;font-size:16.5px;font-weight:700;line-height:1.5;color:#0E1B2C;text-wrap:pretty;">Ein ausbleibender Hinweis ist nie eine Aussage über das Gelände.</p>
+      <div style="font-size:14.5px;line-height:1.5;color:#4A5A6B;">Einen Hinweis auf eine Übereinstimmung gibt es nicht:</div>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;"><li style="display:inline-flex;align-items:center;border:1px dashed #9FB3C8;border-radius:99px;padding:6px 12px;font-size:13.5px;color:#33445A;background:#FFFFFF;">ohne laufende Prüfung</li><li style="display:inline-flex;align-items:center;border:1px dashed #9FB3C8;border-radius:99px;padding:6px 12px;font-size:13.5px;color:#33445A;background:#FFFFFF;">bei leerem Akku</li><li style="display:inline-flex;align-items:center;border:1px dashed #9FB3C8;border-radius:99px;padding:6px 12px;font-size:13.5px;color:#33445A;background:#FFFFFF;">nach einem Neustart des Handys</li><li style="display:inline-flex;align-items:center;border:1px dashed #9FB3C8;border-radius:99px;padding:6px 12px;font-size:13.5px;color:#33445A;background:#FFFFFF;">ohne GPS-Fix</li><li style="display:inline-flex;align-items:center;border:1px dashed #9FB3C8;border-radius:99px;padding:6px 12px;font-size:13.5px;color:#33445A;background:#FFFFFF;">ohne geladenen Lagebericht</li><li style="display:inline-flex;align-items:center;border:1px dashed #9FB3C8;border-radius:99px;padding:6px 12px;font-size:13.5px;color:#33445A;background:#FFFFFF;">wenn iOS die App beendet</li></ul>
     </div>
   </div>
 </div>
@@ -749,17 +757,29 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#1A6DE0;">Retrospektive Abdeckungsprüfung</div>
       <h2 style="margin:0;font-size:clamp(28px,3.8vw,48px);font-weight:900;letter-spacing:-0.025em;line-height:1.06;text-wrap:balance;">An 656 auswertbaren Lawinenereignissen retrospektiv geprüft.</h2>
     </div>
-    <!-- Seit 19.11.2026 (Critique Lauf 4): vier gleich grosse Werte statt zwei
-         Heldenzahlen; die Pflicht-Nachbarschaft 6,6 pp / 10,4 pp (docs/zahlen.md)
-         bleibt in der Leiste erhalten, die Einordnung steht vollstaendig im
-         Aufklapper darunter. Wortlaute der Absaetze unveraendert uebernommen. -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:0 clamp(20px,3vw,36px);margin-top:32px;">
-      <div style="display:flex;flex-direction:column;gap:10px;padding:18px 0;border-top:1px solid #D6E1EC;"><div style="font-size:clamp(30px,3vw,38px);font-weight:800;letter-spacing:-0.03em;line-height:1;color:#0E1B2C;">96<span style="margin:0 -0.04em;">,</span>5<span style="font-size:0.5em;font-weight:700;">&#8239;%</span></div><div style="font-size:14px;line-height:1.5;color:#4A5A6B;text-wrap:pretty;">Ereignisorte mit Übereinstimmung, am Punkt oder im 200-m-Umkreis (656 auswertbare Ereignisse); exakt am Punkt 74,5&#8239;%</div></div>
-      <div style="display:flex;flex-direction:column;gap:10px;padding:18px 0;border-top:1px solid #D6E1EC;"><div style="font-size:clamp(30px,3vw,38px);font-weight:800;letter-spacing:-0.03em;line-height:1;color:#0E1B2C;">89<span style="margin:0 -0.04em;">,</span>9<span style="font-size:0.5em;font-weight:700;">&#8239;%</span></div><div style="font-size:14px;line-height:1.5;color:#4A5A6B;text-wrap:pretty;">Zufällige Vergleichspunkte derselben Warnregion und desselben Tages, gleich geprüft (3.280 Punkte); am Punkt 48,8&#8239;%</div></div>
-      <div style="display:flex;flex-direction:column;gap:10px;padding:18px 0;border-top:1px solid #D6E1EC;"><div style="font-size:clamp(30px,3vw,38px);font-weight:800;letter-spacing:-0.03em;line-height:1;color:#0E1B2C;">6<span style="margin:0 -0.04em;">,</span>6<span style="font-size:0.5em;font-weight:700;">&#8239;pp</span></div><div style="font-size:14px;line-height:1.5;color:#4A5A6B;text-wrap:pretty;">Abstand der beiden Werte, 95-%-Intervall 5,1–8,2</div></div>
-      <div style="display:flex;flex-direction:column;gap:10px;padding:18px 0;border-top:1px solid #D6E1EC;"><div style="font-size:clamp(30px,3vw,38px);font-weight:800;letter-spacing:-0.03em;line-height:1;color:#0E1B2C;">10<span style="margin:0 -0.04em;">,</span>4<span style="font-size:0.5em;font-weight:700;">&#8239;pp</span></div><div style="font-size:14px;line-height:1.5;color:#4A5A6B;text-wrap:pretty;">Abstand am Punkt, wenn beide Seiten auf mindestens 28° beschränkt werden (Kernauswertung, 95-%-Intervall 6,5–14,2; ohne diese Beschränkung 32,2&nbsp;pp). Andere Stichprobe, nicht mit den 6,6&nbsp;pp verrechenbar.</div></div>
-    </div>
+    <!-- Seit Critique-Lauf 5 (19.11.2026): die Lesart steht VOR den Zahlen;
+         96,5/89,9 als Balkenpaar auf gemeinsamer 0–100-%-Skala (der Vergleich
+         ist die Aussage), darunter 6,6 pp und 10,4 pp nebeneinander
+         (Pflicht-Nachbarschaft laut docs/zahlen.md). 74,5/48,8 bleiben
+         sichtbar (Fachprüfung 72b180ed66ca). -->
     <p style="margin:22px 0 0;font-size:16px;font-weight:700;line-height:1.6;color:#0E1B2C;max-width:760px;text-wrap:pretty;border-left:3px solid #1A6DE0;padding-left:16px;">Ereignisorte stimmen häufiger mit einer Gefahrenstelle überein als zufällige Flächenpunkte. Alle Werte gelten für Tirol, sind deskriptiv und an denselben Daten entwickelt: Bitte keine dieser Zahlen als Trefferquote oder Genauigkeit der App lesen.</p>
+    <div style="margin-top:26px;display:flex;flex-direction:column;gap:18px;max-width:900px;">
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;font-weight:600;color:#0E1B2C;">Ereignisorte</span><span style="font-size:22px;font-weight:800;letter-spacing:-0.02em;color:#0E1B2C;white-space:nowrap;">96,5&#8239;%</span></div>
+          <div style="height:12px;border-radius:99px;background:#EDF2F7;overflow:hidden;" aria-hidden="true"><div style="height:100%;width:96.5%;background:#0E1B2C;border-radius:99px;"></div></div>
+          <div style="font-size:14px;line-height:1.5;color:#4A5A6B;text-wrap:pretty;">Mit Übereinstimmung am Punkt oder im 200-m-Umkreis (656 auswertbare Ereignisse); exakt am Punkt 74,5&#8239;%</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;font-weight:600;color:#0E1B2C;">Zufällige Vergleichspunkte</span><span style="font-size:22px;font-weight:800;letter-spacing:-0.02em;color:#0E1B2C;white-space:nowrap;">89,9&#8239;%</span></div>
+          <div style="height:12px;border-radius:99px;background:#EDF2F7;overflow:hidden;" aria-hidden="true"><div style="height:100%;width:89.9%;background:#7E92A6;border-radius:99px;"></div></div>
+          <div style="font-size:14px;line-height:1.5;color:#4A5A6B;text-wrap:pretty;">Derselben Warnregion und desselben Tages, gleich geprüft (3.280 Punkte); am Punkt 48,8&#8239;%</div>
+        </div>
+      <div style="font-size:12.5px;color:#5C6E80;">Skala 0–100&#8239;%</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:0 clamp(20px,3vw,36px);margin-top:18px;max-width:900px;">
+      <div style="display:flex;flex-direction:column;gap:10px;padding:18px 0;border-top:1px solid #D6E1EC;"><div style="font-size:clamp(30px,3vw,38px);font-weight:800;letter-spacing:-0.03em;line-height:1;color:#0E1B2C;">6<span style="margin:0 -0.04em;">,</span>6<span style="font-size:0.55em;font-weight:700;">&#8239;pp</span></div><div style="font-size:14px;line-height:1.5;color:#4A5A6B;text-wrap:pretty;">Abstand der beiden Werte, 95-%-Intervall 5,1–8,2</div></div>
+      <div style="display:flex;flex-direction:column;gap:10px;padding:18px 0;border-top:1px solid #D6E1EC;"><div style="font-size:clamp(30px,3vw,38px);font-weight:800;letter-spacing:-0.03em;line-height:1;color:#0E1B2C;">10<span style="margin:0 -0.04em;">,</span>4<span style="font-size:0.55em;font-weight:700;">&#8239;pp</span></div><div style="font-size:14px;line-height:1.5;color:#4A5A6B;text-wrap:pretty;">Abstand am Punkt, wenn beide Seiten auf mindestens 28° beschränkt werden (Kernauswertung, 95-%-Intervall 6,5–14,2; ohne diese Beschränkung 32,2&nbsp;pp). Andere Stichprobe, nicht mit den 6,6&nbsp;pp verrechenbar.</div></div>
+    </div>
     <details style="margin-top:22px;border-top:1px solid #E2E9F1;padding-top:18px;">
       <summary style="font-size:15.5px;font-weight:700;cursor:pointer;color:#0E1B2C;">Wie diese Zahlen zu lesen sind</summary>
       <div style="display:flex;flex-direction:column;gap:14px;margin-top:16px;">
@@ -775,7 +795,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       <summary style="font-size:15.5px;font-weight:700;cursor:pointer;color:#0E1B2C;">Methodik und Datenbasis</summary>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:6px 40px;margin-top:18px;font-size:14.5px;line-height:1.6;color:#33445A;">
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Datenbasis:</strong> Öffentlich dokumentierte Lawinenereignisse aus LAWIS für Tirol ab November 2021 (Abruf Sommer 2026; LAWIS ist inzwischen abgeschaltet, die Ereignisse stehen jetzt auf lawinen.report). Datenquelle und Attribution: Lawinenwarndienst des Landes Tirol.</div>
-        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Grundgesamtheit:</strong> Insgesamt wurden 711 Ereignisse geprüft. Davon waren 656 auswertbar. Bei 55 Ereignissen war eine Prüfung nicht möglich: für 52 war am Ereignistag kein Lagebericht veröffentlicht (Zeiten ohne laufenden Berichtsbetrieb), 3 lagen außerhalb der Warnregionsgrenzen. Für jedes der 711 Ereignisse lag eine Geländebasis vor. Die 55 Fälle wurden nicht als „keine Übereinstimmung" gewertet, sondern gesondert als nicht auswertbar dokumentiert.</div>
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Grundgesamtheit:</strong> Insgesamt wurden 711 Ereignisse geprüft. Davon waren 656 auswertbar. Bei 55 Ereignissen war eine Prüfung nicht möglich: für 52 war am Ereignistag kein Lagebericht veröffentlicht (Zeiten ohne laufenden Berichtsbetrieb), 3 lagen außerhalb der Warnregionsgrenzen. Für jedes der 711 Ereignisse lag eine Geländebasis vor. Die 55 Fälle wurden nicht als „keine Übereinstimmung“ gewertet, sondern gesondert als nicht auswertbar dokumentiert.</div>
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Ausgangspunkt:</strong> Ausgangspunkt ist die in LAWIS veröffentlichte Ereigniskoordinate. Neigung, Exposition und Höhe werden dort mit demselben Geländemodell und denselben Standardschwellwerten bestimmt, die der Auswertungslogik von HangKontext zugrunde liegen.</div>
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Koordinatenunsicherheit:</strong> LAWIS-Koordinaten können unterschiedliche räumliche Bezüge bezeichnen, beispielsweise die Anrisskante, die Ablagerung oder eine näherungsweise gesetzte Position. Ergibt der exakte Koordinatenpunkt keine Übereinstimmung, werden deshalb zusätzlich alle Rasterzellen geprüft, deren Mittelpunkt innerhalb eines echten Kreises von 200 Metern um die gemeldete Koordinate liegt.</div>
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Übereinstimmungsregel:</strong> Eine Rasterzelle zählt nur dann als Übereinstimmung, wenn Neigung, Exposition und Höhe gemeinsam zu ein und derselben Gefahrenstelle des am Ereignistag gültigen Lageberichts passen. Die Warnregion und deren Gefahrenstellen bleiben dabei die des ursprünglichen Koordinatenpunkts. Der Umkreis verändert nicht die geltende Gefahrenstelle, sondern ausschließlich die geprüfte Geländezelle.</div>
@@ -835,8 +855,8 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
            staerkste Anmeldegrund und beantwortet zugleich die Frage, wie
            sich das Projekt spaeter finanziert. Unwiderruflich (ADR-0020). -->
       <div class="hk-zusage" style="margin-top:20px;max-width:640px;border-left:3px solid #1A6DE0;padding-left:16px;">
-        <div style="font-size:16.5px;font-weight:800;line-height:1.4;color:#0E1B2C;text-wrap:pretty;">Wer diese Saison testet, behält den vollen Funktionsumfang dauerhaft.</div>
-        <p style="margin:6px 0 0;font-size:14.5px;line-height:1.6;color:#33445A;text-wrap:pretty;">Die Beta ist kostenlos. Später soll ein Saison-Abo dazukommen (geplant 20–30&#8239;€) — der Abgleich in deiner eigenen Region bleibt aber immer frei. Wer in der Saison 2026/27 dabei ist, behält den vollen Funktionsumfang ohne Kosten. Keine Werbung, kein Datenverkauf.</p>
+        <div style="font-size:16.5px;font-weight:800;line-height:1.4;color:#0E1B2C;text-wrap:pretty;">Wer in der Beta-Saison 2026/27 dabei ist, behält den vollen Funktionsumfang dauerhaft kostenfrei.</div>
+        <p style="margin:6px 0 0;font-size:14.5px;line-height:1.6;color:#33445A;text-wrap:pretty;">Die Beta ist kostenlos. Später soll ein Saison-Abo dazukommen (geplant 20–30&#8239;€) — der Abgleich in deiner eigenen Region bleibt aber dauerhaft frei. Keine Werbung, kein Datenverkauf.</p>
       </div>
 
       <!-- Zwei Wege, nach Geraet getrennt (Critique 19.11.2026): Fuer iPhone
@@ -854,7 +874,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
           <p style="margin:8px 0 0;font-size:14.5px;line-height:1.6;color:#33445A;text-wrap:pretty;">Die Beta ist offen. Du installierst HangKontext über Apples TestFlight-App, ohne Anmeldung hier.</p>
           <a class="hk-cta hk-tf" href="https://testflight.apple.com/join/c3ZxWFf4" target="_blank" rel="noopener" data-goatcounter-click="/event/testflight-klick" data-goatcounter-title="TestFlight-Klick" style="margin-top:18px;display:inline-flex;align-items:center;justify-content:center;min-height:52px;background:#1A6DE0;color:#FFFFFF;font-size:16px;font-weight:700;padding:0 28px;border-radius:99px;text-decoration:none;box-shadow:0 12px 30px -10px rgba(26,109,224,0.55);">TestFlight-Beta öffnen</a>
           <div style="margin-top:10px;font-size:13.5px;line-height:1.5;color:#4A5A6B;">iPhone mit iOS&#8239;16.2 oder neuer, dazu Apples TestFlight-App.</div>
-          <p style="margin:16px 0 0;padding-top:14px;border-top:1px solid #E4EBF2;font-size:14px;line-height:1.6;color:#33445A;text-wrap:pretty;">Solange die Warndienste keinen Lagebericht veröffentlichen, hat HangKontext nichts zum Abgleichen und zeigt während einer Prüfung durchgehend <strong>„Prüfung eingeschränkt"</strong>. Das ist der vorgesehene Zustand, kein Fehler. Gelände, Karte und Bedienung kannst du trotzdem ansehen.</p>
+          <p style="margin:16px 0 0;padding-top:14px;border-top:1px solid #E4EBF2;font-size:14px;line-height:1.6;color:#33445A;text-wrap:pretty;">Solange die Warndienste keinen Lagebericht veröffentlichen, hat HangKontext nichts zum Abgleichen und zeigt während einer Prüfung durchgehend <strong>„Prüfung eingeschränkt“</strong>. Das ist der vorgesehene Zustand, kein Fehler. Gelände, Karte und Bedienung kannst du trotzdem ansehen.</p>
         </div>
 
         <div style="background:rgba(255,255,255,0.72);border:1px solid #C9D6E3;border-radius:20px;padding:clamp(20px,2.6vw,28px);">
