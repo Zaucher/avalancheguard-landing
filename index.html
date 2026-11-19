@@ -196,7 +196,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       <div style="display:flex;align-items:center;gap:11px;background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:7px 16px 7px 7px;box-shadow:0 4px 24px -8px rgba(9,20,38,0.35);">
         <img src="img/app-icon-96.png" alt="HangKontext App-Icon" width="32" height="32" style="width:32px;height:32px;border-radius:50%;">
         <div style="font-size:15.5px;font-weight:800;letter-spacing:-0.01em;color:#FFFFFF;">HangKontext</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#B9C9DC;">Beta · Winter 26/27</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#B9C9DC;">Beta · Winter 26/27</div>
       </div>
       <nav aria-label="Hauptnavigation" style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:5px;box-shadow:0 4px 24px -8px rgba(9,20,38,0.35);">
         <a class="hk-navlink" href="#funktionsweise" style="color:rgba(255,255,255,0.85);text-decoration:none;font-size:14.5px;font-weight:500;padding:10px 14px;border-radius:99px;">So funktioniert's</a>
@@ -228,7 +228,10 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
           <a class="hk-cta-hero" href="#beta" style="background:#1A6DE0;color:#FFFFFF;font-size:16.5px;font-weight:700;padding:16px 30px;border-radius:99px;text-decoration:none;box-shadow:0 14px 34px -10px rgba(26,109,224,0.6);">Beta testen</a>
           <a class="hk-ghost" href="#funktionsweise" style="background:rgba(9,20,38,0.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.22);color:#FFFFFF;font-size:16.5px;font-weight:600;padding:15px 28px;border-radius:99px;text-decoration:none;">So funktioniert's</a>
         </div>
-        <div style="display:flex;align-items:center;gap:9px;color:#FFFFFF;font-size:14.5px;text-shadow:0 1px 14px rgba(10,30,60,0.6);">
+        <!-- Eigene dunkle Flaeche: die Zeile sitzt unten im Hero, wo der Verlauf
+             schon ins helle #F4F7FA laeuft — weiss auf hellem Schnee kam dort
+             nur auf etwa 3:1 (Critique 19.11.2026). -->
+        <div style="display:inline-flex;align-self:flex-start;align-items:center;gap:9px;color:#FFFFFF;font-size:14.5px;background:rgba(9,20,38,0.62);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.16);border-radius:99px;padding:8px 16px;">
           <div style="width:7px;height:7px;background:#FFFFFF;transform:rotate(45deg);flex-shrink:0;opacity:0.8;" aria-hidden="true"></div>
           Informativ, nie als Freigabe — die Beurteilung bleibt beim Menschen.
         </div>
@@ -260,7 +263,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     </div>
   </header>
   <div style="position:relative;z-index:3;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:28px 20px 0;gap:16px;animation:hkReveal 0.7s ease-out both;">
-    <div style="display:flex;align-items:center;gap:8px;align-self:flex-start;background:rgba(9,20,38,0.55);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.92);">
+    <div style="display:flex;align-items:center;gap:8px;align-self:flex-start;background:rgba(9,20,38,0.55);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.2);border-radius:99px;padding:8px 14px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.92);">
       <div style="width:7px;height:7px;border-radius:50%;background:#6FAAF7;animation:hkPulse 1.8s ease-in-out infinite;flex-shrink:0;" aria-hidden="true"></div>
       <!-- Kurzform nur hier: „Lawinenlagebericht" bricht am Handy zweizeilig
            und wirkt gequetscht; der volle Begriff steht direkt darunter im
@@ -275,7 +278,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     <a href="#beta" style="display:flex;align-items:center;justify-content:center;min-height:54px;background:#1A6DE0;color:#FFFFFF;font-size:17px;font-weight:700;border-radius:99px;text-decoration:none;box-shadow:0 14px 34px -10px rgba(26,109,224,0.6);">Beta testen</a>
     <!-- v6.0: Beta-Deal als Micro-Zeile — am Handy statt der drei Chips
          des Desktop-Heros, damit der Hero nicht wächst. -->
-    <div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,255,255,0.92);text-shadow:0 1px 12px rgba(10,30,60,0.65);">Kostenlos · iPhone sofort · Android-Warteliste</div>
+    <div style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.92);text-shadow:0 1px 12px rgba(10,30,60,0.65);">Kostenlos · iPhone sofort · Android-Warteliste</div>
   </div>
   <div style="position:relative;z-index:4;width:min(56%,222px);margin:20px auto -178px;">
     <div style="background:#0E1B2C;border-radius:40px 40px 0 0;padding:8px 8px 0;box-shadow:0 -20px 70px -16px rgba(9,20,38,0.6);">
@@ -310,7 +313,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     </div>
     <div style="flex:0 1 250px;min-width:210px;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 20px 50px -24px rgba(14,27,44,0.45);">
       <img src="img/terrain-base-mobile.webp" alt="" aria-hidden="true" loading="lazy" style="width:100%;display:block;aspect-ratio:16/10;object-fit:cover;object-position:center 40%;">
-      <div style="position:absolute;left:10px;bottom:10px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:5px 11px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;">AMTLICHES GELÄNDEMODELL</div>
+      <div style="position:absolute;left:10px;bottom:10px;background:rgba(9,20,38,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.28);border-radius:99px;padding:5px 11px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:#FFFFFF;white-space:nowrap;">AMTLICHES GELÄNDEMODELL</div>
     </div>
   </div>
   <div style="position:relative;margin-top:30px;">
@@ -469,7 +472,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;border-left:2px solid #A79BFF;padding-left:18px;">
         <h3 style="margin:0;font-size:17px;font-weight:800;letter-spacing:-0.01em;">Was HangKontext nicht zeigt</h3>
-        <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Keine Prognose, keine Gefahrenkartierung und keine Freigabe. Unmarkierte Flächen sind nicht automatisch sicher.</p>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Keine Prognose, keine Gefahrenkartierung und keine Freigabe. Unmarkierte Flächen sind nicht automatisch sicher. Keine Prüfung, ob Lawinen aus dem Gelände oberhalb den Standort erreichen können (Auslauf), und keine Vorwarnung entlang der Route: Die App meldet erst dort, wo man steht.</p>
       </div>
     </div>
     <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:36px;padding-bottom:clamp(40px,5vw,64px);">
@@ -507,7 +510,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;border-left:2px solid #A79BFF;padding-left:16px;">
         <h3 style="margin:0;font-size:17.5px;font-weight:800;letter-spacing:-0.01em;">Was HangKontext nicht zeigt</h3>
-        <p style="margin:0;font-size:16px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Keine Prognose, keine Gefahrenkartierung und keine Freigabe. Unmarkierte Flächen sind nicht automatisch sicher.</p>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Keine Prognose, keine Gefahrenkartierung und keine Freigabe. Unmarkierte Flächen sind nicht automatisch sicher. Keine Prüfung, ob Lawinen aus dem Gelände oberhalb den Standort erreichen können (Auslauf), und keine Vorwarnung entlang der Route: Die App meldet erst dort, wo man steht.</p>
       </div>
     </div>
     <div style="padding-bottom:38px;"></div>
@@ -576,7 +579,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       <div style="position:absolute;inset:0;display:flex;align-items:center;">
         <div style="display:flex;gap:clamp(20px,3vw,48px);align-items:center;flex-wrap:wrap;padding:clamp(22px,3.5vw,52px);width:100%;box-sizing:border-box;">
           <div style="flex:1 1 300px;min-width:260px;display:flex;flex-direction:column;gap:12px;">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#9FB8CC;">Live Activity · Sperrbildschirm · Dynamic Island</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#9FB8CC;">Live Activity · Sperrbildschirm · Dynamic Island</div>
             <div style="font-size:clamp(22px,2.6vw,32px);font-weight:800;letter-spacing:-0.015em;line-height:1.15;color:#FFFFFF;">Ohne die App zu öffnen.</div>
             <p style="margin:0;font-size:15.5px;line-height:1.6;color:#D5E2EE;text-wrap:pretty;max-width:440px;">Zustand, Messwerte und Gefahrenstufe liegen auf dem Sperrbildschirm und kompakt in der Dynamic Island — die Handschuhe bleiben an, das Telefon in der Jacke.</p>
           </div>
@@ -591,13 +594,16 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin-top:14px;">
       <div style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:16px 18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
         <div class="hk-zoom-sm" data-lb="watch" role="button" tabindex="0" aria-label="Watch-Mockup vergrößern" style="width:78px;background:#05090F;border-radius:22px;padding:5px;flex-shrink:0;cursor:zoom-in;transition:transform 0.25s ease;">
-          <!-- watch.png: Simulator-Aufnahme 19.11.2026 (Build 7); das rote
-               Statussymbol „iPhone getrennt“ der Watch-Statusleiste ist
-               übermalt, sonst unverändert. -->
+          <!-- watch.png: Simulator-Aufnahme 19.11.2026 (Build 7) am Punkt
+               47.47135,10.52925 (30° · SW · 1681 m, wie Sperrbildschirm und
+               Startbildschirm). Die Watch-Uhrzeit laesst sich im Simulator
+               nicht ueberschreiben; die Anzeige „14:13“ ist aus den Ziffern
+               des Bildes selbst gesetzt, damit sie nach dem Treffer (13:59)
+               liegt. Sonst unverändert. -->
           <img src="img/watch.png" alt="Apple-Watch-Komplikation: Zustand am Handgelenk" loading="lazy" style="width:100%;display:block;border-radius:20px;">
         </div>
         <div style="flex:1 1 170px;display:flex;flex-direction:column;gap:7px;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Apple Watch</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Apple Watch</div>
           <div style="font-size:18px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;">Ein Blick, weitergehen.</div>
           <div style="font-size:14.5px;line-height:1.55;color:#33445A;text-wrap:pretty;">Der Zustand als Komplikation direkt am Handgelenk.</div>
         </div>
@@ -607,7 +613,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
           <img src="img/karte-overlay.webp" alt="Karte mit markiertem passendem Steilgelände" loading="lazy" width="1206" height="2622" style="width:100%;height:auto;display:block;border-radius:16px;">
         </div>
         <div style="flex:1 1 170px;display:flex;flex-direction:column;gap:7px;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Karte · Opt-in</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Karte · Opt-in</div>
           <div style="font-size:18px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;">Gefahrenstellen im Gelände</div>
           <div style="font-size:14.5px;line-height:1.55;color:#33445A;text-wrap:pretty;">Passendes Steilgelände liegt markiert auf der Karte. Unmarkiert heißt nie sicher.</div>
         </div>
@@ -653,7 +659,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       <div data-lb="watch" role="button" tabindex="0" aria-label="Watch-Mockup vergrößern" style="background:#05090F;border-radius:20px;padding:4px;cursor:zoom-in;align-self:center;">
         <img src="img/watch.png" alt="Apple-Watch-Komplikation: Zustand am Handgelenk" loading="lazy" style="height:75px;width:auto;display:block;border-radius:17px;">
       </div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Apple Watch</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">Apple Watch</div>
       <div style="font-size:17px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;line-height:1.2;">Ein Blick, weitergehen.</div>
       <div style="font-size:15.5px;line-height:1.5;color:#33445A;text-wrap:pretty;">Der Zustand direkt am Handgelenk.</div>
     </div>
@@ -661,7 +667,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       <div data-lb="map" role="button" tabindex="0" aria-label="Karten-Mockup vergrößern" style="background:#05090F;border-radius:9px;padding:3px;cursor:zoom-in;align-self:center;">
         <img src="img/karte-overlay.webp" alt="Karte in der iPhone-App mit markiertem passendem Steilgelände" loading="lazy" width="1206" height="2622" style="height:77px;width:auto;display:block;border-radius:7px;">
       </div>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">iPhone · Karte</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5E7788;">iPhone · Karte</div>
       <div style="font-size:17px;font-weight:800;letter-spacing:-0.01em;color:#0E1B2C;line-height:1.2;">Gefahrenstellen im Gelände</div>
       <div style="font-size:15.5px;line-height:1.5;color:#33445A;text-wrap:pretty;">In der App zuschaltbar: passendes Steilgelände wird markiert. Unmarkiert heißt nie sicher.</div>
     </div>
@@ -680,15 +686,15 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
 <div data-screen-label="Zielgruppen" style="max-width:1240px;margin:0 auto;padding:clamp(8px,1.5vw,20px) 24px 0;">
   <div data-hk-desktop style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:18px 24px;display:flex;gap:14px 36px;flex-wrap:wrap;align-items:center;">
     <div style="display:flex;align-items:baseline;gap:10px;flex:1 1 250px;min-width:230px;">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:#1A6DE0;flex-shrink:0;">EINSTIEG</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;color:#1A6DE0;flex-shrink:0;">EINSTIEG</span>
       <span style="font-size:14.5px;line-height:1.5;color:#33445A;">Unterwegs den Lagebericht im Gelände nachvollziehen.</span>
     </div>
     <div style="display:flex;align-items:baseline;gap:10px;flex:1 1 250px;min-width:230px;">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:#33445A;flex-shrink:0;">ERFAHRUNG</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;color:#33445A;flex-shrink:0;">ERFAHRUNG</span>
       <span style="font-size:14.5px;line-height:1.5;color:#33445A;">Lagebericht und Gelände schneller zusammenbringen.</span>
     </div>
     <div style="display:flex;align-items:baseline;gap:10px;flex:1 1 250px;min-width:230px;">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:#6B5CE0;flex-shrink:0;">PROFESSIONELL</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;color:#6B5CE0;flex-shrink:0;">PROFESSIONELL</span>
       <span style="font-size:14.5px;line-height:1.5;color:#33445A;">Zustände dokumentieren und nachvollziehbar besprechen.</span>
     </div>
   </div>
@@ -714,21 +720,25 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
              Seitenraender, „96,5" liest sich dadurch als „96 , 5". Der
              Ausgleich haengt an der Schrift, nicht an tabular-nums (mit und
              ohne exakt gleich breit gemessen), deshalb von Hand. -->
-        <div style="font-size:clamp(56px,7vw,96px);font-weight:900;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;color:#1A6DE0;">96<span style="margin:0 -0.055em;">,</span>5<span style="font-size:0.42em;">&#8239;%</span></div>
+        <div style="font-size:clamp(56px,7vw,96px);font-weight:900;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;color:#0E1B2C;">96<span style="margin:0 -0.055em;">,</span>5<span style="font-size:0.42em;">&#8239;%</span></div>
         <p style="margin:0;font-size:16.5px;line-height:1.6;color:#33445A;text-wrap:pretty;max-width:440px;">Bei 96,5&#8239;% der 656 auswertbaren Ereignisse lag am gemeldeten Punkt oder innerhalb eines Umkreises von 200 Metern eine Übereinstimmung mit einer Gefahrenstelle des am Ereignistag gültigen Lageberichts vor.</p>
         <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;max-width:440px;">Exakt an der veröffentlichten Koordinate waren es 74,5&#8239;%. Der Umkreis gleicht unscharfe Ereigniskoordinaten aus; die App selbst prüft den aktuellen Standort.</p>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#4A5A6B;">Gematchte Vergleichspunkte</div>
-        <div style="font-size:clamp(56px,7vw,96px);font-weight:900;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;color:#33445A;">89<span style="margin:0 -0.055em;">,</span>9<span style="font-size:0.42em;">&#8239;%</span></div>
+        <div style="font-size:clamp(56px,7vw,96px);font-weight:900;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;color:#0E1B2C;">89<span style="margin:0 -0.055em;">,</span>9<span style="font-size:0.42em;">&#8239;%</span></div>
         <p style="margin:0;font-size:16.5px;line-height:1.6;color:#33445A;text-wrap:pretty;max-width:440px;">Zu jedem auswertbaren Ereignis wurden fünf zufällige Vergleichspunkte im Höhenband 1.500–3.200 Meter erzeugt, die Datum und Warnregion des Ereignisses teilen — insgesamt 3.280 Punkte, geprüft mit derselben Punkt- und 200-Meter-Umkreislogik. 89,9&#8239;% dieser Vergleichspunkte ergaben ebenfalls eine Übereinstimmung; direkt am Punkt, ohne Umkreis, waren es 48,8&#8239;%.</p>
         <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;max-width:440px;">Die 89,9&#8239;% beschreiben eine künstliche Flächenreferenz an den untersuchten Ereignistagen. Die Punkte stammen nicht aus real begangenen Touren und sind daher weder False-Positive-Rate noch Unfallwahrscheinlichkeit. Eine Tirol-weit gezogene Sekundärkontrolle liegt bei 88,5&#8239;%.</p>
       </div>
     </div>
     <!-- Einordnung direkt unter den beiden Zahlen: ohne diesen Satz lesen
-         Ueberflieger 96,5 und 88,5 als zwei Erfolgswerte oder als Widerspruch.
-         Der Abstand ist nur ein deskriptiver Flächenvergleich. -->
-    <p style="margin:28px 0 0;font-size:16px;font-weight:700;line-height:1.6;color:#0E1B2C;max-width:760px;text-wrap:pretty;border-left:3px solid #1A6DE0;padding-left:16px;">Beide Zahlen gehören zusammen: Ereignisorte stimmen mit 96,5&#8239;% häufiger mit einer Gefahrenstelle überein als zufällige Flächenpunkte derselben Warnregion in Tirol (89,9&#8239;%). Der Abstand ist deskriptiv; ohne Vergleichsdaten aus real begangenen Touren misst er nicht den Produktnutzen.</p>
+         Ueberflieger 96,5 und 89,9 als zwei Erfolgswerte oder als Widerspruch.
+         Der Abstand ist nur ein deskriptiver Flächenvergleich. Seit 19.11.2026
+         beide Zahlen in derselben Farbe (vorher 96,5 blau als „Heldenzahl"),
+         Abstand mit Intervall laut docs/zahlen.md und die Einordnung aus dem
+         Presse-Zahlenkasten (Tirol, deskriptiv, an denselben Daten entwickelt). -->
+    <p style="margin:28px 0 0;font-size:16px;font-weight:700;line-height:1.6;color:#0E1B2C;max-width:760px;text-wrap:pretty;border-left:3px solid #1A6DE0;padding-left:16px;">Beide Zahlen gehören zusammen: Ereignisorte stimmen mit 96,5&#8239;% häufiger mit einer Gefahrenstelle überein als zufällige Flächenpunkte derselben Warnregion in Tirol (89,9&#8239;%), ein Abstand von 6,6 Prozentpunkten (95-%-Intervall 5,1–8,2). Das Intervall erfasst nur die Streuung durch die Stichprobe, nicht die Anpassung der Prüfregel an dieselben Daten. Der Abstand ist deskriptiv; ohne Vergleichsdaten aus real begangenen Touren misst er nicht den Produktnutzen.</p>
+    <p style="margin:14px 0 0;font-size:15px;line-height:1.65;color:#33445A;max-width:760px;text-wrap:pretty;">Alle Werte gelten für Tirol und sind deskriptiv: Prüfregel und Waldgrenzen-Kalibrierung wurden an demselben Datensatz entwickelt. Eine Prüfung an unbekannten Daten beginnt erst mit dem Winter 2026/27, für den die Waldgrenzen-Kalibrierung eingefroren ist. Bitte keine dieser Zahlen als Trefferquote oder Genauigkeit der App lesen.</p>
     <p style="margin:20px 0 0;font-size:15px;line-height:1.65;color:#4A5A6B;max-width:760px;text-wrap:pretty;">Die Auswertung prüft die Abdeckung der Kriterien des amtlichen Lageberichts im konkreten Gelände. Sie misst keine Unfallwahrscheinlichkeit und belegt keine Unfallvermeidung. HangKontext gibt keine Hänge frei — die Beurteilung bleibt beim Menschen.</p>
     <p style="margin:18px 0 0;font-size:16px;line-height:1.6;max-width:760px;"><a href="validierung.html" style="font-weight:700;color:#1A6DE0;text-decoration-color:#1A6DE0;">Die ganze Auswertung lesen</a> — mit der Aufschlüsselung nach Gefahrenstufe, den Fällen ohne Übereinstimmung und den Grenzen der Methode.</p>
     <details style="margin-top:28px;border-top:1px solid #E2E9F1;padding-top:20px;">
@@ -785,7 +795,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
           <p style="margin:8px 0 0;font-size:14.5px;line-height:1.6;color:#33445A;text-wrap:pretty;">Die Beta ist offen. Du installierst HangKontext über Apples TestFlight-App, ohne Anmeldung hier.</p>
           <a class="hk-cta" href="https://testflight.apple.com/join/c3ZxWFf4" target="_blank" rel="noopener" data-goatcounter-click="/event/testflight-klick" data-goatcounter-title="TestFlight-Klick" style="margin-top:18px;display:inline-flex;align-items:center;justify-content:center;min-height:52px;background:#1A6DE0;color:#FFFFFF;font-size:16px;font-weight:700;padding:0 28px;border-radius:99px;text-decoration:none;box-shadow:0 12px 30px -10px rgba(26,109,224,0.55);">TestFlight-Beta öffnen</a>
           <div style="margin-top:10px;font-size:13.5px;line-height:1.5;color:#4A5A6B;">iPhone mit iOS&#8239;16.2 oder neuer, dazu Apples TestFlight-App.</div>
-          <p style="margin:16px 0 0;padding-top:14px;border-top:1px solid #E4EBF2;font-size:14px;line-height:1.6;color:#33445A;text-wrap:pretty;">Solange die Warndienste keinen Lagebericht veröffentlichen, hat HangKontext nichts zum Abgleichen und zeigt durchgehend <strong>„Eingeschränkte Prüfung"</strong>. Das ist der vorgesehene Zustand, kein Fehler. Gelände, Karte und Bedienung kannst du trotzdem ansehen.</p>
+          <p style="margin:16px 0 0;padding-top:14px;border-top:1px solid #E4EBF2;font-size:14px;line-height:1.6;color:#33445A;text-wrap:pretty;">Solange die Warndienste keinen Lagebericht veröffentlichen, hat HangKontext nichts zum Abgleichen und zeigt während einer Prüfung durchgehend <strong>„Eingeschränkte Prüfung"</strong>. Das ist der vorgesehene Zustand, kein Fehler. Gelände, Karte und Bedienung kannst du trotzdem ansehen.</p>
         </div>
 
         <div style="background:rgba(255,255,255,0.72);border:1px solid #C9D6E3;border-radius:20px;padding:clamp(20px,2.6vw,28px);">
@@ -854,14 +864,14 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       <div style="display:flex;align-items:center;gap:10px;">
         <img src="img/app-icon-96.png" alt="" width="26" height="26" style="width:26px;height:26px;border-radius:7px;">
         <div style="font-size:15px;font-weight:800;">HangKontext</div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6E80;">hangkontext.de</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6E80;">hangkontext.de</div>
       </div>
       <div style="font-size:14.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;">HangKontext informiert. Der Mensch beurteilt und entscheidet. Diese Information ersetzt keine Ausbildung, keine Tourenplanung und keine eigene Beurteilung im Gelände und warnt nicht vorab vor Gefahrenstellen auf deiner Route.</div>
       <!-- Vier Zeilen statt eines <br>-Blocks: am Desktop unveraendert eine
            Zeile je Quelle, am Handy (siehe 719-px-Query) Kategorie und
            Nennung getrennt, damit umgebrochene Nennungen nicht wie eine
            neue Kategorie aussehen. -->
-      <div data-hk-attribution style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;line-height:2;color:#5C6E80;">
+      <div data-hk-attribution style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.06em;line-height:2;color:#5C6E80;">
         <div><span data-hk-attr-key>LAGEBERICHTE:</span> <span data-hk-attr-val>AVALANCHE.REPORT <span style="white-space:nowrap;">(<a href="https://creativecommons.org/licenses/by/4.0/deed.de" style="color:inherit;">CC BY 4.0</a>)</span> · LAWINENWARNDIENST BAYERN</span></div>
         <div><span data-hk-attr-key>UNFALLDATEN:</span> <span data-hk-attr-val>LAWINENWARNDIENST DES LANDES TIROL <span style="white-space:nowrap;">(<a href="https://creativecommons.org/licenses/by/4.0/deed.de" style="color:inherit;">CC BY</a>)</span></span></div>
         <div><span data-hk-attr-key>GELÄNDE:</span> <span data-hk-attr-val>LAND TIROL · BAYER. VERMESSUNGSVERWALTUNG <span style="white-space:nowrap;">(<a href="https://creativecommons.org/licenses/by/4.0/deed.de" style="color:inherit;">CC BY 4.0</a>)</span></span></div>
@@ -869,13 +879,13 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:11px;font-size:14.5px;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6E80;">Mehr</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6E80;">Mehr</div>
       <a href="validierung.html">Validierung</a>
       <a href="presse.html">Presse</a>
       <a href="rechtliches.html">Impressum</a>
       <a href="rechtliches.html#nutzungsbedingungen">Nutzungsbedingungen</a>
       <a href="rechtliches.html#datenschutz">Datenschutz</a>
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:#5C6E80;margin-top:8px;">© 2026 HANGKONTEXT</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.08em;color:#5C6E80;margin-top:8px;">© 2026 HANGKONTEXT</div>
     </div>
   </div>
 </footer>
@@ -883,7 +893,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
 <!-- LIGHTBOX (im Entwurf: sc-if lbOpen) -->
 <div id="hk-lightbox" hidden role="dialog" aria-modal="true" aria-label="Vergrößerte Ansicht — tippen zum Schließen" style="position:fixed;inset:0;z-index:1000;background:rgba(6,14,24,0.84);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:28px;cursor:zoom-out;">
   <img id="hk-lightbox-img" src="" alt="" style="max-width:min(90vw,400px);max-height:80vh;border-radius:26px;box-shadow:0 44px 96px -22px rgba(0,0,0,0.65);display:block;">
-  <div style="position:absolute;bottom:22px;left:0;right:0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.55);pointer-events:none;">Tippen zum Schließen</div>
+  <div style="position:absolute;bottom:22px;left:0;right:0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.55);pointer-events:none;">Tippen zum Schließen</div>
   <button id="hk-lightbox-close" aria-label="Schließen" style="position:absolute;top:18px;right:18px;width:44px;height:44px;border-radius:99px;border:1px solid rgba(255,255,255,0.28);background:rgba(255,255,255,0.1);color:#FFFFFF;font-size:20px;line-height:1;cursor:pointer;">×</button>
 </div>
 
@@ -932,6 +942,21 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
   }
 
   $('#z-status').textContent = zStatusText(STATUSZEILEN[zust]);
+
+  /* Die beiden versteckten Zustandsbilder tragen loading="lazy" und wuerden
+     erst beim Umschalten geladen — bis dahin stand ein leerer schwarzer
+     Telefonrahmen da (am Handy im Mobilnetz deutlich sichtbar). Deshalb
+     laden sie, sobald der Abschnitt in die Naehe kommt. */
+  (function () {
+    var imgs = $$('img[data-z]');
+    var vorladen = function () { imgs.forEach(function (i) { i.loading = 'eager'; }); };
+    var panel = $('#zustand-panel');
+    if (!('IntersectionObserver' in window) || !panel) { vorladen(); return; }
+    var io = new IntersectionObserver(function (es) {
+      if (es.some(function (e) { return e.isIntersecting; })) { vorladen(); io.disconnect(); }
+    }, { rootMargin: '1200px 0px' });
+    io.observe(panel);
+  })();
 
   $$('[data-zust]').forEach(function (tab) {
     tab.addEventListener('click', function () { setZustand(tab.getAttribute('data-zust')); });
