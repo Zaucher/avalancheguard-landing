@@ -97,12 +97,13 @@
   Quellenangabe verwendet werden.</p>
 
   <h2>Kurzbeschreibung</h2>
-  <p>HangKontext ist ein standortbezogener Entscheidungsassistent für Skitouren
-  und Freeriding. Die App bestimmt im Hintergrund das Gelände am Standort —
-  Exposition, Höhe und Hangneigung — und gleicht es laufend mit den
+  <p>HangKontext ist eine Abgleich-App für den Lawinenlagebericht auf
+  Skitour. Nach dem Start einer Prüfung bestimmt die App im Hintergrund das Gelände
+  am Standort — Exposition, Höhe und Hangneigung — und gleicht es mit den
   Gefahrenstellen des amtlichen Lawinenlageberichts ab. Stimmen alle drei
   Merkmale mit derselben Gefahrenstelle überein, meldet die App diese
-  Übereinstimmung; sie bewertet den Hang nicht und gibt ihn nicht frei.</p>
+  Übereinstimmung; sie bewertet den Hang nicht und gibt ihn nicht frei.
+  Eine Prüfung endet, wenn man sie beendet, spätestens nach 12 Stunden.</p>
   <p>Das Projekt entsteht privat, ohne Auftraggeber und ohne Werbung. Die Beta
   ist kostenlos; nach der Erprobungsphase soll ein Saison-Abo in der
   Größenordnung von 20 bis 30 Euro hinzukommen, wobei die Kernfunktion — der
@@ -116,7 +117,9 @@
     Gefahrenstelle des amtlichen Lageberichts entsprechen.</p>
     <h3>Was HangKontext nicht zeigt</h3>
     <p style="margin-bottom:6px">Keine Prognose, keine Gefahrenkartierung und
-    keine Freigabe. Unmarkierte Flächen sind nicht automatisch sicher.</p>
+    keine Freigabe. Unmarkierte Flächen sind nicht automatisch sicher. Keine
+    Prüfung des Geländes oberhalb (Auslauf) und keine Vorwarnung entlang der
+    Route: Die App meldet erst dort, wo man steht.</p>
   </div>
   <p>Zwei Grundsätze prägen die App und gelten auch für ihre Kommunikation:</p>
   <ul>
@@ -156,9 +159,10 @@
   Methode, Aufschlüsselung nach Gefahrenstufe, die Fälle ohne Übereinstimmung
   und die Grenzen der Datenbasis — steht auf einer eigenen Seite:
   <a href="validierung.html">656 Lawinenereignisse nachgerechnet</a>.</p>
-  <p>Datenbasis der Ereignisse: LAWIS, bereitgestellt vom
+  <p>Datenbasis der Ereignisse: LAWIS (Abruf Sommer 2026), bereitgestellt vom
   <strong style="color:var(--text)">Lawinenwarndienst des Landes Tirol</strong>
-  unter CC&nbsp;BY.</p>
+  unter CC&nbsp;BY. LAWIS ist inzwischen abgeschaltet, die Ereignisse stehen
+  jetzt auf lawinen.report.</p>
 
   <h2>Faktenkasten</h2>
   <div class="facts">
@@ -216,7 +220,8 @@
     „informativ, nie als Freigabe".</p>
     <p style="margin:0"><strong style="color:var(--text)">Nicht zutreffend:</strong>
     „warnt vor Lawinen", „erkennt Lawinengefahr", „zeigt sichere Hänge",
-    „Lawinen-Warn-App", „schützt vor Lawinen". HangKontext ersetzt weder
+    „Lawinen-Warn-App", „schützt vor Lawinen", „warnt rechtzeitig",
+    „ersetzt die Planung", „von Verbänden empfohlen". HangKontext ersetzt weder
     Ausbildung noch Tourenplanung noch die eigene Beurteilung im Gelände.</p>
   </div>
 
@@ -225,7 +230,7 @@
   weitere Bilder auf Anfrage:
   <a href="mailto:avalancheguard.app@gmail.com">avalancheguard.app@gmail.com</a></p>
 
-  <p class="fine">Stand: August 2026 · <a href="rechtliches.html" style="color:inherit">Impressum &amp; Datenschutz</a></p>
+  <p class="fine">Stand: November 2026 · <a href="rechtliches.html" style="color:inherit">Impressum &amp; Datenschutz</a></p>
 </div>
 <script data-goatcounter="https://hangkontext.goatcounter.com/count"
         async src="/count.js"></script>
