@@ -160,6 +160,11 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
    der jeweils ausgeblendete schneidet nie und stoert damit nicht. */
 [data-hk-stickycta]{transform:translateY(-105%);visibility:hidden;transition:transform 0.28s ease,visibility 0s linear 0.28s}
 [data-hk-stickycta].is-on{transform:none;visibility:visible;transition:transform 0.28s ease,visibility 0s}
+/* Handy (Critique-Lauf 6): Leiste unten im Daumenbereich statt oben rechts. */
+@media (max-width:719px){
+  [data-hk-stickycta]{top:auto !important;bottom:0;padding-top:10px !important;padding-bottom:calc(10px + env(safe-area-inset-bottom)) !important;border-bottom:0 !important;border-top:1px solid #DDE6EF;transform:translateY(105%)}
+  [data-hk-stickycta] .hk-cta{min-height:46px !important;padding:0 22px !important;font-size:15px !important}
+}
 </style>
 </head>
 <body>
@@ -425,7 +430,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
   <div style="max-width:1240px;margin:0 auto;padding:0 24px;">
     <div style="display:flex;flex-direction:column;gap:14px;max-width:680px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#6B5CE0;">Im Gelände</div>
-      <h2 style="margin:0;font-size:clamp(32px,4.4vw,56px);font-weight:900;letter-spacing:-0.025em;line-height:1.04;text-wrap:balance;">So sieht eine Gefahrenstelle aus.</h2>
+      <h2 style="margin:0;font-size:clamp(32px,4.4vw,56px);font-weight:900;letter-spacing:-0.025em;line-height:1.04;text-wrap:balance;">Ein Hang. Drei Messwerte.</h2>
     </div>
     <div style="position:relative;margin-top:36px;">
       <div style="position:relative;border-radius:28px;overflow:hidden;box-shadow:0 40px 90px -40px rgba(14,27,44,0.4);animation:hkReveal 0.8s both;animation-timeline:view();animation-range:entry 0% entry 30%;">
@@ -467,7 +472,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         <img src="img/sperrbildschirm.webp" alt="Sperrbildschirm (Simulator, Beispiel-Lagebericht): Übereinstimmung mit denselben Werten — Höhe 1.681 m, Exposition SW, Hangneigung 30°" loading="lazy" width="1206" height="2622" style="width:100%;height:auto;display:block;border-radius:23px;">
       </div>
     </div>
-    <p style="margin:clamp(56px,7vw,92px) 0 0;text-align:center;font-size:clamp(22px,3.2vw,36px);font-weight:800;letter-spacing:-0.02em;text-wrap:balance;animation:hkReveal 0.8s both;animation-timeline:view();animation-range:entry 0% entry 60%;">Ein Hang. Drei Kriterien. Ein Abgleich.</p>
+    <p style="margin:clamp(56px,7vw,92px) 0 0;text-align:center;font-size:clamp(22px,3.2vw,36px);font-weight:800;letter-spacing:-0.02em;text-wrap:balance;animation:hkReveal 0.8s both;animation-timeline:view();animation-range:entry 0% entry 60%;">Drei Messwerte. Drei Kriterien. Ein Abgleich.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px 40px;margin:clamp(36px,5vw,56px) auto 0;max-width:1000px;">
       <div style="display:flex;flex-direction:column;gap:8px;">
         <h3 style="margin:0;font-size:17px;font-weight:800;letter-spacing:-0.01em;">Was HangKontext zeigt</h3>
@@ -476,7 +481,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       <div style="display:flex;flex-direction:column;gap:8px;border-left:2px solid #A79BFF;padding-left:18px;">
         <h3 style="margin:0;font-size:17px;font-weight:800;letter-spacing:-0.01em;">Was HangKontext nicht zeigt</h3>
         <p style="margin:0;font-size:15px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Keine Prognose, keine Gefahrenkartierung und keine Freigabe. Unmarkiert heißt nie sicher.</p>
-        <p style="margin:4px 0 0;font-size:15px;line-height:1.55;color:#0E1B2C;font-weight:600;text-wrap:pretty;border:1px dashed #9FB3C8;border-radius:12px;padding:10px 14px;background:#FFFFFF;">Keine Prüfung, ob Lawinen aus dem Gelände oberhalb den Standort erreichen können (Auslauf), und keine Vorwarnung entlang der Route: Die App meldet erst dort, wo man steht.</p>
+        <p style="margin:4px 0 0;font-size:15px;line-height:1.55;color:#0E1B2C;font-weight:600;text-wrap:pretty;border:1px dashed #9FB3C8;border-radius:12px;padding:10px 14px;background:#FFFFFF;">Keine Prüfung, ob Lawinen aus dem Gelände oberhalb den Standort erreichen können (Auslauf), und keine Meldung vorab entlang der Route: Gemeldet wird erst dort, wo man steht.</p>
       </div>
     </div>
     <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:36px;padding-bottom:clamp(40px,5vw,64px);">
@@ -491,7 +496,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
   <div style="padding:0 20px;">
     <div style="display:flex;flex-direction:column;gap:12px;">
       <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#6B5CE0;">Im Gelände</div>
-      <h2 style="margin:0;font-size:clamp(27px,7.6vw,32px);font-weight:900;letter-spacing:-0.025em;line-height:1.08;text-wrap:balance;">So sieht eine Gefahrenstelle aus.</h2>
+      <h2 style="margin:0;font-size:clamp(27px,7.6vw,32px);font-weight:900;letter-spacing:-0.025em;line-height:1.08;text-wrap:balance;">Ein Hang. Drei Messwerte.</h2>
       <p style="margin:0;font-size:16.5px;line-height:1.55;font-weight:600;color:#33445A;text-wrap:pretty;">Das Gelände liefert Messwerte. Der Lagebericht liefert Kriterien.</p>
     </div>
     <div style="position:relative;border-radius:22px;overflow:hidden;box-shadow:0 30px 70px -34px rgba(14,27,44,0.45);margin-top:22px;">
@@ -506,7 +511,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     <div style="width:min(50%,198px);margin:max(-138px,-31vw) auto 0;position:relative;z-index:2;background:#0B0D12;border-radius:32px;padding:8px;box-shadow:0 24px 54px -22px rgba(9,20,38,0.55),0 0 0 1px rgba(255,255,255,0.10) inset;">
       <img src="img/sperrbildschirm.webp" alt="Sperrbildschirm (Simulator, Beispiel-Lagebericht): Übereinstimmung mit denselben Werten — Höhe 1.681 m, Exposition SW, Hangneigung 30°" loading="lazy" width="1206" height="2622" style="width:100%;height:auto;display:block;border-radius:25px;">
     </div>
-    <p style="margin:28px 0 0;text-align:center;font-size:clamp(21px,6vw,26px);font-weight:800;letter-spacing:-0.02em;text-wrap:balance;">Ein Hang. Drei Kriterien. Ein Abgleich.</p>
+    <p style="margin:28px 0 0;text-align:center;font-size:clamp(21px,6vw,26px);font-weight:800;letter-spacing:-0.02em;text-wrap:balance;">Drei Messwerte. Drei Kriterien. Ein Abgleich.</p>
     <div style="display:flex;flex-direction:column;gap:18px;margin-top:24px;">
       <div style="display:flex;flex-direction:column;gap:8px;">
         <h3 style="margin:0;font-size:17.5px;font-weight:800;letter-spacing:-0.01em;">Was HangKontext zeigt</h3>
@@ -515,7 +520,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       <div style="display:flex;flex-direction:column;gap:8px;border-left:2px solid #A79BFF;padding-left:16px;">
         <h3 style="margin:0;font-size:17.5px;font-weight:800;letter-spacing:-0.01em;">Was HangKontext nicht zeigt</h3>
         <p style="margin:0;font-size:16px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Keine Prognose, keine Gefahrenkartierung und keine Freigabe. Unmarkiert heißt nie sicher.</p>
-        <p style="margin:4px 0 0;font-size:15px;line-height:1.55;color:#0E1B2C;font-weight:600;text-wrap:pretty;border:1px dashed #9FB3C8;border-radius:12px;padding:10px 14px;background:#FFFFFF;">Keine Prüfung, ob Lawinen aus dem Gelände oberhalb den Standort erreichen können (Auslauf), und keine Vorwarnung entlang der Route: Die App meldet erst dort, wo man steht.</p>
+        <p style="margin:4px 0 0;font-size:15px;line-height:1.55;color:#0E1B2C;font-weight:600;text-wrap:pretty;border:1px dashed #9FB3C8;border-radius:12px;padding:10px 14px;background:#FFFFFF;">Keine Prüfung, ob Lawinen aus dem Gelände oberhalb den Standort erreichen können (Auslauf), und keine Meldung vorab entlang der Route: Gemeldet wird erst dort, wo man steht.</p>
       </div>
     </div>
     <div style="padding-bottom:38px;"></div>
@@ -759,10 +764,12 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
     </div>
     <!-- Seit Critique-Lauf 5 (19.11.2026): die Lesart steht VOR den Zahlen;
          96,5/89,9 als Balkenpaar auf gemeinsamer 0–100-%-Skala (der Vergleich
-         ist die Aussage), darunter 6,6 pp und 10,4 pp nebeneinander
-         (Pflicht-Nachbarschaft laut docs/zahlen.md). 74,5/48,8 bleiben
+         ist die Aussage), darunter 6,6 als einzige Kennzahl und 10,4 als Einwand-Zeile
+         in Fliesstext-Typo (Critique-Lauf 6: als gleich grosse Kennzahl las
+         sich der Einwand wie eine zweite Erfolgszahl). Nachbarschaft laut
+         docs/zahlen.md bleibt erhalten. 74,5/48,8 bleiben
          sichtbar (Fachprüfung 72b180ed66ca). -->
-    <p style="margin:22px 0 0;font-size:16px;font-weight:700;line-height:1.6;color:#0E1B2C;max-width:760px;text-wrap:pretty;border-left:3px solid #1A6DE0;padding-left:16px;">Ereignisorte stimmen häufiger mit einer Gefahrenstelle überein als zufällige Flächenpunkte. Alle Werte gelten für Tirol, sind deskriptiv und an denselben Daten entwickelt: Bitte keine dieser Zahlen als Trefferquote oder Genauigkeit der App lesen.</p>
+    <p style="margin:22px 0 0;font-size:16px;font-weight:700;line-height:1.6;color:#0E1B2C;max-width:760px;text-wrap:pretty;border-left:3px solid #1A6DE0;padding-left:16px;">Ereignisorte stimmen häufiger mit einer Gefahrenstelle überein als zufällige Vergleichspunkte. Alle Werte gelten für Tirol, sind deskriptiv und an denselben Daten entwickelt: Bitte keine dieser Zahlen als Trefferquote oder Genauigkeit der App lesen.</p>
     <div style="margin-top:26px;display:flex;flex-direction:column;gap:18px;max-width:900px;">
         <div style="display:flex;flex-direction:column;gap:6px;">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;"><span style="font-size:15px;font-weight:600;color:#0E1B2C;">Ereignisorte</span><span style="font-size:22px;font-weight:800;letter-spacing:-0.02em;color:#0E1B2C;white-space:nowrap;">96,5&#8239;%</span></div>
@@ -776,9 +783,9 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         </div>
       <div style="font-size:12.5px;color:#5C6E80;">Skala 0–100&#8239;%</div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:0 clamp(20px,3vw,36px);margin-top:18px;max-width:900px;">
-      <div style="display:flex;flex-direction:column;gap:10px;padding:18px 0;border-top:1px solid #D6E1EC;"><div style="font-size:clamp(30px,3vw,38px);font-weight:800;letter-spacing:-0.03em;line-height:1;color:#0E1B2C;">6<span style="margin:0 -0.04em;">,</span>6<span style="font-size:0.55em;font-weight:700;">&#8239;pp</span></div><div style="font-size:14px;line-height:1.5;color:#4A5A6B;text-wrap:pretty;">Abstand der beiden Werte, 95-%-Intervall 5,1–8,2</div></div>
-      <div style="display:flex;flex-direction:column;gap:10px;padding:18px 0;border-top:1px solid #D6E1EC;"><div style="font-size:clamp(30px,3vw,38px);font-weight:800;letter-spacing:-0.03em;line-height:1;color:#0E1B2C;">10<span style="margin:0 -0.04em;">,</span>4<span style="font-size:0.55em;font-weight:700;">&#8239;pp</span></div><div style="font-size:14px;line-height:1.5;color:#4A5A6B;text-wrap:pretty;">Abstand am Punkt, wenn beide Seiten auf mindestens 28° beschränkt werden (Kernauswertung, 95-%-Intervall 6,5–14,2; ohne diese Beschränkung 32,2&nbsp;pp). Andere Stichprobe, nicht mit den 6,6&nbsp;pp verrechenbar.</div></div>
+    <div style="margin-top:18px;max-width:900px;border-top:1px solid #D6E1EC;padding-top:18px;display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;"><div style="font-size:clamp(30px,3vw,38px);font-weight:800;letter-spacing:-0.03em;line-height:1;color:#0E1B2C;white-space:nowrap;">6<span style="margin:0 -0.04em;">,</span>6 Prozentpunkte</div><div style="font-size:14px;line-height:1.5;color:#4A5A6B;text-wrap:pretty;flex:1 1 260px;">Abstand der beiden Umkreiswerte (95&#8209;%&#8209;Intervall 5,1–8,2). Eine Fassung mit Neigungsbeschränkung gibt es für diese Gesamtzahl nicht.</div></div>
+      <p style="margin:0;font-size:14.5px;line-height:1.6;color:#33445A;max-width:760px;text-wrap:pretty;"><strong style="color:#0E1B2C;">Stärkster Einwand: die Hangneigung.</strong> In der vorab festgelegten Kernauswertung, einer anderen Stichprobe, schrumpft der Abstand am Punkt von 32,2 auf 10,4&nbsp;Prozentpunkte (95&#8209;%&#8209;Intervall 6,5–14,2), wenn Ereignisorte und Vergleichspunkte beide auf mindestens 28° beschränkt werden. Nicht mit den 6,6 verrechenbar.</p>
     </div>
     <details style="margin-top:22px;border-top:1px solid #E2E9F1;padding-top:18px;">
       <summary style="font-size:15.5px;font-weight:700;cursor:pointer;color:#0E1B2C;">Wie diese Zahlen zu lesen sind</summary>
@@ -800,7 +807,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Koordinatenunsicherheit:</strong> LAWIS-Koordinaten können unterschiedliche räumliche Bezüge bezeichnen, beispielsweise die Anrisskante, die Ablagerung oder eine näherungsweise gesetzte Position. Ergibt der exakte Koordinatenpunkt keine Übereinstimmung, werden deshalb zusätzlich alle Rasterzellen geprüft, deren Mittelpunkt innerhalb eines echten Kreises von 200 Metern um die gemeldete Koordinate liegt.</div>
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Übereinstimmungsregel:</strong> Eine Rasterzelle zählt nur dann als Übereinstimmung, wenn Neigung, Exposition und Höhe gemeinsam zu ein und derselben Gefahrenstelle des am Ereignistag gültigen Lageberichts passen. Die Warnregion und deren Gefahrenstellen bleiben dabei die des ursprünglichen Koordinatenpunkts. Der Umkreis verändert nicht die geltende Gefahrenstelle, sondern ausschließlich die geprüfte Geländezelle.</div>
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Vergleichsmethode:</strong> Für jedes der 656 auswertbaren Ereignisse wurden fünf zufällige Vergleichspunkte im Höhenband 1.500–3.200 Meter erzeugt, insgesamt 3.280 Punkte — als primäre Kontrolle beschränkt auf Datum und Warnregion des Ereignisses (bei gröber aufgelösten Archiv-Berichten die übergeordnete Region); eine Tirol-weit gezogene Sekundärkontrolle (88,5&#8239;%) läuft als Sensitivitätsanalyse mit. Jeder Vergleichspunkt wurde mit derselben Punkt- und Umkreislogik und mit dem Lagebericht des zugehörigen Ereignistages geprüft.</div>
-        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Grenze der Vergleichsmethode:</strong> Zufällige Flächenpunkte bilden nicht ab, wo Tourengeher tatsächlich unterwegs sind. Die Kontrollquote ist deshalb keine False-Positive-Rate und der Abstand zwischen beiden Quoten kein belastbares Produkt-Gütemaß.</div>
+        <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Grenze der Vergleichsmethode:</strong> Die zufälligen Vergleichspunkte sind Flächenpunkte: Sie bilden nicht ab, wo Tourengeher tatsächlich unterwegs sind. Die Kontrollquote ist deshalb keine False-Positive-Rate und der Abstand zwischen beiden Quoten kein belastbares Produkt-Gütemaß.</div>
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Tödliche Ereignisse:</strong> Die 36 auswertbaren tödlichen Ereignisse wurden mit derselben automatisierten Punkt- und 200-Meter-Umkreislogik geprüft. Bei 35 dieser 36 Ereignisse lag im 200-Meter-Umkreis eine Übereinstimmung vor, direkt am Punkt bei 34.</div>
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Stand der Auswertung:</strong> Lauf 11. August 2026 (runId 20260811T105326Z-c774755; reproduziert den Lauf vom 4. August Stelle für Stelle), Methodenkritik 29. Juli 2026, <a href="validierung.html#korrektur" style="color:#1A6DE0;">Korrektur-Nachtrag 31. Juli</a> und <a href="validierung.html#korrektur-0804" style="color:#1A6DE0;">4. August 2026</a></div>
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Stand der Auswertungslogik:</strong> HangKontext 1.0.0 mit den zu diesem Zeitpunkt geltenden Standardschwellwerten für Neigung, Exposition und Höhenband.</div>
@@ -853,10 +860,12 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
 
       <!-- Die Beta-Zusage steht bewusst VOR dem Formular: sie ist der
            staerkste Anmeldegrund und beantwortet zugleich die Frage, wie
-           sich das Projekt spaeter finanziert. Unwiderruflich (ADR-0020). -->
+           sich das Projekt spaeter finanziert. Unwiderruflich (ADR-0020); Berechtigtenkreis wie ADR-0021
+           (TestFlight + fristgerechte Anmeldungen inkl. Android-Warteliste). -->
       <div class="hk-zusage" style="margin-top:20px;max-width:640px;border-left:3px solid #1A6DE0;padding-left:16px;">
         <div style="font-size:16.5px;font-weight:800;line-height:1.4;color:#0E1B2C;text-wrap:pretty;">Wer in der Beta-Saison 2026/27 dabei ist, behält den vollen Funktionsumfang dauerhaft kostenfrei.</div>
-        <p style="margin:6px 0 0;font-size:14.5px;line-height:1.6;color:#33445A;text-wrap:pretty;">Die Beta ist kostenlos. Später soll ein Saison-Abo dazukommen (geplant 20–30&#8239;€) — der Abgleich in deiner eigenen Region bleibt aber dauerhaft frei. Keine Werbung, kein Datenverkauf.</p>
+        <p style="margin:6px 0 0;font-size:14.5px;line-height:1.6;color:#33445A;text-wrap:pretty;">Dabei ist, wer die Beta über TestFlight installiert oder sich in dieser Saison hier einträgt, auch auf die Android-Warteliste. Eine Mindestnutzung ist nicht nötig.</p>
+        <p style="margin:6px 0 0;font-size:14.5px;line-height:1.6;color:#33445A;text-wrap:pretty;">Für alle anderen gilt später: Geplant ist ein Saison-Abo (20–30&#8239;€), der Abgleich in der eigenen Region bleibt dauerhaft frei. Die Beta ist kostenlos. Keine Werbung, kein Datenverkauf.</p>
       </div>
 
       <!-- Zwei Wege, nach Geraet getrennt (Critique 19.11.2026): Fuer iPhone
@@ -869,7 +878,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
            datumsunabhaengig wie in presse.html. -->
       <div class="hk-betawege" style="margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;max-width:900px;align-items:start;">
 
-        <div style="background:#FFFFFF;border:1px solid #C9D6E3;border-radius:20px;padding:clamp(20px,2.6vw,28px);box-shadow:0 18px 40px -28px rgba(14,27,44,0.35);">
+        <div id="beta-iphone" style="scroll-margin-top:16px;background:#FFFFFF;border:1px solid #C9D6E3;border-radius:20px;padding:clamp(20px,2.6vw,28px);box-shadow:0 18px 40px -28px rgba(14,27,44,0.35);">
           <h3 style="margin:0;font-size:19px;font-weight:800;letter-spacing:-0.01em;line-height:1.3;text-wrap:balance;">iPhone: sofort loslegen</h3>
           <p style="margin:8px 0 0;font-size:14.5px;line-height:1.6;color:#33445A;text-wrap:pretty;">Die Beta ist offen. Du installierst HangKontext über Apples TestFlight-App, ohne Anmeldung hier.</p>
           <a class="hk-cta hk-tf" href="https://testflight.apple.com/join/c3ZxWFf4" target="_blank" rel="noopener" data-goatcounter-click="/event/testflight-klick" data-goatcounter-title="TestFlight-Klick" style="margin-top:18px;display:inline-flex;align-items:center;justify-content:center;min-height:52px;background:#1A6DE0;color:#FFFFFF;font-size:16px;font-weight:700;padding:0 28px;border-radius:99px;text-decoration:none;box-shadow:0 12px 30px -10px rgba(26,109,224,0.55);">TestFlight-Beta öffnen</a>
@@ -947,7 +956,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         <div style="font-size:15px;font-weight:800;">HangKontext</div>
         <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;color:#5C6E80;">hangkontext.de</div>
       </div>
-      <div style="font-size:14.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;">HangKontext informiert. Der Mensch beurteilt und entscheidet. Diese Information ersetzt keine Ausbildung, keine Tourenplanung und keine eigene Beurteilung im Gelände und warnt nicht vorab vor Gefahrenstellen auf deiner Route.</div>
+      <div style="font-size:14.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;">HangKontext informiert. Der Mensch beurteilt und entscheidet. Diese Information ersetzt keine Ausbildung, keine Tourenplanung und keine eigene Beurteilung im Gelände. HangKontext meldet erst dort, wo du stehst, nicht vorab entlang deiner Route.</div>
       <!-- Vier Zeilen statt eines <br>-Blocks: am Desktop unveraendert eine
            Zeile je Quelle, am Handy (siehe 719-px-Query) Kategorie und
            Nennung getrennt, damit umgebrochene Nennungen nicht wie eine
@@ -1224,6 +1233,13 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
   });
   applyVids();
 
+  /* --- iPhone: "Beta testen" springt direkt zur TestFlight-Karte ---
+     (Critique-Lauf 6). Alle anderen landen wie bisher am Anfang der
+     Beta-Sektion, wo beide Wege nebeneinander stehen. */
+  if (/iPhone|iPod/.test(navigator.userAgent)) {
+    document.querySelectorAll('a[href="#beta"]').forEach(function (a) { a.setAttribute('href', '#beta-iphone'); });
+  }
+
   /* --- Sticky-CTA (alle Breiten) ---
      Faehrt ein, sobald der sichtbare Hero aus dem Bild ist, und wieder aus,
      sobald das Beta-Formular sichtbar wird. Beobachtet werden beide Heros:
@@ -1247,12 +1263,18 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
       apply();
     }, { threshold: 0 });
     heroes.forEach(function (h) { hio.observe(h); });
-    new IntersectionObserver(function (es) {
+    /* Beta-Sektion UND Footer: Seit die Leiste am Handy unten sitzt, wuerde
+       sie am Seitenende sonst die Footer-Links verdecken (Critique-Lauf 6). */
+    var ends = [beta, $('footer')].filter(Boolean);
+    var seenEnd = new WeakMap();
+    var eio = new IntersectionObserver(function (es) {
       /* Bei schnellen Spruengen liefert der Observer mehrere gepufferte
-         Eintraege; massgeblich ist der letzte, nicht es[0]. */
-      atBeta = es[es.length - 1].isIntersecting;
+         Eintraege; massgeblich ist je Ziel der letzte. */
+      es.forEach(function (e) { seenEnd.set(e.target, e.isIntersecting); });
+      atBeta = ends.some(function (t) { return seenEnd.get(t); });
       apply();
-    }, { threshold: 0 }).observe(beta);
+    }, { threshold: 0 });
+    ends.forEach(function (t) { eio.observe(t); });
   })();
 
   /* --- Telefon im Gelände-Bild: erscheint, wenn die Bühne mittig steht --- */
