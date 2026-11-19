@@ -682,6 +682,28 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
   </svg>
 </div>
 
+<!-- ============ KAPITEL 5b · EREIGNISEBENE ============ -->
+<!-- Bestehende Funktion seit Build 5 (ADR-0019, ADR-0023): zuschaltbare
+     Ebene mit dokumentierten Lawinenereignissen in der Vollbildkarte.
+     Leitplanken aus ADR-0019 gelten auch fuer diese Beschreibung: Lern- und
+     Kontextkarte ohne Einfluss auf Treffer/Zustand/Push, keine Dichte- oder
+     Umkreisaussage, unvollstaendige Erfassung benennen, Abdeckung benennen,
+     standardmaessig aus. Bewusst ohne Zahlen (602/6/60 stehen im Register
+     nur fuer die App). Attribution: LWD Tirol (CC BY), LWD Bayern. -->
+<div id="ereignisse" data-screen-label="Ereignisebene" style="max-width:1240px;margin:0 auto;padding:clamp(40px,5vw,72px) 24px clamp(24px,3vw,40px);">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(20px,4vw,64px);align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:440px;">
+      <h2 style="margin:0;font-size:clamp(28px,3.8vw,48px);font-weight:900;letter-spacing:-0.025em;line-height:1.06;text-wrap:balance;">Dokumentierte Lawinenereignisse auf der Karte.</h2>
+      <p style="margin:0;font-size:16.5px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Zum Lernen und Einordnen, nicht zum Entscheiden.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <p style="margin:0;font-size:16px;line-height:1.65;color:#33445A;text-wrap:pretty;">In der Vollbildkarte kannst du eine zweite Ebene zuschalten: dokumentierte Lawinenereignisse mit Personenbeteiligung aus Tirol und Bayern, aus Bayern für einen Teil der früheren Winter nur tödliche Unfälle. Zu jedem Ereignis stehen Datum, Gelände und Lawinenart, soweit die Quelle sie führt; die Lage ist oft nur ungefähr. Die Ebene ist standardmäßig aus und hat keinen Einfluss auf Übereinstimmungen, Zustand oder Mitteilungen.</p>
+      <p style="margin:0;font-size:15.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;">Die Erfassung ist nicht vollständig: Keine Markierung bedeutet nicht, dass dort keine Lawinen auftreten. Außerhalb des Bundeslands Tirol und der bayerischen Alpen gibt es keine Datengrundlage. Zeitraum, Auswahl und Quelle stehen in der App an der Ebene.</p>
+      <div style="font-size:13.5px;line-height:1.55;color:#4A5A6B;padding-top:12px;border-top:1px solid #D6E1EC;">Ereignisdaten: Lawinenwarndienst des Landes Tirol (<a href="https://creativecommons.org/licenses/by/4.0/deed.de" style="color:inherit;">CC BY</a>), Lawinenwarndienst Bayern.</div>
+    </div>
+  </div>
+</div>
+
 <!-- ============ KAPITEL 6 · ZIELGRUPPEN ============ -->
 <div data-screen-label="Zielgruppen" style="max-width:1240px;margin:0 auto;padding:clamp(8px,1.5vw,20px) 24px 0;">
   <div data-hk-desktop style="background:#FFFFFF;border:1px solid #DDE6EF;border-radius:20px;padding:18px 24px;display:flex;gap:14px 36px;flex-wrap:wrap;align-items:center;">
@@ -758,6 +780,35 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
         <div style="padding:10px 0;border-bottom:1px solid #EDF2F7;"><strong>Weitere Datenquellen:</strong> avalanche.report, Lawinenwarndienst Bayern, Land Tirol (DGM 10&#8239;m), Bayerische Vermessungsverwaltung (DGM5), OpenTopoMap</div>
       </div>
     </details>
+  </div>
+</div>
+
+<!-- ============ KAPITEL 7b · AUSBLICK ============ -->
+<!-- Ausblick, bewusst ohne Termine (19.11.2026). Nur Beschlossenes oder
+     Untersuchtes: Holdout-Pruefung laut Analysevertrag (zeitlicher Holdout,
+     kTreelineM eingefroren), Ueberkopf laut ADR-0016 (Validierungsschranke,
+     kein Rollout im Winter 2026/27), Android offen. Keine neuen
+     Bezahlfunktionen (Beta-Zusage ADR-0020), keine Schweiz/Bayern-Validierung. -->
+<div id="ausblick" data-screen-label="Ausblick" style="max-width:1240px;margin:0 auto;padding:clamp(48px,6vw,88px) 24px 0;">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(20px,4vw,64px);align-items:start;">
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:420px;">
+      <h2 style="margin:0;font-size:clamp(28px,3.8vw,48px);font-weight:900;letter-spacing:-0.025em;line-height:1.06;text-wrap:balance;">Was als Nächstes kommt.</h2>
+      <p style="margin:0;font-size:16.5px;line-height:1.6;color:#4A5A6B;text-wrap:pretty;">Was geplant ist, ohne Termine. Nichts davon ändert, was die App heute prüft.</p>
+    </div>
+    <ol style="list-style:none;margin:0;padding:0;border-top:1px solid #D6E1EC;">
+      <li style="padding:22px 0;border-bottom:1px solid #D6E1EC;display:flex;flex-direction:column;gap:8px;">
+        <h3 style="margin:0;font-size:19px;font-weight:800;letter-spacing:-0.01em;line-height:1.3;">Prüfung an neuen Daten</h3>
+        <p style="margin:0;font-size:15.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;">Die bisherigen Zahlen beschreiben die Vergangenheit. Im Winter 2026/27 wollen wir die Regel an den Tiroler Lawinenereignissen dieses Winters prüfen, mit eingefrorener Waldgrenzen-Kalibrierung, also an Daten, an denen nichts eingestellt wurde. Das Ergebnis wollen wir nach der Saison veröffentlichen, auch wenn es schlechter ausfällt.</p>
+      </li>
+      <li style="padding:22px 0;border-bottom:1px solid #D6E1EC;display:flex;flex-direction:column;gap:8px;">
+        <h3 style="margin:0;font-size:19px;font-weight:800;letter-spacing:-0.01em;line-height:1.3;">Gelände oberhalb</h3>
+        <p style="margin:0;font-size:15.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;">Wir untersuchen, ob die App künftig auch einbeziehen kann, ob Lawinen aus dem Gelände oberhalb den Standort erreichen können. In der Saison 2026/27 ist das nicht enthalten.</p>
+      </li>
+      <li style="padding:22px 0;border-bottom:1px solid #D6E1EC;display:flex;flex-direction:column;gap:8px;">
+        <h3 style="margin:0;font-size:19px;font-weight:800;letter-spacing:-0.01em;line-height:1.3;">Android</h3>
+        <p style="margin:0;font-size:15.5px;line-height:1.65;color:#4A5A6B;text-wrap:pretty;">Ob und wann eine Android-Version kommt, ist offen. Wer sich unten auf die Warteliste setzt, hört davon, sobald es dazu etwas zu sagen gibt.</p>
+      </li>
+    </ol>
   </div>
 </div>
 
@@ -873,7 +924,7 @@ footer [data-hk-attr-val]{display:block;padding-left:12px;border-left:1px solid 
            neue Kategorie aussehen. -->
       <div data-hk-attribution style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.06em;line-height:2;color:#5C6E80;">
         <div><span data-hk-attr-key>LAGEBERICHTE:</span> <span data-hk-attr-val>AVALANCHE.REPORT <span style="white-space:nowrap;">(<a href="https://creativecommons.org/licenses/by/4.0/deed.de" style="color:inherit;">CC BY 4.0</a>)</span> · LAWINENWARNDIENST BAYERN</span></div>
-        <div><span data-hk-attr-key>UNFALLDATEN:</span> <span data-hk-attr-val>LAWINENWARNDIENST DES LANDES TIROL <span style="white-space:nowrap;">(<a href="https://creativecommons.org/licenses/by/4.0/deed.de" style="color:inherit;">CC BY</a>)</span></span></div>
+        <div><span data-hk-attr-key>UNFALLDATEN:</span> <span data-hk-attr-val>LAWINENWARNDIENST DES LANDES TIROL <span style="white-space:nowrap;">(<a href="https://creativecommons.org/licenses/by/4.0/deed.de" style="color:inherit;">CC BY</a>)</span> · LAWINENWARNDIENST BAYERN</span></div>
         <div><span data-hk-attr-key>GELÄNDE:</span> <span data-hk-attr-val>LAND TIROL · BAYER. VERMESSUNGSVERWALTUNG <span style="white-space:nowrap;">(<a href="https://creativecommons.org/licenses/by/4.0/deed.de" style="color:inherit;">CC BY 4.0</a>)</span></span></div>
         <div><span data-hk-attr-key>KARTE:</span> <span data-hk-attr-val>© OPENTOPOMAP <span style="white-space:nowrap;">(<a href="https://creativecommons.org/licenses/by-sa/3.0/deed.de" style="color:inherit;">CC BY-SA 3.0</a>)</span> · © OPENSTREETMAP-MITWIRKENDE</span></div>
       </div>
